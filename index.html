@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title xml:lang="en">Bird watching forum</title>
+    <link rel="stylesheet" href="stile.css" />
+</head>
+<body>
+<div id="sidebar" class="accent-color">
+    <img xml:lang="en" src="assets/logo.png" alt="Bird watching logo"/>
+    <ul>
+        <li>Home</li>
+        <li><a href="login.html">Accedi</a></li>
+        <li><a href="signup.html">Iscriviti</a></li>
+        <li><a href="logout.html">Esci</a></li>
+        <li><a href="profile.html">Il tuo profilo</a></li>
+        <li><a href="reports.html">Segnalazioni</a></li>
+        <li><a href="admin.html">Amministratore</a></li>
+    </ul>
+</div>
+<div id="content">
+    <div id="search-bar" class="primary-color" >
+        <form id="search-form">
+            <label for="search-input">Cerca</label>
+            <input id="search-input" alt="Cerca" />
+            <button form="search-form">Ok</button>
+        </form>
+    </div>
+    <div>
+        <div class="tab-content feed">
+            <h1>Di tuo interesse</h1>
+            <dl>
+                <dt>
+                    <a href="merlo_di_prova.html">
+                        Merlo di prova
+                    </a>
+                </dt>
+                <dd>
+                    <img src="assets/merlo.png" alt="Merlo" />
+                    <p>Merlo avvistato a quest'ora del giorno, in questa zona della nazione, interamente locato nella sua cucina?</p>
+                </dd>
+                <dt>
+                    <a href="pettirosso_di_prova.html">
+                        Pettirosso di test
+                    </a>
+                </dt>
+                <dd>
+                    <img src="assets/pettirosso.png" alt="Merlo" />
+                    <p>Aveva un petto rosso, lo assicuro! Era nel mio giardino, ho avuto molta paura, sembrava estremamente pericoloso</p>
+                </dd>
+                <dt>
+                    <a href="condor_di_aldo.html">
+                        Guarda lì, due condor. Presagio di sventura...
+                    </a>
+                </dt>
+                <dd>
+                    <img src="assets/condor.png" alt="Merlo" />
+                    <p>Sento che sta per succedere qualcosa</p>
+                </dd>
+            </dl>
+        </div>
+        <div class="tab-content popular">
+            <h1>Popolari</h1>
+            <dl>
+                <dt>
+                    <a href="condor_di_aldo.html">
+                        Guarda lì, due condor. Presagio di sventura...
+                    </a>
+                </dt>
+                <dd>
+                    <img src="assets/condor.png" alt="Merlo" />
+                    <p>Sento che sta per succedere qualcosa</p>
+                </dd>
+
+            </dl>
+        </div>
+        <div class="tab-content debated">
+            <h1>Discussi</h1>
+        </div>
+    </div>
+    <div class="footer"></div>
+</div>
+</body>
+</html>

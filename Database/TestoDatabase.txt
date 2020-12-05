@@ -1,0 +1,69 @@
+
+
+    La nostra realtà:
+
+    v2
+    
+    Si vuole realizzare una banca dati per la gestione di una pagina web stile
+    social network che permette agli utenti di condividere il loro interesse per il birdwatching.
+
+    Sul sito esistono tre diverse categorie di Utenti:(Nome, Email, Password, Data Nascita, FotoProfilo): Amministratore, Moderatore e Utente Standard.
+    Ogni utente può essere dotato di Certificati:(Titolo,Descrizione) e questi vengono approvati da Moderatori e creati da Amministratori.
+
+    Un utente può pubblicare un Post(Titolo, Testo, Immagini, Data). Un Post può essere attivo o archiviato.
+    Ogni Post cita almeno un Tag come lista di categorie.
+
+    Un utente può Approvare(Y/N: bool) un post oppure scrivere un Commento. Un Commento(Testo) è un'entità legata
+    e dipendente dal Post e viene identificata mediaente esso. Un commento \emph{Notifica} anche l'Utente autore del post.
+
+    Un Utente può salvare i post per poterne tenere traccia in futuro.
+
+    Un utente può interessarsi a uno specifico Tag e seguire altri utenti.  
+
+    Come già annunciato, un Tag(RGBID, Nome, Descrizione*) è un'entità ettichetta che riassume i contenuti di un determinato elemento.
+    Esistono tre tipologie di Tag: Tag ad Uccello, Tag a Famiglia, Tag a Zona Geografica.
+
+    Inoltre esistono Uccelli(Nome, NomeScientifico, Descrizione, Immagine, Famiglia) -> Famiglia è ridondante e quindi diventa un'entità a se.
+    Ogni uccello è associato a diverse Zone Geografiche(Nome, Continente, Stato, Descrizione*) e ad ogni corrispondenza si ha (Stagione, DataInizio, DataFine).
+
+    Un utente ha la possibilità di creare una Segnalazione(Causale): A Post, A Commento. Una Segnalazione notifica un Moderatore
+    che se ne occupa e fa riferimento nel caso di Post a un Post e in caso di Commento ad un Commento.
+
+
+    IDEA DI FORREST:
+        Un post e un commento hanno entrambi un contenuto, rendela entità 
+        a se e mettere le chiavi così ho solo un tipo di sengalazioni.
+        Il trucco ha un prblema: Contenuto deve contenere testo immagini e titolo? Ma un commento non ha tutti questi dati      
+
+
+
+    v1
+    Si vuole realizzare una banca dati per la gestione di una pagina web stile
+    social network che permette agli utenti di condividere il loro interesse per il birdwatching.
+
+    Il sito è caratterizzato da Utenti dotati di: Nome, Email, Password, Certificati, Data Nascita.
+    Un utente può essere affiliato ad un altro utente nel senso che ne segue l'attività. 
+    Un utente può inoltre decidere di seguire un determinato tag.
+
+    Esistono tre classi di utenti: Amministratore, Moderatore e Utente Standard. (Sono due specializzazioni quinidi)
+
+    
+    Un Utente iscritto può creare un nuovo Post dotato di: Testo, Titolo, Immagini (Opz), Data.
+    
+    Un Post richede di essere associato ad almeno un Tag che è definito da: CodiceColore, Nome, Descrizione.
+    
+    Esistono diversi tipi di Tag: Tag Uccello, Tag di Famiglia, Tag di tipo Geografico.
+
+    Inoltre l'utente iscritto può creare un nuovo commento relativo a un certo Post, il commento ha: Testo, Autore, Data.
+    Un utente può anche mettere una reazione di like/dislike su un post. 
+    
+    Inoltre un utente può creare una segnalazione riguardo un Post o un Commento, Segnalazione: Descrizione, Data.
+    Esistono due tipi di segnalazioni: Segnalazione di commento o di Post.
+
+    Il sito permette di vedere gli uccelli registrati in un catalogo, 
+    ogni Uccello è definito da: Nome, Nome scientifico, Famiglia, Età media, Rarità(?) e Descrizione.
+
+    Ogni uccello si trova in una o più zone Geografiche ed è in relazione in base alla stagione, 
+    da cui l'entita Zona Geografica: Nome, Regione, Nazione.
+
+

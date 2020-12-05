@@ -3,6 +3,7 @@
        Creazione del database. Rilascio delle possibli tabelle.
        Pirma vengono droppate le entità più deboli.*/
 
+    /** Da fare: Controllare vincoli e riguardare tutto.*/
 
     drop table if exists CertificatoUtente;
     drop table if exists Certificato;
@@ -28,10 +29,13 @@
     drop table if exists Residenza;
     drop table if exists ZonaGeografica;
 
-    drop table if exists Uccello;
+    drop table if exists Specie;
+    drop table if exists Genere;
     drop table if exists Famiglia;
     drop table if exists Ordine;
-    drop table if exists SuperOrdine;
+
+
+    drop table if exists Conservazione;
 
     drop table if exists Tag;
     drop table if exists Label;
@@ -66,8 +70,8 @@
 
     create table CertificatoUtente(
 
-        UserID INT UNSIGNED NOT NULL PRIMARY KEY,
-        CertID INT UNSIGNED NOT NULL PRIMARY KEY,
+        UserID INT UNSIGNED NOT NULL,
+        CertID INT UNSIGNED NOT NULL,
 
         ModID INT UNSIGNED NOT NULL ,
 
@@ -114,7 +118,7 @@
 
     create table Famiglia(
         TagID INT UNSIGNED NOT NULL PRIMARY KEY,
-        OrdID INT UNSIGNED NOT NULL PRIMARY KEY,
+        OrdID INT UNSIGNED NOT NULL,
 
         nomeScientifico VARCHAR(40) NOT NULL,
         caratteristicheComuni TEXT,
@@ -179,10 +183,89 @@
 
     create table Residenza(
 
-        specieID int UNSIGNED NOT NULL PRIMARY KEY,
-        zonaID int UNSIGNED NOT NULL PRIMARY KEY,
+        specieID int UNSIGNED NOT NULL,
+        zonaID int UNSIGNED NOT NULL,
 
         periodoInizio date NOT NULL,
-        periodoFine date NOT NULL CHECK ( periodoFine > periodoInizio ) /* Data fine deve venire dopo di inizio*/
+        periodoFine date NOT NULL CHECK ( periodoFine > periodoInizio ), /* Data fine deve venire dopo di inizio*/
+
+        constraint residenzaID primary key (specieID,zonaID),
+
+        foreign key (specieID) references Specie(tagID),
+        foreign key (zonaID) references ZonaGeografica(tagID)
+
+    ) engine = InnoDB;
+
+    create table Contenuto(
+        ID int unsigned not null primary key,
+        UserID int unsigned not null, /* Primo utente in Utenti sarà deleted.*/
+
+        isArchived bool not null,
+        content text not null,
+        data date not null,
+
+        foreign key (ID) references Utente(ID)
+    ) engine = InnoDB;
+
+    create table Approvazione(
+        utenteID int unsigned not null,
+        contentID int unsigned not null,
+
+        likes bool not null,
+
+        constraint approvazioneID primary key (utenteID,contentID),
+
+        foreign key (utenteID) references Utente(ID),
+        foreign key (contentID) references Contenuto(ID)
+    ) engine = InnoDB;
+
+    create table Segnalazione(
+        contentID int unsigned not null,
+        utenteID int unsigned not null,
+
+        modResponsabile int unsigned not null,
+
+        causale text,
+        elaborato bool not null default (false),
+
+        constraint segnalazioneID primary key (contentID,utenteID),
+
+        foreign key (contentID) references Contenuto(ID) on delete cascade,
+        foreign key (utenteID) references Utente(ID),
+        foreign key  (modResponsabile) references Moderatore(UserID)
+    ) engine = InnoDB;
+
+    create table Post(
+        contentID int unsigned not null primary key ,
+        title varchar(200) not null,
+
+        foreign key (contentID) references Contenuto(ID) on delete cascade
+    ) engine = InnoDB;
+
+    create table ImmaginiPost(
+        postID int unsigned not null primary key,
+        percorsoImmagine varchar(200) not null unique,
+
+        foreign key (postID) references Post(contentID) on delete cascade
+    ) engine = InnoDB;
+
+    create table Commento(
+        contentID int unsigned not null,
+        postID int unsigned not null,
+
+        constraint commentoID primary key (contentID,postID),
+        foreign key (contentID) references Contenuto(ID) on delete cascade,
+        foreign key (postID) references Post(contentID) on delete cascade
+    ) engine = InnoDB;
+
+    create table Notifica(
+        utenteID int unsigned not null,
+        utenteCausaID int unsigned not null check (utenteCausaID != utenteID),
+        contenutoID int unsigned not null,
+
+        constraint NotificaID primary key (utenteID,utenteCausaID,contenutoID),
+        foreign key (utenteID) references Utente(ID),
+        foreign key (utenteCausaID) references Utente(ID),
+        foreign key (contenutoID) references Contenuto(ID)
 
     ) engine = InnoDB;

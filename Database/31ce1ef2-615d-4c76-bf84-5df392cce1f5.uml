@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>31ce1ef2-615d-4c76-bf84-5df392cce1f5</OriginalElement>
+  <nodes>
+    <node x="2269.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.SESSION_VARIABLES</node>
+    <node x="572.6338095238095" y="1188.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.residenza</node>
+    <node x="680.75" y="428.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.tag</node>
+    <node x="850.25" y="246.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.certificato</node>
+    <node x="1290.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_LOCKS</node>
+    <node x="2496.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.ENGINES</node>
+    <node x="0.0" y="609.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.zonageografica</node>
+    <node x="2658.0" y="1354.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_BUFFER_PAGE</node>
+    <node x="1058.0" y="1354.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.EVENTS</node>
+    <node x="1797.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_COLUMNS</node>
+    <node x="804.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_METRICS</node>
+    <node x="2240.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.TABLESPACES</node>
+    <node x="1912.75" y="428.5">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.notifica</node>
+    <node x="3113.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.KEY_CACHES</node>
+    <node x="909.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_VIRTUAL</node>
+    <node x="1609.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.SYSTEM_VARIABLES</node>
+    <node x="695.25" y="246.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.label</node>
+    <node x="1366.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.OPTIMIZER_TRACE</node>
+    <node x="2779.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.USER_PRIVILEGES</node>
+    <node x="331.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.VIEWS</node>
+    <node x="1048.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.PARAMETERS</node>
+    <node x="2981.0" y="1354.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_BUFFER_PAGE_LRU</node>
+    <node x="2776.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.KEY_COLUMN_USAGE</node>
+    <node x="1356.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.STATISTICS</node>
+    <node x="2275.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_FOREIGN_COLS</node>
+    <node x="1551.5" y="0.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.utente</node>
+    <node x="2340.0" y="1354.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_TRX</node>
+    <node x="1356.5" y="428.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.approvazione</node>
+    <node x="1557.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.TABLE_PRIVILEGES</node>
+    <node x="1135.0869047619046" y="620.5">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.citazione</node>
+    <node x="2720.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_CMP</node>
+    <node x="1938.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_TABLESTATS</node>
+    <node x="2756.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_FT_CONFIG</node>
+    <node x="1533.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_TABLESPACES_SCRUBBING</node>
+    <node x="1519.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.GLOBAL_VARIABLES</node>
+    <node x="757.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.COLLATIONS</node>
+    <node x="1647.0" y="1354.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.COLUMNS</node>
+    <node x="671.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_FIELDS</node>
+    <node x="1145.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_FOREIGN</node>
+    <node x="1768.0" y="620.5">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.commento</node>
+    <node x="617.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_TABLESPACES_ENCRYPTION</node>
+    <node x="477.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.TABLE_CONSTRAINTS</node>
+    <node x="0.0" y="3422.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_FT_BEING_DELETED</node>
+    <node x="1915.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.ALL_PLUGINS</node>
+    <node x="1031.25" y="246.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.moderatore</node>
+    <node x="1029.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_FT_INDEX_TABLE</node>
+    <node x="0.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INDEX_STATISTICS</node>
+    <node x="558.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.PROCESSLIST</node>
+    <node x="301.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.PROFILING</node>
+    <node x="328.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.TABLE_STATISTICS</node>
+    <node x="0.0" y="1354.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.PARTITIONS</node>
+    <node x="3019.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_LOCK_WAITS</node>
+    <node x="2275.703253968254" y="0.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.FILES</node>
+    <node x="2574.703253968254" y="0.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_BUFFER_POOL_STATS</node>
+    <node x="453.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.SPATIAL_REF_SYS</node>
+    <node x="900.0" y="769.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.conservazione</node>
+    <node x="1769.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.SESSION_STATUS</node>
+    <node x="625.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.CHECK_CONSTRAINTS</node>
+    <node x="488.0" y="3422.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.ENABLED_ROLES</node>
+    <node x="693.0" y="769.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.genere</node>
+    <node x="1117.5" y="406.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.segnalazione</node>
+    <node x="2003.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.user_variables</node>
+    <node x="2933.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_CMP_RESET</node>
+    <node x="2034.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_CMPMEM</node>
+    <node x="2265.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_CMPMEM_RESET</node>
+    <node x="1293.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_FT_INDEX_CACHE</node>
+    <node x="916.875" y="428.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.certificatoutente</node>
+    <node x="1146.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.COLLATION_CHARACTER_SET_APPLICABILITY</node>
+    <node x="2209.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.PLUGINS</node>
+    <node x="724.0" y="1354.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.CLIENT_STATISTICS</node>
+    <node x="590.0" y="620.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.ordine</node>
+    <node x="390.0" y="1354.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.USER_STATISTICS</node>
+    <node x="2519.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_DATAFILES</node>
+    <node x="850.25" y="33.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.entericonosciuto</node>
+    <node x="2503.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.GEOMETRY_COLUMNS</node>
+    <node x="3065.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_INDEXES</node>
+    <node x="1542.0" y="620.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.immaginipost</node>
+    <node x="1344.0" y="1354.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.TABLES</node>
+    <node x="905.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.SCHEMA_PRIVILEGES</node>
+    <node x="3001.703253968254" y="0.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.ROUTINES</node>
+    <node x="2536.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_MUTEXES</node>
+    <node x="487.0" y="758.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.famiglia</node>
+    <node x="0.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.REFERENTIAL_CONSTRAINTS</node>
+    <node x="0.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_CMP_PER_INDEX</node>
+    <node x="2017.0" y="1354.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.TRIGGERS</node>
+    <node x="1719.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.CHARACTER_SETS</node>
+    <node x="1564.5" y="213.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.contenuto</node>
+    <node x="2961.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_FT_DEFAULT_STOPWORD</node>
+    <node x="0.0" y="1981.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_SEMAPHORE_WAITS</node>
+    <node x="2019.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.GLOBAL_STATUS</node>
+    <node x="0.0" y="3070.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.SCHEMATA</node>
+    <node x="1555.5" y="439.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.post</node>
+    <node x="2048.703253968254" y="246.5">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.seguito</node>
+    <node x="781.0" y="929.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.specie</node>
+    <node x="2531.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_CMP_PER_INDEX_RESET</node>
+    <node x="1011.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_TABLESPACES</node>
+    <node x="237.0" y="2817.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.COLUMN_PRIVILEGES</node>
+    <node x="261.0" y="3422.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_FT_DELETED</node>
+    <node x="234.0" y="3257.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.APPLICABLE_ROLES</node>
+    <node x="2816.0" y="2498.0">31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_TABLES</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.contenuto" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.utente">
+      <point x="0.0" y="-71.5" />
+      <point x="0.0" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.commento" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.post">
+      <point x="-44.75" y="-38.0" />
+      <point x="1812.75" y="589.0" />
+      <point x="1704.6666666666665" y="589.0" />
+      <point x="59.66666666666674" y="38.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.tag" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.label">
+      <point x="0.0" y="-49.5" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.notifica" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.utente">
+      <point x="68.0" y="-49.0" />
+      <point x="2082.75" y="386.0" />
+      <point x="2038.203253968254" y="386.0" />
+      <point x="2038.203253968254" y="183.0" />
+      <point x="1686.5555555555557" y="183.0" />
+      <point x="41.55555555555566" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.certificatoutente" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.utente">
+      <point x="-1.1368683772161603E-13" y="-49.5" />
+      <point x="1000.8749999999999" y="386.0" />
+      <point x="1020.75" y="386.0" />
+      <point x="1020.75" y="163.0" />
+      <point x="1561.8888888888887" y="163.0" />
+      <point x="-83.11111111111109" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.famiglia" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.ordine">
+      <point x="46.5" y="-60.5" />
+      <point x="626.5" y="733.0" />
+      <point x="636.5" y="733.0" />
+      <point x="-46.5" y="38.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.segnalazione" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.moderatore">
+      <point x="-73.0" y="-71.5" />
+      <point x="1154.0" y="386.0" />
+      <point x="1152.0" y="386.0" />
+      <point x="40.25" y="38.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.approvazione" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.contenuto">
+      <point x="44.75" y="-49.5" />
+      <point x="1490.75" y="386.0" />
+      <point x="1612.7999999999997" y="386.0" />
+      <point x="-32.200000000000045" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.moderatore" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.utente">
+      <point x="0.0" y="-38.5" />
+      <point x="1111.75" y="173.0" />
+      <point x="1582.6666666666665" y="173.0" />
+      <point x="-62.33333333333326" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.residenza" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.zonageografica">
+      <point x="-42.5" y="-60.5" />
+      <point x="615.1338095238095" y="1163.0" />
+      <point x="270.5" y="1163.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.ordine" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.tag">
+      <point x="0.0" y="-38.5" />
+      <point x="683.0" y="589.0" />
+      <point x="749.0833333333334" y="589.0" />
+      <point x="-13.666666666666629" y="49.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.certificato" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.entericonosciuto">
+      <point x="0.0" y="-38.5" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.specie" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.tag">
+      <point x="0.0" y="-104.5" />
+      <point x="881.0" y="904.0" />
+      <point x="889.5" y="904.0" />
+      <point x="889.5" y="579.0" />
+      <point x="803.75" y="579.0" />
+      <point x="41.0" y="49.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.certificatoutente" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.certificato">
+      <point x="-56.000000000000114" y="-49.5" />
+      <point x="944.8749999999999" y="386.0" />
+      <point x="930.25" y="386.0" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.zonageografica" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.tag">
+      <point x="0.0" y="-49.5" />
+      <point x="270.5" y="569.0" />
+      <point x="694.4166666666666" y="569.0" />
+      <point x="-68.33333333333337" y="49.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.famiglia" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.tag">
+      <point x="-46.5" y="-60.5" />
+      <point x="533.5" y="733.0" />
+      <point x="551.5" y="733.0" />
+      <point x="551.5" y="579.0" />
+      <point x="721.75" y="579.0" />
+      <point x="-41.0" y="49.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.commento" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.contenuto">
+      <point x="44.75" y="-38.0" />
+      <point x="1902.25" y="386.0" />
+      <point x="1677.1999999999998" y="386.0" />
+      <point x="32.200000000000045" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.citazione" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.tag">
+      <point x="-39.75" y="-38.0" />
+      <point x="1174.8369047619046" y="569.0" />
+      <point x="831.0833333333334" y="569.0" />
+      <point x="68.33333333333337" y="49.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.approvazione" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.utente">
+      <point x="-44.75" y="-49.5" />
+      <point x="1401.25" y="193.0" />
+      <point x="1624.2222222222222" y="193.0" />
+      <point x="-20.77777777777783" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.notifica" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.contenuto">
+      <point x="-68.0" y="-49.0" />
+      <point x="1946.75" y="376.0" />
+      <point x="1709.4" y="376.0" />
+      <point x="64.40000000000009" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.segnalazione" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.contenuto">
+      <point x="73.0" y="-71.5" />
+      <point x="1300.0" y="376.0" />
+      <point x="1580.6" y="376.0" />
+      <point x="-64.40000000000009" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.post" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.contenuto">
+      <point x="0.0" y="-38.5" />
+      <point x="0.0" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.certificatoutente" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.moderatore">
+      <point x="55.999999999999886" y="-49.5" />
+      <point x="1056.875" y="386.0" />
+      <point x="1071.5" y="386.0" />
+      <point x="-40.25" y="38.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.specie" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.genere">
+      <point x="-66.66666666666674" y="-104.5" />
+      <point x="814.3333333333333" y="904.0" />
+      <point x="786.0" y="904.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.specie" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.conservazione">
+      <point x="66.66666666666663" y="-104.5" />
+      <point x="947.6666666666666" y="904.0" />
+      <point x="976.0" y="904.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.immaginipost" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.post">
+      <point x="0.0" y="-38.5" />
+      <point x="0.0" y="38.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.segnalazione" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.utente">
+      <point x="0.0" y="-71.5" />
+      <point x="1227.0" y="386.0" />
+      <point x="1215.875" y="386.0" />
+      <point x="1215.875" y="183.0" />
+      <point x="1603.4444444444443" y="183.0" />
+      <point x="-41.55555555555566" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.citazione" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.post">
+      <point x="39.75" y="-38.0" />
+      <point x="1254.3369047619046" y="589.0" />
+      <point x="1585.333333333333" y="589.0" />
+      <point x="-59.66666666666674" y="38.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.seguito" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.utente">
+      <point x="45.5" y="-38.0" />
+      <point x="2185.203253968254" y="163.0" />
+      <point x="1728.1111111111109" y="163.0" />
+      <point x="83.11111111111109" y="71.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.genere" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.tag">
+      <point x="46.5" y="-49.5" />
+      <point x="832.5" y="733.0" />
+      <point x="814.5" y="733.0" />
+      <point x="814.5" y="589.0" />
+      <point x="776.4166666666666" y="589.0" />
+      <point x="13.666666666666629" y="49.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.residenza" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.specie">
+      <point x="42.5" y="-60.5" />
+      <point x="700.1338095238095" y="1163.0" />
+      <point x="881.0" y="1163.0" />
+      <point x="0.0" y="104.5" />
+    </edge>
+    <edge source="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.genere" target="31ce1ef2-615d-4c76-bf84-5df392cce1f5.TABLE:webbirddb.ordine">
+      <point x="-46.5" y="-49.5" />
+      <point x="739.5" y="733.0" />
+      <point x="729.5" y="733.0" />
+      <point x="46.5" y="38.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.093046357615894" x="1582.3035443804908" y="813.6522265980007" />
+  <SelectedNodes>
+    <node>31ce1ef2-615d-4c76-bf84-5df392cce1f5.VIEW:information_schema.INNODB_SYS_TABLESPACES</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+

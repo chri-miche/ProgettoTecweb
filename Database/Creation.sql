@@ -1,124 +1,152 @@
 
-    /* Jacopo Fichera - 05/12/2020.
-       Creazione del database. Rilascio delle possibli tabelle.
-       Pirma vengono droppate le entità più deboli.*/
+/* Jacopo Fichera - 05/12/2020.
+   Creazione del database. Rilascio delle possibli tabelle.
+   (Pirma vengono droppate le entità più deboli).*/
 
     /** Da fare: Controllare vincoli e riguardare tutto.*/
 
-    drop table if exists CertificatoUtente;
-    drop table if exists Certificato;
-    drop table if exists EnteRiconosciuto;
+    DROP TABLE IF EXISTS CertificatoUtente;
+    DROP TABLE IF EXISTS Certificato;
+    DROP TABLE IF EXISTS EnteRiconosciuto;
 
-    drop table if exists Notifica;
-    drop table if exists Commento;
+    DROP TABLE IF EXISTS Notifica;
+    DROP TABLE IF EXISTS Commento;
 
-    drop table if exists ImmaginiPost;
-    drop table if exists Citazione;
-    drop table if exists Post;
+    DROP TABLE IF EXISTS ImmaginiPost;
+    DROP TABLE IF EXISTS Citazione;
+    DROP TABLE IF EXISTS Post;
 
-    drop table if exists Segnalazione;
-    drop table if exists Approvazione;
+    DROP TABLE IF EXISTS Segnalazione;
+    DROP TABLE IF EXISTS Approvazione;
 
-    drop table if exists Contenuto;
+    DROP TABLE IF EXISTS Contenuto;
 
-    drop table if exists Seguito;
-    drop table if exists Interesse;
-    drop table if exists Moderatore;
-    drop table if exists Utente;
+    DROP TABLE IF EXISTS Seguito;
+    DROP TABLE IF EXISTS interesse;
+    DROP TABLE IF EXISTS Moderatore;
+    DROP TABLE IF EXISTS Utente;
 
-    drop table if exists Residenza;
-    drop table if exists ZonaGeografica;
+    DROP TABLE IF EXISTS Residenza;
+    DROP TABLE IF EXISTS ZonaGeografica;
 
-    drop table if exists Specie;
-    drop table if exists Genere;
-    drop table if exists Famiglia;
-    drop table if exists Ordine;
-
-
-    drop table if exists Conservazione;
-
-    drop table if exists Tag;
-    drop table if exists Label;
+    DROP TABLE IF EXISTS Specie;
+    DROP TABLE IF EXISTS Genere;
+    DROP TABLE IF EXISTS Famiglia;
+    DROP TABLE IF EXISTS Ordine;
 
 
-    create table EnteRiconosciuto(
-        ID INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        Nome VARCHAR(30) NOT NULL UNIQUE
+    DROP TABLE IF EXISTS Conservazione;
+
+    DROP TABLE IF EXISTS Tag;
+    DROP TABLE IF EXISTS Label;
+
+
+    CREATE TABLE EnteRiconosciuto(
+
+        ID int UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        Nome varchar(30) NOT NULL UNIQUE
+
     ) ENGINE = InnoDB;
 
-    create table Certificato(
-        ID INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 
-        EnteID INT UNSIGNED NOT NULL,
+    CREATE TABLE Certificato(
+
+        ID int UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+
+        EnteID int UNSIGNED NOT NULL,
         FOREIGN KEY  (EnteID) REFERENCES EnteRiconosciuto(ID)
+
     ) ENGINE = InnoDB;
 
-    create table Utente(
-        ID INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        nome VARCHAR(25) NOT NULL ,
 
-        email VARCHAR(40) NOT NULL ,
-        password VARCHAR(14) NOT NULL
-    ) engine = InnoDB;
+    CREATE TABLE Utente(
 
-    create table Moderatore(
-        UserID INT UNSIGNED NOT NULL PRIMARY KEY,
+        ID int UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        nome VARCHAR(25) NOT NULL,
+
+        email VARCHAR(40) NOT NULL,
+        password VARCHAR(14) NOT NULL,
+
+        immagineProfilo varchar(40) NOT NULL default ('/default.png')
+
+    ) ENGINE = InnoDB;
+
+
+    CREATE TABLE Moderatore(
+
+        UserID int UNSIGNED NOT NULL PRIMARY KEY,
         isAdmin BOOLEAN NOT NULL,
 
         FOREIGN KEY (UserID) REFERENCES Utente(ID)
-    ) engine = InnoDB;
 
-    create table CertificatoUtente(
+    ) ENGINE = InnoDB;
 
-        UserID INT UNSIGNED NOT NULL,
-        CertID INT UNSIGNED NOT NULL,
 
-        ModID INT UNSIGNED NOT NULL ,
+    CREATE TABLE CertificatoUtente(
 
-        CONSTRAINT CertificatoKey PRIMARY KEY (UserID,CertID),
+        UserID int UNSIGNED NOT NULL,
+        CertID int UNSIGNED NOT NULL,
+
+        ModID int UNSIGNED NOT NULL,
+
+        CONSTRAint CertificatoKey PRIMARY KEY (UserID,CertID),
         FOREIGN KEY (UserID) REFERENCES Utente(ID),
         FOREIGN KEY (CertID) REFERENCES Certificato(ID),
 
         FOREIGN KEY (ModID) REFERENCES Moderatore(UserID)
-    ) engine InnoDB;
+
+    ) ENGINE InnoDB;
+
 
     /** Sistemare un po' i nomi, non troppo chiari.*/
-    create table Seguito(
-        SeguitoID INT UNSIGNED NOT NULL,
-        SeguaceID INT UNSIGNED NOT NULL,
+    CREATE TABLE Seguito(
 
-        CONSTRAINT SeguitoKey PRIMARY KEY (SeguitoID,SeguaceID),
+        SeguitoID int UNSIGNED NOT NULL,
+        SeguaceID int UNSIGNED NOT NULL,
+
+        CONSTRAint SeguitoKey PRIMARY KEY (SeguitoID,SeguaceID),
 
         FOREIGN KEY (SeguaceID) REFERENCES Utente(ID) ON DELETE CASCADE,
         FOREIGN KEY (SeguitoID) REFERENCES Utente(ID) ON DELETE CASCADE
-    ) engine = InnoDB;
 
-    create table Label( /* Etttichetta (relativa a uno o molti tag)*/
-        ID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ) ENGINE = InnoDB;
+
+
+    CREATE TABLE Label( /* Etttichetta (relativa a uno o molti tag)*/
+
+        ID int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
         text VARCHAR(255) NOT NULL
-    ) engine = InnoDB;
 
-    create table Tag(
-        ID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ) ENGINE = InnoDB;
+
+
+    CREATE TABLE Tag(
+
+        ID int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(20) UNIQUE NOT NULL,
 
-        LabelID INT UNSIGNED,
+        LabelID int UNSIGNED,
         FOREIGN KEY (LabelID) REFERENCES Label(ID) ON DELETE SET NULL
-    ) engine = InnoDB;
+
+    ) ENGINE = InnoDB;
 
     /* Elemetni degli uccelli.*/
 
-    create table Ordine(
-        TagID INT UNSIGNED NOT NULL PRIMARY KEY,
+
+    CREATE TABLE Ordine(
+
+        TagID int UNSIGNED NOT NULL PRIMARY KEY,
         nomeScientifico VARCHAR(40) NOT NULL UNIQUE,
 
         FOREIGN KEY (TagID) REFERENCES Tag(ID) ON DELETE CASCADE
-    ) engine = InnoDB;
+
+    ) ENGINE = InnoDB;
 
 
-    create table Famiglia(
-        TagID INT UNSIGNED NOT NULL PRIMARY KEY,
-        OrdID INT UNSIGNED NOT NULL,
+    CREATE TABLE Famiglia(
+
+        TagID int UNSIGNED NOT NULL PRIMARY KEY,
+        OrdID int UNSIGNED NOT NULL,
 
         nomeScientifico VARCHAR(40) NOT NULL,
         caratteristicheComuni TEXT,
@@ -128,29 +156,33 @@
         FOREIGN KEY (TagID) REFERENCES Tag(ID) ON DELETE CASCADE ,
         FOREIGN KEY (OrdID) REFERENCES Ordine(TagID) ON DELETE CASCADE
 
-    ) engine = InnoDB;
+    ) ENGINE = InnoDB;
 
 
-    create table Genere(
-        tagID INT UNSIGNED NOT NULL PRIMARY KEY,
-        famID INT UNSIGNED NOT NULL,
+    CREATE TABLE Genere(
+
+        tagID int UNSIGNED NOT NULL PRIMARY KEY,
+        famID int UNSIGNED NOT NULL,
 
         nomeScientifico VARCHAR(40) NOT NULL,
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID) ON DELETE CASCADE ,
         FOREIGN KEY (famID) REFERENCES Ordine(TagID) ON DELETE CASCADE
 
-    ) engine = InnoDB;
+    ) ENGINE = InnoDB;
 
-    create table Conservazione(
+
+    CREATE TABLE Conservazione(
+
         codice varchar(2) NOT NULL PRIMARY KEY,
 
         nome varchar(20) NOT NULL UNIQUE,
-        probEstinzione integer
+        probEstinzione int
 
-    ) engine = InnoDB;
+    ) ENGINE = InnoDB;
 
-    create table Specie(
+    CREATE TABLE Specie(
+
         tagID int UNSIGNED NOT NULL PRIMARY KEY,
         genID int UNSIGNED NOT NULL,
 
@@ -165,12 +197,12 @@
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID),
         FOREIGN KEY (genID) REFERENCES Genere(tagID) ON DELETE CASCADE,
+        FOREIGN KEY (conservazioneID) REFERENCES Conservazione(Codice) ON DELETE RESTRICT
 
-        FOREIGN KEY (conservazioneID) references Conservazione(Codice) ON DELETE RESTRICT
-    ) engine = InnoDB;
+    ) ENGINE = InnoDB;
 
 
-    create table ZonaGeografica(
+    CREATE TABLE ZonaGeografica(
 
         tagID int UNSIGNED NOT NULL PRIMARY KEY,
 
@@ -179,9 +211,11 @@
             'Asia', 'Europa', 'Oceania', 'Antartide'),
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID) ON DELETE CASCADE
-    ) engine = InnoDB;
 
-    create table Residenza(
+    ) ENGINE = InnoDB;
+
+
+    CREATE TABLE Residenza(
 
         specieID int UNSIGNED NOT NULL,
         zonaID int UNSIGNED NOT NULL,
@@ -189,83 +223,115 @@
         periodoInizio date NOT NULL,
         periodoFine date NOT NULL CHECK ( periodoFine > periodoInizio ), /* Data fine deve venire dopo di inizio*/
 
-        constraint residenzaID primary key (specieID,zonaID),
+        CONSTRAint residenzaID PRIMARY KEY (specieID,zonaID),
 
-        foreign key (specieID) references Specie(tagID),
-        foreign key (zonaID) references ZonaGeografica(tagID)
+        FOREIGN KEY (specieID) REFERENCES Specie(tagID),
+        FOREIGN KEY (zonaID) REFERENCES ZonaGeografica(tagID)
 
-    ) engine = InnoDB;
+    ) ENGINE = InnoDB;
 
-    create table Contenuto(
-        ID int unsigned not null primary key,
-        UserID int unsigned not null, /* Primo utente in Utenti sarà deleted.*/
 
-        isArchived bool not null,
-        content text not null,
-        data date not null,
+    CREATE TABLE Contenuto(
 
-        foreign key (ID) references Utente(ID)
-    ) engine = InnoDB;
+        ID int UNSIGNED NOT NULL PRIMARY KEY,
+        UserID int UNSIGNED NOT NULL, /* Primo utente in Utenti sarà deleted.*/
 
-    create table Approvazione(
-        utenteID int unsigned not null,
-        contentID int unsigned not null,
+        isArchived bool NOT NULL,
+        content text NOT NULL,
+        data date NOT NULL,
 
-        likes bool not null,
+        FOREIGN KEY (ID) REFERENCES Utente(ID)
 
-        constraint approvazioneID primary key (utenteID,contentID),
+    ) ENGINE = InnoDB;
 
-        foreign key (utenteID) references Utente(ID),
-        foreign key (contentID) references Contenuto(ID)
-    ) engine = InnoDB;
 
-    create table Segnalazione(
-        contentID int unsigned not null,
-        utenteID int unsigned not null,
+    CREATE TABLE Approvazione(
 
-        modResponsabile int unsigned not null,
+        utenteID int UNSIGNED NOT NULL,
+        contentID int UNSIGNED NOT NULL,
+
+        likes bool NOT NULL,
+
+        CONSTRAint approvazioneID PRIMARY KEY (utenteID,contentID),
+
+        FOREIGN KEY (utenteID) REFERENCES Utente(ID),
+        FOREIGN KEY (contentID) REFERENCES Contenuto(ID)
+
+    ) ENGINE = InnoDB;
+
+
+    CREATE TABLE Segnalazione(
+
+        contentID int UNSIGNED NOT NULL,
+        utenteID int UNSIGNED NOT NULL,
+
+        modResponsabile int UNSIGNED NOT NULL,
 
         causale text,
-        elaborato bool not null default (false),
+        elaborato bool NOT NULL default (false),
 
-        constraint segnalazioneID primary key (contentID,utenteID),
+        CONSTRAint segnalazioneID PRIMARY KEY (contentID,utenteID),
 
-        foreign key (contentID) references Contenuto(ID) on delete cascade,
-        foreign key (utenteID) references Utente(ID),
-        foreign key  (modResponsabile) references Moderatore(UserID)
-    ) engine = InnoDB;
+        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) on delete cascade,
+        FOREIGN KEY (utenteID) REFERENCES Utente(ID),
+        FOREIGN KEY  (modResponsabile) REFERENCES Moderatore(UserID)
 
-    create table Post(
-        contentID int unsigned not null primary key ,
-        title varchar(200) not null,
+    ) ENGINE = InnoDB;
 
-        foreign key (contentID) references Contenuto(ID) on delete cascade
-    ) engine = InnoDB;
 
-    create table ImmaginiPost(
-        postID int unsigned not null primary key,
-        percorsoImmagine varchar(200) not null unique,
+    CREATE TABLE Post(
 
-        foreign key (postID) references Post(contentID) on delete cascade
-    ) engine = InnoDB;
+        contentID int UNSIGNED NOT NULL PRIMARY KEY,
+        title varchar(200) NOT NULL,
 
-    create table Commento(
-        contentID int unsigned not null,
-        postID int unsigned not null,
+        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) on delete cascade
 
-        constraint commentoID primary key (contentID,postID),
-        foreign key (contentID) references Contenuto(ID) on delete cascade,
-        foreign key (postID) references Post(contentID) on delete cascade
-    ) engine = InnoDB;
+    ) ENGINE = InnoDB;
 
-    create table Notifica(
-        utenteID int unsigned not null,
-        utenteCausaID int unsigned not null check (utenteCausaID != utenteID),
-        contenutoID int unsigned not null,
 
-        constraint NotificaID primary key (utenteID,utenteCausaID,contenutoID),
-        foreign key (utenteID) references Utente(ID),
-        foreign key (utenteCausaID) references Utente(ID),
-        foreign key (contenutoID) references Contenuto(ID)
+    CREATE TABLE ImmaginiPost(
 
-    ) engine = InnoDB;
+        postID int UNSIGNED NOT NULL PRIMARY KEY,
+        percorsoImmagine varchar(200) NOT NULL unique,
+
+        FOREIGN KEY (postID) REFERENCES Post(contentID) on delete cascade
+
+    ) ENGINE = InnoDB;
+
+
+    CREATE TABLE Commento(
+        contentID int UNSIGNED NOT NULL,
+        postID int UNSIGNED NOT NULL,
+
+        CONSTRAint commentoID PRIMARY KEY (contentID,postID),
+
+        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) on delete cascade,
+        FOREIGN KEY (postID) REFERENCES Post(contentID) on delete cascade
+
+     ) ENGINE = InnoDB;
+
+
+    CREATE TABLE Notifica(
+        utenteID int UNSIGNED NOT NULL,
+        utenteCausaID int UNSIGNED NOT NULL check (utenteCausaID != utenteID),
+        contenutoID int UNSIGNED NOT NULL,
+
+        CONSTRAint NotificaID PRIMARY KEY (utenteID,utenteCausaID,contenutoID),
+
+        FOREIGN KEY (utenteID) REFERENCES Utente(ID),
+        FOREIGN KEY (utenteCausaID) REFERENCES Utente(ID),
+        FOREIGN KEY (contenutoID) REFERENCES Contenuto(ID)
+
+    ) ENGINE = InnoDB;
+
+
+    CREATE TABLE Citazione(
+        tagID int UNSIGNED NOT NULL,
+        postID int UNSIGNED NOT NULL,
+
+        CONSTRAint citazioneID PRIMARY KEY (tagID,postID),
+
+        FOREIGN KEY (tagID) REFERENCES Tag(ID),
+        FOREIGN KEY (postID) REFERENCES Post(contentID) on delete cascade
+
+    ) ENGINE = InnoDB;

@@ -67,7 +67,7 @@
         email VARCHAR(40) NOT NULL,
         password VARCHAR(14) NOT NULL,
 
-        immagineProfilo varchar(40) NOT NULL default ('/default.png')
+        immagineProfilo varchar(40) NOT NULL DEFAULT ('imgs/default.png')
 
     ) ENGINE = InnoDB;
 
@@ -89,9 +89,9 @@
 
         ModID int UNSIGNED NOT NULL,
 
-        CONSTRAint CertificatoKey PRIMARY KEY (UserID,CertID),
-        FOREIGN KEY (UserID) REFERENCES Utente(ID),
-        FOREIGN KEY (CertID) REFERENCES Certificato(ID),
+        CONSTRAINT CertificatoKey PRIMARY KEY (UserID,CertID),
+        FOREIGN KEY (UserID) REFERENCES Utente(ID) ON DELETE CASCADE,
+        FOREIGN KEY (CertID) REFERENCES Certificato(ID) ON DELETE CASCADE,
 
         FOREIGN KEY (ModID) REFERENCES Moderatore(UserID)
 
@@ -130,7 +130,6 @@
 
     ) ENGINE = InnoDB;
 
-    /* Elemetni degli uccelli.*/
 
 
     CREATE TABLE Ordine(
@@ -138,7 +137,7 @@
         TagID int UNSIGNED NOT NULL PRIMARY KEY,
         nomeScientifico VARCHAR(40) NOT NULL UNIQUE,
 
-        FOREIGN KEY (TagID) REFERENCES Tag(ID) ON DELETE CASCADE
+        FOREIGN KEY (TagID) REFERENCES Tag(ID)
 
     ) ENGINE = InnoDB;
 
@@ -153,8 +152,8 @@
 
         /** Se elimino dal sistema un ordine elimino anche tutte le famiglie
             ad esso relativo. Mi pare giusto così.*/
-        FOREIGN KEY (TagID) REFERENCES Tag(ID) ON DELETE CASCADE ,
-        FOREIGN KEY (OrdID) REFERENCES Ordine(TagID) ON DELETE CASCADE
+        FOREIGN KEY (TagID) REFERENCES Tag(ID),
+        FOREIGN KEY (OrdID) REFERENCES Ordine(TagID)
 
     ) ENGINE = InnoDB;
 
@@ -166,8 +165,8 @@
 
         nomeScientifico VARCHAR(40) NOT NULL,
 
-        FOREIGN KEY (tagID) REFERENCES Tag(ID) ON DELETE CASCADE ,
-        FOREIGN KEY (famID) REFERENCES Ordine(TagID) ON DELETE CASCADE
+        FOREIGN KEY (tagID) REFERENCES Tag(ID),
+        FOREIGN KEY (famID) REFERENCES Ordine(TagID)
 
     ) ENGINE = InnoDB;
 
@@ -196,8 +195,8 @@
         descrizione text NOT NULL,
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID),
-        FOREIGN KEY (genID) REFERENCES Genere(tagID) ON DELETE CASCADE,
-        FOREIGN KEY (conservazioneID) REFERENCES Conservazione(Codice) ON DELETE RESTRICT
+        FOREIGN KEY (genID) REFERENCES Genere(tagID),
+        FOREIGN KEY (conservazioneID) REFERENCES Conservazione(Codice)
 
     ) ENGINE = InnoDB;
 
@@ -210,7 +209,7 @@
         continente enum('Africa','America del nord', 'Sud America',
             'Asia', 'Europa', 'Oceania', 'Antartide'),
 
-        FOREIGN KEY (tagID) REFERENCES Tag(ID) ON DELETE CASCADE
+        FOREIGN KEY (tagID) REFERENCES Tag(ID)
 
     ) ENGINE = InnoDB;
 
@@ -225,7 +224,7 @@
 
         CONSTRAint residenzaID PRIMARY KEY (specieID,zonaID),
 
-        FOREIGN KEY (specieID) REFERENCES Specie(tagID),
+        FOREIGN KEY (specieID) REFERENCES Specie(tagID) ON DELETE CASCADE,
         FOREIGN KEY (zonaID) REFERENCES ZonaGeografica(tagID)
 
     ) ENGINE = InnoDB;
@@ -254,8 +253,8 @@
 
         CONSTRAint approvazioneID PRIMARY KEY (utenteID,contentID),
 
-        FOREIGN KEY (utenteID) REFERENCES Utente(ID),
-        FOREIGN KEY (contentID) REFERENCES Contenuto(ID)
+        FOREIGN KEY (utenteID) REFERENCES Utente(ID) ON DELETE CASCADE,
+        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
 
@@ -272,8 +271,11 @@
 
         CONSTRAint segnalazioneID PRIMARY KEY (contentID,utenteID),
 
-        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) on delete cascade,
-        FOREIGN KEY (utenteID) REFERENCES Utente(ID),
+        /* Se elimino il post o l'utente la segnalazione va eliminata, non è oiù rilevante. */
+        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) ON DELETE CASCADE ,
+        FOREIGN KEY (utenteID) REFERENCES Utente(ID) ON DELETE CASCADE,
+        /* Non è possibile eliminare il moderatore responsabile se ha ancora Segnalazioni
+           da gestire, quindi default behaviour. */
         FOREIGN KEY  (modResponsabile) REFERENCES Moderatore(UserID)
 
     ) ENGINE = InnoDB;
@@ -284,7 +286,7 @@
         contentID int UNSIGNED NOT NULL PRIMARY KEY,
         title varchar(200) NOT NULL,
 
-        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) on delete cascade
+        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
 
@@ -294,7 +296,7 @@
         postID int UNSIGNED NOT NULL PRIMARY KEY,
         percorsoImmagine varchar(200) NOT NULL unique,
 
-        FOREIGN KEY (postID) REFERENCES Post(contentID) on delete cascade
+        FOREIGN KEY (postID) REFERENCES Post(contentID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
 
@@ -305,8 +307,8 @@
 
         CONSTRAint commentoID PRIMARY KEY (contentID,postID),
 
-        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) on delete cascade,
-        FOREIGN KEY (postID) REFERENCES Post(contentID) on delete cascade
+        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) ON DELETE CASCADE,
+        FOREIGN KEY (postID) REFERENCES Post(contentID) ON DELETE CASCADE
 
      ) ENGINE = InnoDB;
 
@@ -318,9 +320,9 @@
 
         CONSTRAint NotificaID PRIMARY KEY (utenteID,utenteCausaID,contenutoID),
 
-        FOREIGN KEY (utenteID) REFERENCES Utente(ID),
+        FOREIGN KEY (utenteID) REFERENCES Utente(ID) ON DELETE CASCADE,
         FOREIGN KEY (utenteCausaID) REFERENCES Utente(ID),
-        FOREIGN KEY (contenutoID) REFERENCES Contenuto(ID)
+        FOREIGN KEY (contenutoID) REFERENCES Contenuto(ID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
 
@@ -332,6 +334,6 @@
         CONSTRAint citazioneID PRIMARY KEY (tagID,postID),
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID),
-        FOREIGN KEY (postID) REFERENCES Post(contentID) on delete cascade
+        FOREIGN KEY (postID) REFERENCES Post(contentID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;

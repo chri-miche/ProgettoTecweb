@@ -27,7 +27,7 @@
         </form>
     </div>
     <div id="feed-tab" style="padding-right: 50px">
-        <h1 id="personal-header" class="feed-tab-header">Di tuo interesse</h1>
+        <h1 id="personal-header" class="feed-tab-header" (click)="showTab(personal)">Di tuo interesse</h1>
         <dl id="personal-content" class="feed-tab-content">
             <dt class="card-header accent-color">
                 <a class="title" href="merlo_di_prova.html">
@@ -41,39 +41,42 @@
                 <img src="assets/merlo.png" alt="Merlo" />
                 <p>Merlo avvistato a quest'ora del giorno, in questa zona della nazione, interamente locato nella sua cucina?</p>
             </dd>
-            <dt>
-                <a href="pettirosso_di_prova.html">
+            <dt class="card-header accent-color">
+                <a class="title" href="pettirosso_di_prova.html">
                     Pettirosso di test
                 </a>
             </dt>
-            <dd>
+            <dd class="card-content accent-color">
                 <img src="assets/pettirosso.png" alt="Merlo" />
                 <p>Aveva un petto rosso, lo assicuro! Era nel mio giardino, ho avuto molta paura, sembrava estremamente pericoloso</p>
             </dd>
-            <dt>
-                <a href="condor_di_aldo.html">
+            <dt class="card-header accent-color">
+                <a class="title" href="condor_di_aldo.html">
                     Guarda lì, due condor. Presagio di sventura...
                 </a>
             </dt>
-            <dd>
+            <dd class="card-content accent-color">
                 <img src="assets/condor.png" alt="Merlo" />
                 <p>Sento che sta per succedere qualcosa</p>
             </dd>
         </dl>
-        <h1 id="popular-header" class="feed-tab-header">Popolari</h1>
+        <h1 id="popular-header" class="feed-tab-header" (click)="showTab(popular)">Popolari</h1>
         <dl id="popular-content" class="feed-tab-content">
-            <dt>
-                <a href="condor_di_aldo.html">
+            <dt class="card-header accent-color">
+                <a class="title" href="condor_di_aldo.html">
                     Guarda lì, due condor. Presagio di sventura...
                 </a>
+                <p class="subtitle">
+                    Di <a href="profiles/nonpossonescenderenesalire.html">Aldo Baglio</a>
+                </p>
             </dt>
-            <dd>
+            <dd class="card-content accent-color">
                 <img src="assets/condor.png" alt="Merlo" />
                 <p>Sento che sta per succedere qualcosa</p>
             </dd>
 
         </dl>
-        <h1 id="discussed-header"  class="feed-tab-header">Discussi</h1>
+        <h1 id="discussed-header"  class="feed-tab-header" (click)="showTab(discussed)">Discussi</h1>
         <dl id="discussed-content" class="feed-tab-content">
 
         </dl>

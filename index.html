@@ -26,59 +26,61 @@
             <button form="search-form">Ok</button>
         </form>
     </div>
-    <div>
-        <div class="tab-content feed">
-            <h1>Di tuo interesse</h1>
-            <dl>
-                <dt>
-                    <a href="merlo_di_prova.html">
-                        Merlo di prova
-                    </a>
-                </dt>
-                <dd>
-                    <img src="assets/merlo.png" alt="Merlo" />
-                    <p>Merlo avvistato a quest'ora del giorno, in questa zona della nazione, interamente locato nella sua cucina?</p>
-                </dd>
-                <dt>
-                    <a href="pettirosso_di_prova.html">
-                        Pettirosso di test
-                    </a>
-                </dt>
-                <dd>
-                    <img src="assets/pettirosso.png" alt="Merlo" />
-                    <p>Aveva un petto rosso, lo assicuro! Era nel mio giardino, ho avuto molta paura, sembrava estremamente pericoloso</p>
-                </dd>
-                <dt>
-                    <a href="condor_di_aldo.html">
-                        Guarda lì, due condor. Presagio di sventura...
-                    </a>
-                </dt>
-                <dd>
-                    <img src="assets/condor.png" alt="Merlo" />
-                    <p>Sento che sta per succedere qualcosa</p>
-                </dd>
-            </dl>
-        </div>
-        <div class="tab-content popular">
-            <h1>Popolari</h1>
-            <dl>
-                <dt>
-                    <a href="condor_di_aldo.html">
-                        Guarda lì, due condor. Presagio di sventura...
-                    </a>
-                </dt>
-                <dd>
-                    <img src="assets/condor.png" alt="Merlo" />
-                    <p>Sento che sta per succedere qualcosa</p>
-                </dd>
+    <div id="feed-tab" style="padding-right: 50px">
+        <h1 id="personal-header" class="feed-tab-header">Di tuo interesse</h1>
+        <dl id="personal-content" class="feed-tab-content">
+            <dt class="card-header accent-color">
+                <a class="title" href="merlo_di_prova.html">
+                    Merlo di prova
+                </a>
+                <p class="subtitle">
+                    Di <a href="profiles/usermerlmerlson.html">Merl Merlson</a>
+                </p>
+            </dt>
+            <dd class="card-content accent-color">
+                <img src="assets/merlo.png" alt="Merlo" />
+                <p>Merlo avvistato a quest'ora del giorno, in questa zona della nazione, interamente locato nella sua cucina?</p>
+            </dd>
+            <dt>
+                <a href="pettirosso_di_prova.html">
+                    Pettirosso di test
+                </a>
+            </dt>
+            <dd>
+                <img src="assets/pettirosso.png" alt="Merlo" />
+                <p>Aveva un petto rosso, lo assicuro! Era nel mio giardino, ho avuto molta paura, sembrava estremamente pericoloso</p>
+            </dd>
+            <dt>
+                <a href="condor_di_aldo.html">
+                    Guarda lì, due condor. Presagio di sventura...
+                </a>
+            </dt>
+            <dd>
+                <img src="assets/condor.png" alt="Merlo" />
+                <p>Sento che sta per succedere qualcosa</p>
+            </dd>
+        </dl>
+        <h1 id="popular-header" class="feed-tab-header">Popolari</h1>
+        <dl id="popular-content" class="feed-tab-content">
+            <dt>
+                <a href="condor_di_aldo.html">
+                    Guarda lì, due condor. Presagio di sventura...
+                </a>
+            </dt>
+            <dd>
+                <img src="assets/condor.png" alt="Merlo" />
+                <p>Sento che sta per succedere qualcosa</p>
+            </dd>
 
-            </dl>
-        </div>
-        <div class="tab-content debated">
-            <h1>Discussi</h1>
-        </div>
+        </dl>
+        <h1 id="discussed-header"  class="feed-tab-header">Discussi</h1>
+        <dl id="discussed-content" class="feed-tab-content">
+
+        </dl>
     </div>
     <div class="footer"></div>
 </div>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -3,8 +3,6 @@
    Creazione del database. Rilascio delle possibli tabelle.
    (Pirma vengono droppate le entità più deboli).*/
 
-    /** Da fare: Controllare vincoli e riguardare tutto.*/
-
     DROP TABLE IF EXISTS CertificatoUtente;
     DROP TABLE IF EXISTS Certificato;
     DROP TABLE IF EXISTS EnteRiconosciuto;

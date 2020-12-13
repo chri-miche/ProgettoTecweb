@@ -13,8 +13,6 @@
 
     class User extends DatabaseElement {
         /* Variables: */
-
-
         /** Data related to a user that has to be accessible all the time.*/
         private $id;
         private $isAdmin; private $isModerator;
@@ -22,7 +20,7 @@
         /* Constructor (init dbAccess). Creates a new user if id is null
             or not valid the user has null fields. */
         public function __construct($id = null) { parent::__construct();
-        
+
             /** Se l'utente non è nullo e l'utente esiste. */
             if($id && $this->checkUser($id)){
 

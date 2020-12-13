@@ -8,10 +8,14 @@
 
 <?php
     require_once "UserData.php";
-    
+
     $usrData = new User();
 
     session_start();
+
+    if(isset($_SESSION['User'])) {
+        session_destroy();
+    }
 
     if(isset($_POST['username'])) {
 

@@ -2,6 +2,7 @@
 <head>
     <meta charset="utf-8">
     <title>Login</title>
+    <link rel=" stylesheet" href="../stile.css"/>
 </head>
 <body>
 
@@ -22,7 +23,7 @@
         $res = $usrData->userCredentialsCorrect($email,$password);
 
         if ($res) {
-            $_SESSION['email'] = $email;
+            $_SESSION['UserID'] = $res['ID'];
 
             $_SESSION['Admin'] = $usrData->isAdmin($res['ID']);
             if($_SESSION['Admin'])

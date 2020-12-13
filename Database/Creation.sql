@@ -62,7 +62,7 @@
         ID int UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
         nome VARCHAR(25) NOT NULL,
 
-        email VARCHAR(40) NOT NULL,
+        email VARCHAR(40) NOT NULL UNIQUE,
         password VARCHAR(14) NOT NULL,
 
         immagineProfilo varchar(40) NOT NULL DEFAULT ('imgs/default.png')

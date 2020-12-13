@@ -16,27 +16,21 @@
 
 
         public function openConnection(){
+
             /** Apre la connessione con il database.*/
             $this->connection = mysqli_connect(DBAccess::HOST, DBAccess::USER,
                 DBAccess::PASSWORD,DBAccess::DB_NAME);
 
-            return !mysqli_connect_errno();
+            if (mysqli_connect_errno() != 0)
+                throw new Exception(mysqli_connect_error());
+
         }
 
-
+        /** Multiline Query. $filter to be added? */
         public function executeQuery($query){
 
-            $result = mysqli_query($this->connection, $query);
+            /***/
 
-            if(mysqli_num_rows($result) != 0) {
-
-                $res = mysqli_fetch_all($result, MYSQLI_ASSOC);
-                mysqli_free_result($result);
-
-                return $res;
-            }
-
-            return null;
         }
 
         /** Queries known to get only one record in the db.
@@ -44,23 +38,21 @@
         public function singleRowQuery($query){
 
             $result = mysqli_query($this->connection, $query);
+            if(!$result) throw new Exception('Errore nella esecuzione della query.');
 
-            if(mysqli_num_rows($result) != 0) {
+            $res =  mysqli_fetch_assoc($result);
+            mysqli_free_result($result);
 
-               $res =  mysqli_fetch_assoc($result);
-               mysqli_free_result($result);
-
-               return $res;
-            }
-
-            return null;
+            return $res;
 
         }
 
+        public function connectionIsOpen(){ return $this->connection; }
 
         public function closeConnection(){
 
             mysqli_close($this->connection);
+            $this->connection = false;
 
         }
 

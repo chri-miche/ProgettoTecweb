@@ -7,11 +7,9 @@
 <body>
 
 <?php
-    require_once "DBConnector.php";
     require_once "UserData.php";
-
-    $dbConnector = new DBAccess();
-    $usrData = new UserData();
+    
+    $usrData = new User();
 
     session_start();
 
@@ -23,10 +21,11 @@
         $res = $usrData->userCredentialsCorrect($email,$password);
 
         if ($res) {
-            $_SESSION['UserID'] = $res['ID'];
+            /** Salviamo l'id dell'utente connesso in modo da sapere chi è.*/
+            $usrData->loadUser($res['ID']);
+            $_SESSION['User'] = $usrData;
 
-            $_SESSION['Admin'] = $usrData->isAdmin($res['ID']);
-            if($_SESSION['Admin'])
+            if($_SESSION['User']->getAdmin())
                 echo "Sei un amministratore";
 
         } else {

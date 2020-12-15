@@ -29,7 +29,16 @@
         /** Multiline Query. $filter to be added? */
         public function executeQuery($query){
 
-            /***/
+            $result = mysqli_query($this->connection,$query);
+            if(!$result) throw new Exception('Errore nella query.');
+
+            $ret = array();
+
+            while($elem = mysqli_fetch_assoc($result)){
+                array_push($ret,$elem);
+            }
+
+            return $ret;
 
         }
 

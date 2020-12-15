@@ -335,3 +335,5 @@
         FOREIGN KEY (postID) REFERENCES Post(contentID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
+
+

@@ -7,39 +7,38 @@
 <body>
 
 <?php
-    require_once "UserData.php";
 
-    $usrData = new User();
+    require_once "UserData.php";
+    $usrData = new UserElement();
 
     session_start();
-
-    if(isset($_SESSION['User'])) {
-        session_destroy();
-    }
 
     if(isset($_POST['username'])) {
 
         $email = stripslashes($_REQUEST['username']);
         $password = stripslashes($_REQUEST['password']);
 
-        $res = $usrData->userCredentialsCorrect($email,$password);
+        $res = $usrData->checkCredentials($email,$password);
 
         if ($res) {
-            /** Salviamo l'id dell'utente connesso in modo da sapere chi è.*/
-            $usrData->loadUser($res['ID']);
-            $_SESSION['User'] = $usrData;
 
-            if($_SESSION['User']->getAdmin())
-                echo "Sei un amministratore";
+            /** Salviamo l'id dell'utente connesso in modo da sapere chi è.*/
+            $usrData->loadElement($res['ID']);
+            $_SESSION['User'] = serialize($usrData);
+
+
+            header('Location: Profile.php');
 
         } else {
+
             echo "<div class='form'>
                     <h3>Username/password is incorrect.</h3><br/>
                     Click here to 
                     <a href='login.php'>Login</a>
                 </div>";
+
         }
-    } else {
+    } else if(!isset($_SESSION['User'])) {
 
 ?>
     <div class="form">
@@ -51,7 +50,20 @@
         </form>
         <p>Not registered yet? <a href='registration.php'>Register Here</a></p>
     </div>
+    <?php } else {
+
+
+        ?>
+        <div class="form">
+
+            <form action="Logout.php">
+                <input type="submit" value="Logout" />
+            </form>
+
+        </div>
+
     <?php } ?>
+
 </body>
 
 </html>

@@ -8,7 +8,9 @@
 
 <?php
 
-    require_once "UserData.php";
+    define('__ROOT__', dirname(__FILE__));
+    require_once __ROOT__."/model/UserData.php";
+
     $usrData = new UserElement();
 
     session_start();

@@ -1,40 +1,35 @@
 <?php
 
-    require_once "UserData.php";
-    require_once "BuildSideBar.php";
-
+    define('__ROOT__', dirname(__FILE__));
+    require_once (__ROOT__ . "/control/Builder.php");
 
     session_start();
-
-    $userData = null;
-
-    if(isset($_SESSION['User']))
-        $userData = unserialize($_SESSION['User']);
-    echo '<div id= "content>';
-
-    Builder::buildSideBar($userData);
-
-    echo '<div style="width: 80%; float:right">';
-    /** If session is set and has values.*/
-    if(isset($userData)){
-
-        $app = $userData->fullData();
-
-        echo $app['nome'] . $app['immagineProfilo'] . '<br></br>';
-        if($userData->getModerator()) {
-            echo "Utente moderatore <br>" ;
-            if ($userData->getAdmin())
-                echo "Utente amministratore.";
-
-        }
+    $HTMLpage = file_get_contents("../xhtml/BaseLayout.xhtml");
 
 
+    if(!isset($_POST['Submit'])){
+        $_SESSION['SearchTags'] = /**/ null;
+        /** Open result page.  ?**/
 
-    } else {
+        $HTMLpage = str_replace("<sideBar />", Builder::buildSideBar(), $HTMLpage);
 
-        echo "Effettuare prima il login.";
+        $HTMLpage = str_replace("<searchBar />", Builder::buildSearchBar(true), $HTMLpage);
+
+        $HTMLpage = str_replace("<content />", Builder::buildProfileContent(), $HTMLpage);
+
+        echo $HTMLpage;
+
+    } else if(isset($_POST['Submit'])) {
+
+        $HTMLpage = str_replace("<sideBar />", Builder::buildSideBar(), $HTMLpage);
+
+        $HTMLpage = str_replace("<searchBar />", Builder::buildSearchBar(true), $HTMLpage);
+
+        $HTMLpage .= 'rubyrubyruby';
+
+        echo $HTMLpage;
 
     }
-    echo '</div>'. '</div>';
+
 
 ?>

@@ -1,6 +1,6 @@
 <?php
-    require_once "DataElement.php";
-    class PostData extends DataElement{
+    require_once __ROOT__."/model/DataElement.php";
+    class PostElement extends DataElement{
 
         protected function loadData() {
             // TODO: Implement loadData() method.

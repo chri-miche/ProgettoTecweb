@@ -1,6 +1,6 @@
 <?php
 
-    require_once "DBConnector.php";
+    require_once __ROOT__ . "/control/DBAccess.php";
 
     abstract class DataElement{
 
@@ -50,6 +50,7 @@
         abstract public function checkID($id);
 
 
+        // TODO: Rename baseData() to relationsKeys() and fullData() to tableData()?
         /** Gets ids from all relations?*/
         abstract public function baseData();
 

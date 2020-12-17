@@ -1,9 +1,11 @@
 <?php
 
+    require_once __ROOT__.'\control\components\Component.php';
 
     class BasePage {
 
         /** Array of all components inside of the generic page.*/
+
         private $components;
         private $pageHTML;
 

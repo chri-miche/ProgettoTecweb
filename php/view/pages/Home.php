@@ -4,7 +4,7 @@
 
     require_once __ROOT__.'\control\BasePage.php';
 
-    require_once __ROOT__.'\control\SideBar.php';
+    require_once __ROOT__ . '\control\components\SideBar.php';
     require_once __ROOT__.'\control\components\SearchBar.php';
 
     $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');

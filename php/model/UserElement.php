@@ -4,7 +4,7 @@
     class UserElement extends Element {
 
         private $isAdmin; private $isModerator;
-        // TODO: Should i move the data to the Element? Prolly yes
+        // TODO: Should i move the data to the Element? Prolly yes.
         private $userData;/** Data relative to the user will be stored here. */
 
         protected function loadData() {

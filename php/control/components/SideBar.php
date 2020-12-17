@@ -1,34 +1,23 @@
 <?php
 
-    require_once __ROOT__.'\control\Component.php';
+    require_once __ROOT__.'\control\components\Component.php';
     require_once __ROOT__.'\control\SessionUser.php';
 
-    class SideBar extends Component {
+    class SideBar implements Component {
 
+        private $HTML;
         private $user;
-
-        private const MOD_TAG = '<sideBar />'; // Sposto in Component?
-        private const INNER_MOD_TAG = '<loggedActions \>';
-
-
 
         public function __construct(string $HTMLcontent = null) {
 
-            parent::__construct($HTMLcontent);
+             ($HTMLcontent) ? $this->HTML = $HTMLcontent
+                : $this->HTML = file_get_contents(__ROOT__.'\view\modules\SideBar.xhtml');
+
             $this->user = new SessionUser();
 
         }
 
-        public function validForThisBuild(string $HTML) {
-
-            return !(strpos($HTML, self::MOD_TAG) == false);
-
-        }
-
-        protected function addContent() {
-
-            $ret['html'] = file_get_contents(__ROOT__.'\view\modules\SideBar.xhtml');
-            $ret['tag'] = self::MOD_TAG;
+        public function build() {
 
 
             $contentHTML = '';
@@ -55,20 +44,9 @@
 
             }
 
-            $ret['html'] = str_replace(self::INNER_MOD_TAG, $contentHTML, $ret['html']);
-
-            return $ret;
+            return str_replace(Component::INNER_TAG, $contentHTML, $this->HTML);
 
         }
 
-
-        public function newBuild(string $HTML) {
-
-        }
-
-        public function deleteBuild()
-        {
-            // TODO: Implement deleteBuild() method.
-        }
 
     }

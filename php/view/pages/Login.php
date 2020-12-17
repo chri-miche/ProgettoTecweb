@@ -10,7 +10,7 @@
 
     $page = new BasePage($basePage);
 
-    if(!$page->addModule(new Login()))
+    if(!$page->addComponent(new Login()))
         echo 'Ooops something went wrong';
 
     echo $page;

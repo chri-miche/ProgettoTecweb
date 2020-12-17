@@ -4,6 +4,8 @@
     // TODO: Consider if the instace has to be on page and not inside of each component
     //  at the moment every component that has one session user has an istance of the class.
 
+
+    // TODO: Check if there are problems and if the user has to be updated every operation.
     require_once __ROOT__.'\model\UserElement.php';
     class SessionUser {
 
@@ -30,16 +32,13 @@
         }
 
         public function userIdentified(){
-
-            if(isset($this->user) && $this->user->getId() != null){
-
-                /** User is identified. */
-
-            }
+            /** User is identified. */
+            return isset($this->user) && $this->user->getId() != null;
 
         }
 
         public function getUser(){ return $this->user; }
+        public function setUser(int $id){ $this->user->loadElement($id);}
 
 
     }

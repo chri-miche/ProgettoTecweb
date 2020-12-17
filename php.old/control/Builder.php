@@ -32,7 +32,7 @@
                 $personalSideElements .=
                     "<ul>
                         <li> Utente </li>
-                        <li><a href='Logout.php'>Logout</a></li>
+                        <li><a href='Logout.php.old'>Logout</a></li>
                     </ul>";
 
                 if($element->getModerator()) {
@@ -45,7 +45,7 @@
             } else {
 
                 $personalSideElements .=
-                    "<li><a href='Login.php'>Login</a></li>
+                    "<li><a href='Login.php.old'>Login</a></li>
                         </ul>";
 
             }
@@ -84,6 +84,11 @@
             }
 
             else return "Non sei identificato, eseugi l'accesso.";
+
+        }
+
+        static public function buildSearchResults(){
+
 
 
         }

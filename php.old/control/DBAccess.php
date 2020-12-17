@@ -1,6 +1,6 @@
 <?php
     /** Unca classse che faccia la connessione ele query.
-        Il razionale dietro allo sviluppo di php.*/
+        Il razionale dietro allo sviluppo di php.old.*/
     class DBAccess {
 
         /** Informazioni per l'accesso al database. */

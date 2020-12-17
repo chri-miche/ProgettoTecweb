@@ -29,14 +29,14 @@
             $_SESSION['User'] = serialize($usrData);
 
 
-            header('Location: Profile.php');
+            header('Location: Profile.php.old');
 
         } else {
 
             echo "<div class='form'>
                     <h3>Username/password is incorrect.</h3><br/>
                     Click here to 
-                    <a href='login.php'>Login</a>
+                    <a href='login.php.old'>Login</a>
                 </div>";
 
         }

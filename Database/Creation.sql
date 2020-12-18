@@ -237,7 +237,7 @@
         content text NOT NULL,
         data date NOT NULL,
 
-        FOREIGN KEY (ID) REFERENCES Utente(ID)
+        FOREIGN KEY (UserID) REFERENCES Utente(ID)
 
     ) ENGINE = InnoDB;
 

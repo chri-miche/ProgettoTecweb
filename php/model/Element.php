@@ -13,14 +13,13 @@
          * @param null $id : Identificatore dell'elemento cercato. */
         public function __construct($id = null){
 
-            if($id && $this->checkID($id)) {
+            $this->dbAccess = new DatabaseAccess();
+            if($id != null && $this->checkID($id)) {
 
                 $this->id = $id;
                 $this->loadData();
 
             }
-
-            $this->dbAccess = new DatabaseAccess();
 
         }
 
@@ -41,6 +40,28 @@
             }
 
             return false;
+
+        }
+
+        protected function getSingleRecord(string $query){
+
+            $this->dbAccess->openConnection();
+
+            $res = $this->dbAccess->singleRowQuery($query);
+            $this->dbAccess->closeConnection();
+
+            return $res;
+
+        }
+
+        protected function getMultipleRecords(string $query){
+
+            $this->dbAccess->openConnection();
+
+            $res = $this->dbAccess->executeQuery($query);
+            $this->dbAccess->closeConnection();
+
+            return $res;
 
         }
 

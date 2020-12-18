@@ -1,14 +1,14 @@
 <?php
 
 
-class PostPreview implements Component {
+    class PostPreview implements Component {
 
 
 
-    function build() {
-        // TODO: Implement build() method.
+        function build() {
+            // TODO: Implement build() method.
 
+
+        }
 
     }
-
-}

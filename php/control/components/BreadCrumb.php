@@ -1,24 +1,11 @@
 <?php
 
-    class BreadCrumb extends Component {
+    class BreadCrumb implements Component {
 
-        protected function addContent()
-        {
-            // TODO: Implement addContent() method.
+
+        function build() {
+            // TODO: Implement build() method.
         }
 
-        public function validForThisBuild(string $HTML)
-        {
-            // TODO: Implement validForThisBuild() method.
-        }
 
-        public function newBuild(string $HTML)
-        {
-            // TODO: Implement newBuild() method.
-        }
-
-        public function deleteBuild()
-        {
-            // TODO: Implement deleteBuild() method.
-        }
-}
+    }

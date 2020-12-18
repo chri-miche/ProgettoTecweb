@@ -126,7 +126,8 @@ button {
 #search-bar {
 
     height: fit-content;
-    flex: auto;
+    width: 100%;
+    flex: 0  1  auto;
 
     z-index: 1;
     padding: 1.5em;

@@ -5,7 +5,8 @@
 
     class SideBar implements Component {
 
-        private $HTML;
+        private $HTML; /** Spostare questo a private in Component e renderla una classe?
+                            Cosi da evitare che possa essere modificato una volta inizilizzata.*/
         private $user;
 
         public function __construct(string $HTMLcontent = null) {

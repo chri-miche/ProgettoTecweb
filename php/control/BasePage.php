@@ -2,38 +2,31 @@
 
     require_once __ROOT__.'\control\components\Component.php';
 
+
+    /* Remove from the side the sidebar? And keep an header that moves with content of page?*/
     class BasePage {
 
         /** Array of all components inside of the generic page.*/
 
         private $components; private $pageHTML;
 
-        private const HEADER_TAG = '/<container \/>/';
         private const COMPONENT_EXPR = '/<component \/>/';
         private const COMPONENT_TAG = '<component />';
+
+        private $sideBar;
+        private $header;
 
         private $lastBuiltHTML;
 
         public function __construct(string $baseLayout) {
 
             $this->components = array();
-
             $this->pageHTML = $baseLayout;
 
         }
 
-        public function setHeader(Header $head){
-
-            if($head) {
-
-                $this->HTML = str_replace(self::HEADER_TAG, $head, $this->HTML);
-                return 'Header successfully set';
-
-            }  else
-                /** Make a header destroy and recreate? (reassing)*/
-                return 'Header Already set.';
-
-        }
+        public function setHeader(Header $head){ $this->header = $head;}
+        public function setSideBar(SideBar $bar){ $this->sideBar = $bar;}
 
 
         public function addComponent(Component $component){
@@ -70,6 +63,9 @@
 
             }
 
+            if($this->sideBar)
+                $this->lastBuiltHTML =  str_replace('<sidebar />', $this->sideBar->build(), $this->lastBuiltHTML);
+
             $this->lastBuiltHTML = self::cleanTags($this->lastBuiltHTML);
             return $this->lastBuiltHTML;
 
@@ -80,6 +76,7 @@
             /** Cerchiamo i tag non sostituiti e li togliamo. */
             $HTML = str_replace(self::COMPONENT_TAG, " ", $HTML);
             $HTML = str_replace('<header />',"", $HTML);
+            $HTML = str_replace('<sidebar />', "", $HTML);
 
             return $HTML;
 

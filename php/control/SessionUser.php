@@ -20,7 +20,7 @@
 
         public function currentSessionUser(){
 
-            if(!session_status()) session_start();
+            if(session_status() == PHP_SESSION_NONE) session_start();
 
             if(isset($_SESSION['User']) && $_SESSION['User'])
                 $this->user = unserialize($_SESSION['User']);

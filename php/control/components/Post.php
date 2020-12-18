@@ -16,26 +16,33 @@
             $this->HTML = file_get_contents(__ROOT__.'\view\modules\Post.xhtml');
 
             $this->user = new SessionUser();
-            $this->post = new PostElement($_GET['PostID']);
+
+            if(isset($_GET['PostID']))
+                $this->post = new PostElement($_GET['PostID']);
 
         }
 
         function build() {
             // TODO: Implement build() method.
 
-            if($this->post->getId()){
+            if(isset($this->post)) {
+
+                if ($this->post->getId()) {
 
 
+                    if ($this->user->userIdentified()) {
+                        /* He can comment. */
+                    }
 
-
-                if($this->user->userIdentified()){
-                    /* He can comment. */
                 }
 
+                return $this->HTML;
+            } else {
+
+                /** Redirect to home like youtube does?*/
+                return 'Oops you have no post selected.';
+
             }
-
-            return $this->HTML;
-
         }
 
 

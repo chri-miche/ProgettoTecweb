@@ -25,7 +25,6 @@
          *  @return bool : True if the operation went right. */
         public function loadElement($id){
 
-
             if (!($id === null) && $this->checkID($id)) {
 
                     $this->data['ID'] = $id;

@@ -70,6 +70,7 @@
         }
 
 
+
         public function getModerator(){ return $this->moderator; }
         public function getAdmin() { return $this->isAdmin; }
 

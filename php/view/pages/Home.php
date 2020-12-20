@@ -15,7 +15,6 @@
 
     if(!$page->addComponent(new SearchBar()))  echo 'Oops something went wrong';
 
-
     echo $page;
 
 ?>

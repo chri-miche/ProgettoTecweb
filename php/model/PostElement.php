@@ -53,6 +53,6 @@
         // TODO: Implement all fields with get function? (To be clearer).
         public function getPictures(){ return $this->immagini;}
         public function getTitle(){ return $this->title;}
-        public function getCreator() { return $this->post;}
+        public function getCreator() { return $this->userID;}
 
     }

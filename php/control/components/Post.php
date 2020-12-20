@@ -38,7 +38,12 @@
             /* Se il post è assegnato. */
             if(isset($this->post)) {
 
-                $ret = "<div>";
+                return $this->HTML;
+
+                $ret = "<div class='w3-container' style='width: 70%'>";
+
+
+                $ret .= self::posterData($this->creator);
 
                 $ret .= $this->post->content;
 
@@ -48,7 +53,7 @@
                 $postData = $this->post->getPictures();
 
                 foreach ($postData as $image)
-                    $ret .=  '<img src="'. $image ."></img>" ;
+                    $ret .=  '<img src="'. $image .'" ></img>' ;
 
 
                 if ($this->user->userIdentified()) {
@@ -65,6 +70,18 @@
         }
 
         /** Ausliari per dividere la costruzione di un post.*/
+
+        private static function posterData(UserElement $user){
+                $ret = "";
+                /* strReplace may be the way to go but we try by builing it from hand.*/
+                $ret .= '<header class="w3-container w3-blue"><h1>';
+
+                $ret .= '<img src= "'. $user->immagine . '"></img>';
+                $ret .= 'Creato da :' .$user->nome . "  ";
+
+                return $ret."</h1></header>";
+
+        }
 
         private function postContent(){
 

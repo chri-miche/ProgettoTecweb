@@ -3,103 +3,65 @@
     require_once __ROOT__.'\model\Element.php';
     class UserElement extends Element {
 
-        private $isAdmin; private $isModerator;
-        // TODO: Should i move the data to the Element? Prolly yes.
-        private $userData;/** Data relative to the user will be stored here. */
-
-        protected function loadData() {
-            // TODO: Implement loadData() method.
+     // Nota carina. In php false viene stampato come vuoto. Sensatissimo.
+     protected function loadData() {
 
             try {
 
-                if($this->getId() == null)
+                $userData = array();
+
+                if($this->ID === null)
                     throw new Exception('Cannot fetch data of element that
-                                    is not defined yet. First define the element.');
-
-
-                $this->dbAccess->openConnection();
+                    is not defined yet. First define the element.');
 
                 $query =    "SELECT * FROM Moderatore AS M  RIGHT JOIN 
                             (SELECT * FROM Utente as A WHERE A.ID =".$this->getId() . " LIMIT 1) 
                             AS U ON U.ID = M.UserID LIMIT 1;";
 
+                $res = $this->getSingleRecord($query);
 
-                $res = $this->dbAccess->singleRowQuery($query);
-                $this->dbAccess->closeConnection();
+                /** Potrei semplicemente ritornare res?
+                    TODO: Think about it. Prolly yes, fixing the keys in query should be the way.*/
 
-                $this->isModerator = isset($res['isAdmin']);
-                $this->isAdmin = isset($res['isAdmin']) && $res['isAdmin'];
+                $userData['moderator'] = isset($res['isAdmin']);
+                $userData['isAdmin'] = isset($res['isAdmin']) && $res['isAdmin'];
 
-                /** Build of the data. */
-                $this->userData['Nome'] = $res['nome'];
-                $this->userData['Email'] = $res['Email'];
-                $this->userData['Immagine'] = $res['immagineprofilo'];
+                $userData['nome'] = $res['nome'];
+                $userData['email'] = $res['email'];
+                $userData['immagine'] = $res['immagineProfilo'];
 
-            } catch (Exception $e) {
+                return $userData;
 
-                if($this->dbAccess->connectionIsOpen())
-                    $this->dbAccess->closeConnection();
-
-                echo 'Errore nell ottenimento dei dati';
-
-            }
+            } catch (Exception $e) { echo $e; }
 
         }
 
         /** @inheritDoc  */
         public function checkID($id) {
-            // TODO: Implement checkID() method.
 
             try{
+                if(!($id === null)) {
 
-                $this->dbAccess->openConnection();
+                    $query = "SELECT U.ID FROM Utente AS U WHERE U.ID = '$id' LIMIT 1";
+                    return !($this->getSingleRecord($query) === null);
 
-                $query = "SELECT U.ID FROM Utente AS U WHERE U.ID = '$id' LIMIT 1";
-                $res = $this->dbAccess->singleRowQuery($query);
-
-                $this->dbAccess->closeConnection();
-
-                return count($res);
-
-            } catch (Exception $e) {
-
-                if($this->dbAccess->connectionIsOpen())
-                    $this->dbAccess->closeConnection();
-
-                return null;
-
-            }
+                } else throw new Exception('Given Id cannot be null.');
+            } catch (Exception $e) { return null; }
         }
 
-        /** @inheritDoc  */
-        public function baseData() {
-            // TODO: Implement baseData() method.
-            return $this->userData;
-        }
-
-        public function fullData() {
-            // TODO: Implement fullData() method.
-        }
 
         // TODO: Rename or change the return type. Why do we the id?
+        //      returns the ID of the user if exists, else is false. Null if something goes wrong.
         public function checkCredentials($email, $password){
 
             try {
 
-                $this->dbAccess->openConnection();
-
                 $query = " SELECT  U.ID FROM  Utente AS U 
                     WHERE U.email ='$email' AND U.password = '$password' LIMIT 1;";
 
-                $res = $this->dbAccess->singleRowQuery($query);
-                $this->dbAccess->closeConnection();
-
-                return $res;
+                return $this->getSingleRecord($query);
 
             } catch (Exception $e) {
-
-                if($this->dbAccess->connectionIsOpen())
-                    $this->dbAccess->closeConnection();
 
                 return null;
 
@@ -108,7 +70,7 @@
         }
 
 
-        public function getModerator(){ return $this->isModerator; }
+        public function getModerator(){ return $this->moderator; }
         public function getAdmin() { return $this->isAdmin; }
 
     }

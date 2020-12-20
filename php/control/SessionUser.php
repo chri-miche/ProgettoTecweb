@@ -17,28 +17,24 @@
 
         }
 
-
         public function currentSessionUser(){
 
             if(session_status() == PHP_SESSION_NONE) session_start();
 
-            if(isset($_SESSION['User']) && $_SESSION['User'])
-                $this->user = unserialize($_SESSION['User']);
+            if(!isset($_SESSION['User']))
+                $_SESSION['User'] = serialize(new UserElement());
 
-            else
-                $this->user = new UserElement();
+            $this->user = unserialize($_SESSION['User']);
 
-
-        }
-
-        public function userIdentified(){
-            /** User is identified. */
-            return isset($this->user) && $this->user->getId() != null;
+            /*echo $this->user->ID;
+            print_r(array_keys($this->user->getData())); */
 
         }
+
+        public function userIdentified(){ return $this->user->ID != null; }
 
         public function getUser(){ return $this->user; }
-        public function setUser(int $id){ $this->user->loadElement($id);}
+        public function setUser(int $id){$this->user->loadElement($id);}
 
 
     }

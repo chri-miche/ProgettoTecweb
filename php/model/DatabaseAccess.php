@@ -35,9 +35,9 @@ class DatabaseAccess {
 
         $ret = array();
 
-        while($elem = mysqli_fetch_assoc($result)){
-            array_push($ret,$elem);
-        }
+        while($elem = mysqli_fetch_assoc($result))
+            $ret [] = $elem;
+
 
         return $ret;
 

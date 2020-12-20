@@ -291,10 +291,13 @@
 
     CREATE TABLE ImmaginiPost(
 
-        postID int UNSIGNED NOT NULL PRIMARY KEY,
-        percorsoImmagine varchar(200) NOT NULL unique,
+        postID int UNSIGNED NOT NULL,
+        percorsoImmagine varchar(200) NOT NULL,
+
+        CONSTRAINT immaginiPostID PRIMARY KEY (postID,percorsoImmagine),
 
         FOREIGN KEY (postID) REFERENCES Post(contentID) ON DELETE CASCADE
+
 
     ) ENGINE = InnoDB;
 

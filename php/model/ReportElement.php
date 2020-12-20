@@ -38,7 +38,7 @@
             $query = "  SELECT S.contentID FROM segnalazione AS S
                         WHERE S.utenteID =" . $userID . " AND S.contentID =". $postID." LIMIT 1;";
 
-            return(!($this->getSingleRecord($query) === null));
+            return (!($this->getSingleRecord($query) === null));
 
 
         }

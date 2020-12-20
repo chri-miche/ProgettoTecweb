@@ -10,7 +10,7 @@
                 throw new Exception('Cannot retrieve data of element not 
                 defined yet. First define the element.');
 
-            $query = "  SELECT C.content, C.UserID AS userID, P.title, P.Voti as voti, P.Valutazioni as valutazioni 
+            $query = "  SELECT C.content, C.isArchived, C.UserID AS userID, P.title, P.Voti as voti, P.Valutazioni as valutazioni 
                         FROM contenuto as C INNER JOIN
                             (SELECT P.contentID, P.title, A.Voti, A.Valutazioni  
                             FROM Post as P LEFT JOIN

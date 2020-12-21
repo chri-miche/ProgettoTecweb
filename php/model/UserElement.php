@@ -58,8 +58,9 @@
 
                 $query = " SELECT  U.ID FROM  Utente AS U 
                     WHERE U.email ='$email' AND U.password = '$password' LIMIT 1;";
+                $res = $this->getSingleRecord($query);
 
-                return $this->getSingleRecord($query);
+                return (isset($res['ID'])) ? $res['ID'] : false;
 
             } catch (Exception $e) {
 

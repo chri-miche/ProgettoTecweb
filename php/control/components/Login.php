@@ -3,18 +3,27 @@
     require_once __ROOT__.'\control\components\Component.php';
     require_once __ROOT__.'\control\SessionUser.php';
 
+    // TODO: Check this but it should be quite fine right now, it does what it has to
+    //  in a very nice way in my opinion. Add exceptions?
     class Login implements Component {
-
+        /* Base page layout.*/
         private $HTML;
+
+        /* The current session user if exists.*/
         private $user;
 
-        public function __construct(string $HTMLcontent = null) {
+        /* Input fields given.*/
+        private $email;
+        private $password;
 
-            if($HTMLcontent)
-                $this->HTML = $HTMLcontent;
+        public function __construct(string $email = null, string $password = null, string $HTMLcontent = null) {
 
-            else
-                $this->HTML =(file_get_contents(__ROOT__.'\view\modules\login.xhtml'));
+            ($HTMLcontent) ? $this->HTML = $HTMLcontent : $this->HTML =(
+                file_get_contents(__ROOT__.'\view\modules\login.xhtml'));
+
+
+            $this->email = $email;
+            $this->password = $password;
 
             $this->user = new SessionUser();
 
@@ -22,43 +31,38 @@
 
         public function build() {
 
-            if(!$this->user->userIdentified()) { /** If not user identified*/
+            if(!isset($this->email) && !isset($this->password))
+                return $this->HTML;
 
-                $this->HTML = file_get_contents(__ROOT__ . '\view\modules\Login.xhtml');
+            $valid = $this->validCredentials();
 
-                if(isset($_POST['username'])){
+            if(!($valid === null) && $valid){ header('Location: Home.php');}
+            else if(!($valid === null) && !$valid) {
+                return "<div class='form'> <h3>Username/password is incorrect.</h3><br/>
+                        Click here to  <a href='login.php.old'>Login</a> </div>";}
+            else {  return file_get_contents(__ROOT__ . '\view\modules\Error.xhtml'); }
 
-                    $email = stripslashes($_REQUEST['username']);
-                    $password = stripslashes($_REQUEST['password']);
+        }
 
-                    $sessionUser = $this->user->getUser();
-                    $res = $sessionUser->checkCredentials($email,$password);
 
-                    if($res){
+        public function validCredentials(){
 
-                        $this->user->setUser($res['ID']);
-                        $_SESSION['User'] = serialize($this->user->getUser());
+            if(!$this->user->userIdentified()){
+                if(isset($this->email) && isset($this->password)){
 
-                        header('Location: Home.php');
+                    // TODO: Rifare il modello, non mi piace così.
+                    $res = $this->user->getUser()->checkCredentials($this->email, $this->password);
 
-                    } else {
-
-                        $this->HTML ="<div class='form'>
-                                <h3>Username/password is incorrect.</h3><br/>
-                                    Click here to 
-                                <a href='login.php.old'>Login</a>
-                                </div>";
-                    }
+                    if(!($res === null) && !($res === false)) {
+                        $this->user->setUser($res); return true;
+                    } return false;
 
                 }
 
-            } else {
+            } else
 
-                return file_get_contents(__ROOT__ . '\view\modules\Error.xhtml');
+                return null;
 
-            }
-
-            return $this->HTML;
         }
 
     }

@@ -31,10 +31,16 @@
 
         }
 
-        public function userIdentified(){ return $this->user->ID != null; }
+        public function userIdentified(){ return !($this->user->ID === null); }
 
         public function getUser(){ return $this->user; }
-        public function setUser(int $id){$this->user->loadElement($id);}
+
+        public function setUser(int $id){
+
+            $this->user->loadElement($id);
+            $_SESSION['User'] = serialize($this->user);
+
+        }
 
 
     }

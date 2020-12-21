@@ -3,6 +3,8 @@
     require_once __ROOT__.'\model\PostElement.php';
     require_once __ROOT__.'\model\UserElement.php';
 
+    //TODO: Remove globals inside of Post and other Components.
+
     class Post implements Component {
 
         private $HTML;

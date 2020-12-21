@@ -7,6 +7,8 @@
     require_once __ROOT__.'\control\components\SideBar.php';
     require_once __ROOT__.'\control\components\Report.php';
     require_once __ROOT__.'\control\components\SearchBar.php';
+    require_once __ROOT__.'\control\components\BreadCrumb.php';
+
 
     $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
 
@@ -15,7 +17,7 @@
     $page->setSideBar(new SideBar());
 
     if(!$page->addComponent(new SearchBar()))  echo 'Oops something went wrong';
-
+    $page->addComponent(new BreadCrumb(array('Home')));
     $page->addComponent(new Report());
 
     echo $page;

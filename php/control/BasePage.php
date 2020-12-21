@@ -9,7 +9,9 @@
 
     //TODO: Remove globals inside of Post and other Components.
 
+
     /* Remove from the side the sidebar? And keep an header that moves with content of page?*/
+    // TODO: Check all this out.
     class BasePage {
 
         /** Array of all components inside of the generic page.*/
@@ -34,7 +36,7 @@
         public function setHeader(Header $head){ $this->header = $head;}
         public function setSideBar(SideBar $bar){ $this->sideBar = $bar;}
 
-
+        /* Add here H + value as parameter? */
         public function addComponent(Component $component){
 
             try {

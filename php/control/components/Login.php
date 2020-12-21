@@ -16,6 +16,7 @@
         private $email;
         private $password;
 
+        // TODO: Add session user as parameter by reference and assign it to user.
         public function __construct(string $email = null, string $password = null, string $HTMLcontent = null) {
 
             ($HTMLcontent) ? $this->HTML = $HTMLcontent : $this->HTML =(

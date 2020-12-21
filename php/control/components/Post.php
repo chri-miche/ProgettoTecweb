@@ -16,28 +16,21 @@
 
         /** TODO: Throw exception if we construct a non valid post? Yes myabe we shouòd.
          * @param string|null $HTML */
-        public function __construct(string $HTML = null) {
+        public function __construct(int $pid = null, SessionUser &$user, string $HTML = null) {
 
-            ($HTML) ? $this->HTML = $HTML :
-            $this->HTML = file_get_contents(__ROOT__.'\view\modules\Post.xhtml');
+            ($HTML) ? $this->HTML = $HTML :  $this->HTML = file_get_contents(__ROOT__.'\view\modules\Post.xhtml');
+            $this->post = new PostElement();
 
-            $this->user = new SessionUser();
+            $this->user = $user;
 
-            /** TODO :Brutto, trovare un modo migliore epr farlo */
-            if(isset($_GET['PostID'])) {
-                $this->post = new PostElement($_GET['PostID']);
+            (isset($pid) && $this->post->checkID($pid))?(($this->post->loadElement($pid))
+                ?  $this->creator = new UserElement($this->post->getCreator()) : $this->post = null) : $this->post = null;
 
-                if($this->post->exists())
-                    $this->creator = new UserElement($this->post->getCreator());
-
-                else
-                    $this->post = null;
-            }
 
         }
 
         function build() {
-            /* Se il post è assegnato. */
+            /* Se il post è assegnato significa che esiste e abbiamo tutti i dati utili. */
             if(isset($this->post)) {
 
                 return $this->HTML;
@@ -67,7 +60,7 @@
 
             } else {
                 /** Redirect to home like youtube does?*/
-                return 'Oops you have no post selected.';
+                return '<div class="w3-container w3-red w3-margin w3-border" style="width: 60%"> Oops you have no post selected.</div>';
             }
         }
 

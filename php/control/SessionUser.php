@@ -6,16 +6,15 @@
 
 
     // TODO: Check if there are problems and if the user has to be updated every operation.
+
+
     require_once __ROOT__.'\model\UserElement.php';
+    /* SessionUser is strongly couppled with the session so there is no way
+        to avoid this attachment, or it it?*/
     class SessionUser {
 
         private $user;
-
-        public function __construct() {
-
-            $this->currentSessionUser();
-
-        }
+        public function __construct() {$this->currentSessionUser();}
 
         public function currentSessionUser(){
 
@@ -25,9 +24,6 @@
                 $_SESSION['User'] = serialize(new UserElement());
 
             $this->user = unserialize($_SESSION['User']);
-
-            /*echo $this->user->ID;
-            print_r(array_keys($this->user->getData())); */
 
         }
 
@@ -41,6 +37,5 @@
             $_SESSION['User'] = serialize($this->user);
 
         }
-
 
     }

@@ -9,6 +9,7 @@
                             Cosi da evitare che possa essere modificato una volta inizilizzata.*/
         private $user;
 
+        /** TODO: Give user as parameter by reference? Avoid multiple definitons of SessionUser. */
         public function __construct(string $HTMLcontent = null) {
 
              ($HTMLcontent) ? $this->HTML = $HTMLcontent

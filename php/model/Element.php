@@ -37,26 +37,18 @@
 
         }
 
-        protected function getSingleRecord(string $query) {
+        protected static function getSingleRecord(string $query) {
 
             try {
-                $this->dbAccess->openConnection();
-                $res = $this->dbAccess->singleRowQuery($query);
-                $this->dbAccess->closeConnection();
-
-                return $res;
+                return DatabaseAccess::executeSingleQuery($query);
             } catch (Exception $e) { echo $e; return null; }
 
          }
 
-        protected function getMultipleRecords(string $query){
+        protected static function getMultipleRecords(string $query){
 
             try {
-                $this->dbAccess->openConnection();
-                $res = $this->dbAccess->executeQuery($query);
-                $this->dbAccess->closeConnection();
-
-                return $res;
+                return DatabaseAccess::executeQuery($query);
             } catch (Exception $e) { echo $e; return null; }
         }
 
@@ -68,7 +60,7 @@
          * @return true :  true if it exists, else false.
          * @return null : if there is an error in the query.
          * ____________________________________________*/
-        abstract public function checkID($id);
+        abstract static public function checkID($id);
 
 
         public function __get($name){/* Get any value from the data structure.*/

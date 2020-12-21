@@ -8,19 +8,19 @@
 
         private $previous;
 
-        public function __construct() {
-            $this->previous = explode('/',$_SERVER["REQUEST_URI"]);
-        }
+        // TODO: Check and make it new. ( non global var dependant)
+        public function __construct() {$this->previous = explode('/',$_SERVER["REQUEST_URI"]);}
 
-
+        // TODO: Check and make it new. ( non global var dependant)
         function build() {
 
             $ret = "<div class='w3-container w3-green' style='width:100%; height: fit-content'>";
             $ret .= 'Al momento ti trovi in:   ';
 
             foreach ($this->previous as $prev){ $ret .= " / ". $prev ; }
+
             return  $ret . "</div>";
-            // TODO: Implement build() method.
+
         }
 
 

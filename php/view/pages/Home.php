@@ -9,6 +9,10 @@
     require_once __ROOT__.'\control\components\SearchBar.php';
     require_once __ROOT__.'\control\components\BreadCrumb.php';
 
+    require_once __ROOT__.'\control\components\BrowsePosts.php';
+
+
+
     $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
 
     $page = new BasePage($basePage);
@@ -17,7 +21,8 @@
 
     if(!$page->addComponent(new SearchBar()))  echo 'Oops something went wrong';
     $page->addComponent(new BreadCrumb(array('Home')));
-    $page->addComponent(new Report());
+
+    $page->addComponent(new BrowsePosts());
 
     echo $page;
 

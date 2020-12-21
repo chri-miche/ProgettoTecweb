@@ -20,13 +20,33 @@
          * } posts
          *
          */
+        private $HTML;
 
-        public function __construct() {
+        private $post;
+        private $creator;
 
+        public function __construct(int $pid) {
+            //  Get the HTML from builder? Might be the way to go.
+            $this->HTML = file_get_contents(__ROOT__.'\view\modules\PostPreview.xhtml');
+
+            if(PostElement::checkID($pid)){
+                $this->post = new PostElement($pid);
+                if(UserElement::checkID($this->post->userID))
+                    $this->creator = new UserElement($this->post->userID);
+
+            }
         }
 
-        function build() {
-            // TODO: Implement build() method.
+        public function build() {
+            // TODO: Avoid dependency.
+
+            $this->HTML = file_get_contents(__ROOT__.'\view\modules\PostPreview.xhtml');
+
+            $this->HTML = str_replace("{TITOLO}", $this->post->title,  $this->HTML);
+            $this->HTML = str_replace('{NOME_UTENTE}', '<a href="user.php?id='. $this->creator->ID .'">
+                                '. $this->creator->nome. '</a>',  $this->HTML);
+
+            return  $this->HTML;
 
 
         }

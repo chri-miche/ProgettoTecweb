@@ -6,14 +6,15 @@
     class SideBar implements Component {
 
         private $HTML; /** Spostare questo a private in Component e renderla una classe?
-                            Cosi da evitare che possa essere modificato una volta inizilizzata.*/
+                        Cosi da evitare che possa essere modificato una volta inizilizzata.*/
+
         private $user;
 
         /** TODO: Give user as parameter by reference? Avoid multiple definitons of SessionUser. */
         public function __construct(string $HTMLcontent = null) {
 
              ($HTMLcontent) ? $this->HTML = $HTMLcontent
-                : $this->HTML = file_get_contents(__ROOT__.'\view\modules\SideBar.xhtml');
+             : $this->HTML = file_get_contents(__ROOT__.'\view\modules\SideBar.xhtml');
 
             $this->user = new SessionUser();
 

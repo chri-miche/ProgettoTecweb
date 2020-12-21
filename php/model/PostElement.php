@@ -38,15 +38,49 @@
         }
 
         /*** @inheritDoc  */
-        // TODO : Write nicelu.
-        public function checkID($id) {
+        public static function checkID($id) {
             // TODO: Implement checkID() method.
             try {
 
                 $query = "SELECT P.contentID FROM Post AS P  WHERE P.contentID = '$id' LIMIT 1; ";
-                return !($this->getSingleRecord($query) === null);
+                return !(self::getSingleRecord($query) === null);
 
             } catch (Exception $e) { return false; }
+
+        }
+        // TODO: Move this to somewhhere it makes sense. Why on earth would i do
+        //  a get all new post inside an element of Post?
+        public static function getNewest(int $range, int $offset){
+
+            try{
+                $query = " SELECT P.contentID FROM post AS P, contenuto AS C 
+                        WHERE P.contentID = C.ID ORDER BY  C.data LIMIT ". $range ." OFFSET ". $offset .";";
+
+                $res = self::getMultipleRecords($query);
+
+                $return = array();
+                foreach ($res as $r){ $return[] = $r['contentID']; }
+
+                return $return;
+
+            } catch (Exception $e){return false;}
+
+        }
+
+        public static function getBest(int $range, int $offset){
+
+            try{
+
+                $query = "";
+
+                $res = self::getMultipleRecords($query);
+
+                $return = array();
+                foreach ($res as $r){ $return[] = $r['contentID']; }
+
+                return $return;
+
+            } catch (Exception $e){return false;}
 
         }
 

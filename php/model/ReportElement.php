@@ -20,12 +20,12 @@
         }
 
         /** * @inheritDoc  */
-        public function checkID($id) {
+        public static function checkID($id) {
 
             try{
 
                 $query = "SELECT S.contentID FROM segnalazione AS S  WHERE S.contentID = '$id' LIMIT 1;";
-                return !($this->getSingleRecord($query) === null);
+                return !(self::getSingleRecord($query) === null);
 
             } catch (Exception $e) { return false; }
         }

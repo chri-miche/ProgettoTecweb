@@ -37,13 +37,13 @@
         }
 
         /** @inheritDoc  */
-        public function checkID($id) {
+        public static function checkID($id) {
 
             try{
                 if(!($id === null)) {
 
                     $query = "SELECT U.ID FROM Utente AS U WHERE U.ID = '$id' LIMIT 1";
-                    return !($this->getSingleRecord($query) === null);
+                    return !(self::getSingleRecord($query) === null);
 
                 } else throw new Exception('Given Id cannot be null.');
             } catch (Exception $e) { return null; }
@@ -52,13 +52,13 @@
 
         // TODO: Rename or change the return type. Why do we the id?
         //      returns the ID of the user if exists, else is false. Null if something goes wrong.
-        public function checkCredentials($email, $password){
+        public static function checkCredentials($email, $password){
 
             try {
 
                 $query = " SELECT  U.ID FROM  Utente AS U 
                     WHERE U.email ='$email' AND U.password = '$password' LIMIT 1;";
-                $res = $this->getSingleRecord($query);
+                $res = Element::getSingleRecord($query);
 
                 return (isset($res['ID'])) ? $res['ID'] : false;
 
@@ -69,8 +69,6 @@
             }
 
         }
-
-
 
         public function getModerator(){ return $this->moderator; }
         public function getAdmin() { return $this->isAdmin; }

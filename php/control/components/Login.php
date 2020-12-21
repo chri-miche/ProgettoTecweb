@@ -20,7 +20,7 @@
         public function __construct(string $email = null, string $password = null, string $HTMLcontent = null) {
 
             ($HTMLcontent) ? $this->HTML = $HTMLcontent : $this->HTML =(
-                file_get_contents(__ROOT__.'\view\modules\login.xhtml'));
+                file_get_contents(__ROOT__.'\view\modules\login.xhtml'));   //STD FILE
 
 
             $this->email = $email;
@@ -51,9 +51,7 @@
             if(!$this->user->userIdentified()){
                 if(isset($this->email) && isset($this->password)){
 
-                    // TODO: Rifare il modello, non mi piace così.
-                    $res = $this->user->getUser()->checkCredentials($this->email, $this->password);
-
+                    $res = UserElement::checkCredentials($this->email, $this->password);
                     if(!($res === null) && !($res === false)) {
                         $this->user->setUser($res); return true;
                     } return false;

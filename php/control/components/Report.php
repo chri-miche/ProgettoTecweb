@@ -25,7 +25,7 @@
             $this->user = new SessionUser();
             $this->report = new ReportElement();
 
-            /** TODO: Check if second isset does work, prolly not.*/
+            /** TODO: Delete globals dependecy.*/
             if(isset($_GET['pid']))
                 $this->post = new PostElement($_GET['pid']);
 

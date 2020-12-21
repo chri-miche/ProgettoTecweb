@@ -1,69 +1,63 @@
 <?php
 
+    class DatabaseAccess{
 
-class DatabaseAccess {
-    // TODO: Check all and maybe rewrite.
+        private const HOST = 'localhost';
 
-    /** Informazioni per l'accesso al database. */
+        private const USER = 'root';
+        private const PASSWORD = '';
 
-    private const HOST = 'localhost';
+        private const DB_NAME = 'WebBirdDB';
 
-    private const USER = 'root';
-    private const PASSWORD = '';
+        static public function executeQuery($query){
 
-    private const DB_NAME = 'WebBirdDB';
+            try {
+                $connection = self::openConnection();
+                $return = array();
 
-    private $connection;
+                $result = mysqli_query($connection, $query);
 
+                while($elem = mysqli_fetch_assoc($result)) $return[] = $elem;
 
-    public function openConnection(){
+                self::closeConnection($connection);
+                return $return;
 
-        /** Apre la connessione con il database.*/
-        $this->connection = mysqli_connect(self::HOST, self::USER,
-                self::PASSWORD,self::DB_NAME);
+            } catch (Exception $e) { return null; }
+        }
 
-        if (mysqli_connect_errno() != 0)
-            throw new Exception(mysqli_connect_error());
+        static public function executeSingleQuery($query){
 
-    }
+            try{
+                $connection = self::openConnection();
 
-    /** Multiline Query. $filter to be added? */
-    public function executeQuery($query){
+                $result = mysqli_query($connection, $query);
+                $result = mysqli_fetch_assoc($result);
 
-        $result = mysqli_query($this->connection,$query);
-        if(!$result) throw new Exception('Errore nella query.');
+                self::closeConnection($connection);
+                return $result;
 
-        $ret = array();
+            } catch (Exception $e) { return null; }
 
-        while($elem = mysqli_fetch_assoc($result))
-            $ret [] = $elem;
+        }
 
+        static private function openConnection(){
 
-        return $ret;
+            $connection = mysqli_connect(self::HOST, self::USER,
+                self::PASSWORD, self::DB_NAME);
 
-    }
+            if( mysqli_connect_errno() != 0)
+                throw new Exception(mysqli_connect_error());
 
-    /** Queries known to get only one record in the db.
-    They fetch the data and create an associative array.*/
-    public function singleRowQuery($query){
+            return $connection;
 
-        $result = mysqli_query($this->connection, $query);
-        if(!$result) throw new Exception('Errore nella esecuzione della query.');
+        }
 
-        $res =  mysqli_fetch_assoc($result);
-        mysqli_free_result($result);
+        static private function closeConnection($connection){
 
-        return $res;
+            mysqli_close($connection);
+            return true;
 
-    }
+        }
 
-    public function connectionIsOpen(){ return $this->connection; }
-
-    public function closeConnection(){
-
-        mysqli_close($this->connection);
-        $this->connection = false;
 
     }
-
-}

@@ -82,6 +82,7 @@
         private static function cleanTags($HTML){
 
             /** Cerchiamo i tag non sostituiti e li togliamo. */
+            // TODO: Remake
             $HTML = str_replace(self::COMPONENT_TAG, " ", $HTML);
             $HTML = str_replace('<header />',"", $HTML);
             $HTML = str_replace('<sidebar />', "", $HTML);
@@ -90,12 +91,8 @@
 
         }
 
-        public function returnPage(){
-
-            return ($this->built) ? $this->lastBuiltHTML : $this->build();
-        }
-
-         public function __toString() { return $this->returnPage(); }
+        public function returnPage(){return ($this->built) ? $this->lastBuiltHTML : $this->build();}
+        public function __toString() { return $this->returnPage(); }
 
     }
 

@@ -24,12 +24,16 @@
         private $sideBar;
         private $header;
 
+        private $built;
+
         private $lastBuiltHTML;
 
         public function __construct(string $baseLayout) {
 
             $this->components = array();
             $this->pageHTML = $baseLayout;
+
+            $this->built = false;
 
         }
 
@@ -71,8 +75,12 @@
 
             }
 
-            if($this->sideBar)
-                $this->lastBuiltHTML =  str_replace('<sidebar />', $this->sideBar->build(), $this->lastBuiltHTML);
+            if($this->sideBar) {
+                $this->lastBuiltHTML = str_replace('<sidebar />', $this->sideBar->build(), $this->lastBuiltHTML);
+                $this->lastBuiltHTML = str_replace('{SETMARGIN}', '160px', $this->lastBuiltHTML);
+            } else {
+                $this->lastBuiltHTML = str_replace('{SETMARGIN}', '0px;', $this->lastBuiltHTML);
+            }
 
             $this->lastBuiltHTML = self::cleanTags($this->lastBuiltHTML);
             return $this->lastBuiltHTML;

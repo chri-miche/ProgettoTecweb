@@ -37,10 +37,7 @@
         }
 
         public function build() {
-
-            // TODO: Avoid dependency.
-            $this->HTML = file_get_contents(__ROOT__.'\view\modules\PostPreview.xhtml');
-
+            
             $this->HTML = str_replace("{TITOLO}", $this->post->title,  $this->HTML);
             $this->HTML = str_replace('{NOME_UTENTE}', '<a href="user.php?id='. $this->creator->ID .'">
                                 '. $this->creator->nome. '</a>',  $this->HTML);

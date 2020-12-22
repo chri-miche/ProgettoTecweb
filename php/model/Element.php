@@ -68,6 +68,8 @@
             TODO: Check this out.*/
         public function getId(){ return ($this->exists())? $this->ID : null; }
 
+        /** Insert new adata or update new data to be done.*/
+        public function loadUpdate(){}
 
         public function exists() { return !($this->ID === null);}
 

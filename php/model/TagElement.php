@@ -13,7 +13,7 @@ class TagElement extends Element
 
             $query = "  SELECT Q.nome, L.text as label  FROM label AS L RIGHT JOIN
                         (SELECT T.ID, T.LabelID, T.nome FROM tag AS T WHERE T.ID = ". $this->ID
-                        ." LIMIT 1) AS Q ON L.ID = Q.ID LIMIT 1;";
+                        ." LIMIT 1) AS Q ON L.ID = Q.LabelID LIMIT 1;";
 
             $res = $this->getSingleRecord($query);
 
@@ -34,5 +34,8 @@ class TagElement extends Element
 
         } catch (Exception $e) { return false; }
     }
+
+    public function getNome(){return $this->nome;}
+    public function getLabel(){return $this->label;}
 
 }

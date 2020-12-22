@@ -28,13 +28,13 @@
             /** To make code tidied up count the black space of the opened tag before.*/
             if(!$this->user->getUser()->getId()){
 
-                $contentHTML .= '<li><a href="Login.php">Accedi</a></li>'."\n"
-                    .'<li><a href="signup.html">Iscriviti</a></li>';
+                $contentHTML .= '<a href="Login.php" class="w3-bar-item w3-button" style="width: 100%">Accedi</a>'."\n"
+                    .'<a href="signup.html" class="w3-border-top w3-border-bottom w3-bar-item w3-button" style="width: 100%">Iscriviti</a>';
 
 
             } else {
 
-                $contentHTML .= '<li><a href= "Logout.php">Logout</a></li>';
+                $contentHTML .= '<a class="w3-bar-item w3-button w3-border-bottom" style="width: 100%" href= "Logout.php">Logout</a>';
 
                 if($this->user->getUser()->getModerator()){
 
@@ -47,7 +47,8 @@
 
             }
 
-            return str_replace(Component::INNER_TAG, $contentHTML, $this->HTML);
+            $contentHTML = str_replace(Component::INNER_TAG, $contentHTML, $this->HTML);
+            return $contentHTML;
 
         }
 

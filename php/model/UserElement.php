@@ -69,6 +69,26 @@
             }
 
         }
+        /** Overload the function also for ID. */
+        private static function userExists(string $email){
+            $query = "SELECT U.ID FROM utente AS U WHERE U.email='". $email. "' LIMIT 1;";
+            $app = self::getSingleRecord($query);
+            return isset($app['ID']);
+        }
+
+        /* TODO: Check this, it was done in a hurry. Not checked yet.*/
+        public static function addUser(string $username, string $password, string $email){
+
+            if(!self::userExists($email)){
+
+                $query = "INSERT INTO utente(nome, email, password, immagineProfilo) 
+                          VALUE ('". $username . "',  '" . $email . "', '" . $password ." ', 'defj.pg' );";
+
+                /* TODO: Move this to Element. (or at least add the Virtual method for addelement.*/
+                return DatabaseAccess::writeRecord($query);
+            } return null;
+
+        }
 
         public function getModerator(){ return $this->moderator; }
         public function getAdmin() { return $this->isAdmin; }

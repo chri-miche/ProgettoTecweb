@@ -59,5 +59,19 @@
 
         }
 
+        /* TODO: Check this, it was done in a hurry. Not checked yet.*/
+        static public function writeRecord($query){
+
+            $connection = self::openConnection();
+
+            mysqli_query($connection, $query);
+            $ret = mysqli_insert_id($connection);
+
+            self::closeConnection($connection);
+
+            return $ret;
+
+        }
+
 
     }

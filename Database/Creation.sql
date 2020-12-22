@@ -164,7 +164,7 @@
         nomeScientifico VARCHAR(40) NOT NULL,
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID),
-        FOREIGN KEY (famID) REFERENCES Ordine(TagID)
+        FOREIGN KEY (famID) REFERENCES Famiglia(TagID)
 
     ) ENGINE = InnoDB;
 

@@ -1,6 +1,6 @@
 <?php
 
-    require_once __ROOT__.'\control\components\PostPreview.php';
+    require_once __ROOT__ . '\control\components\previews\PostPreview.php';
     // TODO: Check the PostPreview Class.
     class BrowsePosts implements Component {
 

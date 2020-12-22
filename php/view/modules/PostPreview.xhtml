@@ -1,15 +1,22 @@
-<div class =  "w3-margin">
+<div class =  "w3-margin" style="width: 60%">
     <div class="w3-card-4">
+            <header class="w3-container w3-light-green"> <!-- Container color based on first tag? !-->
+                    <h5 class="w3-opacity">
+                        <a href="" > {NOME_UTENTE} </a> : 10/07/2020
+                    </h5>
+            </header>
 
-        <header class="w3-container w3-green"> <!-- Container color based on first tag? !-->
-                <h5 class="w3-opacity">
-                    <a href="" > {NOME_UTENTE} </a> : 10/07/2020
-                </h5>
+            <div class="w3-container w3-green">
+                    <h2 class="">
+                        <a href="postPage.php?pid={POSTLINKID}" style="display: block">
+                        {TITOLO}
+                        </a>
+                    </h2>
+            </div>
 
-                <h2>
-                    {TITOLO}
-                </h2>
-        </header>
+        <footer class="w3-container w3-black w3-padding" style="display: flex">
+            {TAGS}
+        </footer>
 
     </div>
 </div>

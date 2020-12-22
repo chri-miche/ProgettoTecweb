@@ -48,6 +48,7 @@
             } catch (Exception $e) { return false; }
 
         }
+
         // TODO: Move this to somewhhere it makes sense. Why on earth would i do
         //  a get all new post inside an element of Post?
         public static function getNewest(int $range, int $offset){
@@ -81,6 +82,17 @@
                 return $return;
 
             } catch (Exception $e){return false;}
+
+        }
+
+        public function relatedTagIds(){
+
+            $ret = array();
+
+            $query = "SELECT C.tagID as ID FROM Citazione AS C WHERE C.postID = ". $this->ID .";";
+            foreach (Element::getMultipleRecords($query) as $result)  $ret [] = $result['ID'];
+
+            return $ret;
 
         }
 

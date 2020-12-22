@@ -7,7 +7,6 @@
 
     require_once __ROOT__.'\control\components\SideBar.php';
     require_once __ROOT__.'\control\components\SearchBar.php';
-    require_once __ROOT__.'\control\components\VericalComponent.php';
 
     require_once __ROOT__.'\control\SessionUser.php ';
 

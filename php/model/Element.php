@@ -4,15 +4,11 @@
     require_once __ROOT__.'\model\DatabaseAccess.php';
     abstract class Element {
 
-        private $dbAccess;
-
         private $data; /** Associative Array where all the data is stored.*/
 
         /** Builds a new item.
          * @param null $id : Identificatore dell'elemento cercato. */
         public function __construct($id = null){
-
-            $this->dbAccess = new DatabaseAccess();
 
             $this->data = array();
             $this->loadElement($id);

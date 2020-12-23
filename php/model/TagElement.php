@@ -70,6 +70,10 @@ class TagElement extends Element
         } catch (Exception $e){return null;}
     }
 
+    static public function genereTags($famiglia = null){
+
+    }
+
     public function getNome(){return $this->nome;}
     public function getLabel(){return $this->label;}
 

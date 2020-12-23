@@ -20,10 +20,10 @@
         private $reference;
         private $parentReference;
 
-        public function __construct($ids, string $parentReference, int $page = 0, int $elementsPerPAge = 10, string $HTML = null, string $reference = null) {
+        public function __construct($ids, string $parentReference, int $page = 0, int $elementsPerPAge = 10, string $reference = null, string $HTML = null) {
 
             (isset($HTML)) ? $this->HTML = $HTML : $this->HTML = file_get_contents(__ROOT__.'\view\modules\BirdCatalogue.xhtml');
-            (isset($reference))? $this->reference = $reference : $this->reference = '\Progetto\ProgettoTecweb\php\view\pages\catalogo\famiglia.php?id=';
+            (isset($reference))? $this->reference = $reference : $this->reference = '';
 
             $this->currentPage = $page;
             $this->parentReference = $parentReference;

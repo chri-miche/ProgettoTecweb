@@ -23,8 +23,10 @@
     $page = new BasePage($basePage);
 
     isset($_GET['page'])?
-        $page->addComponent(new TagBrowser(TagElement::ordineTags(),'\Progetto\ProgettoTecweb\php\view\pages\Catalogo\Ordine.php?page=', $_GET['page'])):
-        $page->addComponent(new TagBrowser(TagElement::ordineTags(),'\Progetto\ProgettoTecweb\php\view\pages\Catalogo\Ordine.php?page=',0));
+        $page->addComponent(new TagBrowser(TagElement::ordineTags(),'\Progetto\ProgettoTecweb\php\view\pages\catalogo\ordine.php?page=',
+            $_GET['page'],10, '\Progetto\ProgettoTecweb\php\view\pages\catalogo\famiglia.php?id=')):
+        $page->addComponent(new TagBrowser(TagElement::ordineTags(),'\Progetto\ProgettoTecweb\php\view\pages\catalogo\ordine.php?page=',
+            0, 10,  '\Progetto\ProgettoTecweb\php\view\pages\catalogo\famiglia.php?id='));
 
 
     echo  $page;

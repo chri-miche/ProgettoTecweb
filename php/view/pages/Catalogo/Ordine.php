@@ -14,16 +14,17 @@
     require_once __ROOT__.'\control\components\BrowseElements.php';
     require_once __ROOT__.'\control\components\BrowsePosts.php';
     require_once __ROOT__ . '\control\components\previews\TagPreview.php';
-    require_once __ROOT__ . '\control\components\browsers\OrdineBrowser.php';
+    require_once __ROOT__ . '\control\components\browsers\TagBrowser.php';
 
+    require_once __ROOT__ . '\model\TagElement.php';
     // TODO: Fix the naming and the pathing of files. ( Ordine essendo in un file lotnano)
     $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
 
     $page = new BasePage($basePage);
 
     isset($_GET['page'])?
-        $page->addComponent(new OrdineBrowser('\Progetto\ProgettoTecweb\php\view\pages\Catalogo\Ordine.php?page=', $_GET['page'])):
-        $page->addComponent(new OrdineBrowser('\Progetto\ProgettoTecweb\php\view\pages\Catalogo\Ordine.php?page=',0));
+        $page->addComponent(new TagBrowser(TagElement::ordineTags(),'\Progetto\ProgettoTecweb\php\view\pages\Catalogo\Ordine.php?page=', $_GET['page'])):
+        $page->addComponent(new TagBrowser(TagElement::ordineTags(),'\Progetto\ProgettoTecweb\php\view\pages\Catalogo\Ordine.php?page=',0));
 
 
     echo  $page;

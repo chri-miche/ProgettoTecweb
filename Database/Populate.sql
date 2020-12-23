@@ -46,3 +46,16 @@ insert into tag(ID, nome, LabelID) VALUES (0, 'Fenicottero', 1);
 
 insert into citazione(tagID, postID) VALUES (1, 0), (9,0), (1, 1);
 
+INSERT INTO tag(ID, nome, LabelID) VALUES  (8, 'Galliformes', null),
+    (10, 'Gaviiformes', null),(11, 'Sphenisciformes', null),(12, 'Procellariiformes', null),(13, 'Podicipediformes', null),(14, 'Phaethontiformes', null),(15, 'Phoenicopteriformes', null),(16, 'Ciconiiformes', null),
+    (17, 'Pelecaniformes', null),(18, 'Suliformes', null),(19, 'Accipitriformes', null),(20, 'Falconiformes', null),(21, 'Otidiformes', null),(22, 'Mesitornithiformes', null),(23, 'Cariamiformes', null);
+
+INSERT INTO ordine(TagID, nomeScientifico) VALUES (8, 'Galliformes'), (10, 'Gaviiformes'),
+(11, 'Sphenisciformes'),(12, 'Procellariiformes'),(13, 'Podicipediformes'),(14, 'Phaethontiformes'),(15, 'Phoenicopteriformes'),(16, 'Ciconiiformes'),
+(17, 'Pelecaniformes'),(18, 'Suliformes'),(19, 'Accipitriformes'),(20, 'Falconiformes'),(21, 'Otidiformes'),(22, 'Mesitornithiformes'),(23, 'Cariamiformes');
+
+INSERT INTO tag(ID, nome, LabelID) VALUES
+    (24,'Phoenicopteridae', null), (25,'Threskiornithidae', null), (26,'Ardeidae', null), (27,'Scopidae', null), (28,'Pelecanidae', null), (29,' Balaenicipitidae', null);
+
+INSERT INTO famiglia(TagID, OrdID, nomeScientifico, caratteristicheComuni) VALUES
+    (24,15 ,'Phoenicopteridae', null), (25, 17,'Threskiornithidae', null), (26,17,'Ardeidae', null), (27,17,'Scopidae', null), (28,17,'Pelecanidae', null), (29,17,' Balaenicipitidae', null

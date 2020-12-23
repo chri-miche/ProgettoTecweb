@@ -50,6 +50,26 @@ class TagElement extends Element
         } catch (Exception $e) {return null;}
     }
 
+    static public function famigliaTags($ordine = null){
+        try {
+
+            isset($ordine)
+                /** Va fatta la join*/
+                ? $query = "SELECT T.ID FROM tag AS T, Famiglia AS F, ordine AS O 
+                            WHERE F.TagID = T.ID AND F.OrdID =" . $ordine . " GROUP BY T.ID;" :
+                $query= "SELECT T.ID FROM tag as T, famiglia as F WHERE  T.ID = F.TagID;";
+
+
+            $ret = array();
+
+            $elem =  self::getMultipleRecords($query);
+
+            foreach ($elem as $el){$ret[] = $el['ID'];}
+            return $ret;
+
+        } catch (Exception $e){return null;}
+    }
+
     public function getNome(){return $this->nome;}
     public function getLabel(){return $this->label;}
 

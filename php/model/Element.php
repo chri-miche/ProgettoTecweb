@@ -8,6 +8,8 @@
 
         /** Builds a new item.
          * @param null $id : Identificatore dell'elemento cercato. */
+
+        
         public function __construct($id = null){
 
             $this->data = array();

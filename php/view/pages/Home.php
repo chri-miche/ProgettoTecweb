@@ -4,7 +4,7 @@
 
     require_once __ROOT__.'\control\BasePage.php';
 
-    require_once __ROOT__.'\control\components\SideBar.php';
+    require_once __ROOT__ . '\control\components\SiteBar.php';
     require_once __ROOT__.'\control\components\Report.php';
     require_once __ROOT__.'\control\components\SearchBar.php';
     require_once __ROOT__.'\control\components\BreadCrumb.php';
@@ -20,7 +20,7 @@
 
     $page = new BasePage($basePage);
 
-    $page->setSideBar(new SideBar());
+    $page->addComponent(new SiteBar());
 
     if(!$page->addComponent(new SearchBar()))  echo 'Oops something went wrong';
     $page->addComponent(new BreadCrumb(array('Home')));

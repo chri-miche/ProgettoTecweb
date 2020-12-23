@@ -38,7 +38,7 @@
             $valid = $this->validCredentials();
 
             if(!($valid === null) && $valid){ header('Location: Home.php');}
-            else if(!($valid === null) && !$valid) {
+            else if(!($valid === null) && !$valid) { /** Return the login page + error message under the penguin,*/
                 return "<div class='form'> <h3>Username/password is incorrect.</h3><br/>
                         Click here to  <a href='login.php.old'>Login</a> </div>";}
             else {  return file_get_contents(__ROOT__ . '\view\modules\Error.xhtml'); }

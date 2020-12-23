@@ -18,7 +18,7 @@
         private $creator;
         private $tags;
 
-        public function __construct(int $pid) {
+        public function __construct(int $pid, string $reference = null) {
             //  Get the HTML from builder? Might be the way to go.
             $this->HTML = file_get_contents(__ROOT__.'\view\modules\PostPreview.xhtml');
 

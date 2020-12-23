@@ -21,7 +21,6 @@
         private const COMPONENT_EXPR = '/<component \/>/';
         private const COMPONENT_TAG = '<component />';
 
-        private $sideBar;
         private $header;
 
         private $built;
@@ -38,7 +37,6 @@
         }
 
         public function setHeader(Header $head){ $this->header = $head;}
-        public function setSideBar(SideBar $bar){ $this->sideBar = $bar;}
 
         /* Add here H + value as parameter? */
         public function addComponent(Component $component){
@@ -50,11 +48,7 @@
 
                 return true;
 
-            } catch( Exception $e ){
-
-                return false;
-
-            }
+            } catch( Exception $e ){ return false; }
 
         }
 
@@ -73,13 +67,6 @@
                 $this->lastBuiltHTML = preg_replace(self::COMPONENT_EXPR, $HTML, $this->lastBuiltHTML, 1);
 
 
-            }
-
-            if($this->sideBar) {
-                $this->lastBuiltHTML = str_replace('<sidebar />', $this->sideBar->build(), $this->lastBuiltHTML);
-                $this->lastBuiltHTML = str_replace('{SETMARGIN}', '160px', $this->lastBuiltHTML);
-            } else {
-                $this->lastBuiltHTML = str_replace('{SETMARGIN}', '0px;', $this->lastBuiltHTML);
             }
 
             $this->lastBuiltHTML = self::cleanTags($this->lastBuiltHTML);

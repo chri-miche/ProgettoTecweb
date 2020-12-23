@@ -5,7 +5,7 @@
     // TODO: Make includes files for pages.
     require_once __ROOT__.'\control\BasePage.php';
 
-    require_once __ROOT__.'\control\components\SideBar.php';
+    require_once __ROOT__ . '\control\components\SiteBar.php';
     require_once __ROOT__.'\control\components\SearchBar.php';
 
     require_once __ROOT__.'\control\SessionUser.php ';
@@ -20,6 +20,8 @@
 
 
     $page = new BasePage($basePage);
+
+    $page->addComponent(new SiteBar());
 
     if(!$page->addComponent(new SearchBar()))  echo 'Oops something went wrong';
     $page->addComponent(new BreadCrumb());

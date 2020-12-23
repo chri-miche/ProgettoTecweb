@@ -35,6 +35,21 @@ class TagElement extends Element
         } catch (Exception $e) { return false; }
     }
 
+    static public function ordineTags(){
+        try{
+
+            $query = "SELECT T.ID FROM tag AS T, ordine AS O WHERE O.TagID = T.ID;";
+
+            $ret = array();
+
+            $elem =  self::getMultipleRecords($query);
+
+            foreach ($elem as $el){$ret[] = $el['ID'];}
+            return $ret;
+
+        } catch (Exception $e) {return null;}
+    }
+
     public function getNome(){return $this->nome;}
     public function getLabel(){return $this->label;}
 

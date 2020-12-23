@@ -17,10 +17,12 @@ class BrowseElements implements Component {
 
         $this->previews = array(); // List of each preview element. How to build it?
 
-        foreach ($ids as $id) {
-            // Ogni id crea una nuova preview di tipo Preview specifico.
-            // Funziona? Si ma sembra un hack.
-            $this->previews [] = new $type($id);
+        if(isset($ids)){
+            foreach ($ids as $id) {
+                // Ogni id crea una nuova preview di tipo Preview specifico.
+                // Funziona? Si ma sembra un hack.
+                $this->previews [] = new $type($id);
+            }
         }
     }
 
@@ -28,11 +30,15 @@ class BrowseElements implements Component {
     public function build() {
 
         $HTML = "";
+        if(!isset($this->previews))
+            $HTML.= 'Non ci sono elmeenti da visualizzare';
 
-        foreach ($this->previews as $preview)
-            $HTML .= $preview->build();
+        else
+            foreach ($this->previews as $preview)
+                $HTML .= $preview->build();
+
         return $HTML;
-        
+
     }
 
 }

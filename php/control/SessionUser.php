@@ -4,7 +4,6 @@
     // TODO: Consider if the instace has to be on page and not inside of each component
     //  at the moment every component that has one session user has an istance of the class.
 
-
     // TODO: Check if there are problems and if the user has to be updated every operation.
 
 

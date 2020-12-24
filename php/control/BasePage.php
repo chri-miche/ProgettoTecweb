@@ -66,7 +66,6 @@
 
                 $this->lastBuiltHTML = preg_replace(self::COMPONENT_EXPR, $HTML, $this->lastBuiltHTML, 1);
 
-
             }
 
             $this->lastBuiltHTML = self::cleanTags($this->lastBuiltHTML);

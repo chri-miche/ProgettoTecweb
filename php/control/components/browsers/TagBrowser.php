@@ -37,14 +37,19 @@
 
         function build() {
             // TODO: Implement build() method.
-            $HTML = $this->ordinePage->build();
 
             /** Page nav. The link has to be given by parent.*/
-            $HTML .= '<div class="w3-bar" style="display: flex; justify-content: center;">';
+            $HTML = '<div class="w3-card-4" style=" width:80%; display: flex; justify-content: center; flex-wrap: wrap">';
+
+            $HTML .= $this->ordinePage->build();
+            $HTML .=  '  <div style="width: 100%;"></div>'; //https://stackoverflow.com/questions/45086899/flexbox-item-wrap-to-a-new-line
+            $HTML .= '<div  class ="w3-bar w3-margin w3-border-top w3-padding"  style="width: 60%; display: flex; justify-content: center;">';
+
             for($i = 0; $i < $this->numberPages; $i ++){
-                if($i == $this->currentPage)  $HTML .= '<a href="'. $this->parentReference .($i + 1) .'" class="w3-button w3-red">'. ($i + 1) .'</a>';
+                if($i == $this->currentPage)  $HTML .= '<a href= "" class="w3-button w3-red">'. ($i + 1) .'</a>';
                 else $HTML .= '<a href="'. $this->parentReference .$i .'" class="w3-button">'. ($i + 1) .'</a>';
-            }
+            } $HTML .= '</div>';
+
 
             return $HTML .= '</div>';
         }

@@ -1,12 +1,12 @@
 <?php
 
 
-class TagElement extends Element
-{
+class TagElement extends Element {
 
     protected function loadData() {
         // TODO: Implement loadData() method.
         try{
+
             if($this->ID === null)
                 throw new Exception('Cannot retrieve data of element not 
                 defined yet. First define the element.');

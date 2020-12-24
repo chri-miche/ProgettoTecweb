@@ -15,6 +15,7 @@
     require_once __ROOT__ . '\control\components\BrowsePosts.php';
     require_once __ROOT__ . '\control\components\previews\TagPreview.php';
     require_once __ROOT__ . '\control\components\browsers\TagBrowser.php';
+    require_once __ROOT__ . '\control\components\Title.php';
 
     require_once __ROOT__ . '\model\TagElement.php';
     // TODO: Fix the naming and the pathing of files. ( Ordine essendo in un file lotnano)
@@ -32,6 +33,9 @@
         // TODO: Pass on each page the previous explored?.
     }
     $page->addComponent(new BreadCrumb());
+
+
+    $page->addComponent(new Title('Ordini', 'Classificazione Uccelli', 'Classificazione di bla bla.'));
 
     isset($_GET['page']) ? $pgnum = $_GET['page'] : $pgnum = 0;
 

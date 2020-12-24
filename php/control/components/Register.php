@@ -23,7 +23,6 @@ class Register implements Component {
 
         if($this->user->userIdentified()){
             return 'Already autenticated';
-
         }
 
         return $HTML;

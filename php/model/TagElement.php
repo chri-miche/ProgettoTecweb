@@ -26,15 +26,17 @@ class TagElement extends Element
 
     /** * @inheritDoc  */
     static public function checkID($id){
-        // TODO: Implement checkID() method.
-        try {
 
+        try {
             $query = "SELECT T.ID  FROM Tag AS T  WHERE T.ID = ". $id. " LIMIT 1; ";
             return !(self::getSingleRecord($query) === null);
 
         } catch (Exception $e) { return false; }
     }
 
+
+
+    //TODO : Unify, this is just replicated code.
     static public function ordineTags(){
         try{
 
@@ -51,8 +53,8 @@ class TagElement extends Element
     }
 
     static public function famigliaTags($ordine = null){
-        try {
 
+        try {
             isset($ordine)
                 /** Va fatta la join*/
                 ? $query = "SELECT T.ID FROM tag AS T, Famiglia AS F, ordine AS O 
@@ -71,6 +73,43 @@ class TagElement extends Element
     }
 
     static public function genereTags($famiglia = null){
+
+        try {
+            isset($famiglia)
+                /** Va fatta la join*/
+                ? $query = "SELECT T.ID FROM tag AS T, Genere AS G, ordine AS O 
+                            WHERE G.TagID = T.ID AND G.famID =" . $famiglia . " GROUP BY T.ID;" :
+                $query= "SELECT T.ID FROM tag as T, genere as G WHERE  T.ID = G.TagID;";
+
+
+            $ret = array();
+
+            $elem =  self::getMultipleRecords($query);
+
+            foreach ($elem as $el){$ret[] = $el['ID'];}
+            return $ret;
+
+        } catch (Exception $e){return null;}
+    }
+
+    static public function specieTags($genere = null){
+
+        try {
+            isset($genere)
+                /** Va fatta la join*/
+                ? $query = "SELECT T.ID FROM tag AS T, Specie AS S, ordine AS O 
+                            WHERE S.TagID = T.ID AND S.genID =" . $genere . " GROUP BY T.ID;" :
+                $query= "SELECT T.ID FROM tag as T, specie as S WHERE  T.ID = S.TagID;";
+
+
+            $ret = array();
+
+            $elem =  self::getMultipleRecords($query);
+
+            foreach ($elem as $el){$ret[] = $el['ID'];}
+            return $ret;
+
+        } catch (Exception $e){return null;}
 
     }
 

@@ -58,4 +58,26 @@ INSERT INTO tag(ID, nome, LabelID) VALUES
     (24,'Phoenicopteridae', null), (25,'Threskiornithidae', null), (26,'Ardeidae', null), (27,'Scopidae', null), (28,'Pelecanidae', null), (29,' Balaenicipitidae', null);
 
 INSERT INTO famiglia(TagID, OrdID, nomeScientifico, caratteristicheComuni) VALUES
-    (24,15 ,'Phoenicopteridae', null), (25, 17,'Threskiornithidae', null), (26,17,'Ardeidae', null), (27,17,'Scopidae', null), (28,17,'Pelecanidae', null), (29,17,' Balaenicipitidae', null
+    (24,15 ,'Phoenicopteridae', null), (25, 17,'Threskiornithidae', null), (26,17,'Ardeidae', null), (27,17,'Scopidae', null), (28,17,'Pelecanidae', null), (29,17,' Balaenicipitidae', null);
+
+
+select *from tag;
+
+INSERT INTO tag(ID, nome, LabelID) VALUES
+    (30, 'Balaeniceps', null),(31, 'Pelecanus', null),(32, 'Scopus', null),(35, 'B. rex', null),(36, 'Pelecanus conspicillatus', null),(37, 'Pelecanus crispus', null),(38, 'Pelecanus erythrorhynchos', null);
+
+INSERT INTO genere(tagID, famID, nomeScientifico) VALUES
+    (30, 28, 'Balaeniceps'),(31, 28, 'Pelecanus'),(32, 28,'Scopus');
+
+INSERT INTO conservazione(codice, nome, probEstinzione) VALUES
+    ('VU', 'Vulnerabile', 30);
+
+INSERT INTO specie(tagID, genID, nomeScientifico, percorsoImmagine, conservazioneID, pesoMedio, altezzaMedia, descrizione) VALUES
+    (35, 30, 'B. rex', '', 'VU', 200, 180, 'Bel uccello' );
+
+INSERT INTO specie(tagID, genID, nomeScientifico, percorsoImmagine, conservazioneID, pesoMedio, altezzaMedia, descrizione) VALUES
+    (36, 31, 'Pelecanus conspicillatus', '', 'VU',200, 180, 'Bel uccello' ),(37, 31, 'Pelecanus crispus', '', 'VU',200, 180, 'Bel uccello' ),(38, 31, 'Pelecanus erythrorhynchos', '', 'VU',200, 180, 'Bel uccello' );
+
+
+ALTER TABLE tag MODIFY nome VARCHAR(40);
+

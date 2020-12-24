@@ -4,6 +4,11 @@
     // it's hard to unserstand the h1, h2 etc stuff. Find a way to make a component H1?.
     // (most simple solution is to keep for each important component H1 in the code, maybe a subclass
     // maincontent? To consider.
+
+    // TODO: Rifare breadcrumb (cioè fare in generale)
+
+    /* Idea: Breadcrumb costruito da un parametro get da session, la breadcrumb sarebbe direttamente dipendente dalla sesssion.
+            __construct($previousPath)*/
     class BreadCrumb implements Component {
 
         private $previous;

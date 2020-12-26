@@ -11,7 +11,7 @@
 
     require_once __ROOT__.'\control\components\BrowseElements.php';
     require_once __ROOT__.'\control\components\BrowsePosts.php';
-    require_once __ROOT__ . '\control\components\previews\PostPreview.php';
+    require_once __ROOT__.'\control\components\previews\PostPreview.php';
 
 
 
@@ -22,7 +22,7 @@
 
     $page->addComponent(new SiteBar());
 
-    if(!$page->addComponent(new SearchBar()))  echo 'Oops something went wrong';
+    if(!$page->addComponent(new SearchBar())) echo 'Oops something went wrong';
     $page->addComponent(new BreadCrumb(array('Home')));
 
     $arr [] = 0;

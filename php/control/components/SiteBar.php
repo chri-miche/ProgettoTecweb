@@ -28,16 +28,14 @@
             /** To make code tidied up count the black space of the opened tag before.*/
             if(!$this->user->getUser()->getId()){
 
-                $contentHTML .= '<a href="Login.php" class="w3-bar-item w3-button" style="width: 10%; margin-left: auto;">Accedi</a>'."\n"
-                    .'<a href="Register.php" class="w3-border-top w3-border-bottom w3-bar-item w3-button" style="width: 10%">Iscriviti</a>';
-
+                $contentHTML = file_get_contents(__ROOT__.'\view\modules\LoggedOutActions.xhtml');
 
             } else {
-                // TODO Move it somewhere else, it's ugly here.
-                $contentHTML .= '<div class="w3-dropdown-hover" style="margin-left: auto"><button class="w3-button">'.$this->user->getUser()->nome.'</button>
-                                 <div class="w3-dropdown-content w3-bar-block w3-card-4" style="z-index: 5000;">
-                                 <a href="UserPage.php?='. $this->user->getUser()->ID . '"class="w3-bar-item w3-button"> Profilo </a>
-                                 <a href="Logout.php" class="w3-bar-item w3-button"> Logout </a> </div> </div>';
+                $contentHTML = file_get_contents(__ROOT__.'\view\modules\LoggedInActions.xhtml');
+                $username = $this->user->getUser()->nome;
+                $userid = $this->user->getUser()->ID;
+                $contentHTML = str_replace("{username}", $username, $contentHTML);
+                $contentHTML = str_replace("{userid}", $userid, $contentHTML);
 
                 if($this->user->getUser()->getModerator()){
 
@@ -50,7 +48,19 @@
 
             }
 
+
+            // Prevenire link circolari
+            $homeattributes = strrpos($_SERVER["REQUEST_URI"], "Home.php") === false ?
+                'class="tab-header activable" href="Home.php"' :
+                'class="tab-header"';
+
+            $catalogattributes = strrpos($_SERVER["REQUEST_URI"], "Ordine.php") === false ?
+                'class="tab-header activable" href="Ordine.php"' :
+                'class="tab-header"';
+
             $contentHTML = str_replace(Component::INNER_TAG, $contentHTML, $this->HTML);
+            $contentHTML = str_replace('href="Home.php"', $homeattributes, $contentHTML);
+            $contentHTML = str_replace('href="Ordine.php"', $catalogattributes, $contentHTML);
             return $contentHTML;
 
         }

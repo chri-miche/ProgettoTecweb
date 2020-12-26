@@ -1,24 +1,27 @@
 <?php
 
-    //TODO: In page building we have multple possible components this means that
-    // it's hard to unserstand the h1, h2 etc stuff. Find a way to make a component H1?.
-    // (most simple solution is to keep for each important component H1 in the code, maybe a subclass
-    // maincontent? To consider.
-
-    // TODO: Rifare breadcrumb (cioè fare in generale)
-
-    /* Idea: Breadcrumb costruito da un parametro get da session, la breadcrumb sarebbe direttamente dipendente dalla sesssion.
-            __construct($previousPath)*/
+    // Ci sto lavorando ma se vuoi farlo tu, sei libero di farlo.
     class BreadCrumb implements Component {
 
         private $previous;
+        private $HTML;
 
-        // TODO: Check and make it new. ( non global var dependant)
-        public function __construct() {$this->previous = explode('/',$_SERVER["REQUEST_URI"]);}
+        /** Prende in input la pagina corrente e l'array di pagine precedenti.
+         * @param array $crumb
+         * @param string|null $HTML
+         */
+        public function __construct(array $crumb, string $HTML = null/** Metto default qui. */) {
+
+            $this->HTML = $HTML;
+            $this->previous = $crumb;
+
+        }
+
 
         // TODO: Check and make it new. ( non global var dependant)
         function build() {
 
+            // TODO: Move this stuff to file and just make a strreplace.
             $ret = "<div class='w3-container w3-green' style='width:100%; height: fit-content'>";
             $ret .= 'Al momento ti trovi in:   ';
 

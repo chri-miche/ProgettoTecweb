@@ -2,19 +2,13 @@
     define('__ROOT__', dirname(dirname(dirname(__FILE__))));
 
     require_once __ROOT__ . '\control\BasePage.php';
-
     require_once __ROOT__ . '\control\components\SiteBar.php';
-    require_once __ROOT__ . '\control\components\Report.php';
     require_once __ROOT__ . '\control\components\SearchBar.php';
     require_once __ROOT__ . '\control\components\BreadCrumb.php';
-
-    require_once __ROOT__ . '\control\components\BrowseElements.php';
-    require_once __ROOT__ . '\control\components\BrowsePosts.php';
-    require_once __ROOT__ . '\control\components\previews\TagPreview.php';
     require_once __ROOT__ . '\control\components\browsers\TagBrowser.php';
 
     require_once __ROOT__ . '\model\TagElement.php';
-    // TODO: Fix the naming and the pathing of files. ( Ordine essendo in un file lotnano)
+
     $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
 
     $page = new BasePage($basePage);
@@ -22,21 +16,11 @@
     $page->addComponent(new SiteBar());
     $page->addComponent(new SearchBar());
 
-    isset($_GET['id'])? $res = TagElement::famigliaTags($_GET['id']) : $res = TagElement::famigliaTags();
-
-    if(isset($_GET['id'])){
-        $res = TagElement::genereTags($_GET['id']);
-        $reference = '\Progetto\ProgettoTecweb\php\view\pages\genere.php?id='. $_GET['id'].'&page=';
-    } else {
-
-        $res = TagElement::genereTags();
-        $reference = '\Progetto\ProgettoTecweb\php\view\pages\genere.php?page=';
-    }
-
-    isset($_GET['page']) ? $innerpage = $_GET['page'] : $innerpage = 0;
-
-    $page->addComponent(new TagBrowser($res, $reference, $innerpage,
-    10, '\Progetto\ProgettoTecweb\php\view\pages\specie.php?id='));
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    $reference = isset($id) ? '\php\view\pages\genere.php?id='. $id .'&page=' : '\php\view\pages\genere.php?page=';
+    $innerPage = isset($_GET['page']) ? $_GET['page'] :  0;
+    
+    $page->addComponent(new TagBrowser(TagElement::genereTags($id), $reference, $innerPage, 10, '\php\view\pages\specie.php?id='));
 
     echo  $page;
 

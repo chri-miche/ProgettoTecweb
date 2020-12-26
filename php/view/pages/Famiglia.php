@@ -25,20 +25,22 @@
 
     $page->addComponent(new Title('Famiglia', 'Classificazione Uccelli', 'Classificazione di bla bla.'));
 
-    isset($_GET['id'])? $res = TagElement::famigliaTags($_GET['id']) : $res = TagElement::famigliaTags();
-
     if(isset($_GET['id'])){
+
         $res = TagElement::famigliaTags($_GET['id']);
-        $reference = '\Progetto\ProgettoTecweb\php\view\pages\famiglia.php?id='. $_GET['id'].'&page=';
+        $reference = '\php\view\pages\famiglia.php?id='. $_GET['id'].'&page=';
+
     } else {
 
         $res = TagElement::famigliaTags();
-        $reference = '\Progetto\ProgettoTecweb\php\view\pages\famiglia.php?page=';
+        $reference = '\php\view\pages\famiglia.php?page=';
+
     }
 
-    isset($_GET['page']) ? $innerpage = $_GET['page'] : $innerpage = 0;
+    $innerPage = isset($_GET['page']) ? $_GET['page'] : 0;
 
-    $page->addComponent(new TagBrowser($res, $reference, $innerpage, 10,'\Progetto\ProgettoTecweb\php\view\pages\genere.php?id='));
+    $page->addComponent(new TagBrowser($res, $reference, $innerPage,
+        10,'\php\view\pages\genere.php?id='));
 
     echo  $page;
 

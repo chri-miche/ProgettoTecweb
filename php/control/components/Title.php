@@ -20,14 +20,14 @@
         public function build() {
             // TODO: Implement build() method.
             // TODO: Push this stuff in layout and just change values with str_replace
-            $HTML = '<div class="w3-card w3-blue w3-padding"; style="width: 80%;display: flex; flex-direction: row; "><h1> '. $this->title .'</h1>';
+            $HTML = '<div class="w3-card w3-blue w3-padding"; style="width: 80%;display: flex; flex-direction: row; align-self: center "><h1> '. $this->title .'</h1>';
             if(isset($this->secondTitle))
                 $HTML .=  '<h2 class="w3-opacity w3-margin">'. $this->secondTitle.' </h2> ';
 
             $HTML .= '</div>';
 
             if(isset($this->description))
-                $HTML .= '<div class = "w3-card w3-light-blue w3-padding" style="width: 80%">'. $this->description.'</div>';
+                $HTML .= '<div class = "w3-card w3-light-blue w3-padding" style="width: 80%; align-self: center">'. $this->description.'</div>';
 
             return $HTML;
 

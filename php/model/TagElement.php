@@ -92,6 +92,8 @@ class TagElement extends Element {
         } catch (Exception $e){return null;}
     }
 
+    // TODO: Change the input from one id to array of id's and check the combination to do the query.
+    //  Example: We want all brids from a GENERE, family is not important right now. arr[ordid,famid,genid] per esempio.
     static public function specieTags($genere = null){
 
         try {

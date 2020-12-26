@@ -14,8 +14,6 @@
     require_once __ROOT__.'\control\components\previews\PostPreview.php';
 
 
-
-
     $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
 
     $page = new BasePage($basePage);
@@ -25,8 +23,7 @@
     if(!$page->addComponent(new SearchBar())) echo 'Oops something went wrong';
     $page->addComponent(new BreadCrumb(array('Home')));
 
-    $arr [] = 0;
-    $arr [] = 1;
+    $arr [] = 0; $arr [] = 1;
 
     $page->addComponent(new BrowseElements($arr, new PostPreview(0)));
 

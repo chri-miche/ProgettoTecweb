@@ -21,21 +21,21 @@
     $page->addComponent(new SiteBar());
     $page->addComponent(new SearchBar());
 
-    isset($_GET['id'])? $res = TagElement::famigliaTags($_GET['id']) : $res = TagElement::famigliaTags();
-
     if(isset($_GET['id'])){
+
         $res = TagElement::specieTags($_GET['id']);
-        $reference = '\Progetto\ProgettoTecweb\php\view\pages\specie.php?id='. $_GET['id'].'&page=';
+        $reference = '\php\view\pages\specie.php?id='. $_GET['id'].'&page=';
+
     } else {
 
         $res = TagElement::specieTags();
-        $reference = '\Progetto\ProgettoTecweb\php\view\pages\specie.php?page=';
+        $reference = '\php\view\pages\specie.php?page=';
+
     }
 
-    isset($_GET['page']) ? $innerpage = $_GET['page'] : $innerpage = 0;
+    $innerPage = isset($_GET['page']) ? $_GET['page'] :  0;
 
-    $page->addComponent(new TagBrowser($res, $reference, $innerpage,
-        10, '\Progetto\ProgettoTecweb\php\view\pages\uccello.php?id='));
+    $page->addComponent(new TagBrowser($res, $reference, $innerPage, 10, '\php\view\pages\uccello.php?id='));
 
     echo  $page;
 

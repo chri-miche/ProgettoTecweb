@@ -1,7 +1,7 @@
 <?php
 
-/** OPPURE MEGLIO : TagPreview e mostriamo i tag uccelli etc con nome, descrizione
-    e un'immagine. La sfruttiamo per creare catalogo uccelli.*/
+    require_once __ROOT__ . '\control\components\previews\Preview.php';
+    //TODO: document.
     class TagPreview implements Preview {
 
         private $tag;

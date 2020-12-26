@@ -39,7 +39,7 @@
             // TODO: Implement build() method.
 
             /** Page nav. The link has to be given by parent.*/
-            $HTML = '<div class="w3-card-4" style=" width:80%; display: flex; justify-content: center; flex-wrap: wrap">';
+            $HTML = '<div class="w3-card-4" style=" width:80%; display: flex; justify-content: center; flex-wrap: wrap; align-self: center">';
 
             $HTML .= $this->ordinePage->build();
             $HTML .=  '  <div style="width: 100%;"></div>'; //https://stackoverflow.com/questions/45086899/flexbox-item-wrap-to-a-new-line

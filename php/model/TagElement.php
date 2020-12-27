@@ -6,7 +6,6 @@ class TagElement extends Element {
     protected function loadData() {
         // TODO: Implement loadData() method.
         try{
-
             if($this->ID === null)
                 throw new Exception('Cannot retrieve data of element not 
                 defined yet. First define the element.');
@@ -16,7 +15,6 @@ class TagElement extends Element {
                         ." LIMIT 1) AS Q ON L.ID = Q.LabelID LIMIT 1;";
 
             $res = $this->getSingleRecord($query);
-
             if(!isset($res['label'])) $res['label'] = "";
 
             return $res;
@@ -35,18 +33,17 @@ class TagElement extends Element {
     }
 
 
-
     //TODO : Unify, this is just replicated code.
     static public function ordineTags(){
         try{
 
             $query = "SELECT T.ID FROM tag AS T, ordine AS O WHERE O.TagID = T.ID;";
-
-            $ret = array();
-
             $elem =  self::getMultipleRecords($query);
 
-            foreach ($elem as $el){$ret[] = $el['ID'];}
+            $ret = array();
+            foreach ($elem as $el)
+                $ret[] = $el['ID'];
+
             return $ret;
 
         } catch (Exception $e) {return null;}

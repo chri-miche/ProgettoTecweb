@@ -73,9 +73,12 @@
         /** Insert new adata or update new data to be done.*/
         public function loadUpdate(){}
 
-        public function exists() { return !($this->ID === null);}
+        protected static function addNew(string $query){
+            return DatabaseAccess::writeRecord($query);
+        }
 
-        public function getData(){return $this->data;}
+        public function exists() { return !($this->ID === null);}
+        public function getData(){ return $this->data; }
 
     }
 

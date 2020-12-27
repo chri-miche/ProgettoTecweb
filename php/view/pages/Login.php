@@ -8,8 +8,10 @@
 
     $page = new BasePage($basePage);
 
-    (isset($_POST['username']) && isset($_POST['password']))?
-        $page->addComponent(new Login($_POST['username'], $_POST['password'])) : $page->addComponent(new Login());
+    $username = isset($_POST['username']) ? $_POST['username'] : null;
+    $password = isset($_POST['password']) ? $_POST['password'] : null;
+
+    $page->addComponent(new Login($username, $password));
 
     echo $page;
 

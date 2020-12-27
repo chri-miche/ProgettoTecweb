@@ -40,13 +40,11 @@
         public static function checkID($id) {
 
             try{
-                if(!($id === null)) {
-
                     $query = "SELECT U.ID FROM Utente AS U WHERE U.ID = '$id' LIMIT 1";
                     return !(self::getSingleRecord($query) === null);
 
-                } else throw new Exception('Given Id cannot be null.');
             } catch (Exception $e) { return null; }
+
         }
 
 
@@ -62,31 +60,25 @@
 
                 return (isset($res['ID'])) ? $res['ID'] : false;
 
-            } catch (Exception $e) {
-
-                return null;
-
-            }
+            } catch (Exception $e) { return null; }
 
         }
-        /** Overload the function also for ID. */
+
+        /** Overload the function also for ID.
+         * @param string $email : Email is unique to a user so we check if it is already set.
+         * @return bool : Returns true if he exists, false if not null if error occured.
+         */
         private static function userExists(string $email){
             $query = "SELECT U.ID FROM utente AS U WHERE U.email='". $email. "' LIMIT 1;";
-            $app = self::getSingleRecord($query);
-            return isset($app['ID']);
+            return isset(self::getSingleRecord($query)['ID']);
         }
 
         /* TODO: Check this, it was done in a hurry. Not checked yet.*/
         public static function addUser(string $username, string $password, string $email){
 
-            if(!self::userExists($email)){
-
-                $query = "INSERT INTO utente(nome, email, password, immagineProfilo) 
-                          VALUE ('". $username . "',  '" . $email . "', '" . $password ." ', 'defj.pg' );";
-
-                /* TODO: Move this to Element. (or at least add the Virtual method for addelement.*/
-                return DatabaseAccess::writeRecord($query);
-            } return null;
+            $query = "INSERT INTO utente(nome, email, password, immagineProfilo) VALUE 
+                          ('". $username . "',  '" . $email . "', '" . $password ." ', 'defj.pg' );";
+            return  (!self::userExists($email)) ? Element::addNew($query) : null;
 
         }
 

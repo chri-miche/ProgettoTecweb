@@ -174,7 +174,8 @@
         codice varchar(2) NOT NULL PRIMARY KEY,
 
         nome varchar(20) NOT NULL UNIQUE,
-        probEstinzione int
+        probEstinzione int,
+        descrizione text
 
     ) ENGINE = InnoDB;
 

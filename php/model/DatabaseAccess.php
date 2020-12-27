@@ -12,12 +12,14 @@
         static public function executeQuery($query){
 
             try {
+
                 $connection = self::openConnection();
                 $return = array();
 
                 $result = mysqli_query($connection, $query);
 
-                while($elem = mysqli_fetch_assoc($result)) $return[] = $elem;
+                while($elem = mysqli_fetch_assoc($result))
+                    $return[] = $elem;
 
                 self::closeConnection($connection);
                 return $return;
@@ -31,6 +33,7 @@
                 $connection = self::openConnection();
 
                 $result = mysqli_query($connection, $query);
+
                 $result = mysqli_fetch_assoc($result);
 
                 self::closeConnection($connection);

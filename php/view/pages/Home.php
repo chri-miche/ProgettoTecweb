@@ -20,10 +20,6 @@
     if(!$page->addComponent(new SearchBar())) echo 'Oops something went wrong';
     $page->addComponent(new BreadCrumb(array('Home')));
 
-    $arr [] = 0; $arr [] = 1;
-
-    $page->addComponent(new BrowseElements($arr, new PostPreview(0)));
-
     echo $page;
 
 ?>

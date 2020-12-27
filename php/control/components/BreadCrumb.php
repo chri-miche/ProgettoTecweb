@@ -8,8 +8,7 @@
 
         /** Prende in input la pagina corrente e l'array di pagine precedenti.
          * @param array $crumb
-         * @param string|null $HTML
-         */
+         * @param string|null $HTML  */
         public function __construct(array $crumb, string $HTML = null/** Metto default qui. */) {
 
             $this->HTML = $HTML;
@@ -17,8 +16,6 @@
 
         }
 
-
-        // TODO: Check and make it new. ( non global var dependant)
         function build() {
 
             // TODO: Move this stuff to file and just make a strreplace.
@@ -30,6 +27,4 @@
             return  $ret . "</div>";
 
         }
-
-
     }

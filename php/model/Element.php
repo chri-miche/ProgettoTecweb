@@ -8,8 +8,6 @@
 
         /** Builds a new item.
          * @param null $id : Identificatore dell'elemento cercato. */
-
-        
         public function __construct($id = null){
 
             $this->data = array();
@@ -21,7 +19,7 @@
         Checks for the id in the DB, if it exists the assignment is done.
          *  @param $id : Id dell'elemento da caricare.
          *  @return bool : True if the operation went right. */
-        public function loadElement($id){
+        public function loadElement(int $id = null){
 
             if (!($id === null) && $this->checkID($id)) {
 
@@ -34,6 +32,8 @@
             return false;
 
         }
+        // TODO: Docs.
+        abstract protected function loadData();
 
         protected static function getSingleRecord(string $query) {
 
@@ -50,14 +50,12 @@
             } catch (Exception $e) { echo $e; return null; }
         }
 
-        abstract protected function loadData();
 
         /** Checks if current id is set to an element of type Data
          * in the database at the moment.
          * @param $id : Id of the element to check
          * @return true :  true if it exists, else false.
-         * @return null : if there is an error in the query.
-         * ____________________________________________*/
+         * @return null : if there is an error in the query. */
         abstract static public function checkID($id);
 
 

@@ -66,19 +66,32 @@
 
         /** Overload the function also for ID.
          * @param string $email : Email is unique to a user so we check if it is already set.
-         * @return bool : Returns true if he exists, false if not null if error occured.
-         */
+         * @return bool : Returns true if he exists, false if not null if error occured. */
         private static function userExists(string $email){
             $query = "SELECT U.ID FROM utente AS U WHERE U.email='". $email. "' LIMIT 1;";
             return isset(self::getSingleRecord($query)['ID']);
         }
 
-        /* TODO: Check this, it was done in a hurry. Not checked yet.*/
         public static function addUser(string $username, string $password, string $email){
 
             $query = "INSERT INTO utente(nome, email, password, immagineProfilo) VALUE 
                           ('". $username . "',  '" . $email . "', '" . $password ." ', 'defj.pg' );";
             return  (!self::userExists($email)) ? Element::addNew($query) : null;
+
+        }
+
+        /** Returns all friends of the user.*/
+        public function getFriends(){
+
+        }
+
+        /** Returns all the followed tags by the user.*/
+        public function getFollowedTags(){
+
+        }
+
+        /** Get all posts made by the user. */
+        public function getWrittenPosts(){
 
         }
 

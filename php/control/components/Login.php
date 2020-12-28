@@ -24,7 +24,6 @@
             $this->HTML = (isset($HTMLcontent)) ? $HTML : (file_get_contents(__ROOT__.'\view\modules\login.xhtml'));
             $this->redirect = $redirect;
 
-
             $this->email = $email;
             $this->password = $password;
 
@@ -63,6 +62,11 @@
                 return false;
             } catch (Exception $e ){ return null; } // Ritorna nullo e build quindi visualizza una finestra di errore.
 
+        }
+
+
+        public function associateData(){// TODO: Implement associateData() method.
+            return null;
         }
 
 

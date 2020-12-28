@@ -16,6 +16,7 @@
     $page->addComponent(new SearchBar());
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
+
     $reference = isset($id) ? '\php\view\pages\genere.php?id='. $id .'&page=' : '\php\view\pages\genere.php?page=';
     $innerPage = isset($_GET['page']) ? $_GET['page'] :  0;
 

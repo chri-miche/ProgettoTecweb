@@ -19,7 +19,6 @@
     $page = new BasePage($basePage);
 
     $page->addComponent(new SiteBar());
-    $page->addComponent(new SearchBar());
 
     // Breadcrumb makes previous and next? Or just sets current?
     // TODO: Rifare breadcrumb (cioè fare in generale)
@@ -28,7 +27,8 @@
         // TODO: Pass on each page the previous explored?.
     }
     $page->addComponent(new BreadCrumb(array('Home','Catalogo', 'Ordine')));
-    $page->addComponent(new Title('Ordini', 'Classificazione Uccelli', 'Classificazione di bla bla.'));
+    $page->addComponent(new Title('Ordini', 'Classificazione Uccelli', 'In biologia, ai fini della tassonomia, l ordine è uno 
+            dei livelli di classificazione scientifica degli organismi viventi, tanto della zoologia quanto della botanica'));
 
     $pageNum = isset($_GET['page']) ? $_GET['page'] :  0;
 

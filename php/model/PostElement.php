@@ -20,12 +20,12 @@
             $query = "SELECT I.percorsoImmagine FROM immaginipost AS I
                       WHERE I.postID = ".$this->getId().";";
 
-            $images = array();
+            $data['immagini'] = array();
 
-            foreach ($this->getMultipleRecords($query) as $image)  $images [] = $image['percorsoImmagine'];
+            foreach ($this->getMultipleRecords($query) as $image)
+                $data ['immagini'][] = $image['percorsoImmagine'];
 
-            $imagesList['immagini'] = $images;
-            return array_merge($data, $imagesList);
+            return $data;
 
         }
 

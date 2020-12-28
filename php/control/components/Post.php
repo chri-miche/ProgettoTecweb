@@ -19,17 +19,19 @@
 
             $this->HTML = (isset($HTML)) ? $HTML : file_get_contents(__ROOT__.'\view\modules\Post.xhtml');
 
-            $this->post = new PostElement($pid);
-            $this->user = $user;
-
-            print_r($this->post);
 
             if(isset($pid) && PostElement::checkID($pid)){
 
                 $this->post = new PostElement($pid);
-                $this->user = new UserElement($this->post->userID);
+
+                $this->user = new UserElement($this->post->UserID);
 
             }
+
+            print_r($this->post);
+            print_r($this->user);
+
+            print_r(UserElement::getInterestsIds($this->user->ID));
 
         }
 

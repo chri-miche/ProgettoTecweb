@@ -1,8 +1,6 @@
 <?php
 
     require_once __ROOT__ . '\control\components\previews\Preview.php';
-
-    require_once __ROOT__ . '\model\Citazione.php';
     require_once __ROOT__ . '\model\TagElement.php';
     // TODO: Vogliamo mettere un menu a tendina ogni volta che si seleziona
     //  un tag per fare in modo di permettere di andare sia alla pagina di ricerca che a quella dell'uccello (se esite).

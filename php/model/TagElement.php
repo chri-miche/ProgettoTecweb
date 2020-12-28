@@ -11,13 +11,10 @@ class TagElement extends Element {
                 defined yet. First define the element.');
 
             $query = "  SELECT Q.nome, L.text as label  FROM label AS L RIGHT JOIN
-                        (SELECT T.ID, T.LabelID, T.nome FROM tag AS T WHERE T.ID = ". $this->ID
-                        ." LIMIT 1) AS Q ON L.ID = Q.LabelID LIMIT 1;";
-
-            $res = $this->getSingleRecord($query);
-            if(!isset($res['label'])) $res['label'] = "";
-
-            return $res;
+                            (   SELECT T.ID, T.LabelID, T.nome 
+                                FROM tag AS T WHERE T.ID = ". $this->ID ."  
+                        LIMIT 1) AS Q ON L.ID = Q.LabelID LIMIT 1;";
+           return $this->getSingleRecord($query);
 
         } catch (Exception $e) { return null; }
     }

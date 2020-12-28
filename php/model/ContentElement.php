@@ -37,5 +37,10 @@
 
         }
 
+        /** Ritorno array di senglaazioni oppure id di segnalazioni? Direi ID e poi si costruiscono loro le segnalazioni.*/
+        public static function getSegnalazioni(int $id){
+
+        }
+
 
     }

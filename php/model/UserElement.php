@@ -1,34 +1,29 @@
 <?php
+    // Nota carina. In php false viene stampato come vuoto. Sensatissimo.
 
     require_once __ROOT__.'\model\Element.php';
     class UserElement extends Element {
 
-     // Nota carina. In php false viene stampato come vuoto. Sensatissimo.
-     protected function loadData() {
+       protected function loadData() {
 
             try {
 
-                $userData = array();
-
                 if($this->ID === null)
-                    throw new Exception('Cannot fetch data of element that
-                    is not defined yet. First define the element.');
+                    throw new Exception('Cannot fetch data of element that is not defined yet. 
+                                                First define the element.');
 
-                $query =    "SELECT * FROM Moderatore AS M  RIGHT JOIN 
-                            (SELECT * FROM Utente as A WHERE A.ID =".$this->getId() . " LIMIT 1) 
+                // TODO: Move this to a function? "BaseData"?
+                $query =    "SELECT M.isAdmin, U.nome, U.email, U.immagineProfilo FROM Moderatore AS M  RIGHT JOIN 
+                                (SELECT * FROM Utente as A 
+                                WHERE A.ID =".$this->ID . " LIMIT 1) 
                             AS U ON U.ID = M.UserID LIMIT 1;";
 
-                $res = $this->getSingleRecord($query);
+                $userData = $this->getSingleRecord($query);
 
-                /** Potrei semplicemente ritornare res?
-                    TODO: Think about it. Prolly yes, fixing the keys in query should be the way.*/
+                $userData['moderator'] = isset($userData['isAdmin']);
+                $userData['isAdmin'] = isset($userData['isAdmin']) && $userData['isAdmin'];
 
-                $userData['moderator'] = isset($res['isAdmin']);
-                $userData['isAdmin'] = isset($res['isAdmin']) && $res['isAdmin'];
-
-                $userData['nome'] = $res['nome'];
-                $userData['email'] = $res['email'];
-                $userData['immagine'] = $res['immagineProfilo'];
+                $userData['amici'] = $this->getFriends($this->ID);
 
                 return $userData;
 
@@ -81,19 +76,42 @@
         }
 
         /** Returns all friends of the user.*/
-        public function getFriends(){
+        public static function getFriends(int $id){
+
+            try{
+
+                $query = "  SELECT U.nome, S.seguitoID FROM utente AS U JOIN (  
+                                SELECT S.SeguitoID AS seguitoID , S.SeguaceID AS seguaceID
+                                FROM seguito AS S WHERE S.SeguaceID =". $id . " 
+                            ) AS S ON S.seguaceID = U.ID";
+
+                return self::getMultipleRecords($query);
+
+            } catch (Exception $e ) { return null; }
 
         }
 
-        /** Returns all the followed tags by the user.*/
-        public function getFollowedTags(){
+        public static function getInterestsIDs(int $id){
+
+            try {
+
+                $query ="SELECT I.tagID FROM interesse AS I WHERE I.userID = " . $id .";";
+                $result =  self::getMultipleRecords($query);
+
+                // TODO: Make it clean, it should be done maybe in Element.
+                //  something like singleColumnMultipleRecords?
+                $res = array();
+
+                foreach ($result as $item) { $res[] = $item['tagID']; }
+
+                return $res;
+
+            } catch (Exception $e) { return null;}
 
         }
 
-        /** Get all posts made by the user. */
-        public function getWrittenPosts(){
-
-        }
+        /** Get all posts made by the user. */ //TODO: Implement
+        public static function getWrittenPosts(int $id){}
 
         public function getModerator(){ return $this->moderator; }
         public function getAdmin() { return $this->isAdmin; }

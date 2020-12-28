@@ -74,3 +74,4 @@ INSERT INTO specie(tagID, genID, nomeScientifico, percorsoImmagine, conservazion
 
 ALTER TABLE tag MODIFY nome VARCHAR(40);
 
+INSERT INTO interesse(tagID, userID) VALUE (30, 1), (35, 1 );

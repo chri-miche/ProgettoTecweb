@@ -20,7 +20,7 @@
     DROP TABLE IF EXISTS Contenuto;
 
     DROP TABLE IF EXISTS Seguito;
-    DROP TABLE IF EXISTS interesse;
+    DROP TABLE IF EXISTS Interesse;
     DROP TABLE IF EXISTS Moderatore;
     DROP TABLE IF EXISTS Utente;
 
@@ -303,6 +303,18 @@
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID),
         FOREIGN KEY (postID) REFERENCES Post(contentID) ON DELETE CASCADE
+
+    ) ENGINE = InnoDB;
+
+    CREATE TABLE Interesse(
+
+        tagID int UNSIGNED NOT NULL,
+        userID int UNSIGNED NOT NULL,
+
+        CONSTRAINT interesseID PRIMARY KEY (tagID, userID),
+
+        FOREIGN KEY (tagID) REFERENCES Tag(ID),
+        FOREIGN KEY (userID) REFERENCES  Utente(ID)
 
     ) ENGINE = InnoDB;
 

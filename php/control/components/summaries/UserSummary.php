@@ -27,13 +27,14 @@
 
         function build() {
 
-
             /*Here goes a PostPreview.*/
             return $this->HTML;
 
         }
 
         public function resolveData() {
+
+            $swapData = [];
 
 
         }

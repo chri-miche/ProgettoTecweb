@@ -9,9 +9,11 @@
         /** Prende in input la pagina corrente e l'array di pagine precedenti.
          * @param array $crumb
          * @param string|null $HTML  */
-        public function __construct(array $crumb, string $HTML = null/** Metto default qui. */) {
+        public function __construct(array $crumb, string $HTML = null) {
 
-            $this->HTML = $HTML;
+
+            $this->HTML = isset($HTML) ? $HTML : file_get_contents(__ROOT__.'/view/modules/BreadCrumb.xhtml');
+
             $this->previous = $crumb;
 
         }
@@ -23,6 +25,8 @@
 
 
             foreach ($this->previous as $prev){ $ret .= " >  ". $prev ; }
+
+            return $this->HTML;
 
             return  $ret . "</div></div>";
 

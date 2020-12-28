@@ -12,7 +12,7 @@
             // TODO: Aggiungere anche nome non scientifico e descrizione conservazione.
             $query = "    
             SELECT  R.*, O.nomeScientifico AS nomeOrdine FROM ordine AS O INNER JOIN(
-                SELECT Q.*, F.nomeScientifico AS nomeFamiglia, F.OrdID FROM famiglia AS F INNER JOIN (
+                SELECT Q.*, F.nomeScientifico AS nomeFamiglia, F.ordID FROM famiglia AS F INNER JOIN (
                     SELECT S.*, G.nomeScientifico AS nomeGenere, G.famID FROM genere AS G INNER JOIN
                         (SELECT * FROM specie as S WHERE tagID = ". $this->ID ." LIMIT 1)
                     AS S ON G.tagID = S.genID LIMIT 1)

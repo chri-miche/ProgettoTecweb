@@ -9,8 +9,7 @@
 
     // TODO: Make it static?
     require_once __ROOT__.'\model\UserElement.php';
-    /* SessionUser is strongly couppled with the session so there is no way
-        to avoid this attachment, or it it?*/
+    /* SessionUser is strongly couppled with the session so there is no way to avoid this attachment, or it it?*/
     class SessionUser {
 
         private $user;

@@ -4,7 +4,7 @@
     require_once __ROOT__.'\model\UserElement.php';
 
     //TODO: Remove globals inside of Post and other Components.
-
+    // TODO: Move to be postSummary. And also create CommentSummary.
     class Post implements Component {
 
         private $HTML;
@@ -14,18 +14,22 @@
         private $post;
         private $creator;
 
-        /** TODO: Throw exception if we construct a non valid post? Yes myabe we shouòd.
-         * @param string|null $HTML */
+        /*** @param string|null $HTML */
         public function __construct(int $pid = null, SessionUser &$user, string $HTML = null) {
 
-            ($HTML) ? $this->HTML = $HTML :  $this->HTML = file_get_contents(__ROOT__.'\view\modules\Post.xhtml');
-            $this->post = new PostElement();
+            $this->HTML = (isset($HTML)) ? $HTML : file_get_contents(__ROOT__.'\view\modules\Post.xhtml');
 
+            $this->post = new PostElement($pid);
             $this->user = $user;
 
-            (isset($pid) && $this->post->checkID($pid))?(($this->post->loadElement($pid))
-                ?  $this->creator = new UserElement($this->post->getCreator()) : $this->post = null) : $this->post = null;
+            print_r($this->post);
 
+            if(isset($pid) && PostElement::checkID($pid)){
+
+                $this->post = new PostElement($pid);
+                $this->user = new UserElement($this->post->userID);
+
+            }
 
         }
 

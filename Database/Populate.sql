@@ -5,16 +5,12 @@ USE WebBirdDB;
 Insert into Tag(ID, nome, LabelID) VALUES (1, 'Pinguini', null);
 Insert into ordine(TagID, nomeScientifico) VALUES (1, 'Pengus Maestos');
 insert into utente(ID, nome, email, password, immagineProfilo) values
-    (1, 'Jacopo', 'jacopo.fichera98@gmail.com', 'risiko', 'immagine.jpg');
-
-insert into utente(ID, nome, email, password, immagineProfilo) values
+    (1, 'Jacopo', 'jacopo.fichera98@gmail.com', 'risiko', 'immagine.jpg'),
     (3, 'Spdierman', 'spider@man.it', 'risiko', 'img.jpg'),
     (4, 'John Wick', 'john@wick.gun', 'risiko', 'img.jpg'),
     (5, 'Adam Sandler', 'adam@sandler.funny', 'risiko', 'img.jpg');
 
-
-Insert into moderatore(UserID, isAdmin) value
-    (1, true);
+Insert into moderatore(UserID, isAdmin) value (1, true);
 
 insert into contenuto(ID, UserID, isArchived, content, data) values
     (0, 1, false, 'Abracadabra qui ci sta del testo uhahaha','1960-10-12'),
@@ -41,10 +37,7 @@ insert into segnalazione(contentID, utenteID, modResponsabile, causale)
 insert into label(ID, text) VALUES
     (0, 'Un uccello molto rosa');
 
-insert into tag(ID, nome, LabelID) VALUES (0, 'Fenicottero', 1);
-
-
-insert into citazione(tagID, postID) VALUES (1, 0), (9,0), (1, 1);
+insert into tag(ID, nome, LabelID) VALUES (0, 'Fenicottero', null);
 
 INSERT INTO tag(ID, nome, LabelID) VALUES  (8, 'Galliformes', null),
     (10, 'Gaviiformes', null),(11, 'Sphenisciformes', null),(12, 'Procellariiformes', null),(13, 'Podicipediformes', null),(14, 'Phaethontiformes', null),(15, 'Phoenicopteriformes', null),(16, 'Ciconiiformes', null),

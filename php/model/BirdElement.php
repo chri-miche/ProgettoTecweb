@@ -9,7 +9,7 @@
             if($this->ID === null) // TODO: Make clearer exception handling.
                 throw new Exception('Cannot fetch data of element that
                                     is not defined yet. First define the element.');
-            // TODO: Aggiungere anche nome non scientifico e descrizione conservazione.
+            // TODO: Aggiungere anche nome non scientifico.
             $query = "    
             SELECT  R.*, O.nomeScientifico AS nomeOrdine FROM ordine AS O INNER JOIN(
                 SELECT Q.*, F.nomeScientifico AS nomeFamiglia, F.ordID FROM famiglia AS F INNER JOIN (

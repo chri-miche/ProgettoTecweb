@@ -38,25 +38,7 @@
     DROP TABLE IF EXISTS Tag;
     DROP TABLE IF EXISTS Label;
 
-
-    CREATE TABLE EnteRiconosciuto(
-
-        ID int UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        Nome varchar(30) NOT NULL UNIQUE
-
-    ) ENGINE = InnoDB;
-
-
-    CREATE TABLE Certificato(
-
-        ID int UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-
-        EnteID int UNSIGNED NOT NULL,
-        FOREIGN KEY  (EnteID) REFERENCES EnteRiconosciuto(ID)
-
-    ) ENGINE = InnoDB;
-
-
+    /*TODO: Change all keys to snakecase*/
     CREATE TABLE Utente(
 
         ID int UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -78,23 +60,6 @@
         FOREIGN KEY (UserID) REFERENCES Utente(ID)
 
     ) ENGINE = InnoDB;
-
-
-    CREATE TABLE CertificatoUtente(
-
-        UserID int UNSIGNED NOT NULL,
-        CertID int UNSIGNED NOT NULL,
-
-        ModID int UNSIGNED NOT NULL,
-
-        CONSTRAINT CertificatoKey PRIMARY KEY (UserID,CertID),
-        FOREIGN KEY (UserID) REFERENCES Utente(ID) ON DELETE CASCADE,
-        FOREIGN KEY (CertID) REFERENCES Certificato(ID) ON DELETE CASCADE,
-
-        FOREIGN KEY (ModID) REFERENCES Moderatore(UserID)
-
-    ) ENGINE InnoDB;
-
 
     /** Sistemare un po' i nomi, non troppo chiari.*/
     CREATE TABLE Seguito(
@@ -124,6 +89,8 @@
         nome VARCHAR(40) UNIQUE NOT NULL,
 
         LabelID int UNSIGNED,
+        image_file VARCHAR(40),
+
         FOREIGN KEY (LabelID) REFERENCES Label(ID) ON DELETE SET NULL
 
     ) ENGINE = InnoDB;
@@ -205,8 +172,7 @@
         tagID int UNSIGNED NOT NULL PRIMARY KEY,
 
         nome varchar(40) NOT NULL,
-        continente enum('Africa','America del nord', 'Sud America',
-            'Asia', 'Europa', 'Oceania', 'Antartide'),
+        continente enum('Africa','America del nord', 'Sud America', 'Asia', 'Europa', 'Oceania', 'Antartide'),
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID)
 

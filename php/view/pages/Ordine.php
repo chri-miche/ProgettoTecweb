@@ -18,7 +18,7 @@
 
     $page = new BasePage($basePage);
 
-    $page->addComponent(new SiteBar());
+    $page->addComponent(new SiteBar("ordine"));
 
     // Breadcrumb makes previous and next? Or just sets current?
     // TODO: Rifare breadcrumb (cioè fare in generale)

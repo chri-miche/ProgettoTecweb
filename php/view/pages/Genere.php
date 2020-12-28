@@ -12,7 +12,7 @@
 
     $page = new BasePage($basePage);
 
-    $page->addComponent(new SiteBar());
+    $page->addComponent(new SiteBar("genere"));
     $page->addComponent(new SearchBar());
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;

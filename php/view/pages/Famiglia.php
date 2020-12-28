@@ -18,7 +18,7 @@
     // TODO: Consider if title is component
     $page = new BasePage($basePage);
 
-    $page->addComponent(new SiteBar());
+    $page->addComponent(new SiteBar("famiglia"));
     $page->addComponent(new SearchBar());
 
     $page->addComponent(new Title('Famiglia', 'Classificazione Uccelli', 'Classificazione di bla bla.'));

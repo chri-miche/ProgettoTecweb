@@ -16,7 +16,7 @@
 
     $page = new BasePage($basePage);
 
-    $page->addComponent(new SiteBar());
+    $page->addComponent(new SiteBar("specie"));
     $page->addComponent(new SearchBar());
 
     if(isset($_GET['id'])){

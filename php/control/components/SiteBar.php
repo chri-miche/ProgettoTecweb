@@ -9,21 +9,40 @@
                         Cosi da evitare che possa essere modificato una volta inizilizzata.*/
 
         private $user;
+        /**
+         * @var string
+         */
+        private $catalogattributes;
+        /**
+         * @var string
+         */
+        private $homeattributes;
 
-        /** TODO: Give user as parameter by reference? Avoid multiple definitons of SessionUser. */
-        public function __construct(string $HTMLcontent = null) {
+        /** TODO: Give user as parameter by reference? Avoid multiple definitons of SessionUser.
+         * @param string|null $HTMLcontent
+         * @param string $position
+         */
+        public function __construct(string $position, string $HTMLcontent = null) {
 
-             ($HTMLcontent) ? $this->HTML = $HTMLcontent
-             : $this->HTML = file_get_contents(__ROOT__.'\view\modules\SiteBar.xhtml');
+             ($HTMLcontent) ?
+                 $this->HTML = $HTMLcontent :
+                 $this->HTML = file_get_contents(__ROOT__.'\view\modules\SiteBar.xhtml');
 
             $this->user = new SessionUser();
+
+            // Prevenire link circolari
+            $this->homeattributes = strcasecmp($position, "home") <> 0 ?
+                'class="tab-header activable primary-color" href="Home.php"' :
+                'class="tab-header accent-color"';
+
+            $this->catalogattributes = strcasecmp($position, "ordine") <> 0 ?
+                'class="tab-header activable primary-color" href="Ordine.php"' :
+                'class="tab-header accent-color"';
 
         }
 
         public function build() {
 
-
-            $contentHTML = '';
 
             /** To make code tidied up count the black space of the opened tag before.*/
             if(!$this->user->getUser()->getId()){
@@ -48,19 +67,9 @@
 
             }
 
-
-            // Prevenire link circolari
-            $homeattributes = strrpos($_SERVER["REQUEST_URI"], "Home.php") === false ?
-                'class="tab-header activable" href="Home.php"' :
-                'class="tab-header"';
-
-            $catalogattributes = strrpos($_SERVER["REQUEST_URI"], "Ordine.php") === false ?
-                'class="tab-header activable" href="Ordine.php"' :
-                'class="tab-header"';
-
             $contentHTML = str_replace(Component::INNER_TAG, $contentHTML, $this->HTML);
-            $contentHTML = str_replace('href="Home.php"', $homeattributes, $contentHTML);
-            $contentHTML = str_replace('href="Ordine.php"', $catalogattributes, $contentHTML);
+            $contentHTML = str_replace('href="Home.php"', $this->homeattributes, $contentHTML);
+            $contentHTML = str_replace('href="Ordine.php"', $this->catalogattributes, $contentHTML);
             return $contentHTML;
 
         }

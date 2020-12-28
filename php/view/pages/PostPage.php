@@ -15,7 +15,7 @@
     $sessionUser = new SessionUser();
     $page = new BasePage($basePage);
 
-    $page->addComponent(new SiteBar());
+    $page->addComponent(new SiteBar("postpage"));
 
     $page->addComponent(new SearchBar());
     $page->addComponent(new BreadCrumb(array('Home', 'Post')));

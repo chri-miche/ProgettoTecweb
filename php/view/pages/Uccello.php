@@ -19,7 +19,7 @@
 
     $page = new BasePage($basePage);
 
-    $page->addComponent(new SiteBar());
+    $page->addComponent(new SiteBar("uccello"));
 
     isset($_GET['id']) ? $id = $_GET['id'] : $id = null;
 

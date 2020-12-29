@@ -18,7 +18,7 @@
     $page->addComponent(new SiteBar("home"));
 
     if(!$page->addComponent(new SearchBar())) echo 'Oops something went wrong';
-    $page->addComponent(new BreadCrumb(array('Home')));
+    $page->addComponent(new BreadCrumb(array()));
 
     echo $page;
 

@@ -45,19 +45,7 @@ input {
     border-style: none;
     background-color: transparent;
     outline: none;
-
-    /*
-    border-radius: 2em;
-    padding: 0.5em 1em;
-    box-shadow:
-            0 3px 1px -2px rgba(0,0,0,.2),
-            0 2px 2px 0 rgba(0,0,0,.14),
-            0 1px 5px 0 rgba(0,0,0,.12);
-
-     */
 }
-
-
 
 #container {
     display: flex;
@@ -80,10 +68,15 @@ button, .button {
             0 2px 2px 0 rgba(0,0,0,.14),
             0 1px 5px 0 rgba(0,0,0,.12);
     cursor: pointer;
-    transform: translate3d(0, 0, 0);
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* TODO link si capiscono che sono link
+a::after {
+    content: "→";
+}
+
+ */
 
 button:active, .button:active {
     background: #afd0da;
@@ -123,7 +116,6 @@ button:hover, .button:hover {
 
 /* #tabs*/
 
-
 #menu-tabs {
     display: flex;
     align-items: flex-end;
@@ -133,10 +125,12 @@ button:hover, .button:hover {
     text-decoration: none;
     padding: 0.5em 1em;
     border-radius: 0.4em 0.4em 0 0;
+    z-index: 100;
 }
 
 .activable {
     cursor: pointer;
+    z-index: 90;
     transform: translate3d(0, 0, 0);
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1),box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow:
@@ -154,6 +148,7 @@ button:hover, .button:hover {
 
 .activable:hover {
     background: #2D323E;
+    z-index: 110;
 }
 
 /* #end tabs */
@@ -223,6 +218,9 @@ button:hover, .button:hover {
 
 #search-button {
     border-radius: 2em;
+    box-shadow: none;
+    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    /* TODO tornare sul bottone di ricerca*/
 }
 
 /* #end search */
@@ -377,3 +375,63 @@ button:hover, .button:hover {
 }
 /* #end sitebar */
 
+/* #breadcrumb */
+/* La breadcrumb ha bisogno di una altezza fissa per il layout a "squame"*/
+#breadcrumb {
+    display: flex;
+    align-items: stretch;
+    height: 40px; /*se cambia questa devono cambiare anche i sottostanti*/
+    z-index: 100;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2);
+}
+
+#breadcrumb span {
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+}
+
+.breadcrumb-item, #home-crumb {
+    position: relative; /*per il relative dell'after*/
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background: #2196F3;
+    min-width: 200px;
+    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.breadcrumb-item:after, #home-crumb:after {
+    content: ""; /* altrimenti non si visualizza */
+    height: 40px; /*deve essere uguale alla height della breadcrumb*/
+    width: 40px; /*deve essere uguale alla height della breadcrumb*/
+    transform: scale(.707) rotate(45deg); /* scala la dimensione di sqrt(2)*/
+    /*così si crea un rombo con assi lunghi 40px*/
+    right: -20px; /*deve essere uguale metà height della breadcrumb, così si posiziona a cavallo tra due crumbs*/
+    background: #2196F3;
+    position: absolute;
+    display: inline-block;
+    box-shadow: 1px -1px rgba(0,0,0,0.25);
+    z-index: 1;
+    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.breadcrumb-item:hover, .breadcrumb-item:hover:after {
+    background: white;
+    color: black;
+}
+
+.breadcrumb-item:last-child:hover {
+    background: transparent;
+    color: white;
+}
+
+.breadcrumb-item:last-child:after {
+    content: none; /*elimina l'ultimo >*/
+}
+
+#home-crumb {
+    min-width: 115px;
+}
+
+/* #end breadcrumb */

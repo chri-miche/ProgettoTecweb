@@ -7,12 +7,12 @@
         private $HTML;
 
         /** Prende in input la pagina corrente e l'array di pagine precedenti.
+         * crumb = array associativo Descrizione => Pagina.php
          * @param array $crumb
          * @param string|null $HTML  */
         public function __construct(array $crumb, string $HTML = null) {
 
-
-            $this->HTML = isset($HTML) ? $HTML : file_get_contents(__ROOT__.'/view/modules/BreadCrumb.xhtml');
+            $this->HTML = isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\BreadCrumb.xhtml');
 
             $this->previous = $crumb;
 
@@ -21,14 +21,22 @@
         function build() {
             //https://codepen.io/iamglynnsmith/pen/BRGjgW
             // TODO: Move this stuff to file and just make a strreplace.
-            $ret = "<div class='w3-container w3-blue' style='width:100%; height: fit-content;'>";
+            $ret = "";
 
 
-            foreach ($this->previous as $prev){ $ret .= " >  ". $prev ; }
+            foreach ($this->previous as $key => $value) {
 
-            return $this->HTML;
+                $span = "<span> " . $key . "</span>";
 
-            return  $ret . "</div></div>";
+                if ($value !== '') {
+                    $span = " <a class='breadcrumb-item' href='" . $value . "'>". $span . "</a>";
+                }
 
+                $ret .= $span;
+            }
+
+            // return $this->HTML;
+
+            return str_replace("<breadCrumb />", $ret, $this->HTML);
         }
     }

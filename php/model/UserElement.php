@@ -80,12 +80,15 @@
 
             try{
 
-                $query = "  SELECT U.nome, S.seguitoID FROM utente AS U JOIN (  
+                $query = "  SELECT S.seguitoID FROM utente AS U JOIN (  
                                 SELECT S.SeguitoID AS seguitoID , S.SeguaceID AS seguaceID
                                 FROM seguito AS S WHERE S.SeguaceID =". $id . " 
                             ) AS S ON S.seguaceID = U.ID";
 
-                return self::getMultipleRecords($query);
+                $ret = [];
+                foreach (self::getMultipleRecords($query) as $re)  $ret[] = $re['seguitoID'];
+
+                return $ret;
 
             } catch (Exception $e ) { return null; }
 

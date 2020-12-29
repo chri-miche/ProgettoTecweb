@@ -23,7 +23,7 @@
 
             // Manca conservazione e luoghi geografici.
             /** Conservazione. */ // TODO: Add to conservazione una breve descrizione.
-            $query = "SELECT probEstinzione, nome, descrizione FROM conservazione AS C WHERE C.codice = '". $res['conservazioneID'] ."' LIMIT 1;";
+            $query = "SELECT probEstinzione, nome AS nomeConservazione, descrizione AS descrizioneConservazione FROM conservazione AS C WHERE C.codice = '". $res['conservazioneID'] ."' LIMIT 1;";
             $res = array_merge($res, self::getSingleRecord($query));
 
             /** Luoghi geografici. */

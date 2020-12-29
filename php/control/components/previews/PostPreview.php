@@ -54,4 +54,8 @@
 
         }
 
+        public function resolveData() {
+            // TODO: Implement resolveData() method.
+        }
+
     }

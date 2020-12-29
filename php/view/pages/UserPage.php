@@ -11,7 +11,7 @@
 
     $page = new BasePage($basePage);
 
-    $page->addComponent(new SiteBar());
+    $page->addComponent(new SiteBar('User'));
 
     isset($_GET['id']) ? $id = $_GET['id'] : $id = 1;
 

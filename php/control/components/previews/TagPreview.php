@@ -25,10 +25,8 @@
             // Se il tag esiste.
             if($this->tag->exists()){
 
-                $this->HTML = str_replace('{REFERENCE}', $this->reference. $this->tag->ID, $this->HTML);
-                $this->HTML = str_replace('{IMG}', $this->tag->immagine, $this->HTML);
-                $this->HTML = str_replace('{NOME}',$this->tag->nome, $this->HTML);
-                $this->HTML = str_replace('{DESCRIZIONE}', $this->tag->label, $this->HTML);
+                foreach ($this->resolveData() as $key => $value)
+                    $this->HTML = str_replace($key, $value, $this->HTML);
 
                 return $this->HTML;
 
@@ -36,5 +34,15 @@
 
         }
 
+        public function resolveData() {
+            /* Add reference. */
+            $swapData ['{reference}'] = $this->reference . $this->tag->ID;
+
+            foreach ($this->tag->getData() as $key => $value)
+                if(!is_array($value))  $swapData['{'.$key .'}'] = $value;
+
+            return $swapData;
+
+        }
     }
 

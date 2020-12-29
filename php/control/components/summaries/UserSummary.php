@@ -6,7 +6,7 @@
     require_once __ROOT__.'\control\components\summaries\PageFiller.php';
     require_once __ROOT__.'\model\UserElement.php';
 
-    class UserSummary  implements PageFiller {
+    class UserSummary  extends PageFiller {
 
         private $HTML;
 
@@ -66,7 +66,8 @@
 
         public static function getRole(bool $admin, bool $moderator){
 
-            return $moderator ? $admin ? 'Amministratore' : 'Moderatore' : 'Utente';
+            return $moderator ? $admin ?    '<div style="width: 100%; padding: 1em;"> Amministratore </div>' :
+                '<div style="width: 100%; padding: 1em"> Moderatore </div>' : null;
 
         }
 

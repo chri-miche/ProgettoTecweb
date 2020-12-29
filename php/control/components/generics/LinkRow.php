@@ -2,7 +2,7 @@
 
     require_once __ROOT__.'\control\components\summaries\PageFiller.php';
     /** Creates a banner link with image. (image is optional) */
-    class LinkRow implements PageFiller {
+    class LinkRow extends PageFiller {
 
         private $HTML;
         private $reference;
@@ -13,7 +13,8 @@
 
         public function __construct(string $referece, string $title, string $image = null, string $HTML = null) {
 
-            $this->HTML = isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\LinkRow.xhtml');
+            parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\LinkRow.xhtml'));
+
             $this->reference = $referece;
 
             $this->title = $title;
@@ -24,10 +25,12 @@
 
         function build() {
 
-            foreach ($this->resolveData() as $key => $value)
-                $this->HTML = str_replace($key, $value, $this->HTML);
+            $baseLayout = $this->baseLayout();
 
-            return $this->HTML;
+            foreach ($this->resolveData() as $key => $value)
+                $baseLayout = str_replace($key, $value, $baseLayout);
+
+            return $baseLayout;
         }
 
         public function resolveData() {

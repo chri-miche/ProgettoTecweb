@@ -8,7 +8,7 @@
     require_once __ROOT__ . '\control\components\previews\TagPreview.php';
 
     // TODO: Make it simply a browser and make the array be passed? This would become "Tag Browser"
-    class TagBrowser implements Component {
+    class TagBrowser extends Component {
 
         private $HTML;
 
@@ -22,8 +22,9 @@
 
         public function __construct($ids, string $parentReference, int $page = 0, int $elementsPerPAge = 10, string $reference = null, string $HTML = null) {
 
-            (isset($HTML)) ? $this->HTML = $HTML : $this->HTML = file_get_contents(__ROOT__.'\view\modules\BirdCatalogue.xhtml');
-            (isset($reference))? $this->reference = $reference : $this->reference = '';
+            parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\BirdCatalogue.xhtml'));
+
+            $this->reference = isset($reference) ? $reference :  '';
 
             $this->currentPage = $page;
             $this->parentReference = $parentReference;
@@ -51,7 +52,7 @@
                 else $HTML .= '<a href="'. $this->parentReference .$i .'" class="w3-button">'. ($i + 1) .'</a>';
             } $HTML .= '</div>';
 
+            return $HTML .'</div>';
 
-            return $HTML .= '</div>';
         }
 }

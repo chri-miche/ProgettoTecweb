@@ -9,25 +9,20 @@
     require_once __ROOT__.'\model\ReportElement.php';
     require_once __ROOT__.'\control\components\Component.php';
 
-    class Report implements Component {
-
-        private  $HTML;
+    class Report extends Component {
 
         private $user; private $post;
+
         /* The new created report.*/
         private $report;
 
-        public function __construct(string $HTML = null){
+        public function __construct(int $pid, string $HTML = null){
 
-            ($HTML) ? $this->HTML = $HTML :
-            $this->HTML = file_get_contents(__ROOT__.'\view\modules\Post.xhtml');
+            parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\Post.xhtml'));
 
             $this->user = new SessionUser();
             $this->report = new ReportElement();
-
-            /** TODO: Delete globals dependecy.*/
-            if(isset($_GET['pid']))
-                $this->post = new PostElement($_GET['pid']);
+            $this->post = new PostElement();
 
         }
 

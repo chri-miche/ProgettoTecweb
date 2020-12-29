@@ -20,12 +20,6 @@
 
     $page->addComponent(new SiteBar("ordine"));
 
-    // Breadcrumb makes previous and next? Or just sets current?
-    // TODO: Rifare breadcrumb (cioè fare in generale)
-    if(isset($_SESSION['path']) && $_SESSION['path']['previous'] == 'Home'){
-        /* Create breadcrumb from home. Or maybe the breadcrumb is always the same might be.*/
-        // TODO: Pass on each page the previous explored?.
-    }
     $page->addComponent(new BreadCrumb(array('Catalogo' => 'catalogo.php', 'Ordine' => '')));
     $page->addComponent(new Title('Ordini', 'Classificazione Uccelli', 'In biologia, ai fini della tassonomia, l ordine è uno 
             dei livelli di classificazione scientifica degli organismi viventi, tanto della zoologia quanto della botanica'));

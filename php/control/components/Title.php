@@ -1,14 +1,16 @@
 <?php
 
     require_once __ROOT__ . '\control\components\Component.php';
-    /** Should we also give the title importance(hvalue) ? */
-    class Title implements Component {
+
+    class Title extends Component {
 
         private $title;
         private $secondTitle;
         private $description;
 
-        public function __construct(string $title, string $secondTitle = null, string $description = null) {
+        public function __construct(string $title, string $secondTitle = null, string $description = null, string $HTML = null) {
+
+            parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\Title.xhtml'));
 
             $this->title = $title;
 
@@ -17,6 +19,7 @@
 
         }
 
+        // TODO: Rewrite.
         public function build() {
             // TODO: Implement build() method.
             // TODO: Push this stuff in layout and just change values with str_replace

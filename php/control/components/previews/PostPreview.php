@@ -5,24 +5,21 @@
     // TODO: Vogliamo mettere un menu a tendina ogni volta che si seleziona
     //  un tag per fare in modo di permettere di andare sia alla pagina di ricerca che a quella dell'uccello (se esite).
 
-    /** Makes the preview (title half image and author of each post + votes.
-        On clikc you got to the selected page. 10 are displayed per page.*/
-    class PostPreview implements Preview {
-
-        private $HTML;
-
+    // TODO: Rifare. “Mai rimandare a domani ciò che puoi fare benissimo dopodomani.” Mark Twain
+    class PostPreview extends Preview {
 
         private $post;
         private $creator;
         private $tags;
 
-        public function __construct(int $pid, string $reference = null) {
+        public function __construct(int $pid, string $reference = null, string $HTML = null) {
+
             //  Get the HTML from builder? Might be the way to go.
-            $this->HTML = file_get_contents(__ROOT__.'\view\modules\PostPreview.xhtml');
+            parent::construct(isset($HTML)? $HTML : file_get_contents(__ROOT__.'\view\modules\PostPreview.xhtml'));
 
             if(PostElement::checkID($pid)){
                 $this->post = new PostElement($pid);
-                if(UserElement::checkID($this->post->userID))
+                if(UserElement::checkID($this->post->userID)) // Controllo inutile
                     $this->creator = new UserElement($this->post->userID);
 
                 /** Finds all tags correlated to a post.*/
@@ -34,28 +31,35 @@
             }
         }
 
+        // TODO: Avoid changing this->HTML.
         public function build() {
-            
-            $this->HTML = str_replace("{TITOLO}", $this->post->title,  $this->HTML);
-            $this->HTML = str_replace('{NOME_UTENTE}', '<a href="user.php?id='. $this->creator->ID .'">
-                                '. $this->creator->nome. '</a>',  $this->HTML);
 
-            $this->HTML = str_replace("{POSTLINKID}", $this->post->ID , $this->HTML);
+            $fillHTML = $this->baseLayout();
+
+            $fillHTML = str_replace("{TITOLO}", $this->post->title,  $fillHTML);
+            $fillHTML = str_replace('{NOME_UTENTE}', '<a href="user.php?id='. $this->creator->ID .'">
+                                '. $this->creator->nome. '</a>',  $fillHTML);
+
+            $fillHTML = str_replace("{POSTLINKID}", $this->post->ID , $fillHTML);
 
             if(isset($this->tags)) {
                 $tagText = "";
 
                 foreach ($this->tags as $tag)
                     $tagText .= '<div class = "w3-tag w3-yellow w3-margin-right"><a href="search.php?tgid=' . $tag->ID . '">' . $tag->nome . '</a></div>';
-                $this->HTML = str_replace('{TAGS}', $tagText, $this->HTML);
+
+                $fillHTML = str_replace('{TAGS}', $tagText, $fillHTML);
+
             }
 
-            return  $this->HTML;
+            return  $fillHTML;
 
         }
 
         public function resolveData() {
             // TODO: Implement resolveData() method.
+
+
         }
 
     }

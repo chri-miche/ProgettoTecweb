@@ -2,7 +2,7 @@
 
     require_once __ROOT__ . '\control\components\previews\Preview.php';
     //TODO: Il tagPreview è anche un summarie di Tag? Yes it is.
-    class TagPreview implements Preview {
+    class TagPreview extends Preview {
 
         private $tag;
 
@@ -11,24 +11,25 @@
 
         public function __construct(int $id, string $reference = null) {
 
-            // TODO: Get from constructor.
-            $this->HTML = file_get_contents(__ROOT__.'\view\modules\TagPreview.xhtml');
-
+            parent::__construct($id, file_get_contents(__ROOT__.'\view\modules\TagPreview.xhtml'), $reference);
             $this->reference = $reference;
 
             $this->tag = new TagElement($id);
 
         }
 
-
+        // TODO: Avoid changing this->HTML. Or make sure to be built.
         public function build() {
             // Se il tag esiste.
+
+            $baseLayout = $this->baseLayout();
+
             if($this->tag->exists()){
 
                 foreach ($this->resolveData() as $key => $value)
-                    $this->HTML = str_replace($key, $value, $this->HTML);
+                    $baseLayout = str_replace($key, $value, $baseLayout);
 
-                return $this->HTML;
+                return $baseLayout;
 
             } else return false;
 

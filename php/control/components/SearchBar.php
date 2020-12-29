@@ -1,23 +1,19 @@
 <?php
 
+    // TODO: Implement
     require_once __ROOT__.'\control\components\Component.php';
-    class SearchBar implements Component {
+    class SearchBar extends Component {
 
-        private $HTML;
 
-        public function __construct(string $HTMLcontent = null) {
+        public function __construct(string $HTML = null) {
 
-            $this->HTML = ($HTMLcontent) ?
-                $HTMLcontent :
-                file_get_contents(__ROOT__.'\view\modules\SearchBar.xhtml');
-
+            parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\SearchBar.xhtml'));
 
         }
 
         function build() {
 
-            return $this->HTML;
-
+            return $this->baseLayout();
 
         }
     }

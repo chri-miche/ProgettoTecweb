@@ -3,7 +3,7 @@
     require_once __ROOT__.'\control\components\Component.php';
     require_once __ROOT__.'\control\SessionUser.php';
 
-    class SiteBar implements Component {
+    class SiteBar extends Component {
 
         private $HTML; /** Spostare questo a private in Component e renderla una classe?
                         Cosi da evitare che possa essere modificato una volta inizilizzata.*/
@@ -24,10 +24,7 @@
          */
         public function __construct(string $position, string $HTMLcontent = null) {
 
-             ($HTMLcontent) ?
-                 $this->HTML = $HTMLcontent :
-                 $this->HTML = file_get_contents(__ROOT__.'\view\modules\SiteBar.xhtml');
-
+            parent::__construct(isset($HTMLcontent) ? $HTMLcontent : file_get_contents(__ROOT__.'\view\modules\SiteBar.xhtml'));
             $this->user = new SessionUser();
 
             // Prevenire link circolari
@@ -43,6 +40,8 @@
 
         public function build() {
 
+
+            $baseLayout = $this->baseLayout();
 
             /** To make code tidied up count the black space of the opened tag before.*/
             if(!$this->user->getUser()->getId()){
@@ -67,10 +66,10 @@
 
             }
 
-            $contentHTML = str_replace(Component::INNER_TAG, $contentHTML, $this->HTML);
-            $contentHTML = str_replace('href="Home.php"', $this->homeattributes, $contentHTML);
-            $contentHTML = str_replace('href="Ordine.php"', $this->catalogattributes, $contentHTML);
-            return $contentHTML;
+            $baseLayout = str_replace('<loggedActions />', $contentHTML, $baseLayout);
+            $baseLayout = str_replace('href="Home.php"', $this->homeattributes, $baseLayout);
+            $baseLayout = str_replace('href="Ordine.php"', $this->catalogattributes, $baseLayout);
+            return $baseLayout;
 
         }
 

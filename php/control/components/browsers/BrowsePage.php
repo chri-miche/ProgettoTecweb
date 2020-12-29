@@ -3,11 +3,10 @@
     require_once __ROOT__ . '\control\components\Component.php';
     require_once __ROOT__ . '\control\components\previews\Preview.php';
 
-    class BrowsePage implements  Component {
+    class BrowsePage extends  Component {
+
         /** List of all previews.*/
         private $previews;
-
-        private $HTML;
 
         private $elementsPerPage;
         private $currentPage;
@@ -15,6 +14,7 @@
         public function __construct($ids, Preview $type, int $elementPerPage, int $page, string $reference, string $HTML = null) {
 
             //isset($HTML) ? $this->HTML = $HTML : $this->HTML = file_get_contents(__ROOT__.'');
+            parent::__construct(isset($HTML) ? $HTML : 'Nothing to see here.');
 
             $this->elementsPerPage = $elementPerPage;
             $this->currentPage = $page;
@@ -31,14 +31,15 @@
         }
 
         function build() {
-            $HTML = "";
-            if(!isset($this->previews))
-                return 'Non ci sono elmeenti da visualizzare';
 
-            else
-                foreach ($this->previews as $preview)  $HTML .= $preview->build();
+            $HTML = '';
+            if(!isset($this->previews))  return 'Non ci sono elmeenti da visualizzare';
+
+            foreach ($this->previews as $preview)
+                $HTML .= $preview->build();
 
             return $HTML;
+
         }
 
     }

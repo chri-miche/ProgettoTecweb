@@ -58,7 +58,7 @@
 
             foreach ($this->components as $component){
 
-                $HTML = $component->build();
+                $HTML = $component->returnComponent();
 
                 $this->lastBuiltHTML = str_replace(self::COMPONENT_TAG,
             self::COMPONENT_TAG . "\n" . self::COMPONENT_TAG, $this->lastBuiltHTML);

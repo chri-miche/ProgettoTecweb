@@ -2,8 +2,8 @@
 
     require_once __ROOT__ . '\control\components\Component.php';
     // TODO: Expain.
-    interface PageFiller extends Component {
+    abstract class PageFiller extends Component {
 
-        public function resolveData();
+        abstract public function resolveData();
 
     }

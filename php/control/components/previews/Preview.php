@@ -1,9 +1,21 @@
 <?php
 
     require_once __ROOT__ . '\control\components\summaries\PageFiller.php';
-    interface Preview extends PageFiller {
+    abstract class Preview extends PageFiller {
 
-        /** Every preview has to build itself?* @param int $id */
-        public function __construct(int $id, string $reference = null);
+        private $reference;
+        private $idVal;
+
+        /** Every preview has to build itself?*
+         * @param int $id Id dell'elemento da linkare.
+         * @param string $HTML
+         * @param string|null $reference
+         */
+        public function __construct(int $id, string $HTML , string $reference = null){
+
+            parent::__construct($HTML);
+            $this->idVal = $id; $this->reference = $reference;
+
+        }
 
     }

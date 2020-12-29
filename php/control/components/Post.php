@@ -5,10 +5,9 @@
 
     //TODO: Remove globals inside of Post and other Components.
     // TODO: Move to be postSummary. And also create CommentSummary.
-    class Post implements Component {
+    class Post extends Component {
 
-        private $HTML;
-
+        /** Current user.*/
         private $user;
 
         private $post;
@@ -17,13 +16,11 @@
         /*** @param string|null $HTML */
         public function __construct(int $pid = null, SessionUser &$user, string $HTML = null) {
 
-            $this->HTML = (isset($HTML)) ? $HTML : file_get_contents(__ROOT__.'\view\modules\Post.xhtml');
-
+            parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\Post.xhtml'));
 
             if(isset($pid) && PostElement::checkID($pid)){
 
                 $this->post = new PostElement($pid);
-
                 $this->user = new UserElement($this->post->UserID);
 
             }
@@ -39,7 +36,7 @@
             /* Se il post è assegnato significa che esiste e abbiamo tutti i dati utili. */
             if(isset($this->post)) {
 
-                return $this->HTML;
+                return $this->baseLayout();
 
                 $ret = "<div class='w3-container' style='width: 70%'>";
 

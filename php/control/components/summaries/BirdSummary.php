@@ -2,7 +2,7 @@
     require_once __ROOT__.'\control\components\summaries\PageFiller.php';
     require_once __ROOT__.'\model\BirdElement.php';
 
-    class BirdSummary implements PageFiller {
+    class BirdSummary extends PageFiller {
 
         /** Bird data element, the join of all his parents. (maximum data) */
         private $bird;
@@ -36,8 +36,8 @@
 
         }
 
-        function build() {  // Pagina statica quindi ci sono solo sostituzioni.
-
+        function build() {
+            // Pagina statica quindi ci sono solo sostituzioni.
             if(!($this->bird->exists()))  return 'Bird does not exist in our database'; // TODO: Make error page?
 
             /** Swap variables in fields.*/

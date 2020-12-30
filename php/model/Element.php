@@ -23,6 +23,8 @@
 
             if (!($id === null) && $this->checkID($id)) {
 
+                    $this->data = null;
+
                     $this->data['ID'] = $id;
                     $this->data = array_merge($this->data, $this->loadData());
 
@@ -48,6 +50,13 @@
             try {
                 return DatabaseAccess::executeQuery($query);
             } catch (Exception $e) { echo $e; return null; }
+        }
+
+        protected static function removeRecord(string $query){
+            try {
+                DatabaseAccess::deleteRecord($query);
+            }catch (Exception $e) { echo 'aaa'; return null;}
+
         }
 
 

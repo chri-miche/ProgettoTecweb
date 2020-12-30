@@ -37,4 +37,11 @@
 
         }
 
+        public function updateUser(){
+
+            $this->user->loadElement($this->user->ID);
+            $_SESSION['User'] = serialize($this->user);
+
+        }
+
     }

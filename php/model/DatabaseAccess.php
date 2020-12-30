@@ -76,5 +76,14 @@
 
         }
 
+        static public function deleteRecord(string $query){
+
+            $connection = self::openConnection();
+            mysqli_query($connection, $query);
+            echo 'here';
+            self::closeConnection($connection);
+
+        }
+
 
     }

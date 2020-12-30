@@ -9,7 +9,7 @@
             {tipologiaUtente}
 
             <div style="width: 100%; padding: 1em"> Tag seguiti: </div>
-                        {tags]
+                        {tags}
 
             <div style="width: 100%; padding: 1em"> Utenti seguiti </div>
 
@@ -17,10 +17,23 @@
 
         </div>
 
-        <div style="width: 70%;; height: 80vh; border: 1px solid black; margin-right: auto; margin-left: auto;">
+        <div style="width: 70%; height: 80vh; border: 1px solid black; margin-right: auto; margin-left: auto;">
 
-            <h2 style="padding: 1em"> {nome} - {email} </h2>
+            <div class="head" style="display: flex;">
+
+                <div style="width: 60%">
+
+                    <h2 style="padding: 1em"> {nome} - {email} </h2>
+
+
+                </div>
+
+                <div style="width: fit-content; padding: 1em;">  {loggedActions} </div>
+
+            </div>
+
             <div style="padding: 1em"> {Posts go here} </div>
+
         </div>
 
     </div>

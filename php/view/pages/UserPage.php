@@ -15,7 +15,9 @@
 
     isset($_GET['id']) ? $id = $_GET['id'] : $id = 1;
 
-    $page->addComponent(new UserSummary($id));
+
+
+    $page->addComponent(new UserSummary($id, $_SERVER['PHP_SELF'], isset($_GET['add'])? $_GET['add'] : null));
 
     echo $page;
 

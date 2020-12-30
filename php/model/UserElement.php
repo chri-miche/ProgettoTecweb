@@ -23,7 +23,8 @@
                 $userData['moderator'] = isset($userData['isAdmin']);
                 $userData['isAdmin'] = isset($userData['isAdmin']) && $userData['isAdmin'];
 
-                $userData['amici'] = $this->getFriends($this->ID);
+                $userData['amici'] = self::getFriends($this->ID);
+                $userData['interests'] = self::getInterestsIDs($this->ID);
 
                 return $userData;
 
@@ -94,6 +95,26 @@
 
         }
 
+        public static function addFriend(int $id, int $newFriend){
+            try{
+
+                $query = " INSERT INTO seguito(SeguitoID, SeguaceID) VALUE (".$newFriend.",". $id.")";
+                parent::addNew($query);
+
+            } catch (Exception $e ) { echo'errpore'; return null; }
+        }
+
+        public static function removeFriend(int $id, int $oldFriend){
+            try {
+
+                $query = "DELETE FROM seguito  WHERE SeguitoID =". $oldFriend ." AND SeguaceID = ". $id.";";
+                parent::removeRecord($query);
+
+            } catch (Exception $e) {echo'errpore'; return null;}
+
+        }
+
+
         public static function getInterestsIDs(int $id){
 
             try {
@@ -113,9 +134,11 @@
 
         }
 
+
+
+
         /** Get all posts made by the user. */ //TODO: Implement
         public static function getWrittenPosts(int $id){}
-
         public function getModerator(){ return $this->moderator; }
         public function getAdmin() { return $this->isAdmin; }
 

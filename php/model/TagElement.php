@@ -109,6 +109,27 @@ class TagElement extends Element {
 
     }
 
+    public static function getInterests(int $usid, int $number){
+
+        try{
+            // Selects all the elements.
+            $query = "  SELECT * FROM tag AS T INNER JOIN 
+                            (SELECT I.tagID FROM interesse AS I WHERE I.userID =". $usid." LIMIT ". $number. ") 
+                        AS I ON T.ID = I.tagID";
+
+            $result = self::getMultipleRecords($query);
+            $return = [];
+
+            foreach ($result as $r)
+                $return[] = new self(null, $r);
+
+            return $return;
+
+        } catch (Exception $e) { return null; }
+
+
+    }
+
     public function getNome(){return $this->nome;}
     public function getLabel(){return $this->label;}
 

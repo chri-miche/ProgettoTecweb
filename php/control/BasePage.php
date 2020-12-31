@@ -12,6 +12,8 @@
 
     /* Remove from the side the sidebar? And keep an header that moves with content of page?*/
     // TODO: Check all this out.
+
+    // TODO: Make a component.
     class BasePage {
 
         /** Array of all components inside of the generic page.*/

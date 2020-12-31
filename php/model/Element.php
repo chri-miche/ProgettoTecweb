@@ -4,14 +4,27 @@
     require_once __ROOT__.'\model\DatabaseAccess.php';
     abstract class Element {
 
+        // TODO: Work on it a little bit.
+
         private $data; /** Associative Array where all the data is stored.*/
 
         /** Builds a new item.
-         * @param null $id : Identificatore dell'elemento cercato. */
-        public function __construct($id = null){
+         * @param null $id : Identificatore dell'elemento cercato.
+         * @param null $data
+         * @param int $check
+         */
 
-            $this->data = array();
-            $this->loadElement($id);
+        // Siamo limitati dalla tecnologia odierna.
+        // TODO: Find better solution. For sure now we have to check on writes.
+        public function __construct($id = null, $queryRes = null){
+
+            if(isset($queryRes))
+                $this->data = $queryRes;
+
+            else {
+                $this->data = array();
+                $this->loadElement($id);
+            }
 
         }
 

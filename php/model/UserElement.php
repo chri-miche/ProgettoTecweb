@@ -23,7 +23,7 @@
                 $userData['moderator'] = isset($userData['isAdmin']);
                 $userData['isAdmin'] = isset($userData['isAdmin']) && $userData['isAdmin'];
 
-                $userData['amici'] = self::getFriends($this->ID);
+                $userData['amici'] = self::getFriendsIds($this->ID);
                 $userData['interests'] = self::getInterestsIDs($this->ID);
 
                 return $userData;
@@ -77,7 +77,7 @@
         }
 
         /** Returns all friends of the user.*/
-        public static function getFriends(int $id){
+        public static function getFriendsIds(int $id){
 
             try{
 
@@ -95,19 +95,42 @@
 
         }
 
-        public static function addFriend(int $id, int $newFriend){
+        public static function getFriends(int $id, int $limit){
+
             try{
 
-                $query = " INSERT INTO seguito(SeguitoID, SeguaceID) VALUE (".$newFriend.",". $id.")";
+                $query = "  SELECT * FROM utente AS U INNER JOIN(
+                                SELECT S.SeguitoID FROM seguito AS S 
+                                WHERE S.SeguaceID = ".$id ." LIMIT ". $limit .")
+                            AS S ON S.SeguitoID = U.ID ;";
+
+                $result = self::getMultipleRecords($query);
+
+                $return = [];
+                foreach ($result as $r)  $return[] = new self(null, $r);
+
+                return $return;
+
+
+            } catch (Exception $e) { return null; }
+
+
+        }
+
+        // Why are those static? Mhm. Adding a friend should always be to a UserElement.
+        public function addFriend(int $newFriend){
+            try{
+
+                $query = " INSERT INTO seguito(SeguitoID, SeguaceID) VALUE (".$newFriend.",". $this->ID.");";
                 parent::addNew($query);
 
             } catch (Exception $e ) { echo'errpore'; return null; }
         }
 
-        public static function removeFriend(int $id, int $oldFriend){
+        public function removeFriend(int $oldFriend){
             try {
 
-                $query = "DELETE FROM seguito  WHERE SeguitoID =". $oldFriend ." AND SeguaceID = ". $id.";";
+                $query = "DELETE FROM seguito  WHERE SeguitoID =". $oldFriend ." AND SeguaceID = ". $this->ID.";";
                 parent::removeRecord($query);
 
             } catch (Exception $e) {echo'errpore'; return null;}
@@ -125,7 +148,6 @@
                 // TODO: Make it clean, it should be done maybe in Element.
                 //  something like singleColumnMultipleRecords?
                 $res = array();
-
                 foreach ($result as $item) { $res[] = $item['tagID']; }
 
                 return $res;

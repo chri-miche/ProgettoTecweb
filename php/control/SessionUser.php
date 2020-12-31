@@ -13,6 +13,7 @@
     class SessionUser {
 
         private $user;
+
         public function __construct() {$this->currentSessionUser();}
 
         public function currentSessionUser(){
@@ -23,6 +24,8 @@
                 $_SESSION['User'] = serialize(new UserElement());
 
             $this->user = unserialize($_SESSION['User']);
+
+            return $this;
 
         }
 

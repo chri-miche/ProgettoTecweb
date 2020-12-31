@@ -43,6 +43,8 @@
 
         }
 
+        // TODO: Set modified (so that build can be false).
+
         protected function baseLayout(){ return $this->HTML; }
 
         public function __toString(){ return $this->returnComponent(); }

@@ -1,14 +1,18 @@
 <div class="fixed-card">
     <!-- fixed height card -->
-    <img src="{linkImage}" alt="Foto di {author}"/>
+    <img src="{linkImage}" alt=""/>
+    <!--
+        a un cieco non importa sapere che cosa ci sia qui,
+        e nemmeno agli algoritmi di ricerca
+    -->
     <!-- prima cosa, immagine con altezza % (nostretch) -->
     <dt class="card-header">
-        <h2>{postTitle}</h2>
-        <h3>Avvistamento di <a href="/User.php?id={authorId}">{authorName}</a></h3>
+        <h2>{title}</h2>
+        <h3>Avvistamento di <a href="/User.php?id={UserID}">{authorName}</a></h3>
     </dt>
     <dd class="card-content">
-        <span class="text-truncate">{postPreview}</span>
-        <a href="/Post.php?postId={postId}">Leggi altro</a>
+        <span class="text-truncate">{content}</span>
+        <a href="/Post.php?postId={ID}">Leggi altro</a>
         <!-- link messo qui e non sopra sul titolo perché altrimenti può dare fastidio all'altro link
         (mai mettere due link troppo vicini) --> 
     </dd>

@@ -1,0 +1,15 @@
+<div class="fixed-card">
+    <!-- fixed height card -->
+    <img src="{linkImage}" alt="Foto di {author}"/>
+    <!-- prima cosa, immagine con altezza % (nostretch) -->
+    <dt class="card-header">
+        <h2>{postTitle}</h2>
+        <h3>Avvistamento di <a href="/User.php?id={authorId}">{authorName}</a></h3>
+    </dt>
+    <dd class="card-content">
+        <span class="text-truncate">{postPreview}</span>
+        <a href="/Post.php?postId={postId}">Leggi altro</a>
+        <!-- link messo qui e non sopra sul titolo perché altrimenti può dare fastidio all'altro link
+        (mai mettere due link troppo vicini) --> 
+    </dd>
+</div>

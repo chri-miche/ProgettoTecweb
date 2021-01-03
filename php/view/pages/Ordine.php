@@ -8,7 +8,7 @@
     require_once __ROOT__ . '\control\components\BreadCrumb.php';
 
     require_once __ROOT__ . '\control\components\previews\TagPreview.php';
-    require_once __ROOT__ . '\control\components\browsers\TagBrowser.php';
+    require_once __ROOT__ . '\control\components\browsers\Browser.php';
     require_once __ROOT__ . '\control\components\Title.php';
 
     require_once __ROOT__ . '\model\TagElement.php';
@@ -26,9 +26,9 @@
 
     $pageNum = isset($_GET['page']) ? $_GET['page'] :  0;
 
-    // TODO: Add to Tagbrowser a previous browisng?
-    $page->addComponent(new TagBrowser(TagElement::ordineTags(),'\php\view\pages\ordine.php?page=',
-                            $pageNum,10, '\php\view\pages\famiglia.php?id='));
+    // TODO: Avoid creating all tags, just the ones we care about. Can't be done, we don't know how many tags we hace if we do.
+    $page->addComponent(new Browser(TagElement::ordineTags(), new TagPreview(new TagElement(0)),'\php\view\pages\ordine.php?page=',
+        '\php\view\pages\famiglia.php?id=', $pageNum,10 ));
 
     echo  $page;
 ?>

@@ -7,32 +7,21 @@
     // (most simple solution is to keep for each important component H1 in the code, maybe a subclass
     // maincontent? To consider.
 
-    //TODO: Remove globals inside of Post and other Components.
+    class BasePage extends Component {
 
-
-    /* Remove from the side the sidebar? And keep an header that moves with content of page?*/
-    // TODO: Check all this out.
-    class BasePage {
-
-        /** Array of all components inside of the generic page.*/
-
-        private $components; private $pageHTML;
-
+        // TODO: Remove?
         private const COMPONENT_EXPR = '/<component \/>/';
         private const COMPONENT_TAG = '<component />';
-
         private $header;
 
-        private $built;
+        // Lists of components added to the BasePage.
+        private $components;
 
-        private $lastBuiltHTML;
 
+        // TODO: Add Components array on construction to give the chance to build from components?
         public function __construct(string $baseLayout) {
 
-            $this->components = array();
-            $this->pageHTML = $baseLayout;
-
-            $this->built = false;
+            parent::__construct(isset($baseLayout) ? $baseLayout : file_get_contents(__ROOT__.'\view\pages\BaseLayout.xhtml'));
 
         }
 
@@ -43,33 +32,29 @@
 
             try {
 
-                $this->built = false;
                 $this->components[] = $component; /* Aggiunta di nuovo component */
 
+                $this->notBuilt();
                 return true;
 
             } catch( Exception $e ){ return false; }
 
         }
 
-        private function build(){
+        public function build(){
 
-            $this->lastBuiltHTML = $this->pageHTML; /* Last built is made by template.*/
+            $HTML = $this->baseLayout(); /* Last built is made by template.*/
 
             foreach ($this->components as $component){
 
-                $HTML = $component->returnComponent();
+                $componentHTML = $component->returnComponent();
 
-                $this->lastBuiltHTML = str_replace(self::COMPONENT_TAG,
-            self::COMPONENT_TAG . "\n" . self::COMPONENT_TAG, $this->lastBuiltHTML);
-
-
-                $this->lastBuiltHTML = preg_replace(self::COMPONENT_EXPR, $HTML, $this->lastBuiltHTML, 1);
+                $HTML = str_replace(self::COMPONENT_TAG, self::COMPONENT_TAG . "\n" . self::COMPONENT_TAG, $HTML);
+                $HTML = preg_replace(self::COMPONENT_EXPR, $componentHTML, $HTML, 1);
 
             }
 
-            $this->lastBuiltHTML = self::cleanTags($this->lastBuiltHTML);
-            return $this->lastBuiltHTML;
+            return self::cleanTags($HTML);
 
         }
 
@@ -84,9 +69,6 @@
             return $HTML;
 
         }
-
-        public function returnPage(){return ($this->built) ? $this->lastBuiltHTML : $this->build();}
-        public function __toString() { return $this->returnPage(); }
 
     }
 

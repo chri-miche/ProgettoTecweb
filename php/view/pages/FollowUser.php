@@ -4,21 +4,23 @@
     require_once __ROOT__.'\control\SessionUser.php';
     require_once __ROOT__.'\model\UserElement.php';
 
-    // TODO: Move to Control3
-
+    // TODO: Move to Control
+    // Make it a class?
 
     $currentUser = new SessionUser();
-    $newOldFriend = $_GET['usid'];
-    $add = $_GET['add'];
+    $newOldFriend = $_POST['usid'];
+    $add = $_POST['add'];
 
-    if($add)  UserElement::addFriend($currentUser->getUser()->ID, $newOldFriend);
-    else UserElement::removeFriend($currentUser->getUser()->ID, $newOldFriend);
+    if($newOldFriend != $currentUser->getUser()->ID) {
 
-    $currentUser->updateUser();
+        if ($add) $currentUser->getUser()->addFriend($newOldFriend);
+        else  $currentUser->getUser()->removeFriend($newOldFriend);
 
-    $previous = $_GET['previousPath'];
+        $currentUser->updateUser();
 
-    header('Location: http://localhost:82'. $previous. '?id='. $newOldFriend);
+    }
 
+    $previous = $_POST['previousPath'];
+    header('Location:' . $previous. '?id='. $newOldFriend);
 
 ?>

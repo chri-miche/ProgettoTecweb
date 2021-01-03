@@ -2,23 +2,22 @@
 
     require_once __ROOT__ . '\control\components\previews\Preview.php';
     //TODO: Il tagPreview è anche un summarie di Tag? Yes it is.
+    // TODO: Get the tags already built
     class TagPreview extends Preview {
 
         private $tag;
-
-        private $HTML;
         private $reference;
 
-        public function __construct(int $id, string $reference = null) {
+        public function __construct(TagElement $tag, string $reference = null) {
 
-            parent::__construct($id, file_get_contents(__ROOT__.'\view\modules\TagPreview.xhtml'), $reference);
+            parent::__construct(file_get_contents(__ROOT__.'\view\modules\TagPreview.xhtml'), $reference);
             $this->reference = $reference;
 
-            $this->tag = new TagElement($id);
+            $this->tag = clone $tag;
 
         }
 
-        // TODO: Avoid changing this->HTML. Or make sure to be built.
+
         public function build() {
             // Se il tag esiste.
 
@@ -41,6 +40,7 @@
 
             foreach ($this->tag->getData() as $key => $value)
                 if(!is_array($value))  $swapData['{'.$key .'}'] = $value;
+
 
             return $swapData;
 

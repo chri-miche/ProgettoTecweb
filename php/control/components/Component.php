@@ -45,6 +45,8 @@
 
         // TODO: Set modified (so that build can be false).
 
+        public function notBuilt(){ $this->built = false; }
+
         protected function baseLayout(){ return $this->HTML; }
 
         public function __toString(){ return $this->returnComponent(); }

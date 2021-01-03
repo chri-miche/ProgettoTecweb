@@ -41,6 +41,28 @@
 
         }
 
+        public static function getUserPosts(int $usid, int $limit =  0,  int $offset = 0){
+
+            try{
+
+                $query = "  SELECT * FROM Post AS P INNER JOIN 
+                                (SELECT * FROM contenuto AS C WHERE C.UserID = ". $usid ." )
+                            AS C ON P.contentID = C.ID";
+
+                $query .= $limit > 0 ? $offset > 0 ? " LIMIT ". $limit .", ". $offset . ";" : " LIMIT ". $limit .";" : ";" ;
+                $result = self::getMultipleRecords($query);
+
+                $return = [];
+                foreach ($result as $res) $return[] = new PostElement(0, $res);
+
+                return $return;
+
+            } catch (Exception $e) { return false; }
+
+
+
+        }
+
         // TODO: Move this to somewhhere it makes sense. Why on earth would i do
         //  a get all new post inside an element of Post?
         public static function getNewest(int $range, int $offset){

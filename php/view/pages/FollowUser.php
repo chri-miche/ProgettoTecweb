@@ -8,8 +8,8 @@
     // Make it a class?
 
     $currentUser = new SessionUser();
-    $newOldFriend = $_GET['usid'];
-    $add = $_GET['add'];
+    $newOldFriend = $_POST['usid'];
+    $add = $_POST['add'];
 
     if($newOldFriend != $currentUser->getUser()->ID) {
 
@@ -20,7 +20,7 @@
 
     }
 
-    $previous = $_GET['previousPath'];
-    header('Location: http://localhost:82'. $previous. '?id='. $newOldFriend);
+    $previous = $_POST['previousPath'];
+    header('Location:' . $previous. '?id='. $newOldFriend);
 
 ?>

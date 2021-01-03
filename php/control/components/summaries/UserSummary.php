@@ -2,6 +2,8 @@
 
 
     require_once __ROOT__.'\control\components\generics\LinkRow.php';
+    require_once __ROOT__.'\control\components\profile\UserSide.php';
+
 
     require_once __ROOT__.'\control\components\summaries\PageFiller.php';
 
@@ -67,8 +69,11 @@
 
             $swapData['{tipologiaUtente}'] = self::getRole($swapData['{isAdmin}'], $swapData['{moderator}']);
 
+
+
             // Followed friends list.
             $swapData['{users}'] = !($this->user->amici == []) ? self::makeFriendsList($this->user->amici, $this->selfReference) : 'L utente non ha amici.';
+
 
             // Followed tags list.
             $swapData['{tags}'] = !($this->user->interests == []) ? self::makeTagsList($this->user->interests, $this->tagReference) : 'L utente non segue tag';
@@ -125,7 +130,7 @@
         }
 
         // TODO: Move to outer file?
-        // TODO: Follow component?
+        // TODO: Follow component? -> YES FOLLOW COMPONETN
         private function loggedActions(){
 
             $loggedLayout = '';

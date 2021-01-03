@@ -2,8 +2,13 @@
 
     require_once __ROOT__ . '\control\components\previews\Preview.php';
     require_once __ROOT__ . '\model\TagElement.php';
+    require_once __ROOT__ . '\model\PostElement.php';
+    require_once __ROOT__ . '\model\UserElement.php';
+
+
     // TODO: Vogliamo mettere un menu a tendina ogni volta che si seleziona
     //  un tag per fare in modo di permettere di andare sia alla pagina di ricerca che a quella dell'uccello (se esite).
+
 
     // TODO: Rifare. “Mai rimandare a domani ciò che puoi fare benissimo dopodomani.” Mark Twain
     class PostPreview extends Preview {
@@ -12,35 +17,30 @@
         private $creator;
         private $tags;
 
-        public function __construct(int $pid, string $reference = null, string $HTML = null) {
+        public function __construct(PostElement $post, string $reference = null, string $HTML = null) {
+            parent::__construct(isset($HTML)? $HTML :
+                file_get_contents(__ROOT__.'\view\modules\PostPreview.xhtml'), $reference);
 
-            //  Get the HTML from builder? Might be the way to go.
-            parent::construct(isset($HTML)? $HTML : file_get_contents(__ROOT__.'\view\modules\PostPreview.xhtml'));
 
-            if(PostElement::checkID($pid)){
-                $this->post = new PostElement($pid);
-                if(UserElement::checkID($this->post->userID)) // Controllo inutile
-                    $this->creator = new UserElement($this->post->userID);
+            $this->post = clone $post;
+            if($this->post->exists()) {
+                $this->creator = new UserElement($this->post->userID);
 
                 /** Finds all tags correlated to a post.*/
-
-                $tags = $this->post->relatedTagIds();
-
-                foreach ($tags as $tag)
-                    $this->tags[] = new TagElement($tag);
+                $this->tags = TagElement::getCitedByPost($this->post->ID);
             }
         }
 
-        // TODO: Avoid changing this->HTML.
+        // TODO: Remake.
         public function build() {
 
-            $fillHTML = $this->baseLayout();
+            $baseLayout = $this->baseLayout();
 
-            $fillHTML = str_replace("{TITOLO}", $this->post->title,  $fillHTML);
-            $fillHTML = str_replace('{NOME_UTENTE}', '<a href="user.php?id='. $this->creator->ID .'">
-                                '. $this->creator->nome. '</a>',  $fillHTML);
+            $baseLayout = str_replace("{TITOLO}", $this->post->title,  $baseLayout);
+            $baseLayout = str_replace('{NOME_UTENTE}', '<a href="user.php?id='. $this->creator->ID .'">
+                                '. $this->creator->nome. '</a>',  $baseLayout);
 
-            $fillHTML = str_replace("{POSTLINKID}", $this->post->ID , $fillHTML);
+            $baseLayout = str_replace("{POSTLINKID}", $this->post->ID , $baseLayout);
 
             if(isset($this->tags)) {
                 $tagText = "";
@@ -48,16 +48,15 @@
                 foreach ($this->tags as $tag)
                     $tagText .= '<div class = "w3-tag w3-yellow w3-margin-right"><a href="search.php?tgid=' . $tag->ID . '">' . $tag->nome . '</a></div>';
 
-                $fillHTML = str_replace('{TAGS}', $tagText, $fillHTML);
+                $baseLayout = str_replace('{TAGS}', $tagText, $baseLayout);
 
             }
 
-            return  $fillHTML;
+            return  $baseLayout;
 
         }
 
         public function resolveData() {
-            // TODO: Implement resolveData() method.
 
 
         }

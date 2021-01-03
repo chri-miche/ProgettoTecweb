@@ -11,10 +11,9 @@
         private $elementsPerPage;
         private $currentPage;
 
-        public function __construct($ids, Preview $type, int $elementPerPage, int $page, string $reference, string $HTML = null) {
+        public function __construct(array $ids, Preview $type, int $elementPerPage, int $page, string $reference, string $HTML = null) {
 
-            //isset($HTML) ? $this->HTML = $HTML : $this->HTML = file_get_contents(__ROOT__.'');
-            parent::__construct(isset($HTML) ? $HTML : 'Nothing to see here.');
+           parent::__construct(isset($HTML) ? $HTML : 'Nothing to see here.');
 
             $this->elementsPerPage = $elementPerPage;
             $this->currentPage = $page;

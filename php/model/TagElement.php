@@ -23,6 +23,7 @@ class TagElement extends Element {
     static public function checkID($id){
 
         try {
+            // TODO: Add label.
             $query = "SELECT T.ID  FROM Tag AS T  WHERE T.ID = ". $id. " LIMIT 1; ";
             return !(self::getSingleRecord($query) === null);
 
@@ -30,22 +31,31 @@ class TagElement extends Element {
     }
 
 
-    //TODO : Unify, this is just replicated code.
-    static public function ordineTags(){
+    //TODO : Redo. Add limits and offset.
+    static public function ordineTags(int $limit = -1, int $offset = -1){
         try{
 
-            $query = "SELECT T.ID FROM tag AS T, ordine AS O WHERE O.TagID = T.ID;";
-            $elem =  self::getMultipleRecords($query);
+            $query = "  SELECT * FROM label AS L RIGHT JOIN(
+                            SELECT * FROM tag AS T, ordine AS O 
+                            WHERE O.TagID = T.ID) 
+                        AS T ON L.ID = T.ID ";
 
-            $ret = array();
-            foreach ($elem as $el)
-                $ret[] = $el['ID'];
+            if($limit > -1) $query .= " LIMIT " . $limit;
+            if($offset > -1) $query .= " OFFSET " . $offset;
+            $query .= ";";
 
-            return $ret;
+            $result = self::getMultipleRecords($query);
+
+            $return = [];
+            foreach ($result as $res)
+                $return[] = new TagElement(null, $res);
+
+            return $return;
 
         } catch (Exception $e) {return null;}
     }
 
+    // TODO: Fix those too.
     static public function famigliaTags($ordine = null){
 
         try {
@@ -127,6 +137,27 @@ class TagElement extends Element {
 
         } catch (Exception $e) { return null; }
 
+
+    }
+    /** @return array of TagElement. All the tags cited by a post. */
+    public static function getCitedByPost(int $postid, int $limit = 0){
+
+        try {
+            $query = "SELECT * FROM tag AS T INNER JOIN
+                       (SELECT C.tagID FROM citazione AS C WHERE C.postID =". $postid ;
+
+            if($limit > 0) $query .= " LIMIT ". $limit;
+            $query.= " ) AS C ON T.ID = C.tagID;";
+
+            $result = self::getMultipleRecords($query);
+
+            $return = [];
+
+            foreach ($result as $item)  $return[] = new TagElement(null, $item);
+
+            return $return;
+
+        }catch (Exception $e) { return null; }
 
     }
 

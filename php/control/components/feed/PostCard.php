@@ -10,7 +10,7 @@ class PostCard extends PageFiller {
 
     public function __construct($postId) {
         // construct parent
-        parent::__construct(file_get_contents(__ROOT__."/view/modules/PostCard.xhtml"));
+        parent::__construct(file_get_contents(__ROOT__.'\view\modules\feed\PostCard.xhtml'));
         // get parent's layout
         $this->HTML = $this->baseLayout();
         // get post's attributes
@@ -30,7 +30,7 @@ class PostCard extends PageFiller {
 
         foreach ($this->postElement->getData() as $key => $value) {
             if ($key === "immagini") {
-                $ritorno['{linkImage}'] = $value[0];
+                $ritorno['{linkImage}'] = $value[0] ?? null; // TODO caso in cui non ci sono immagini
             } else {
                 if ($key === 'UserID') {
                     $author = new UserElement($value);

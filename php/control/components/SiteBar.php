@@ -29,12 +29,12 @@
 
             // Prevenire link circolari
             $this->homeattributes = strcasecmp($position, "home") <> 0 ?
-                'class="tab-header activable primary-color" href="Home.php"' :
-                'class="tab-header accent-color"';
+                'class="tab-header" href="Home.php"' :
+                'class="tab-header accent-color unselectable"';
 
             $this->catalogattributes = strcasecmp($position, "ordine") <> 0 ?
-                'class="tab-header activable primary-color" href="Ordine.php"' :
-                'class="tab-header accent-color"';
+                'class="tab-header" href="Ordine.php"' :
+                'class="tab-header accent-color unselectable"';
 
         }
 

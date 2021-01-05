@@ -17,15 +17,17 @@
         private $creator;
         private $tags;
 
+        //TODO Fix
         public function __construct(PostElement $post, string $reference = null, string $HTML = null) {
             parent::__construct(isset($HTML)? $HTML :
                 file_get_contents(__ROOT__.'\view\modules\PostPreview.xhtml'), $reference);
 
-
             $this->post = clone $post;
-            if($this->post->exists()) {
-                $this->creator = new UserElement($this->post->userID);
+            echo $this->post->ID;
+            echo $this->post->exists();
 
+            if($this->post->exists()) {
+                $this->creator = new UserElement($this->post->UserID);
                 /** Finds all tags correlated to a post.*/
                 $this->tags = TagElement::getCitedByPost($this->post->ID);
             }
@@ -37,8 +39,7 @@
             $baseLayout = $this->baseLayout();
 
             $baseLayout = str_replace("{TITOLO}", $this->post->title,  $baseLayout);
-            $baseLayout = str_replace('{NOME_UTENTE}', '<a href="user.php?id='. $this->creator->ID .'">
-                                '. $this->creator->nome. '</a>',  $baseLayout);
+            $baseLayout = str_replace('{NOME_UTENTE}',  $this->creator->nome,  $baseLayout);
 
             $baseLayout = str_replace("{POSTLINKID}", $this->post->ID , $baseLayout);
 

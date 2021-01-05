@@ -56,22 +56,32 @@ class TagElement extends Element {
     }
 
     // TODO: Fix those too.
-    static public function famigliaTags($ordine = null){
+    static public function famigliaTags(int $ordine = null, int $limit = 0, int $offset = 0){
 
         try {
-            isset($ordine)
-                /** Va fatta la join*/
-                ? $query = "SELECT T.ID FROM tag AS T, Famiglia AS F, ordine AS O 
-                            WHERE F.TagID = T.ID AND F.OrdID =" . $ordine . " GROUP BY T.ID;" :
-                $query= "SELECT T.ID FROM tag as T, famiglia as F WHERE  T.ID = F.TagID;";
 
+            $famigliaQuery = "SELECT T.ID, T.nome, T.LabelID FROM tag AS T, famiglia AS F ";
+            $famigliaQuery .= isset($ordine) ? " WHERE T.ID = F.tagID AND F.ordID =". $ordine  : "WHERE T.ID = F.tagID ";
 
-            $ret = array();
+            if($limit > 0){
 
-            $elem =  self::getMultipleRecords($query);
+                $famigliaQuery .= " LIMIT " . $limit;
+                if($offset > 0) $famigliaQuery .= ' ,' . $offset;
 
-            foreach ($elem as $el){$ret[] = $el['ID'];}
-            return $ret;
+            } else if( $offset > 0){
+
+                $famigliaQuery .= " OFFSET " .$offset. ';';
+            }
+
+            $fullQuery = "SELECT * FROM label AS L RIGHT JOIN (" . $famigliaQuery .") AS T ON T.ID = L.ID";
+
+            $results =  self::getMultipleRecords($fullQuery);
+
+            $returnTags = [];
+            foreach ($results as $result)
+                $returnTags [] = new TagElement(null, $result);
+
+            return $returnTags;
 
         } catch (Exception $e){return null;}
     }

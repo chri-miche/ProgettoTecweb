@@ -43,7 +43,7 @@ class FollowButton extends Component{
 
         $resolvedData['{add}'] = !in_array($this->friend, $this->currentUser->getUser()->amici);
 
-        $resolvedData['{text}'] = $resolvedData['{add}'] ? 'Aggiungi' : 'Rimuovi';
+        $resolvedData['{text}'] = $resolvedData['{add}'] ? 'Aggiungi ai seguiti' : 'Rimuovi dai seguiti.';
 
         return $resolvedData;
 

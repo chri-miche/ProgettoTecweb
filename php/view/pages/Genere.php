@@ -8,6 +8,9 @@
     require_once __ROOT__ . '\control\components\browsers\TagBrowser.php';
     require_once __ROOT__ . '\model\TagElement.php';
 
+
+    require_once __ROOT__ . '\control\components\browsers\Browser.php';
+
     $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
 
     $page = new BasePage($basePage);
@@ -20,7 +23,8 @@
     $reference = isset($id) ? '\php\view\pages\genere.php?id='. $id .'&page=' : '\php\view\pages\genere.php?page=';
     $innerPage = isset($_GET['page']) ? $_GET['page'] :  0;
 
-    $page->addComponent(new TagBrowser(TagElement::genereTags($id), $reference, $innerPage, 10, '\php\view\pages\specie.php?id='));
+    $page->addComponent(new Browser(TagElement::genereTags($id),new TagPreview(new TagElement(0)), $reference,
+        '\php\view\pages\specie.php?id=',$innerPage, 10, ));
 
     echo  $page;
 

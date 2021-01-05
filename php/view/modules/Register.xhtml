@@ -1,26 +1,31 @@
 
-<div  style='width:100%; height: 95vh; background-image: url("/res/Images/loginwallpaper.jpg");
-    display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center;'>
+<div id="login-page">
 
     <!-- Div of form. -->
-    <div class= "w3-container w3-card-4 w3-white w3-padding" style="align-content: center; text-align: center; width: 20%; height: 90%;border-radius: 5px">
+    <div id="login-form">
 
-        <img src="/res/Images/kiwi.jpg" style="width: 75%"></img>
+        <img src="/res/Images/kiwi.jpg" alt="" />
         <h1>Registrati</h1>
 
         <form action="Register.php" method="post" name="register">
 
-            <input type="text" name="username" placeholder="Username" required="required" /><br /><br />
+            <label for="username">Nome utente</label>
+            <input type="text" id="username" name="username" placeholder="Nome utente" required="required" />
 
-            <input type="text" name="email" placeholder="Email" required="required" /><br /><br />
-            <input type="password" name="password" placeholder="Password" required="required"/><br /><br />
-            <input type="password" name="password2" placeholder="Conferma Password" required="required" /><br /><br />
+            <label for="email">Indirizzo <span xml:lang="en">e-mail</span></label>
+            <input type="text" id="email" name="email" placeholder="Email" required="required" />
 
-            <input name="submit" type="submit" value="Conferma" />
+            <label for="password" xml:lang="en">Password</label>
+            <input type="password" id="password" name="password" xml:lang="en" placeholder="Password" required="required"/>
+
+            <label for="password2">Ripeti <span xml:lang="en">password</span></label>
+            <input type="password" id="password2" name="password2" placeholder="Ripeti" required="required" />
+
+            <button name="submit" type="submit" >Conferma</button>
 
         </form>
 
-        <p> Already registerd? <a href='Login.php'> Log-in here! </a> </p>
+        <p> Già registrato? <a href='Login.php'> Accedi! </a> </p>
 
     </div>
 </div>

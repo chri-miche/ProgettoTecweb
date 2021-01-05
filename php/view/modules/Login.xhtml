@@ -1,22 +1,26 @@
 
-<div    style='width:100%; height: 95vh; background-image: url("/res/Images/loginwallpaper.jpg");
-        display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center;'>
+<div id="login-page">
+    <!-- Div of form. -->
+    <div id="login-form" >
 
-        <!-- Div of form. -->
-        <div class= "w3-container w3-card-4 w3-white " style="align-content: center; text-align: center; width: 20%; height: 80%; border-radius: 5px">
+        <img src="/res/Images/babybeng.jpg" alt="" />
+        <h1>Accedi</h1>
 
-            <img src="/res/Images/babybeng.jpg" style="width: 75%"></img>
-            <h1>Log In</h1>
+        <form action="Login.php" method="post" name="login">
 
-            <form action="Login.php" method="post" name="login">
 
-                <input type="text" name="username" placeholder="Username" required="required" /><br /><br />
-                <input type="password" name="password" placeholder="Password" required="required"/><br /><br />
-                <input name="submit" type="submit" value="Login" />
+            <label for="username">Nome utente</label>
+            <input id="username" type="text" name="username" required="required" placeholder="Nome utente"/>
 
-            </form>
+            <label for="password" xml:lang="en">Password</label>
+            <input id="password" type="password" name="password" required="required" xml:lang="en" placeholder="Password"/>
+            <!--TODO valutare bottone js mostra nascondi password-->
 
-            <p> Not registered yet? <a href='Register.php'>Register Here</a> </p>
+            <button name="submit" type="submit" xml:lang="en" >Log in</button>
 
-        </div>
+        </form>
+
+        <p> Non hai un <span xml:lang="en">account</span>? <a href='Register.php'>Registrati!</a> </p>
+
     </div>
+</div>

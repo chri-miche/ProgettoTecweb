@@ -14,12 +14,16 @@
             <a href="#feed" id="logo">
                 <img src="/res/Images/logo.png" alt="Vai al contenuto" />
             </a>
-            <a href="Home.php" xml:lang="en"> Home </a>
-            <a href="Ordine.php"> Catalogo </a>
+
+            <navigation />
+
         </div>
             <form id="search-form" action="Search.php" method="post" name="search">
-                <label for="search-input">Cerca nel sito</label>
-                <input id="search-input" name="search" alt="Inserisci qui il testo da cercare" placeholder="Effettua una ricerca"/>
+                <!-- TODO vedere se è controindicato-->
+                <div>
+                    <label for="search-input">Cerca</label>
+                    <input id="search-input" name="search" alt="Effettua una ricerca" />
+                </div>
                 <button id="search-button" type="submit" name="submit">
                     <!-- TODO icone -->
                     <i class="fa fa-search">

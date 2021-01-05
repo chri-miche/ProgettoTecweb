@@ -1,3 +1,7 @@
+/* TODO
+*       eliminare, questo script modifica il layout: layout e comportamento devono essere separati
+* */
+
 const personal = document.getElementById("personal-content");
 const discussed = document.getElementById("discussed-content");
 const popular = document.getElementById("popular-content");

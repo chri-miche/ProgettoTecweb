@@ -12,11 +12,7 @@
         /**
          * @var string
          */
-        private $catalogattributes;
-        /**
-         * @var string
-         */
-        private $homeattributes;
+        private $position;
 
         /** TODO: Give user as parameter by reference? Avoid multiple definitons of SessionUser.
          * @param string|null $HTMLcontent
@@ -27,14 +23,7 @@
             parent::__construct(isset($HTMLcontent) ? $HTMLcontent : file_get_contents(__ROOT__.'\view\modules\SiteBar.xhtml'));
             $this->user = new SessionUser();
 
-            // Prevenire link circolari
-            $this->homeattributes = strcasecmp($position, "home") <> 0 ?
-                'class="tab-header" href="Home.php"' :
-                'class="tab-header accent-color unselectable"';
-
-            $this->catalogattributes = strcasecmp($position, "ordine") <> 0 ?
-                'class="tab-header" href="Ordine.php"' :
-                'class="tab-header accent-color unselectable"';
+            $this->position = $position;
 
         }
 
@@ -67,8 +56,17 @@
             }
 
             $baseLayout = str_replace('<loggedActions />', $contentHTML, $baseLayout);
-            $baseLayout = str_replace('href="Home.php"', $this->homeattributes, $baseLayout);
-            $baseLayout = str_replace('href="Ordine.php"', $this->catalogattributes, $baseLayout);
+            $navigation = '';
+
+            if (strcasecmp($this->position, "home") != 0) {
+                $navigation = '<a href="Home.php" xml:lang="en"> Home </a>';
+            }
+            if (strcasecmp($this->position, "ordine") != 0) {
+                $navigation = '<a href="Ordine.php"> Catalogo </a>';
+            }
+            // da qui in poi .=
+
+            $baseLayout = str_replace('<navigation />', $navigation, $baseLayout);
             return $baseLayout;
 
         }

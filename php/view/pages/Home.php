@@ -11,7 +11,6 @@
     require_once __ROOT__.'\control\components\BreadCrumb.php';
     require_once __ROOT__.'\control\components\previews\PostPreview.php';
 
-
     $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
 
     $page = new BasePage($basePage);
@@ -20,7 +19,9 @@
 
     if(!$page->addComponent(new SearchBar())) echo 'Oops something went wrong';
     $page->addComponent(new BreadCrumb(array()));
-    $page->addComponent(new Feed('time'));
+
+    $feed = $_GET['feed'] ?? 'popularity';
+    $page->addComponent(new Feed($feed));
 
     echo $page;
 

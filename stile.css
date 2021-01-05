@@ -2,9 +2,11 @@
 Il foglio di stile è strutturato come segue:
     - definizioni senza contesto
     - contesto typography
+    - contesto tabs
     - contesto sidebar
     - contesto search
     - contesto content
+    - contesto sitebar
 
 Box shadow:
     quelle che ho usato fin'ora seguono questo schema (fonte luce leggermente spostata verso alto a sinistra)
@@ -29,6 +31,7 @@ body {
     font-family: Verdana,sans-serif;
     line-height: 1.5;
     margin: 0;
+    background: whitesmoke;
 
 }
 
@@ -49,6 +52,13 @@ input {
     border-style: none;
     background-color: transparent;
     outline: none;
+    padding: 0.75em;
+    border-bottom: 3px solid #2196F3;
+    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+input:focus  {
+    background: #D3EAFD;
 }
 
 #container {
@@ -75,15 +85,8 @@ button, .button, a {
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* TODO link - trovare una caratteristica comune a tutti i link
-a::after {
-    content: "→";
-}
-
- */
-
 button:active, .button:active, a:active, a:visited {
-    background: #afd0da;
+    background: #D3EAFD;
     color: black;
     box-shadow:
             0 3px 1px -2px rgba(0,0,0,.2),
@@ -99,20 +102,16 @@ button:hover, .button:hover, a:hover {
             0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-.accent-color button:active, .accent-color .button:active, .accent-color a:active {
-    background: lightgray;
-    box-shadow:
-            0 3px 1px 0 rgba(0,0,0,.2),
-            0 2px 2px 0 rgba(0,0,0,.14),
-            0 1px 5px 0 rgba(0,0,0,.12);
-}
-
-.primary-color button:active, .primary-color .button:active, .primary-color a:active {
-    background: white;
-    box-shadow:
-            0 3px 1px 0 rgba(0,0,0,.2),
-            0 2px 2px 0 rgba(0,0,0,.14),
-            0 1px 5px 0 rgba(0,0,0,.12);
+button.disabled, .button.disabled, a.disabled,
+button.disabled:hover, .button.disabled:hover, a.disabled:hover,
+button.disabled:active, .button.disabled:active, a.disabled:active
+{
+    background: inherit;
+    color: inherit;
+    cursor: default;
+    position: relative;
+    z-index: 1; /* disabilitati sovrastano gli abilitati*/
+    box-shadow: none;
 }
 
 .screen-reader-hint {
@@ -131,19 +130,41 @@ button:hover, .button:hover, a:hover {
 
 #menu-tabs {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .tab-header {
-    text-decoration: none;
-    box-shadow: none;
-    padding: 0.5em 1em;
-    border-radius: 0.4em 0.4em 0 0;
+    display: inline-flex;
+    /* animazione difficile da rendere con discorso disabled e via dicendo TODO desiderabile, non necessario
     position: relative;
     left: 0;
     transition: left 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+
+     */
+    transition: all 600ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+.tab-header a, .tab-header a:active {
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.tab-header a:hover {
+    background: #2196F3;
+    color: white;
+    border-bottom: 3px solid #2196F3;
+}
+
+.tab-header a.disabled, .tab-header a.disabled:hover {
+    color: inherit;
+    background: inherit;
+    border-bottom: 3px solid #2196F3;
+}
+
+/*TODO forse aggiungere un'iconcina nell'after quando selezionato - desiderabile non necessario*/
+
+
+/*
 .tab-header:hover {
     left: 5px;
     z-index: 2;
@@ -153,13 +174,7 @@ button:hover, .button:hover, a:hover {
             0 -1px 1px 0 rgba(0,0,0,.12);
 }
 
-.unselectable:hover {
-    left: 0;
-    box-shadow: none;
-    background: #2196F3;
-    color: white;
-    cursor: default;
-}
+ */
 
 /* #end tabs */
 
@@ -199,7 +214,6 @@ button:hover, .button:hover, a:hover {
     width: 100%;
     flex: 0  1  auto;
 
-    z-index: 1;
     padding: 1.5em;
     box-shadow:
             0 1px 1px 0 rgba(0,0,0,0.2),
@@ -210,9 +224,11 @@ button:hover, .button:hover, a:hover {
 }
 
 #search-form {
+    position: relative;
     display: flex;
     background: white;
     border-radius: 2em;
+    padding: 0.5em 1em;
     box-shadow:
             0 1px 1px 0 rgba(0,0,0,0.2),
                 /*basic*/
@@ -221,14 +237,8 @@ button:hover, .button:hover, a:hover {
     /*added*/
 }
 
-#search-form input {
-    flex: 1 1 auto;
-    margin: 0 1em;
-    font-size: 0.9em;
-}
-
 #search-form label {
-    padding: 0.5em;
+    font-size: 0.9em;
 }
 
 #search-button {
@@ -247,33 +257,24 @@ button:hover, .button:hover, a:hover {
     flex: 1 1 auto;
 }
 
+
+#feed {
+    margin: 0 2em;
+    background: white;
+    box-shadow:
+            0 3px 1px 0 rgba(0,0,0,.2),
+            0 2px 2px 0 rgba(0,0,0,.14),
+            0 1px 5px 0 rgba(0,0,0,.12);
+}
+
 #feed-header {
-    height: 40px;
-    width: 100%;
-    z-index: 0;
-    background: whitesmoke;
+    background: #D3EAFD;
 }
 
-#feed-tab {
-    padding-left: 1em;
-
-}
-
-.feed-tab-header {
-    border-radius: 0 0.4em 0 0;
-    margin-block-end: 0;
-    box-shadow: -1px 0 0 0 rgba(0,0,0,0.12),
-                1px 0 1px 0 rgba(0,0,0,0.2),
-                0 -1px 0 0 rgba(0,0,0,0.12);
-
-}
-
-.feed-tab-content {
-    margin-block-start: 0;
-    padding: 1em;
-    box-shadow: -1px 0 0 0 rgba(0,0,0,0.12),
-                1px 0 1px 0 rgba(0,0,0,0.2),
-                0 1px 1px 0 rgba(0,0,0,0.2);
+#feed-content {
+    display: flex;
+    flex-wrap: wrap;
+    background: white;
 
 }
 
@@ -298,17 +299,11 @@ button:hover, .button:hover, a:hover {
     padding: 0.5em;
 }
 
-#feed {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 /* #end content */
 
 /* #sitebar */
 #sitebar {
 
-    z-index: 1;
     display: flex;
     flex-direction: column;
     background-image: url('/res/Images/banner.jpg');
@@ -405,10 +400,12 @@ button:hover, .button:hover, a:hover {
 #breadcrumb {
     display: flex;
     align-items: stretch;
+    position: relative;
     z-index: 1;
     height: 40px; /*se cambia questa devono cambiare anche i sottostanti*/
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2),
                 0 2px 2px 1px rgba(0, 0, 0, 0.1);
+
 }
 
 #breadcrumb span {
@@ -472,3 +469,55 @@ a.breadcrumb-item:hover {
 }
 
 /* #end breadcrumb */
+/* #footer */
+#footer {
+    height: fit-content;
+    padding: 1em;
+    width: 100%;
+    bottom: 0;
+}
+
+/* #end footer */
+
+/* #login */
+
+#login-page {
+    width: 100%;
+    background-image: url("/res/Images/loginwallpaper.jpg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#login-form {
+    background: white;
+    color: black;
+    width: 20vw;
+    min-width: 300px;
+    height: fit-content;
+    min-height: 600px;
+    padding: 1em;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    align-items: stretch;
+}
+
+#login-form form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#login-form form input {
+    margin: 10px;
+    text-align: center;
+}
+
+#login-form img {
+    width: 75%;
+    align-self: center;
+}
+/* #end login*/

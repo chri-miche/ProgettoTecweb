@@ -5,6 +5,7 @@ require_once 'PostCard.php';
 class Feed extends Component {
 
     private $basePage;
+    private $criteria;
 
     // criteria can be popularity time controviersial
     public function __construct(string $criteria) {
@@ -33,9 +34,13 @@ class Feed extends Component {
         foreach ($results as $result) {
             $this->basePage->addComponent(new PostCard($result['contentID']));
         }
+
+        $this->criteria = $criteria;
     }
 
     public function build() {
-        return $this->basePage->build();
+        $HTML = $this->basePage->build();
+        $HTML = str_replace('href="Home.php?feed=' . $this->criteria . '"', 'class="disabled"', $HTML);
+        return $HTML;
     }
 }

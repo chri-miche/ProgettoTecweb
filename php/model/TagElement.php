@@ -32,7 +32,7 @@ class TagElement extends Element {
 
 
     //TODO : Redo. Add limits and offset.
-    static public function ordineTags(int $limit = -1, int $offset = -1){
+    static public function  ordineTags(int $limit = -1, int $offset = -1){
         try{
 
             $query = "  SELECT * FROM label AS L RIGHT JOIN(

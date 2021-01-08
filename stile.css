@@ -27,12 +27,12 @@ body {
     la font size non può essere questa perché sullo schermo del portatile diventa enorme*/
     font-size: 15px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     font-family: Verdana,sans-serif;
     line-height: 1.5;
     margin: 0;
     background: whitesmoke;
-
+    flex: 1 1 auto;
 }
 
 .accent-color {
@@ -83,6 +83,8 @@ button, .button, a {
             0 1px 5px 0 rgba(0,0,0,.12);
     cursor: pointer;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    width: fit-content;
 }
 
 button:active, .button:active, a:active, a:visited {
@@ -119,9 +121,17 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 }
 
 /* #typography */
+.title {
+    padding-left: 1em;
+}
+
 .subtitle {
     opacity: 0.8;
     font-size: 0.75em;
+}
+
+.text-truncate {
+    text-overflow: ellipsis;
 }
 
 /* #end typography */
@@ -252,13 +262,6 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 
 /* #begin content */
 #content {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-}
-
-
-#feed {
     margin: 0 2em;
     background: white;
     box-shadow:
@@ -278,18 +281,24 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 
 }
 
-.fixed-card {
-    width: 400px;
+.card {
+    min-width: 300px;
+    width: 20vw;
     border-radius: 0.4em;
     margin: 0.5em;
+    overflow: hidden;
     box-shadow:
             0 3px 1px 0 rgba(0,0,0,.2),
             0 2px 2px 0 rgba(0,0,0,.14),
             0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-.card-header {
+.card img {
+    width: 100%;
     border-radius: 0.4em 0.4em 0 0;
+}
+
+.card-header {
     padding: 0.5em;
 }
 

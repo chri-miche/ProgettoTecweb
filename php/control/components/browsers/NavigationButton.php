@@ -1,5 +1,6 @@
 <?php
 
+require_once __ROOT__.'\control\components\summaries\PageFiller.php';
 
 class NavigationButton extends PageFiller {
 

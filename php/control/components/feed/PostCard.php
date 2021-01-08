@@ -18,13 +18,6 @@ class PostCard extends PageFiller {
         $this->postElement->loadElement($postId);
     }
 
-    public function build() {
-        foreach ($this->resolveData() as $placeholder => $value) {
-            $this->HTML = str_replace($placeholder, $value, $this->HTML);
-        }
-        return $this->HTML;
-    }
-
     public function resolveData() {
         $ritorno = [];
 

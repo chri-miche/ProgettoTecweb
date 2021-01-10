@@ -319,14 +319,6 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     background-image: url('/res/Images/banner.jpg');
 }
 
-#banner {
-    height: 10vh;
-    background-image: url('/res/Images/banner.jpg');
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 #actions {
     padding-left: 1em;
     padding-right: 1em;
@@ -342,14 +334,11 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 .dropdown-content {
     position: absolute;
     opacity: 0;
+    top: 0;
     width: 100%;
 }
 
-.dropdown-content .button, .dropdown-content button {
-    border-radius: 0;
-}
-
-.dropdown-hover:hover .dropdown-content {
+.dropdown-hover:hover .dropdown-content, .dropdown-hover:active {
     background: white;
     display: flex;
     flex-direction: column;
@@ -362,14 +351,13 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     opacity: 1;
 }
 
-.dropdown-item {
-    padding: 8px;
-    display: block;
-    text-align: center;
-    border: none;
-    white-space: normal;
-    float: none;
-    outline: 0;
+.dropdown-content a {
+    position: relative;
+    transition: inherit;
+    border-radius: 0;
+    box-shadow: none;
+    width: auto;
+    margin: 0;
 }
 
 #logged-out-actions {
@@ -510,7 +498,6 @@ a.breadcrumb-item:hover {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
     text-align: center;
     align-items: stretch;
 }
@@ -529,5 +516,13 @@ a.breadcrumb-item:hover {
 #login-form img {
     width: 75%;
     align-self: center;
+}
+
+#login-page button {
+    align-self: center;
+}
+
+#login-form a {
+    display: inline;
 }
 /* #end login*/

@@ -472,7 +472,8 @@ a.breadcrumb-item:hover {
 /* #footer */
 #footer {
     height: fit-content;
-    padding: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
     width: 100%;
     bottom: 0;
 }

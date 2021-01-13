@@ -8,13 +8,16 @@
 
         <form action="Login.php" method="post" name="login">
 
+            <fieldset>
+                <legend> Credenziali   </legend>
+                <label for="username">Nome utente</label>
+                <input id="username" type="text" name="username" required="required" placeholder="Nome utente"/>
 
-            <label for="username">Nome utente</label>
-            <input id="username" type="text" name="username" required="required" placeholder="Nome utente"/>
+                <label for="password" xml:lang="en">Password</label>
+                <input id="password" type="password" name="password" required="required" xml:lang="en" placeholder="Password"/>
+                <!--TODO valutare bottone js mostra nascondi password-->
 
-            <label for="password" xml:lang="en">Password</label>
-            <input id="password" type="password" name="password" required="required" xml:lang="en" placeholder="Password"/>
-            <!--TODO valutare bottone js mostra nascondi password-->
+             </fieldset>
 
             <button name="submit" type="submit" xml:lang="en" >Log in</button>
 

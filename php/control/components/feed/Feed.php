@@ -17,13 +17,13 @@ class Feed extends Component {
         $orderby = 'order by ';
         switch ($criteria) {
             case 'popularity':
-                $orderby .= 'likes';
+                $orderby .= 'likes desc';
                 break;
             case 'time':
-                $orderby .= 'data';
+                $orderby .= 'data desc';
                 break;
             case 'controversial':
-                $orderby .= 'commenti';
+                $orderby .= 'commenti desc';
                 break;
             default:
                 $orderby = '';

@@ -51,6 +51,85 @@
                 return !(self::getSingleRecord($query) === null);
 
             } catch (Exception $e) { return null; }
+        }
 
+        static public function getOrdini(){
+
+            $query = "SELECT O.TagID as id, O.nomeScientifico as nome FROM ordine AS O;";
+            $data = Element::getMultipleRecords($query);
+
+            $constructedOrdini = [];
+            foreach ($data as $dat) $constructedOrdini [$dat['id']] = $dat['nome'];
+            return $constructedOrdini;
+        }
+
+        static  public function getFamigle(int $ordini = null){
+
+            $query = "SELECT F.TagID as  id, F.nomeScientifico  as nome  FROM famiglia as F";
+            $query .= isset($ordini) ? " WHERE $ordini = F.OrdID;" : ";";
+
+            $data = Element::getMultipleRecords($query);
+
+            $constructedFamilies = [];
+            foreach ($data as $dat) $constructedFamilies[$dat['id']] = $dat['nome'];
+            return $constructedFamilies;
+        }
+
+        static public function getGeneri(int $ordine = null, int $famiglia = null){
+
+            /** Se ho filtro su una famiglia allora guardo quello altrimenti
+                guardo l'ordine selezionato se neanche quello prendo tutto.*/
+            /* Trova tutti i generi.*/
+            $query = "SELECT G.tagID as id, G.nomeScientifico as nome FROM genere as G ";
+
+            /* Se è stata selezionata la famiglia.*/
+            if(isset($famiglia)) $query .= " WHERE $famiglia = G.famID";
+            else if(isset($ordine)) $query .= " INNER JOIN famiglia AS f on G.famID = f.TagID WHERE F.ordID = $ordine";
+
+            $data = Element::getMultipleRecords($query.";");
+
+            $constructedGeneri = [];
+            foreach ($data as $dat) $constructedGeneri[$dat['id']] = $dat['nome'];
+            return $constructedGeneri;
+
+        }
+
+        static public function getBirds(int $ordine = null, int $famiglia = null, int $genere = null){
+
+            $query = "SELECT S.tagID as id, S.nomeScientifico as nome, S.percorsoImmagine as image FROM specie AS S ";
+
+            if(isset($genere)) $query .= " WHERE S.genID = $genere ;";
+            else if(isset($famiglia))
+                $query .= "INNER JOIN genere G on S.genID = G.tagID 
+                INNER JOIN famiglia AS F ON F.tagID = G.famID 
+                WHERE G.famID = $famiglia;";
+            else if (isset($ordine))
+                $query .= "INNER JOIN genere G on S.genID = G.tagID 
+                INNER JOIN famiglia AS F ON F.tagID = G.famID 
+                INNER JOIN ordine o on F.OrdID = o.TagID 
+                WHERE O.TagID = $ordine";
+
+            return Element::getMultipleRecords($query);
+
+        }
+
+        static public function getFamiglia(int $id = null){
+
+            $query = "SELECT F.TagID as id, F.nomeScientifico as nome FROM famiglia as F WHERE F.TagID = $id LIMIT 1;";
+            $app = self::getSingleRecord($query);
+
+            $returnVal[$app['id']]= $app['nome'];
+            return $returnVal;
+        }
+
+        static public function getOrdine(int $id = null){
+
+            if(!isset($id)) return null;
+
+            $query = "SELECT O.TagID as id, O.nomeScientifico as nome FROM ordine AS o WHERE O.TagID =$id LIMIT 1;";
+            $app = self::getSingleRecord($query);
+
+            $returnVal[$app['id']]= $app['nome'];
+            return $returnVal;
         }
     }

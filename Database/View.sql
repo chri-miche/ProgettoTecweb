@@ -18,3 +18,13 @@ join contenuto
         data // data del contenuto
         commenti // numero di commenti (fatto con una select di un placeholder per speeeed)
 */
+
+CREATE VIEW bird_summary AS
+    SELECT  S.tagID, S.nomeScientifico, S.percorsoImmagine,
+            O.TagID as ordID, O.nomeScientifico as nomeOrdine,
+            F.TagID as famID, F.nomeScientifico as nomeFamiglia,
+            G.tagID as genID, G.nomeScientifico as nomeGenerea
+    FROM specie AS S
+        INNER JOIN genere AS G on S.genID = G.tagID
+        INNER JOIN famiglia AS F on G.famID = F.TagID
+        INNER JOIN ordine O on F.OrdID = O.TagID

@@ -54,6 +54,7 @@
 
             $resolveData['{navigation}'] = $browsingList;
 
+
             return $resolveData;
 
         }

@@ -1,0 +1,21 @@
+    <div class="" style=" margin-top: 3vh; width:100%; display: flex; justify-content: center; flex-wrap: wrap; align-self: center">
+
+        <!-- Qui va la navigation (form) -->
+        <form action="catalogo.php" method="get" style="width: 60%;">
+
+            <fieldset style="width: 100%;display: flex;">
+
+                {navigationSelection} <!-- Selezione del field e tutti quelli precedenti bloccati. (stile navbar?) -->
+                {dropdownSelection} <!-- Le possibili opzioni di dropdown. -->
+
+                <button type="submit"> Applica </button>
+
+            </fieldset>
+
+        </form>
+
+
+        <!-- Pagina di elementi -->
+        {contentsPage}
+
+    </div>

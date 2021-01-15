@@ -3,6 +3,7 @@
     require_once __ROOT__ . '\control\components\Component.php';
     require_once __ROOT__ . '\control\components\previews\Preview.php';
 
+    // TODO: Add container that has all elements.
     class BrowsePage extends  Component {
 
         /** List of all previews.*/
@@ -13,7 +14,7 @@
 
         public function __construct(array $ids, Preview $type, int $elementPerPage, int $page, string $reference, string $HTML = null) {
 
-           parent::__construct(isset($HTML) ? $HTML : 'Nothing to see here.');
+           parent::__construct(isset($HTML) ? $HTML : '<div style="display: flex; flex-wrap: wrap;  padding-left: 3em; padding-right: 3em;"> {posts} </div>');
 
             $this->elementsPerPage = $elementPerPage;
             $this->currentPage = $page;
@@ -31,13 +32,25 @@
 
         function build() {
 
-            $HTML = '';
-            if(!isset($this->previews))  return 'Non ci sono elmeenti da visualizzare';
+            $baseLayout = $this->baseLayout();
 
+            foreach ($this->resolveData() as $key => $value)
+                $baseLayout = str_replace($key, $value, $baseLayout);
+
+            return $baseLayout;
+
+        }
+
+        function resolveData(){
+
+            $resolvedData = [];
+
+            $previewHTMl = '';
             foreach ($this->previews as $preview)
-                $HTML .= $preview->build();
+                $previewHTMl .= $preview->build();
 
-            return $HTML;
+            $resolvedData['{posts}'] = $previewHTMl;
+            return$resolvedData;
 
         }
 

@@ -55,8 +55,8 @@
             if(sizeof($posts) > 0) {
 
                 $resolvedData['{right}'] .= (new BrowsePage($posts, new PostPreview(new PostElement()), 2, 0, 'PostPage.php'))->returnComponent();
-                $resolvedData['{right}'] .= '<a href="UserPosts.php?id='. $this->user->ID .'">
-                            <div class="primary-color" style=" margin: 1em 5em;text-align:center"> Vedi tutti i suoi post  </div> </a>';
+                $resolvedData['{right}'] .= '
+                            <div class="" style=" margin: 1em 5em;text-align:center"> <a href=""> Vedi tutti i post dell utente </a> </div> ';
 
             } else {
 

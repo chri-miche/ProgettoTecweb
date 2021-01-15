@@ -57,7 +57,7 @@
             $resolveData['{immagineProfilo}'] = $this->user->immagineProfilo;
 
             $resolveData['{tipologiaUtente}'] = $this->user->getModerator() ? $this->user->getAdmin() ?
-                '<div style="width: 100%; background-color: #034b72; padding: 1em"> Amministratore </div>' : 'Moderatore' : null; // TODO: Add style.
+                '<div style="width: 100%; background-color: #034b72; padding-top: 1em; padding-bottom: 1em"> <div style="margin-left: 1em"> Amministratore </div> </div>' : 'Moderatore' : null; // TODO: Add style.
 
             $list = '';
             /** List of followed tags.*/

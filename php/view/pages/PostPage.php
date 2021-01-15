@@ -2,7 +2,6 @@
 
     define('__ROOT__', dirname(dirname(dirname(__FILE__))));
 
-    // TODO: Make includes files for pages.
     require_once __ROOT__.'\control\BasePage.php';
     require_once __ROOT__ . '\control\components\SiteBar.php';
     require_once __ROOT__.'\control\components\SearchBar.php';
@@ -20,7 +19,7 @@
     $page->addComponent(new SearchBar());
     $page->addComponent(new BreadCrumb(array('Home', 'Post')));
 
-    $pid = isset($_GET['pid']) ? $_GET['pid'] : null;
+    $pid = isset($_GET['id']) ? $_GET['id'] : null;
     $page->addComponent(new Post($pid,$sessionUser));
 
     echo $page;

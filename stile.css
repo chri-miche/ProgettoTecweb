@@ -7,6 +7,7 @@ Il foglio di stile è strutturato come segue:
     - contesto search
     - contesto content
     - contesto sitebar
+    - contesto admin
 
 Box shadow:
     quelle che ho usato fin'ora seguono questo schema (fonte luce leggermente spostata verso alto a sinistra)
@@ -19,6 +20,10 @@ Box shadow:
     alcuni "speciali" hanno in aggiunta delle ombre più o meno traslate / sfocate
 
     altri usati sono quelli del material design
+*/
+
+/*
+TODO color rgba al posto di hex per fare opacity
 */
 
 body {
@@ -191,7 +196,6 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 
 /* #begin sidebar */
 #sidebar {
-    padding-right: 1.5em;
     box-shadow:
             1px 0 1px 0 rgba(0,0,0,0.2),
             0 1px 1px 0 rgba(0,0,0,0.2),
@@ -199,12 +203,14 @@ button.disabled:active, .button.disabled:active, a.disabled:active
             2px 0 2px 0 rgba(0,0,0,0.12),
             4px 0 5px 0 rgba(0,0,0,0.1);
             /*additionalz*/
-
-    height: 965px;
-
+    position: relative;
+    z-index: 2;
+    background: #D3EAFD;
 }
 
-#sidebar > ul {
+#sidebar {
+    margin-top: 0;
+    margin-bottom: 0;
     list-style: none;
 }
 
@@ -213,8 +219,21 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 }
 
 #sidebar li a {
-
+    background: #D3EAFD;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transition: background-color cubic-bezier(0.25, 0.8, 0.25, 1) 400ms;
 }
+
+#sidebar li a:hover {
+    background: #2196F3;
+}
+
+#sidebar li a.disabled {
+    border-left: 3px solid #2196F3;
+}
+
 
 /* #end sidebar */
 
@@ -255,7 +274,7 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 #search-button {
     border-radius: 2em;
     box-shadow: none;
-    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1);
     /* TODO tornare sul bottone di ricerca*/
 }
 
@@ -265,6 +284,7 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 #content {
     margin: 0 2em;
     background: white;
+    width: 100%;
     box-shadow:
             0 3px 1px 0 rgba(0,0,0,.2),
             0 2px 2px 0 rgba(0,0,0,.14),
@@ -526,3 +546,18 @@ a.breadcrumb-item:hover {
     display: inline;
 }
 /* #end login*/
+
+/* #admin */
+#admin-content {
+    display: flex;
+}
+
+#admin-content #content {
+    margin-left: 0;
+    padding-left: 2em;
+}
+
+#table-container {
+    width: 100%;
+}
+/* #end admin*/

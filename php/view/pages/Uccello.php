@@ -11,7 +11,6 @@
     require_once __ROOT__ . '\control\components\BreadCrumb.php';
 
     require_once __ROOT__ . '\control\components\previews\TagPreview.php';
-    require_once __ROOT__ . '\control\components\browsers\TagBrowser.php';
     require_once __ROOT__ . '\control\components\summaries\BirdSummary.php';
 
     require_once __ROOT__ . '\model\TagElement.php';

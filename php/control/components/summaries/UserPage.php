@@ -2,9 +2,9 @@
 
     require_once __ROOT__ .'\control\components\profile\UserSide.php';
     require_once __ROOT__ .'\control\components\profile\UserDetails.php';
-    require_once __ROOT__ .'\control\components\browsers\Browser.php';
+
     require_once __ROOT__ .'\control\components\previews\PostPreview.php';
-    require_once __ROOT__ .'\control\components\browsers\BrowsePage.php';
+
 
     require_once __ROOT__ .'\model\UserElement.php';
     require_once __ROOT__ .'\model\PostElement.php';
@@ -53,8 +53,8 @@
             $posts = PostElement::getUserPosts($this->user->ID, 2);
 
             if(sizeof($posts) > 0) {
-
-                $resolvedData['{right}'] .= (new BrowsePage($posts, new PostPreview(new PostElement()), 2, 0, 'PostPage.php'))->returnComponent();
+                // TODO: MAke with new browser.
+               // $resolvedData['{right}'] .= (new BrowsePage($posts, new PostPreview(new PostElement()), 2, 0, 'PostPage.php'))->returnComponent();
                 $resolvedData['{right}'] .= '
                             <div class="" style=" margin: 1em 5em;text-align:center"> <a href=""> Vedi tutti i post dell utente </a> </div> ';
 

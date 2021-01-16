@@ -17,7 +17,7 @@
     $page = new BasePage($basePage);
 
     /** Standard navigation for our page.*/
-    $page->addComponent(new SiteBar("famiglia"));
+    $page->addComponent(new SiteBar("catalogo"));
     $page->addComponent(new BreadCrumb(array('Catalogo'=> '')));
 
 
@@ -61,7 +61,7 @@
     /** Creazione degli ucccelli. Potremmo mettere limite con $page e element per page. */
     $birds = BirdElement::getBirds( $ordineEnabled ? $ordineValue : null,
         $famigliaEnabled ? $famigliaValue : null, $genereEnabled? $genereValue : null);
-    
+
 
     $page->addComponent(new
             Catalogo($birds, 'catalogo.php',$_GET['page'] ??    0, 20,

@@ -9,21 +9,22 @@
         private $currentPage;
         private $numberPages;
 
-        private $itemReference;
         private $nextPageReference;
 
-        public function __construct(array $elements, Preview $type, string $nextPageReference, string $reference, int $currentPage = 0,
+        public function __construct(array $elements, string $nextPageReference, int $currentPage = 0,
                                     int $elementsPerPage = 10, string $HTML = null, string $browsePageHTML = null){
 
             parent::__construct(isset($HTML)? $HTML : file_get_contents(__ROOT__.'\view\modules\browsing\Browser.xhtml'));
 
             $this->nextPageReference = $nextPageReference;
-            $this->itemReference = $reference;
 
             $this->currentPage = $currentPage;
             $this->numberPages = count($elements) / $elementsPerPage;
 
-            $this->pageComponent = new BrowsePage($elements, $type, $elementsPerPage, $currentPage, $reference, $browsePageHTML);
+            $newElementsList = array_slice($elements, $this->numberPages * $currentPage,
+                    $this->numberPages * $currentPage + $elementsPerPage);
+
+            $this->pageComponent = new PreviewsPage($newElementsList, $browsePageHTML);
 
         }
 
@@ -42,7 +43,7 @@
             $resolveData = [];
 
             /** Elements page.*/
-            $resolveData['{elements}'] = $this->pageComponent->build();
+            $resolveData['{elements}'] = $this->pageComponent->returnComponent();
 
             /** Page browsing */
             $browsingList = '';

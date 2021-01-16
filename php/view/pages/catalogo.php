@@ -8,9 +8,6 @@
     require_once __ROOT__ . '\control\components\SearchBar.php';
     require_once __ROOT__ . '\control\components\BreadCrumb.php';
 
-    require_once __ROOT__ . '\control\components\previews\TagPreview.php';
-    require_once __ROOT__ . '\control\components\browsers\Browser.php';
-
     require_once __ROOT__ . '\model\BirdElement.php';
 
     require_once __ROOT__ . '\control\components\catalogo\Catalogo.php';
@@ -31,9 +28,9 @@
     $genereEnabled = isset($_GET['genereEnabled']) && !isset($_GET['genereDisable']); /* What to add is known now.*/
 
     /* I valori delle selezioni se esistono */
-    $ordineValue = isset($_GET['ordineValue']) ? $_GET['ordineValue'] : null;
-    $famigliaValue = isset($_GET['famigliaValue']) ? $_GET['famigliaValue'] : null;
-    $genereValue = isset($_GET['genereValue']) ? $_GET['genereValue'] : null;
+    $ordineValue =  $_GET['ordineValue'] ?? null;
+    $famigliaValue = $_GET['famigliaValue'] ?? null;
+    $genereValue =  $_GET['genereValue'] ?? null;
 
 
     // Init delle liste.
@@ -61,14 +58,15 @@
     if($genereEnabled)
         $genereList = BirdElement::getGeneri($ordineValue, $famigliaValue);
 
-
-    $birds = BirdElement::getBirds($ordineEnabled? $ordineValue : null, $famigliaEnabled ? $famigliaValue : null,
-            $genereEnabled? $genereValue : null);
+    /** Creazione degli ucccelli. Potremmo mettere limite con $page e element per page. */
+    $birds = BirdElement::getBirds( $ordineEnabled ? $ordineValue : null,
+        $famigliaEnabled ? $famigliaValue : null, $genereEnabled? $genereValue : null);
 
     print_r($birds);
 
     $page->addComponent(new
-            Catalogo($birds, $ordineList, $famigliaList, $genereList, $ordineValue, $famigliaValue, $genereValue));
+            Catalogo($birds, 'catalogo.php',$_GET['page'] ??    0, 20,
+            $ordineList, $famigliaList, $genereList, $ordineValue, $famigliaValue, $genereValue));
 
     echo $page;
 

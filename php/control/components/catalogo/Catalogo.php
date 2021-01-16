@@ -1,6 +1,7 @@
 <?php
 
     require_once __ROOT__ . '\control\components\Component.php';
+    require_once __ROOT__ . '\control\components\catalogo\GenericBrowser.php';
 
     /** Il catalogo prende in input un array di uccelli già disposto e un array di
         ordini (id e nome) famiglia (id e nome) e di genere (id e nome).*/
@@ -17,8 +18,14 @@
         private $genereList;
         private $currentGenere;
 
-        /** in input l'array di tutte le selezioni + la stringa e id della selezione corrente.
+        private $birdBrowser;
+
+        /**
+         * Catalogo constructor.
          * @param array $birds
+         * @param string $selfReference
+         * @param int $page
+         * @param int $elemPerPage
          * @param array|null $ordini
          * @param array|null $famiglie
          * @param array|null $generi
@@ -27,13 +34,12 @@
          * @param int|null $generePosition
          * @param string|null $HTML
          */
-        public function __construct(array $birds, array $ordini = null, array $famiglie = null, array $generi = null,
-                                    int $ordinePosition = null, int $famigliaPosition = null, int $generePosition = null, string $HTML = null) {
+        public function __construct(array $birds,
+                                string $selfReference, int $page = 0, int $elemPerPage = 10,
+                                array $ordini = null, array $famiglie = null, array $generi = null,
+                                int $ordinePosition = null, int $famigliaPosition = null, int $generePosition = null, string $HTML = null) {
 
             parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\catalogo\Catalogo.xhtml'));
-
-            /** Copio gli uccelli per le preview.*/
-            foreach ($birds as $bird) $this->birds [] = $bird;
 
             $this->ordineList = $ordini;
             $this->currentOrdine = $ordinePosition;
@@ -44,6 +50,8 @@
             $this->genereList = $generi;
             $this->currentGenere = $generePosition;
 
+            $previewLayout = file_get_contents(__ROOT__.'\view\modules\catalogo\BirdCard.xhtml');
+            $this->birdBrowser = new GenericBrowser($birds, $previewLayout,  $selfReference, $page, $elemPerPage);
         }
 
         public function build(){
@@ -61,22 +69,10 @@
 
             $resolvedData = [];
 
-            /** Data to resolve: the selection tags and then the brids page.*/
             $resolvedData['{navigationSelection}'] = $this->resolveNavigation();
             $resolvedData['{dropdownSelection}'] = $this->resolveDropDown();
 
-            /// TOOD WIRTE BETTER
-            $resolvedData['{contentsPage}'] = '';
-            $app = file_get_contents(__ROOT__.'\view\modules\catalogo\BirdCard.xhtml');
-            foreach ($this->birds as $bird){
-
-                $builtBirdPreview = $app;
-                foreach ($bird as $key => $value) {
-                     $builtBirdPreview = str_replace('{' . $key . '}', $value, $builtBirdPreview);
-
-                }
-                $resolvedData['{contentsPage}'] .= $builtBirdPreview;
-            }
+            $resolvedData['{contentsPage}'] = $this->birdBrowser->returnComponent();
 
             return $resolvedData;
         }
@@ -89,20 +85,22 @@
                 $baseHTML .= '<button class="button" disabled="disabled">+</button>
                                 <div class="dropdown-content" style="width: 300px">';
                 $baseHTML .= '<button type="submit" value="true" name="genereEnabled"> Genere</button>';
+
                 if(!isset($this->famigliaList)) {
+
                     $baseHTML .= '<button type="submit" value="true" name="famigliaEnabled">  Famiglia</button>';
-                    if(!isset($this->ordineList)){
+
+                    if(!isset($this->ordineList))
                         $baseHTML .='<button type="submit" value="true" name="ordineEnabled"> Ordine</button>';
-                    } else {
-                        $baseHTML .= '<input  hidden="hidden" value="true" name="ordineEnabled"/>';
-                    }
-                } else {
+                     else $baseHTML .= '<input hidden="hidden" value="true" name="ordineEnabled"/>';
+
+                } else
                     $baseHTML .= '<input  hidden="hidden" value="true" name="famigliaEnabled"/>';
-                }
+
                 $baseHTML .= '</div>';
-            } else {
+
+            } else
                 $baseHTML .= '<input  hidden="hidden" value="true" name="genereEnabled"/>';
-            }
 
             return $baseHTML . '</div>';
 

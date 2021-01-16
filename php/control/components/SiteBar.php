@@ -62,7 +62,7 @@
                 $navigation = '<a href="Home.php" xml:lang="en"> Home </a>';
             }
             if (strcasecmp($this->position, "ordine") != 0) {
-                $navigation = '<a href="Ordine.php"> Catalogo </a>';
+                $navigation = '<a href="catalogo.php"> Catalogo </a>';
             }
             // da qui in poi .=
 

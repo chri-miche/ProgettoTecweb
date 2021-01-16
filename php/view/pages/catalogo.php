@@ -61,8 +61,7 @@
     /** Creazione degli ucccelli. Potremmo mettere limite con $page e element per page. */
     $birds = BirdElement::getBirds( $ordineEnabled ? $ordineValue : null,
         $famigliaEnabled ? $famigliaValue : null, $genereEnabled? $genereValue : null);
-
-    print_r($birds);
+    
 
     $page->addComponent(new
             Catalogo($birds, 'catalogo.php',$_GET['page'] ??    0, 20,

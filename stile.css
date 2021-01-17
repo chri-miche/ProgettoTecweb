@@ -32,7 +32,7 @@ body {
     la font size non può essere questa perché sullo schermo del portatile diventa enorme*/
     /* font-size: 15px; la font size non può essere definita in pixel */
     display: flex;
-    /* flex-direction: column; eliminato perché default */
+    flex-direction: column;
     font-family: Verdana,sans-serif;
     line-height: 1.5;
     margin: 0;
@@ -310,7 +310,7 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 
 }
 
-.fixed-card {
+.card {
 	min-width: 300px;
     width: 20vw;
     border-radius: 0.4em;

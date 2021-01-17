@@ -62,8 +62,8 @@
             if (strcasecmp($this->position, "home") != 0) {
                 $navigation = '<a href="Home.php" xml:lang="en"> Home </a>';
             }
-            if (strcasecmp($this->position, "ordine") != 0) {
-                $navigation .= (new NavigationButton('Catalogo', 'Ordine.php', false))->build();
+            if (strcasecmp($this->position, "catalogo") != 0) {
+                $navigation .= (new NavigationButton('Catalogo', 'Catalogo.php', false))->build();
             }
             // da qui in poi .=
 

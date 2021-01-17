@@ -6,13 +6,21 @@
 
         abstract public function resolveData();
 
-        public function build() {
-            // Get parent layout.
+        /*
+        In questa maniera, basterà semplicemente ridefinire il metodo resolveData nelle classi figlie
+        per ottenere la build già fatta
+        In caso servisse una buld diversa, si può comunque overridare la funzione build, chiamando poi
+        parent::build per l'applicazione dell'interpolazione
+
+        */
+        public function build()
+        {
+
+
             $HTML = $this->baseLayout();
-
-            foreach ($this->resolveData() as $placeholder => $value)
-                $HTML = str_replace($placeholder, $value, $HTML);
-
+            foreach ($this->resolveData() as $key => $value) {
+                $HTML = str_replace($key, $value, $HTML);
+            }
             return $HTML;
         }
 

@@ -28,7 +28,7 @@ class Feed extends Component {
             default:
                 $orderby = '';
         }
-        $results = DatabaseAccess::executeQuery($query . $orderby . ' limit 10;');
+        $results = DatabaseAccess::executeQuery($query . $orderby . ' desc limit 10;');
         $this->basePage = new BasePage($this->baseLayout());
 
         foreach ($results as $result) {

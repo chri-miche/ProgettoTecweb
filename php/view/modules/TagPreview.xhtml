@@ -1,22 +1,16 @@
 
 
-    <!-- Visualizzazione di un tag, preview nel catalogo. -->
-    <div class =  "w3-margin " style="width: 15%; height: fit-content;">
-        <a href="{reference}" >
-            <div class="w3-card-4 w3-hover-opacity">
+<!-- Visualizzazione di un tag, preview nel catalogo. -->
+<div class="card">
 
-                <img src="../../../res/Images/fenicottero.jpg" style=" width: 100%; object-fit: contain" />
-
-                <header class="w3-container w3-blue">
-
-                    <h3 class="w3-opacity"> {nome} </h3>
-
-                </header>
-
-                <div class="w3-container w3-light-blue ">
-                    <h5 class=""> {text} </h5>
-                </div>
-
-            </div>
-        </a>
-    </div>
+    <img src="../../../res/Images/fenicottero.jpg" alt="" />
+    <dt class="card-header primary-color">
+        <h3>{nome}</h3>
+    </dt>
+    <dd class="card-content">
+        <span class="text-truncate">
+            {text}
+        </span>
+        <a href="{reference}">Leggi altro</a>
+    </dd>
+</div>

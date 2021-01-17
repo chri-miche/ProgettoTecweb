@@ -9,8 +9,6 @@
         /** Array associativo dei campi.*/
         private $birdFields;
 
-        private $HTML;
-
         private $ordineReference;
         private $famigliaReference;
         private $genereReference;
@@ -18,7 +16,7 @@
         public function __construct($id, string $HTML = null, string $specieReference = '#', string $genereReference = 'Specie.php?id=',
                                     string $famigliaReference = 'Genere.php?id=' , string $ordineReference = 'Famiglia.php?id='){
 
-            $this->HTML = file_get_contents(__ROOT__.'\view\modules\BirdSummary.xhtml');
+            parent::__construct(file_get_contents(__ROOT__.'\view\modules\BirdSummary.xhtml'));
             $this->bird = new BirdElement($id);
 
             /** Non ricordo le chiavi dell'array*/
@@ -41,12 +39,12 @@
             if(!($this->bird->exists()))  return 'Bird does not exist in our database'; // TODO: Make error page?
 
             /** Swap variables in fields.*/
-            foreach ($this->resolveData() as $key => $value)
-                $this->HTML = str_replace($key, $value, $this->HTML);
+
+            $HTML = parent::build();
 
             /** TODO: Create table for the residence.*/
 
-            return $this->HTML;
+            return $HTML;
 
         }
 

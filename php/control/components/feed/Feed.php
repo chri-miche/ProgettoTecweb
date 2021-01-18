@@ -17,18 +17,18 @@ class Feed extends Component {
         $orderby = 'order by ';
         switch ($criteria) {
             case 'popularity':
-                $orderby .= 'likes desc';
+                $orderby .= 'likes';
                 break;
             case 'time':
-                $orderby .= 'data desc';
+                $orderby .= 'data';
                 break;
             case 'controversial':
-                $orderby .= 'commenti desc';
+                $orderby .= 'commenti';
                 break;
             default:
                 $orderby = '';
         }
-        $results = DatabaseAccess::executeQuery($query . $orderby . ' limit 10;');
+        $results = DatabaseAccess::executeQuery($query . $orderby . ' desc limit 10;');
         $this->basePage = new BasePage($this->baseLayout());
 
         foreach ($results as $result) {

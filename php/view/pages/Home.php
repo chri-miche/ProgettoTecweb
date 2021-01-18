@@ -17,7 +17,7 @@
 
     $page->addComponent(new SiteBar("home"));
 
-    if(!$page->addComponent(new SearchBar())) echo 'Oops something went wrong';
+    // if(!$page->addComponent(new SearchBar())) echo 'Oops something went wrong';
     $page->addComponent(new BreadCrumb(array()));
 
     $feed = $_GET['feed'] ?? 'popularity';

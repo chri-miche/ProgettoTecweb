@@ -2,6 +2,7 @@
 
     require_once __ROOT__.'\control\components\Component.php';
     require_once __ROOT__.'\control\SessionUser.php';
+    require_once __ROOT__.'\control\components\browsers\NavigationButton.php';
 
     class SiteBar extends Component {
 
@@ -62,7 +63,7 @@
                 $navigation = '<a href="Home.php" xml:lang="en"> Home </a>';
             }
             if (strcasecmp($this->position, "catalogo") != 0) {
-                $navigation = '<a href="catalogo.php"> Catalogo </a>';
+                $navigation .= (new NavigationButton('Catalogo', 'Catalogo.php', false))->build();
             }
             // da qui in poi .=
 

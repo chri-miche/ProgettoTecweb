@@ -80,7 +80,7 @@
 
             $connection = self::openConnection();
             mysqli_query($connection, $query);
-            echo 'here';
+            // echo 'here';
             self::closeConnection($connection);
 
         }

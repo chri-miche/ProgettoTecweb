@@ -2,6 +2,9 @@
     require_once __ROOT__ . '\control\components\Component.php';
     require_once __ROOT__ . '\control\components\catalogo\PreviewsPage.php';
 
+
+    // TODO : Move in browser.
+
     class GenericBrowser extends Component {
 
     private $previewPage;

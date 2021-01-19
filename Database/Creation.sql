@@ -57,7 +57,7 @@
         UserID int UNSIGNED NOT NULL PRIMARY KEY,
         isAdmin BOOLEAN NOT NULL,
 
-        FOREIGN KEY (UserID) REFERENCES Utente(ID)
+        FOREIGN KEY (UserID) REFERENCES Utente(ID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
 
@@ -301,7 +301,7 @@
 
         CONSTRAint citazioneID PRIMARY KEY (tagID,postID),
 
-        FOREIGN KEY (tagID) REFERENCES Tag(ID),
+        FOREIGN KEY (tagID) REFERENCES Tag(ID) ON DELETE CASCADE,
         FOREIGN KEY (postID) REFERENCES Post(contentID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;

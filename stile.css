@@ -26,6 +26,12 @@ Box shadow:
 TODO color rgba al posto di hex per fare opacity
 */
 
+@media all and (max-height: 1080px) {
+    body{
+        height: 900px;
+    }
+}
+
 body {
     /*
     font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
@@ -499,7 +505,9 @@ a.breadcrumb-item:hover {
 /* #footer */
 #footer {
     height: fit-content;
-    padding: 1em;
+    position: fixed;
+    padding-top: 1em;
+    padding-bottom: 0.5em;
     width: 100%;
     bottom: 0;
 }

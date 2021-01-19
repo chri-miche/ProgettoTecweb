@@ -1,35 +1,19 @@
 <?php
 
-    /*interface Component {
-
-        const INNER_TAG = '<loggedActions />';
-
-        function build();
-
-        // TODO: Consider.
-        // Array of parameters that create a  new istance of the component?.
-        //function update($params);
-
-        /*function print(); -> If the component was already built you return the built value, else returns the build process.
-         * */
-    /*}*/
-
     abstract class Component {
 
-        private $HTML;
+        /** @var string : Layout HTML della pagina pronta alla sostituzione dei dati. */
+        private $HTML; // Can be empty.
+        /** @var string: Layout HTML della pagina costruita con le sostituzioni.*/
+        private $builtHTML; // Anche questa può essere vuota.
+        /** @var boolean : Se la pagina corrente è in stato di costruito e quindi valida alla stampa.*/
+        private $built; //  = false on default.
 
-        private $builtHTML; private $built;
-
-
-
+        /** @param string $HTML : Layout di base della pagina.*/
         public function __construct(string $HTML){
-
-            $this->HTML = $HTML;
-            $this->built = false;
-
+            /* Setta il layout della pagina e imposta la mancata costruzione della pagina.*/
+            $this->HTML = $HTML; $this->built = false;
         }
-
-        abstract public function build();
 
         public function returnComponent(){
 
@@ -43,11 +27,26 @@
 
         }
 
-        // TODO: Set modified (so that build can be false).
 
         public function notBuilt(){ $this->built = false; }
 
         protected function baseLayout(){ return $this->HTML; }
+
+        /** Definizione di default di build: Risolve tutti i dati che deve risolvere
+            e stampa il layout di base della pagina caricato.*/
+        public function build(){
+
+            $buildLayout = $this->HTML; // Layout della pagina (caricato in costruzione). Può essere vuoto.
+
+            foreach ($this->resolveData() as $key => $value) /** Modifiche dei dati della pagina corrente.*/
+                $buildLayout = str_replace($key, $value, $buildLayout);
+
+            /* Pagina costruita ma non salvata nella classe.*/
+            return $buildLayout;
+        }
+
+        /** Ogni componente deve poter risolvere i dati? Possiamo fare di deafult vuoto?*/
+        public function resolveData(){ return array(); }
 
         public function __toString(){ return $this->returnComponent(); }
 

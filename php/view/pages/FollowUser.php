@@ -21,6 +21,6 @@
     }
 
     $previous = $_POST['previousPath'];
-    header('Location:' . $previous. '?id='. $newOldFriend);
+    header('Location:' . $previous. $newOldFriend);
 
 ?>

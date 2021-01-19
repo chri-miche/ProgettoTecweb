@@ -4,18 +4,23 @@ require_once __ROOT__ .'\control\components\profile\FollowButton.php';
 class UserDetails extends Component {
 
     private $user;
+
+    private $showButton;
     private $redirect;
+
 
     /** We get user id in input.
      * @param UserElement $user the selected page user.
      * @param string $redirect the page to which we redirect when we follow someone (could be self reference).
      * @param string|null $HTML the base layout of the component.
      */
-    public function __construct(UserElement $user, string $redirect, string $HTML = null){
+    public function __construct(UserElement $user, string $redirect, bool $action = true, string $HTML = null){
         parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\user\UserDetails.xhtml'));
 
         $this->user = clone $user;
-        $this->redirect = $redirect;
+
+        $this->showButton = $action;
+        if($this->showButton) $this->redirect = $redirect;
 
     }
 
@@ -37,8 +42,9 @@ class UserDetails extends Component {
         foreach ($this->user->getData() as $key => $value)
             if(!is_array($value)) $resolvedData['{'.$key.'}'] = $value;
 
-        // TODO: Add modify user button if you are the same as the one displayed.
-        $resolvedData['{loggedActions}'] = (new FollowButton($this->user->ID, $this->redirect))->returnComponent();
+        // TODO: Add modify user button if you are the same as the one displayed and if we need to do so.
+        $resolvedData['{loggedActions}'] = $this->showButton ?
+            (new FollowButton($this->user->ID, $this->redirect))->returnComponent() : '';
 
 
         return $resolvedData;

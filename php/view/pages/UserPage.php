@@ -21,7 +21,7 @@
 
     isset($_GET['id']) ? $id = $_GET['id'] : $id = 1;
 
-    $page->addComponent(new UserPage($id, 'UserPage.php'));
+    $page->addComponent(new UserPage($id, 'UserPage.php?usid='));
 
     echo $page;
 

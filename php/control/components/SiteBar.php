@@ -45,13 +45,8 @@
                 $contentHTML = str_replace("{username}", $username, $contentHTML);
                 $contentHTML = str_replace("{userid}", $userid, $contentHTML);
 
-                if($this->user->getUser()->getModerator()){
-
-                    if($this->user->getUser()->getAdmin()){
-
-
-                    }
-
+                if($this->user->getAdmin()) {
+                    $adminButton = new NavigationButton('Admin', 'Admin.php', false);
                 }
 
             }
@@ -65,7 +60,9 @@
             if (strcasecmp($this->position, "catalogo") != 0) {
                 $navigation .= (new NavigationButton('Catalogo', 'Catalogo.php', false))->build();
             }
-            // da qui in poi .=
+            if (strcasecmp($this->position, "admin") != 0 && isset($adminButton)) {
+                $navigation .= $adminButton->build();
+            }
 
             $baseLayout = str_replace('<navigation />', $navigation, $baseLayout);
             return $baseLayout;

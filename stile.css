@@ -34,7 +34,8 @@ body {
     /* font-size: 15px; la font size non può essere definita in pixel */
     display: flex;
     flex-direction: column;
-    font-family: Verdana,sans-serif;
+    align-items: stretch;
+    font-family: Verdana, sans-serif;
     line-height: 1.5;
     margin: 0;
     background: whitesmoke;
@@ -170,6 +171,10 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 
      */
     transition: all 600ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.fake-input {
+    display: none;
 }
 
 .tab-label a, .tab-label a:active {
@@ -501,9 +506,7 @@ a.breadcrumb-item:hover {
 #footer {
     height: fit-content;
     position: relative;
-    padding-top: 1em;
-    padding-bottom: 0.5em;
-    width: 100%;
+    padding: 1em;
     bottom: 0;
 }
 

@@ -28,7 +28,7 @@ class PostCard extends PageFiller {
                 if ($key === 'UserID') {
                     $author = new UserElement($value);
 
-                    $ritorno['{authorName}'] = $author->getData()['nome'];
+                    $ritorno['{nome}'] = $author->getData()['nome'];
                 }
                 $ritorno['{' . $key . '}'] = $value;
             }

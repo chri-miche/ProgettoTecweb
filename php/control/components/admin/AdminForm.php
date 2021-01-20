@@ -17,7 +17,8 @@ class AdminForm extends Component
         if (isset($defaultPersistent)) {
             $this->persistent = $defaultPersistent;
         } else {
-            $this->persistent = new Persistent($manage);
+            ($this->persistent = new Persistent($manage))->setDefaultValues();
+
             if (count($keys) > 0) {
                 foreach ($keys as $column => $value) {
                     $this->persistent->set($column, $value);

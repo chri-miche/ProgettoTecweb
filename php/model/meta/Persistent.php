@@ -140,7 +140,6 @@ class Persistent {
             }
         }
 
-        $sql = '';
         if ($option === "create") {
             $columns = '(';
             $values = '(';
@@ -199,6 +198,13 @@ class Persistent {
             $statement .= " $key = " . $quotes . ($value->value() ?? "NULL") .$quotes .  " and";
         }
         return preg_replace('/and$/', '', $statement);
+    }
+
+    public function setDefaultValues() {
+        // skippo le chiavi
+        foreach ($this->columns as $column) {
+            $column->setValue($column->defaultValue());
+        }
     }
 
 }

@@ -1,15 +1,21 @@
 <div id="content">
     <div id="tab-header">
         <a href="#tab-content" class="screen-reader-hint">Vai ai risultati della ricerca</a>
-        <span class="tab-label">
-            <a href="Search.php?search={keyword}&entity=post" xml:lang="en">Posts</a>
-        </span>
-        <span class="tab-label">
-            <a href="Search.php?search={keyword}&entity=specie">Specie</a>
-        </span>
-        <span class="tab-label">
-             <a href="Search.php?search={keyword}&entity=commento">Commenti</a>
-        </span>
+        <form class="tab-label" action="Search.php" method="post">
+            <input class="fake-input" name="search" value="{keyword}"/>
+            <input class="fake-input" name="entity" value="post"/>
+            <button type="submit" xml:lang="en">Posts</button>
+        </form>
+        <form class="tab-label" action="Search.php" method="post">
+            <input class="fake-input" name="search" value="{keyword}"/>
+            <input class="fake-input" name="entity" value="specie"/>
+            <button type="submit">Specie</button>
+        </form>
+        <form class="tab-label" action="Search.php" method="post">
+            <input class="fake-input" name="search" value="{keyword}"/>
+            <input class="fake-input" name="entity" value="commento"/>
+            <button type="submit">Commenti</button>
+        </form>
     </div>
     <div id="tab-content">
         <component />

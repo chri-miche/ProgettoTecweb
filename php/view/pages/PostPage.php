@@ -4,7 +4,6 @@
 
     require_once __ROOT__.'\control\BasePage.php';
     require_once __ROOT__ . '\control\components\SiteBar.php';
-    require_once __ROOT__.'\control\components\SearchBar.php';
     require_once __ROOT__.'\control\SessionUser.php ';
     require_once __ROOT__.'\control\components\Post.php';
     require_once __ROOT__.'\control\components\BreadCrumb.php';

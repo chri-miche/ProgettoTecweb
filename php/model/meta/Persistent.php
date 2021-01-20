@@ -15,7 +15,7 @@ class Persistent {
 
     public function __construct(string $table, array $prototype = array())
     {
-        $this->table =  trim(htmlspecialchars($table));
+        $this->table = trim(htmlspecialchars($table));
 
         $this->loadMetadata();
 

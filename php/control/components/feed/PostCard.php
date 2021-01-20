@@ -23,7 +23,7 @@ class PostCard extends PageFiller {
 
         foreach ($this->postElement->getData() as $key => $value) {
             if ($key === "immagini") {
-                $ritorno['{linkImage}'] = $value[0] ?? null; // TODO caso in cui non ci sono immagini
+                $ritorno['{percorsoImmagine}'] = $value[0] ?? null; // TODO caso in cui non ci sono immagini
             } else {
                 if ($key === 'UserID') {
                     $author = new UserElement($value);

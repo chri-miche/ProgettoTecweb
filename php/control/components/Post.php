@@ -2,70 +2,83 @@
 
     require_once __ROOT__.'\model\PostElement.php';
     require_once __ROOT__.'\model\UserElement.php';
+    require_once __ROOT__.'\control\components\post\PostActions.php';
+    require_once __ROOT__.'\control\components\post\ImagesSlideshow.php';
+    require_once __ROOT__.'\control\components\post\Comments.php';
 
     //TODO: Remove globals inside of Post and other Components.
     // TODO: Move to be postSummary. And also create CommentSummary.
     class Post extends Component {
 
-        /** Current user.*/
+        /** @var $user SessionUser Current user */
         private $user;
+        private $postUser;
 
         private $post;
         private $creator;
 
-        /*** @param string|null $HTML */
-        public function __construct(int $pid = null, SessionUser &$user, string $HTML = null) {
+        private $interpol = null;
+
+        /***
+         * @param int $pid
+         * @param SessionUser $user
+         * @param string|null $HTML
+         */
+        public function __construct(int $pid, SessionUser &$user, string $HTML = null) {
+
+            $this->user = $user;
 
             parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\Post.xhtml'));
 
             if(isset($pid) && PostElement::checkID($pid)){
 
                 $this->post = new PostElement($pid);
-                $this->user = new UserElement($this->post->UserID);
+                $this->postUser = new UserElement($this->post->UserID);
 
             }
 
-            print_r($this->post);
-            print_r($this->user);
+            // print_r($this->post);
+            // print_r($this->postUser);
 
-            print_r(UserElement::getInterestsIds($this->user->ID));
+            // print_r(UserElement::getInterestsIds($this->postUser->ID));
 
         }
 
-        function build() {
-            /* Se il post è assegnato significa che esiste e abbiamo tutti i dati utili. */
-            if(isset($this->post)) {
-
-                return $this->baseLayout();
-
-                $ret = "<div class='w3-container' style='width: 70%'>";
-
-
-                $ret .= self::posterData($this->creator);
-
-                $ret .= $this->post->content;
-
-                $ret .= $this->post->getTitle();
-                $ret .= '<br></br>';
-
-                $postData = $this->post->getPictures();
-
-                foreach ($postData as $image)
-                    $ret .=  '<img src="'. $image .'" ></img>' ;
-
-
-                if ($this->user->userIdentified()) {
-                    /* He can comment. */
+        public function resolveData()
+        {
+            if (!isset($this->interpol)) {
+                $ref = $this->post->getData();
+                $this->interpol = array();
+                foreach ($ref as $key => $value) {
+                    $this->interpol['{' . $key . '}'] = $value;
                 }
-
-
-                return $ret.= "</div>";
-
-            } else {
-                /** Redirect to home like youtube does?*/
-                return '<div class="w3-container w3-red w3-margin w3-border" style="width: 60%"> Oops you have no post selected.</div>';
+                $this->interpol['{nome}'] = $this->postUser->getData()['nome'];
+                $this->interpol['{UserID}'] = $this->postUser->getData()['ID'];
             }
+            return $this->interpol;
         }
+
+        function build()
+        {
+            $html = parent::build();
+            $images = (new ImagesSlideshow($this->interpol['{contentID}']))->build();
+
+            $html = str_replace("<images />", $images, $html);
+
+            if ($this->user->userIdentified()) {
+                $postActions = (new PostActions($this->post, $this->user))->build();
+                $html = str_replace("<actions />", $postActions, $html);
+
+                $comments = (new Comments($this->post, $this->user))->build();
+                $html = str_replace("<comments />", $comments, $html);
+            } else {
+                $html = str_replace("<comments />", "<li>Per commentare bisogna aver effettuato l'accesso.</li>", $html);
+            }
+
+            return $html;
+        }
+
+
 
         /** Ausliari per dividere la costruzione di un post.*/
 

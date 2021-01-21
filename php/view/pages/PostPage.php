@@ -15,11 +15,13 @@
 
     $page->addComponent(new SiteBar("postpage"));
 
-    $page->addComponent(new SearchBar());
-    $page->addComponent(new BreadCrumb(array('Home', 'Post')));
+    $page->addComponent(new BreadCrumb(array('Post' => '')));
 
-    $pid = isset($_GET['id']) ? $_GET['id'] : null;
-    $page->addComponent(new Post($pid,$sessionUser));
+    if (isset($_GET['id']) ) {
+        $page->addComponent(new Post($_GET['id'],$sessionUser));
+    } else {
+        // TODO error
+    }
 
     echo $page;
 

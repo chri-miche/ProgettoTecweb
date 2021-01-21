@@ -38,8 +38,11 @@
 
             $buildLayout = $this->HTML; // Layout della pagina (caricato in costruzione). Può essere vuoto.
 
-            foreach ($this->resolveData() as $key => $value) /** Modifiche dei dati della pagina corrente.*/
-                $buildLayout = str_replace($key, $value, $buildLayout);
+            foreach ($this->resolveData() as $key => $value) /** Modifiche dei dati della pagina corrente.*/ {
+                if (!is_array($value)) {
+                    $buildLayout = str_replace($key, $value, $buildLayout);
+                }
+            }
 
             /* Pagina costruita ma non salvata nella classe.*/
             return $buildLayout;

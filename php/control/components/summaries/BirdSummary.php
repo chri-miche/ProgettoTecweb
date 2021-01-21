@@ -20,7 +20,7 @@
             $this->bird = new BirdElement($id);
 
             /** Non ricordo le chiavi dell'array*/
-            print_r($this->bird);
+            // print_r($this->bird);
 
             /** References to the pages to browse the catalogue.*/
             $this->ordineReference = $ordineReference;

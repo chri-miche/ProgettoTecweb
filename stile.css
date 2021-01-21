@@ -461,11 +461,21 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 a.breadcrumb-item {
     box-shadow: none;
     border-radius: 0;
+    margin: 0;
 }
 
 a.breadcrumb-item:hover {
     box-shadow: none;
     border-radius: 0;
+}
+
+a.breadcrumb-item:visited {
+    background: initial;
+    color: inherit;
+}
+
+a.breadcrumb-item:visited:hover {
+    color: initial;
 }
 
 .breadcrumb-item:after, #home-crumb:after {

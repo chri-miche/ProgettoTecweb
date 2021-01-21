@@ -127,6 +127,7 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 
 .screen-reader-hint {
     visibility: hidden;
+    position: absolute;
 }
 
 /* #typography */
@@ -177,18 +178,18 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     display: none;
 }
 
-.tab-label a, .tab-label a:active {
+.tab-label a, .tab-label a:active, .tab-label button[type=submit], .tab-label button[type=submit]:active {
     border-radius: 0;
     box-shadow: none;
 }
 
-.tab-label a:hover {
+.tab-label a:hover, .tab-label button[type=submit]:hover {
     background: #2196F3;
     color: white;
     border-bottom: 3px solid #2196F3;
 }
 
-.tab-label a.disabled, .tab-label a.disabled:hover {
+.tab-label a.disabled, .tab-label a.disabled:hover, .tab-label button[type=submit].disabled, .tab-label button[type=submit].disabled:hover {
     color: inherit;
     background: inherit;
     border-bottom: 3px solid #2196F3;

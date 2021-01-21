@@ -25,7 +25,7 @@ class SearchTab extends BasePage
             case "post":
             default:
                 $layout = file_get_contents(__ROOT__."/view/modules/feed/PostCard.xhtml");
-                $query = "select * from post p left join contenuto c on p.contentID = c.ID left join immaginipost i on i.postID = p.contentID join utente u on u.ID = c.UserID where p.title like '%". $this->keyword ."%' or c.content like '%". $this->keyword ."%';";
+                $query = "select * from post p left join contenuto c on p.contentID = c.ID left join immaginipost i on i.postID = p.contentID join utente u on u.ID = c.UserID where p.title like '%". $this->keyword ."%' or c.content like '%". $this->keyword ."%' group by p.contentID ;";
         }
 
         $results = DatabaseAccess::executeQuery($query);

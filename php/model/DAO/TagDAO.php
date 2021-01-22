@@ -9,7 +9,7 @@ class TagDAO extends DAO
     public function get($id) {
 
         $result = $this->performCall(array($id), 'get_tag');
-        return isset($result['success']) && !$result['success'] ? new UserVO() : new UserVO(...$result);
+        return isset($result['failure']) ? new UserVO() : new UserVO(...$result);
 
     }
 

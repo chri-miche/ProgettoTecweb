@@ -132,7 +132,6 @@ class PostDAO extends DAO {
 
             $result = $this->performCall($element->smartDump(true), 'create_post');
 
-
             if(!isset($result['failure']))
                 $element = new $element( ...$result, ...$element->varDumps(true));
 

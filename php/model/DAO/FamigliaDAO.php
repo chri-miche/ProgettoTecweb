@@ -64,7 +64,7 @@
                 /** Se esiste l id della famiglia, quella va semplicemente aggiornata.*/
                 if ($this->checkId($element)) {
 
-                    $result = $this->performCall($element->smartDump(), 'update_famiglia');
+                    $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_famiglia');
                     return isset($result['failure']);
 
                 } else {

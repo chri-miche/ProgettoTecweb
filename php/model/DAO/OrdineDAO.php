@@ -7,7 +7,7 @@
         public function get($id) {
 
             $result = $this->performCall(array($id),'get_ordine');
-            return isset($result['success']) && !$result['success'] ? new OrdineVO() : new OrdineVO(...$result);
+            return isset($result['failure']) ? new OrdineVO() : new OrdineVO(...$result);
 
         }
 
@@ -17,11 +17,10 @@
             $VOArray = array();
 
             $result = $this->performMultiCAll(array(), 'get_all_ordini');
-            if( isset($result['success']) && !$result['success']) return $VOArray;
+            if( isset($result['failure'])) return $VOArray;
 
 
-            foreach ($result as $element)
-                $VOArray [] = new OrdineVO(...$element);
+            foreach ($result as $element)  $VOArray [] = new OrdineVO(...$element);
 
             return $VOArray;
 
@@ -37,8 +36,8 @@
 
             if($this->checkId($element)){
 
-                $result = $this->performCall($element->smartDump(),'update_ordine');
-                return isset($result['success']) && $result['success'];
+                $result = $this->performNoOutputModifyCall($element->smartDump(),'update_ordine');
+                return isset($result['failure']);
 
             } else {
 

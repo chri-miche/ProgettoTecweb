@@ -72,15 +72,12 @@
                 /** Se esiste l id della famiglia, quella va semplicemente aggiornata.*/
                 if ($this->checkId($element)) {
 
-                    $data = $element->smartDump();
-
-                    $result = $this->performCall($data, 'update_specie');
+                    $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_specie');
                     return isset($result['failure']);
 
                 } else {
 
-                    $data = $element->smartDump(true);
-                    $result = $this->performCall($data, 'create_specie');
+                    $result = $this->performCall($element->smartDump(true), 'create_specie');
 
                     if(!isset($result['failure']))
                         $element = new $element(... $result, ...$element->varDumps(true));

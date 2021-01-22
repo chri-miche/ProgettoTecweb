@@ -84,7 +84,7 @@ class CommentoDAO extends DAO {
             /** Se esiste l id del oggetto corrente, quello va semplicemente aggiornata.*/
             if ($this->checkId($element)) {
 
-                $result = $this->performCall($element->smartDump(), 'update_commento');
+                $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_commento');
                 return isset($result['failure']);
 
             } else {

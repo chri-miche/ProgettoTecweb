@@ -45,12 +45,13 @@
             if($this->valid($element)) {
 
                 if($this->checkId($element)){
-                    $result = $this->performCall($element->smartDump(true), 'create_user');
+
+                    $result = $this->performNoOutputModifyCall($element->smartDump(true), 'update_user');
                     return !isset($result['failure']);
 
                 } else {
 
-                    $result = $this->performCall($element->smartDump(true), 'update_user');
+                    $result = $this->performCall($element->smartDump(true), 'create_user');
 
                     if(!isset($result['failure'])) /* Se non è stato un fallimento.*/
                         $element = new $element(...$result, ...$element->varDumps(true));

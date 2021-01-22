@@ -1,10 +1,10 @@
 <li>
     <form method="post" action="PostPage.php?id={contentID}&comment=1">
         <fieldset>
-            <label for="commento">Scrivi un commento</label>
+            <legend>Scrivi un commento</legend>
             <!--TODO textarea vuota-->
-            <textarea id="commento" name="commento" maxlength="250"></textarea>
+            <textarea id="commento" name="commento" maxlength="250" aria-label="Scrivi un commento"></textarea>
+            <button type="submit">Pubblica</button>
         </fieldset>
-        <button type="submit">Pubblica</button>
     </form>
 </li>

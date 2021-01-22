@@ -1,12 +1,17 @@
 <div id="table-container">
-    <h1>{title}</h1>
-    <a class="icon-button" href="Admin.php?manage={table}&operation=update">Nuovo</a> <!-- TODO icon button -->
+    <h1>{title}<a class="icon-button" href="Admin.php?manage={table}&operation=update">Nuovo</a> <!-- TODO icon button -->
+    </h1>
+
     <!-- TODO accessibilità -->
-    <table>
-        <tr>
-            <!-- TODO accessibilità -->
-            <tableHeaders /><th>Modifica</th><th>Elimina</th>
-        </tr>
-        <tableRows />
+    <table cellspacing="0" summary="Questa tabella rappresenta il contenuto di {title}, per la modifica della banca dati.">
+        <thead class="primary-color">
+            <tr>
+                <!-- TODO accessibilità -->
+                <tableHeaders /><th class="action">Modifica</th><th class="action">Elimina</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tableRows />
+        </tbody>
     </table>
 </div>

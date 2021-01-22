@@ -47,9 +47,8 @@
 
                 if($this->user->getAdmin()) {
                     $adminButton = new NavigationButton('Admin', 'Admin.php');
+                    $contentHTML = str_replace('<admin />', $adminButton->build(), $contentHTML);
                 }
-
-                $newPostButton = new NavigationButton('Nuovo Post', 'NewPost.php');
 
             }
 
@@ -61,12 +60,6 @@
             }
             if (strcasecmp($this->position, "catalogo") != 0) {
                 $navigation .= (new NavigationButton('Catalogo', 'Catalogo.php'))->build();
-            }
-            if (strcasecmp($this->position, "admin") != 0 && isset($adminButton)) {
-                $navigation .= $adminButton->build();
-            }
-            if (strcasecmp($this->position, "newpost") != 0 && isset($newPostButton)) {
-                $navigation .= $newPostButton->build();
             }
 
             $baseLayout = str_replace('<navigation />', $navigation, $baseLayout);

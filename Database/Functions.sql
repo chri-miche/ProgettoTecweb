@@ -2,17 +2,22 @@
     /** PROCEDURE E FUNZIONI UTENTE:*/
     DROP PROCEDURE IF EXISTS get_user;
     CREATE PROCEDURE get_user(IN in_id int) BEGIN
-        SELECT U.id as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.admin
+        SELECT U.id as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.isAdmin as admin
         FROM utente U WHERE U.ID = in_id LIMIT 1; END;
 
     DROP PROCEDURE IF EXISTS get_all_users;
     CREATE PROCEDURE get_all_users() BEGIN
-      SELECT U.id as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.admin FROM utente U; END;
+      SELECT U.id as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.isAdmin as admin FROM utente U; END;
 
+    DROP PROCEDURE IF EXISTS get_user_from_login;
+    CREATE PROCEDURE get_user_from_login(IN in_email VARCHAR(40), IN in_password VARCHAR(14)) BEGIN
+        SELECT U.id as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.isAdmin as admin
+        FROM utente U WHERE U.email = in_email AND U.password = in_password;
+    END;
 
     DROP PROCEDURE IF EXISTS get_all_friends;
     CREATE PROCEDURE get_all_friends(IN id int) BEGIN
-       SELECT U.ID as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.admin
+       SELECT U.ID as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.isAdmin
        FROM utente U JOIN
            (  SELECT S.SeguaceID, S.SeguitoID FROM seguito S WHERE S.SeguaceID = id)
         S ON S.SeguitoID = U.ID; END;

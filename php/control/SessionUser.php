@@ -49,6 +49,14 @@
 
         }
 
+        public function setUserVO(UserVO $user){
+
+            $this->user = $user;
+            $_SESSION['User'] = serialize($this->user);
+
+
+        }
+
         public function updateUser(){
 
             $this->setUser($this->user->getId());

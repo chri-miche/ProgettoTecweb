@@ -23,6 +23,13 @@
             return $VOArray;
 
         }
+        public function getFromLogin(string $email, string $password) : UserVO{
+
+            $result = $this->performCall(array($email, $password), 'get_user_from_login');
+            return isset($result['failure'])?  new UserVO() : new UserVO(...$result);
+
+        }
+
 
         private function valid(UserVO $element){
 
@@ -86,6 +93,7 @@
             return $userVOArray;
 
         }
+
         /**@param UserVO $element */
         public function checkId(VO &$element) : bool {
             return $this->idValid($element, 'user_id');

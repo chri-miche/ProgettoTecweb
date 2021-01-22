@@ -13,13 +13,17 @@ class Column
 
     private $value;
 
+    private $default;
+
     private $error;
 
     public function __construct($rawColumn)
     {
         $this->rawColumn = $rawColumn;
-        $this->value = $rawColumn['COLUMN_DEFAULT']; // che può anche esser null
+        $this->value = null;
         if ($this->value === 'NULL') $this->value = null;
+        $this->default = $rawColumn['COLUMN_DEFAULT']; // che può anche esser null
+        if ($this->default === 'NULL') $this->value = null;
         $this->columnDescription = $this->rawColumn['COLUMN_COMMENT'];
     }
 
@@ -37,6 +41,10 @@ class Column
                 case 'tinyint':
                     $this->columnType = 'number';
                     break;
+                case 'date':
+                    $this->columnType = 'date';
+                    break;
+                case 'text':
                 default:
                     $this->columnType = 'text';
             }
@@ -48,9 +56,8 @@ class Column
         return $this->rawColumn['IS_NULLABLE'] === 'NO';
     }
 
-
     public function setValue($newval) {
-        if (!empty($newval)) {
+        if (isset($newval)) {
             switch ($this->columnType()) {
                 case 'number':
                     if (!is_numeric($newval)) {
@@ -66,11 +73,12 @@ class Column
                             $newval = floatval($newval);
                     }
                     break;
+                case 'date':
+                    break;
+                case 'text':
                 default:
                     $newval = addslashes($newval);
             }
-        } else {
-            $newval = null;
         }
         if (!isset($newval) && $this->required()) {
             $this->error = "Il campo è richiesto.";
@@ -83,6 +91,10 @@ class Column
 
     public function value() {
         return $this->value;
+    }
+
+    public function defaultValue() {
+        return $this->default;
     }
 
     public function columnName() {
@@ -98,6 +110,38 @@ class Column
             return $this->error;
         } else {
             return null;
+        }
+    }
+
+    public function tableName()
+    {
+        return $this->rawColumn['TABLE_NAME'];
+    }
+
+    public function getSqlValue() {
+        if ($this->value() === null) {
+            return 'NULL';
+        } else {
+            switch ($this->columnType()) {
+                case 'number':
+                    return $this->value();
+                default:
+                    return "'" . $this->value() . "'";
+            }
+        }
+    }
+
+    public function tryFixInsertValue() {
+        if (!isset($this->value)) {
+            switch ($this->columnType()) {
+                case 'number':
+                    // prob un id
+                    $result = DatabaseAccess::executeQuery("select max(" . $this->columnName() . ") as massimo from " . $this->tableName() . ";")[0]['massimo'];
+                    $this->setValue($result + 1);
+                    break;
+                default:
+                    // do nothing
+            }
         }
     }
 }

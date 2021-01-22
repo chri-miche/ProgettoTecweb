@@ -109,5 +109,20 @@
 
         }
 
+        /**
+         * @param $function
+         *  deve essere una funzione del tipo () -> bool
+         *      che ritorni true sse bisogna fare commit,
+         *      false altrimenti
+         */
+        static public function transaction($function) {
+            $connection = self::openConnection();
+            mysqli_query($connection, 'start transaction;');
+            $result = $function();
+            mysqli_query($connection, $result ? 'commit;' : 'rollback;');
+            self::closeConnection($connection);
+            return $result;
+        }
+
 
     }

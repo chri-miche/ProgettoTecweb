@@ -43,7 +43,7 @@
 
         public function build(){
 
-            $HTML = $this->baseLayout(); /* Last built is made by template.*/
+            $HTML = parent::build(); /* Last built is made by template.*/
 
             foreach ($this->components as $component){
 

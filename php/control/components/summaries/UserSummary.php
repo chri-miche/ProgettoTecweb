@@ -29,7 +29,7 @@
 
             /** Pagina dell'elemento.*/
             $this->user = new UserElement($id);
-            print_r($this->user);
+            // print_r($this->user);
 
             /** Utente attuale :*/
             $this->sessionUser = new SessionUser();

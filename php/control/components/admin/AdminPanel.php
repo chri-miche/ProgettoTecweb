@@ -9,9 +9,10 @@ class AdminPanel extends Component
 {
 
     private static $entities = array(
-        "zonageografica" => "Zona geografica",
-        "famiglia" => "Famiglia",
+        "famiglia" => "Famiglie",
         "tag" => "Tag",
+        "moderatore" => "Moderatori",
+        "utente" => "Utenti"
     );
 
     private $navigation;

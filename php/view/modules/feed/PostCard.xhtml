@@ -1,6 +1,6 @@
 <div class="card">
     <!-- fixed height card -->
-    <img src="{linkImage}" alt=""/>
+    <img src="{percorsoImmagine}" alt=""/>
     <!--
         a un cieco non importa sapere che cosa ci sia qui,
         e nemmeno agli algoritmi di ricerca
@@ -8,11 +8,11 @@
     <!-- prima cosa, immagine con altezza % (nostretch) -->
     <dt class="card-header primary-color">
         <h3>{title}</h3>
-        <span class="subtitle">Avvistamento di <a href="UserPage.php?id={UserID}">{authorName}</a></span>
+        <span class="subtitle">Avvistamento di <a href="UserPage.php?id={UserID}">{nome}</a></span>
     </dt>
     <dd class="card-content">
         <span class="text-truncate">{content}</span>
-        <a href="/Post.php?postId={ID}">Leggi altro</a>
+        <a href="PostPage.php?id={ID}">Leggi altro</a>
         <!-- link messo qui e non sopra sul titolo perché altrimenti può dare fastidio all'altro link
         (mai mettere due link troppo vicini) --> 
     </dd>

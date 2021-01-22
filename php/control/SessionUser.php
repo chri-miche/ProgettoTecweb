@@ -13,6 +13,9 @@
     class SessionUser {
 
         private $user;
+        private $moderator; // true false null
+        private $admin; // true false null
+
 
         public function __construct() {$this->currentSessionUser();}
 
@@ -45,6 +48,24 @@
             $this->user->loadElement($this->user->ID);
             $_SESSION['User'] = serialize($this->user);
 
+        }
+
+        public function getModerator() {
+            if (!isset($this->moderator)) {
+                $info = DatabaseAccess::executeSingleQuery("select isAdmin from moderatore where UserID = '". $this->user->ID ."';");
+                $this->moderator = sizeof($info ?? array()) > 0;
+                $this->admin = $this->moderator && $info[0] === '1';
+            }
+            return $this->moderator;
+        }
+
+        public function getAdmin() {
+            if (!isset($this->moderator)) {
+                $info = DatabaseAccess::executeSingleQuery("select isAdmin from moderatore where UserID = '". $this->user->ID ."';");
+                $this->moderator = sizeof($info ?? array()) > 0;
+                $this->admin = $this->moderator && $info["isAdmin"] === '1';
+            }
+            return $this->admin;
         }
 
     }

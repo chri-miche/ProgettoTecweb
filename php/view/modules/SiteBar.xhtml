@@ -19,16 +19,12 @@
 
         </div>
             <form id="search-form" action="Search.php" method="post" name="search">
-                <!-- TODO vedere se è controindicato-->
                 <div>
-                    <label for="search-input">Cerca</label>
-                    <input id="search-input" name="search" alt="Effettua una ricerca" />
+                    <input id="search-input" name="search" alt="Effettua una ricerca" aria-label="Cerca nel sito" />
                 </div>
-                <button id="search-button" type="submit" name="submit">
+                <button id="search-button" class="icon-button" type="submit" name="submit">
                     <!-- TODO icone -->
-                    <i class="fa fa-search">
-                        <span class="screen-reader-hint">Avvia ricerca</span>
-                    </i>
+                    Cerca
                 </button>
             </form>
         <div>

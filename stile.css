@@ -34,7 +34,8 @@ body {
     /* font-size: 15px; la font size non può essere definita in pixel */
     display: flex;
     flex-direction: column;
-    font-family: Verdana,sans-serif;
+    align-items: stretch;
+    font-family: Verdana, sans-serif;
     line-height: 1.5;
     margin: 0;
     background: whitesmoke;
@@ -125,7 +126,8 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 }
 
 .screen-reader-hint {
-    display: none;
+    visibility: hidden;
+    position: absolute;
 }
 
 /* #typography */
@@ -151,7 +153,17 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     align-items: center;
 }
 
-.tab-header {
+#tab-header {
+    background: #D3EAFD;
+}
+
+#tab-content {
+    display: flex;
+    flex-wrap: wrap;
+    background: white;
+}
+
+.tab-label {
     display: inline-flex;
     /* animazione difficile da rendere con discorso disabled e via dicendo TODO desiderabile, non necessario
     position: relative;
@@ -162,18 +174,22 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     transition: all 600ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.tab-header a, .tab-header a:active {
+.fake-input {
+    display: none;
+}
+
+.tab-label a, .tab-label a:active, .tab-label button[type=submit], .tab-label button[type=submit]:active {
     border-radius: 0;
     box-shadow: none;
 }
 
-.tab-header a:hover {
+.tab-label a:hover, .tab-label button[type=submit]:hover {
     background: #2196F3;
     color: white;
     border-bottom: 3px solid #2196F3;
 }
 
-.tab-header a.disabled, .tab-header a.disabled:hover {
+.tab-label a.disabled, .tab-label a.disabled:hover, .tab-label button[type=submit].disabled, .tab-label button[type=submit].disabled:hover {
     color: inherit;
     background: inherit;
     border-bottom: 3px solid #2196F3;
@@ -299,17 +315,6 @@ button.disabled:active, .button.disabled:active, a.disabled:active
             0 3px 1px 0 rgba(0,0,0,.2),
             0 2px 2px 0 rgba(0,0,0,.14),
             0 1px 5px 0 rgba(0,0,0,.12);
-}
-
-#feed-header {
-    background: #D3EAFD;
-}
-
-#feed-content {
-    display: flex;
-    flex-wrap: wrap;
-    background: white;
-
 }
 
 .card {
@@ -457,11 +462,21 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 a.breadcrumb-item {
     box-shadow: none;
     border-radius: 0;
+    margin: 0;
 }
 
 a.breadcrumb-item:hover {
     box-shadow: none;
     border-radius: 0;
+}
+
+a.breadcrumb-item:visited {
+    background: initial;
+    color: inherit;
+}
+
+a.breadcrumb-item:visited:hover {
+    color: initial;
 }
 
 .breadcrumb-item:after, #home-crumb:after {
@@ -502,9 +517,7 @@ a.breadcrumb-item:hover {
 #footer {
     height: fit-content;
     position: relative;
-    padding-top: 1em;
-    padding-bottom: 0.5em;
-    width: 100%;
+    padding: 1em;
     bottom: 0;
 }
 

@@ -45,14 +45,11 @@
                 $contentHTML = str_replace("{username}", $username, $contentHTML);
                 $contentHTML = str_replace("{userid}", $userid, $contentHTML);
 
-                if($this->user->getUser()->getModerator()){
-
-                    if($this->user->getUser()->getAdmin()){
-
-
-                    }
-
+                if($this->user->getAdmin()) {
+                    $adminButton = new NavigationButton('Admin', 'Admin.php');
                 }
+
+                $newPostButton = new NavigationButton('Nuovo Post', 'NewPost.php');
 
             }
 
@@ -63,9 +60,14 @@
                 $navigation = '<a href="Home.php" xml:lang="en"> Home </a>';
             }
             if (strcasecmp($this->position, "catalogo") != 0) {
-                $navigation .= (new NavigationButton('Catalogo', 'Catalogo.php', false))->build();
+                $navigation .= (new NavigationButton('Catalogo', 'Catalogo.php'))->build();
             }
-            // da qui in poi .=
+            if (strcasecmp($this->position, "admin") != 0 && isset($adminButton)) {
+                $navigation .= $adminButton->build();
+            }
+            if (strcasecmp($this->position, "newpost") != 0 && isset($newPostButton)) {
+                $navigation .= $newPostButton->build();
+            }
 
             $baseLayout = str_replace('<navigation />', $navigation, $baseLayout);
             return $baseLayout;

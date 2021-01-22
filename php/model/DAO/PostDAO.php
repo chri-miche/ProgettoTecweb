@@ -68,49 +68,27 @@ class PostDAO extends DAO {
     private function getImmagini(int $postId) : array{
 
         $immagini = array();
-
         $result = $this->performMultiCAll(array($postId), 'get_images_of_post');
-        if(!isset($result['failure'])) foreach ($result as $element) $immagini [] = $element['immagine'];
+
+        if(!isset($result['failure']))
+            foreach ($result as $element)
+                $immagini [] = $element['immagine'];
 
         return $immagini;
     }
 
-    private function saveImmagini(array $immagini, int $postId) : bool {
+    private function saveImmagine(string $immagine, int $postId) : bool {
 
-        $result = true;
-
-        if(sizeof($immagini) > 0)
-            foreach ($immagini as $immagine) {
-                $passArray = array();
-                $passArray [] = $postId; $passArray [] = $immagine;
-
-                $innerResult = $this->performNoOutputModifyCall($passArray, 'add_missing_immagine');
-                $result &= !isset($innerResult['failure']);
-
-            }
-
-        return $result;
+        $result = $this->performNoOutputModifyCall(array($postId, $immagine), 'add_missing_immagine' );
+        return !isset($result['failure']);
 
     }
 
-    private function deleteImmagini(array $immagini, int $postId){
+    private function deleteImmagine(string $immagine, int $postId){
 
-        $result = true;
+        $result = $this->performNoOutputModifyCall(array($postId, $immagine), 'delete_immagine' );
+        return !isset($result['failure']);
 
-        $allImmagini = $this->getImmagini($postId);
-
-        $delete = array_diff($allImmagini, $immagini);
-        foreach ($delete as $immagine){
-
-            $passArray = array();
-            $passArray [] = $postId; $passArray [] = $immagine;
-
-            $innerResult = $this->performNoOutputModifyCall($passArray, 'delete_immagine');
-            $result &= !isset($innerResult['failure']);
-
-        }
-
-        return $result;
     }
 
     private function getTags(int $postId) : array{
@@ -129,7 +107,7 @@ class PostDAO extends DAO {
 
     private function saveTag(TagVO $tagVO, int $postId){
 
-        $result = $this->performCall(array($postId, $tagVO->getId()), 'save_post_tag' );
+        $result = $this->performNoOutputModifyCall(array($postId, $tagVO->getId()), 'save_post_tag' );
         return !isset($result['failure']);
 
     }
@@ -165,28 +143,33 @@ class PostDAO extends DAO {
             foreach ($add as $tag)
                 $this->saveTag($tag, $element->getId());
 
-            $success = $this->deleteImmagini($element->getImmagini(), $element->getId());
+            /** Sistemazione delle immagini. */
+            $delete = array_diff($this->getImmagini($element->getId()), $element->getImmagini());
+            $add = array_diff($element->getImmagini(), $this->getImmagini($element->getId()));
 
-            if(sizeof($element->getImmagini()) > 0) /* Potremmo salvare di nuovo le stesse?*/
-                $success &= $this->saveImmagini($element->getImmagini(), $element->getId());
+            foreach ($delete as $immagine)
+                $this->deleteImmagine($immagine, $element->getId());
+            foreach ($add as $immagine)
+                $this->saveImmagine($immagine, $element->getId());
 
-            return !isset($result['failure']) && $success;
+            return !isset($result['failure']);
 
         } else {
 
             $result = $this->performCall($element->smartDump(true), 'create_post');
 
-            $success = true;
             if(!isset($result['failure'])) {
 
                 $element = new $element(...$result, ...$element->varDumps(true));
+
                 foreach ($element->getArrayTagVO() as $tagVO)
                     $this->saveTag($tagVO, $element->getId());
-
-                $success = $this->saveImmagini($element->getImmagini(), $element->getId());
+                
+                foreach ($element->getImmagini() as $immagine)
+                    $this->saveImmagine($immagine, $element->getId());
             }
 
-            return !$element->id === null && $success;
+            return !$element->getId() === null;
 
         }
 

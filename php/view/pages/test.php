@@ -30,7 +30,7 @@ require_once __ROOT__.'\model\DAO\PostDAO.php';
 
     $postVO = $postDAO->get(3);
 
-    $postVO->setImmagini(array('immagineuno', 'uuu'));
+    $postVO->setImmagini(array('fsd', 'uuu'));
     $postVO->setUserId(3);
 
     echo $postDAO->save($postVO);

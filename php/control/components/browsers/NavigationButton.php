@@ -7,7 +7,7 @@ class NavigationButton extends PageFiller {
     private $data;
     private $disabled;
 
-    public function __construct($text, $link, $disabled) {
+    public function __construct($text, $link, $disabled = false) {
         parent::__construct(file_get_contents(__ROOT__.'\view\modules\browsing\NavigationButton.xhtml'));
 
         $this->data = array(

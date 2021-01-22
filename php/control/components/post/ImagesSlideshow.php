@@ -13,6 +13,9 @@ class ImagesSlideshow extends BasePage
         }, $result);
         $size = sizeof($links);
         $index = 0;
+        if ($size === 0) {
+            $this->addComponent(new class(file_get_contents(__ROOT__ . '/view/modules/post/NoImage.xhtml')) extends Component {});
+        }
         foreach ($links as $link) {
 
             $this->addComponent(new class(file_get_contents(__ROOT__ . '/view/modules/post/Image.xhtml'), $link, $index, $size) extends Component {

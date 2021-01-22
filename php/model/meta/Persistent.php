@@ -16,6 +16,8 @@ class Persistent {
     public function __construct(string $table, array $prototype = array())
     {
         $this->table = trim(htmlspecialchars($table));
+        $this->keys = array();
+        $this->columns = array();
 
         $this->loadMetadata();
 
@@ -73,6 +75,16 @@ class Persistent {
         return $reason;
     }
 
+    public function get($key) {
+        if (isset($this->keys[$key])) {
+            return $this->keys[$key]->value();
+        }
+        if (isset($this->columns[$key])) {
+            return $this->columns[$key]->value();
+        }
+        return null;
+    }
+
     public function keyfields() {
         return $this->keys;
     }
@@ -98,7 +110,6 @@ class Persistent {
         }
 
         $query .= " true ;";
-
         return
             array_map(
                 function ($obj) {
@@ -128,13 +139,17 @@ class Persistent {
     public function commitFromProto($option = "create") {
 
         foreach ($this->keys as $name => $column) {
-
+            if ($option === 'create') {
+                // se si sta facendo un update questi valori devono essere già giusti
+                $column->tryFixInsertValue();
+            }
             if ($column->hasError()) {
                 return false;
             }
         }
 
         foreach ($this->columns as $column) {
+            $column->tryFixInsertValue();
             if ($column->hasError()) {
                 return false;
             }
@@ -144,14 +159,12 @@ class Persistent {
             $columns = '(';
             $values = '(';
             foreach ($this->keys as $key => $value) {
-                $quotes = $value->columnType() === "text"  && $value->value() !== null ? "'" : "";
                 $columns .= "$key,";
-                $values .= $quotes . ($value->value() ?? "NULL") . $quotes . ",";
+                $values .= $value->getSqlValue() . ",";
             }
             foreach ($this->columns as $key => $value) {
-                $quotes = $value->columnType() === "text"  && $value->value() !== null ? "'" : "";
                 $columns .= "$key,";
-                $values .= $quotes . ($value->value() ?? "NULL") . $quotes . ",";
+                $values .= $value->getSqlValue() . ",";
             }
             $columns = preg_replace('/,$/', ')', $columns);
             $values = preg_replace('/,$/', ')', $values);
@@ -159,8 +172,7 @@ class Persistent {
         } else {
             $values = '';
             foreach ($this->columns as $key => $value) {
-                $quotes = $value->columnType() === "text"  && $value->value() !== null ? "'" : "";
-                $values .= "$key = " . $quotes . ($value->value() ?? "NULL") . $quotes . ",";
+                $values .= "$key = " . $value->getSqlValue() . ",";
             }
             $values = preg_replace('/,$/', '', $values);
 
@@ -168,6 +180,7 @@ class Persistent {
 
             $sql = "update $this->table set $values where $keys;";
         }
+
         try {
             DatabaseAccess::writeRecord($sql);
             return true;

@@ -15,12 +15,17 @@ class PostActions extends Component
 
 
 
-        $likes = DatabaseAccess::executeSingleQuery("select likes from approvazione where contentID = '" .
+        $liked = DatabaseAccess::executeSingleQuery("select likes from approvazione where contentID = '" .
             $post->getData()["contentID"] .
             "' and utenteID ='" .
             $utente->getUser()->getData()['ID'] .
-            "';")
-            ['likes'];
+            "';");
+
+        if (empty($liked)) {
+            $likes = "0";
+        } else {
+            $likes = $liked['likes'];
+        }
 
         if ($likes == "1") {
             $this->data['{likeAction}'] = 'liked';

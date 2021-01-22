@@ -6,18 +6,24 @@ class PostDAO extends DAO {
 
     /**
      * @inheritDoc */
+    private function buildPostVO(array $data) : PostVO {
+
+        $builtVO = new PostVO(...$data);
+
+        $builtVO->setImmagini($this->getImmagini($builtVO->getId()));
+        $builtVO->setArrayTagVO($this->getTags($builtVO->getId()));
+
+        return $builtVO;
+
+    }
+
     public function get($id){
 
         $result = $this->performCall(array($id), 'get_post');
 
         if(isset($result['failure']))  return new PostVO();
 
-        $return = new PostVO(...$result);
-
-        $return->setImmagini($this->getImmagini($id));
-        $return->setArrayTagVO($this->getTags($id));
-
-        return $return;
+        return $this->buildPostVO($result);
     }
 
     /**
@@ -26,19 +32,26 @@ class PostDAO extends DAO {
     public function getAll(){
 
         $VOArray = array();
-
         $result = $this->performMultiCAll(array(), 'get_all_post');
 
         if(!isset($result['failure']))
-            foreach ($result as $element){
+            foreach ($result as $element)
+                $VOArray [] = $this->buildPostVO($element);
 
-                $VOApp = new PostVO(...$element);
+        return $VOArray;
 
-                $VOApp->setImmagini($this->getImmagini($VOApp->getId()));
-                $VOApp->setArrayTagVO($this->getTags($VOApp->getId()));
+    }
 
-                $VOArray [] = $VOApp;
-            }
+    public function getMany(int $limit = 0, int $offset = 0){
+
+        if(!$limit > 0)  return $this->getAll();
+
+        $VOArray = array();
+        $result = $this->performMultiCAll(array($limit, $offset), 'get_many_post');
+
+        if(!isset($result['failure']))
+            foreach ($result as $element)
+                $VOArray [] = $this->buildPostVO($element);
 
         return $VOArray;
 
@@ -53,15 +66,10 @@ class PostDAO extends DAO {
             : $this->performMultiCAll(array($userId), 'get_of_utente_post_all');
 
         if(!isset($result['failure']))
-            foreach ($result as $element) {
+            foreach ($result as $element)
+                $VOArray [] = $this->buildPostVO($element);
 
-                $VOApp = new PostVO(...$element);
-                $VOApp->setImmagini($this->getImmagini($VOApp->getId()));
-
-                $VOArray [] = $VOApp;
-            }
-
-        return $VOArray;
+            return $VOArray;
 
     }
 
@@ -179,6 +187,6 @@ class PostDAO extends DAO {
      * @inheritDoc
      */
     public function delete(VO &$element) : bool {
-        return $this->defaultDelete($element, 'delete_post');
+        return $this->defaultDelete($element, 'delete_content');
     }
 }

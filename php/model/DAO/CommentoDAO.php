@@ -111,7 +111,7 @@ class CommentoDAO extends DAO {
     /**
      * @inheritDoc */
     public function delete(VO &$element) : bool {
-        return $this->defaultDelete($element, 'delete_commento');
+        return $this->defaultDelete($element, 'delete_content');
     }
 
 }

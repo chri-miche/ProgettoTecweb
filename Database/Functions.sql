@@ -243,6 +243,11 @@
         FROM post P INNER JOIN contenuto C ON C.ID = P.contentID;
     END;
 
+    DROP PROCEDURE IF EXISTS get_many_post;
+    CREATE PROCEDURE get_many_post(IN ilimit INT, IN offset INT) BEGIN
+        SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, P.title
+        FROM post P INNER JOIN contenuto C ON C.ID = P.contentID LIMIT offset, ilimit; END;
+
     DROP PROCEDURE IF EXISTS get_images_of_post;
     CREATE PROCEDURE get_images_of_post(IN id INT) BEGIN
         SELECT I.percorsoImmagine as immagine FROM immaginipost I WHERE I.postID = id; END;
@@ -353,3 +358,7 @@
 
         UPDATE contenuto SET UserID = in_user, isArchived = in_isArchived, content = in_content WHERE ID = in_id;
         UPDATE commento SET postID = in_post WHERE contentID = in_id; END;
+
+    DROP PROCEDURE IF EXISTS delete_content;
+    CREATE PROCEDURE delete_content(IN in_id INT) BEGIN
+        DELETE FROM contenuto WHERE ID = in_id; END;

@@ -164,7 +164,7 @@ class PostDAO extends DAO {
 
                 foreach ($element->getArrayTagVO() as $tagVO)
                     $this->saveTag($tagVO, $element->getId());
-                
+
                 foreach ($element->getImmagini() as $immagine)
                     $this->saveImmagine($immagine, $element->getId());
             }

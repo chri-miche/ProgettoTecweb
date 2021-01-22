@@ -33,12 +33,20 @@ class CommentoDAO extends DAO {
         if(!isset($result['failure']))
             foreach ($result as $element){
 
+                $postData = [];
 
-                $element['postVO'] = new PostVO(/**TODO: Mettere tutto.*/);
+                unset($element['post']);
 
-                unset($element['ordine'], $element['nomeScientifico_ordine']);
+                foreach ($element as $key=>$value)
+                    if(substr($key, 0, 2) === 'p_') {
 
+                        $postData[substr($key, 2)] = $value;
+                        unset($element[$key]);
+                    }
+
+                $element['postVO'] = new PostVO(...$postData);
                 // Creazione dell oggetto finale.
+                print_r($result);
                 $VOArray [] = new CommentoVO(...$element);
             }
 
@@ -58,7 +66,7 @@ class CommentoDAO extends DAO {
         $result = $this->performMultiCAll(array($postId), 'get_all_commento_from_post');
 
         if(!isset($result['failure'])) /** Evito più ritorni del dovuto. */
-            foreach ($result as $element) $VOArray [] = new CommentoVO(...$element, $parentVO);
+            foreach ($result as $element) $VOArray [] = new CommentoVO(...$element, ...$parentVO);
 
         return $VOArray;
 
@@ -90,7 +98,6 @@ class CommentoDAO extends DAO {
             } else {
 
                 $result = $this->performCall($element->smartDump(true), 'create_commento');
-
                 if(!isset($result['failure'])) $element = new $element(...$result, ...$element->varDumps(true));
                 /* Ritorna vero se è stato costruito l oggetto falso altrimenti.*/
                 return !$element->getId() === null;

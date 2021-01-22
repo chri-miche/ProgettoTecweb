@@ -310,3 +310,46 @@
     DROP PROCEDURE IF EXISTS delete_post_tag;
     CREATE PROCEDURE delete_post_tag(IN post_id INT, IN tag_id INT) BEGIN
         DELETE FROM citazione WHERE tagID = tag_id AND postID = post_id; END;
+
+
+    DROP PROCEDURE IF EXISTS get_commento;
+    CREATE PROCEDURE get_commento(IN in_id INT) BEGIN
+        SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, A.postID as post FROM contenuto C INNER JOIN
+        (SELECT C.contentID, C.postID FROM commento C WHERE C.contentID = in_id LIMIT 1) A ON A.contentID = C.ID;
+    END;
+
+    DROP PROCEDURE IF EXISTS get_all_commento_from_post;
+    CREATE PROCEDURE get_all_commento_from_post(IN post_id INT) BEGIN
+        SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, A.postID as post
+        FROM contenuto C INNER JOIN commento A ON  C.ID = A.contentID WHERE A.postID = post_id; END;
+
+    DROP PROCEDURE IF EXISTS get_all_commento;
+    CREATE PROCEDURE get_all_commento() BEGIN
+        SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, A.postID as post,
+
+               C2.ID as p_id, C2.UserID as p_userId, C.isArchived as p_isArchived,
+               C.content as p_content, C2.data as p_date, P.title as p_title
+
+        FROM contenuto C INNER JOIN commento A ON C.ID = A.contentID
+        INNER JOIN post P on A.postID = P.contentID INNER JOIN contenuto C2 ON C2.ID = P.contentID; END;
+
+
+    DROP PROCEDURE IF EXISTS check_commento_id;
+    CREATE PROCEDURE check_commento_id(IN in_id INT) BEGIN
+         SELECT COUNT(P.contentID) AS idexists FROM commento P WHERE P.contentID = in_id LIMIT 1; END;
+
+    DROP PROCEDURE IF EXISTS create_commento;
+    CREATE PROCEDURE create_commento(IN in_user INT, IN in_isArchived BOOL,
+    IN in_content TEXT, IN in_date VARCHAR(30), IN in_post INT) BEGIN
+        INSERT INTO contenuto(ID, UserID, isArchived, content, data) VALUES
+        (NULL, in_user, in_isArchived, in_content, NOW());
+
+        INSERT INTO commento (contentID, postID) VALUES (LAST_INSERT_ID(), in_post);
+        SELECT LAST_INSERT_ID() as id;END;
+
+    DROP PROCEDURE IF EXISTS update_commento;
+    CREATE PROCEDURE update_commento(IN in_id INT, IN in_user INT, IN in_isArchived BOOL,
+    IN in_content TEXT, IN in_date VARCHAR(30), IN in_post INT) BEGIN
+
+        UPDATE contenuto SET UserID = in_user, isArchived = in_isArchived, content = in_content WHERE ID = in_id;
+        UPDATE commento SET postID = in_post WHERE contentID = in_id; END;

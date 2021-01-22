@@ -10,6 +10,7 @@
     require_once __ROOT__.'\model\DAO\ConservazioneDAO.php';
 
 require_once __ROOT__.'\model\DAO\PostDAO.php';
+require_once __ROOT__.'\model\DAO\CommentoDAO.php';
 
 
     $cDAO = new ConservazioneDAO();
@@ -32,5 +33,17 @@ require_once __ROOT__.'\model\DAO\PostDAO.php';
 
     $postVO->setImmagini(array('fsd', 'uuu'));
     $postVO->setUserId(3);
+
+
+    $nDAO = new CommentoDAO();
+    print_r($nDAO->getAll());
+
+    $comment  = new CommentoVO(4, 4, false);
+    $comment->setPostVO($postVO);
+
+    print_r($comment);
+
+
+    $nDAO->save($comment);
 
     echo $postDAO->save($postVO);

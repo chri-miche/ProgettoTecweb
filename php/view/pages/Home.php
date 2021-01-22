@@ -5,10 +5,8 @@
     require_once __ROOT__.'\control\BasePage.php';
 
     require_once __ROOT__ . '\control\components\SiteBar.php';
-    require_once __ROOT__.'\control\components\Report.php';
     require_once __ROOT__.'\control\components\feed\Feed.php';
     require_once __ROOT__.'\control\components\BreadCrumb.php';
-    require_once __ROOT__.'\control\components\previews\PostPreview.php';
 
     $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
 

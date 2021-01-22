@@ -2,7 +2,7 @@
 
     /** Elemento contenuto del database. Non lo istanziamo perchè a noi importa la natura del dato.*/
     // TODO: Make it.
-    require_once __ROOT__.'\model\CommentElement.php';
+require_once __ROOT__.'\model\Element.php';
     abstract class ContentElement extends Element {
 
         protected function loadData() {

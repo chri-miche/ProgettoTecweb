@@ -1,5 +1,7 @@
 <?php
 
+    require_once __ROOT__ . '\model\VO\VO.php';
+    require_once __ROOT__ . '\model\VO\FamigliaVO.php';
 
     class GenereVO implements VO{
 

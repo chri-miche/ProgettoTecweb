@@ -1,10 +1,9 @@
 <?php
 
-    // Ci sto lavorando ma se vuoi farlo tu, sei libero di farlo.
+
     class BreadCrumb extends Component {
 
         private $previous;
-        private $HTML;
 
         /** Prende in input la pagina corrente e l'array di pagine precedenti.
          * crumb = array associativo Descrizione => Pagina.php
@@ -12,7 +11,7 @@
          * @param string|null $HTML  */
         public function __construct(array $crumb, string $HTML = null) {
 
-            parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\BreadCrumb.xhtml'));
+            parent::__construct( $HTML ?? file_get_contents(__ROOT__.'\view\modules\BreadCrumb.xhtml'));
             $this->previous = $crumb;
 
         }

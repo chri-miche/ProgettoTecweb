@@ -41,6 +41,24 @@
             return $VOArray;
         }
 
+        public function getAllFilterBy(?int $ordine = null) : array {
+
+            if(is_null($ordine))
+                return $this->getAll();
+
+            $VOArray = array();
+            $ordineVO = (new OrdineDAO())->get($ordine);
+
+            $result = $this->performMultiCAll(array($ordine), 'get_all_famiglia_filter_by_ordine');
+            if(isset($result['failure'])) return $VOArray;
+
+            foreach ($result as $element)
+                $VOArray [] = new FamigliaVO(...$element, ...[$ordineVO]);
+
+            return $VOArray;
+
+        }
+
         /** @param FamigliaVO $element */
         public function checkId(VO &$element) : bool {
             return $this->idValid($element, 'famiglia_id');

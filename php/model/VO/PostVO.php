@@ -1,5 +1,5 @@
 <?php
-
+    require_once __ROOT__ . '\model\VO\VO.php';
 
     class PostVO implements VO {
 
@@ -42,6 +42,14 @@
         }
 
         public function __get($name){ return $this->$name ?? null; }
+
+        public function arrayDump(){
+
+            $result = get_object_vars($this);
+            unset($result['arrayTagVO']);
+            return $result;
+
+        }
 
         public function varDumps(bool $id = false): array {
 

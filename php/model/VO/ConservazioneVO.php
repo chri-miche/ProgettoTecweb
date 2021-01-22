@@ -1,4 +1,5 @@
 <?php
+    require_once __ROOT__ . '\model\VO\VO.php';
 
     class ConservazioneVO implements VO {
 

@@ -1,38 +1,34 @@
 <?php
-require_once __ROOT__.'\control\components\summaries\PageFiller.php';
 
+    require_once __ROOT__.'\model\DAO\UserDAO.php';
+    require_once __ROOT__.'\model\DAO\PostDAO.php';
 
-class PostCard extends PageFiller {
+    class PostCard extends PageFiller {
 
-    private $HTML;
+        private $postVO;
 
-    private $postElement;
-
-    public function __construct($postId) {
-        // construct parent
-        parent::__construct(file_get_contents(__ROOT__.'\view\modules\feed\PostCard.xhtml'));
-        // get parent's layout
-        $this->HTML = $this->baseLayout();
-        // get post's attributes
-        $this->postElement = new PostElement();
-        $this->postElement->loadElement($postId);
+        public function __construct($postId) {
+            parent::__construct(file_get_contents(__ROOT__.'\view\modules\feed\PostCard.xhtml'));
+            // Get the post VO.
+            $this->postVO = (new PostDAO())->get($postId);
     }
 
     public function resolveData() {
+
         $ritorno = [];
 
-        foreach ($this->postElement->getData() as $key => $value) {
-            if ($key === "immagini") {
-                $ritorno['{percorsoImmagine}'] = $value[0] ?? null; // TODO caso in cui non ci sono immagini
-            } else {
-                if ($key === 'UserID') {
-                    $author = new UserElement($value);
+        $userVO = (new UserDAO())->get($this->postVO->getUserId());
+        $ritorno['{nome}'] = $userVO->getNome();
 
-                    $ritorno['{nome}'] = $author->getData()['nome'];
-                }
+        foreach ($this->postVO->arrayDump() as $key => $value) {
+            if ($key === "immagini" && !isset($ritorno['{{percorsoImmagine}']))
+                $ritorno['{percorsoImmagine}'] = $value[0] ?? null; // TODO caso in cui non ci sono immagini
+
+            else
                 $ritorno['{' . $key . '}'] = $value;
-            }
+
         }
+
         return $ritorno;
     }
 }

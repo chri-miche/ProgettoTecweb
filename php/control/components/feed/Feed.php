@@ -28,6 +28,7 @@ class Feed extends Component {
             default:
                 $orderby = '';
         }
+
         $results = DatabaseAccess::executeQuery($query . $orderby . ' desc limit 10;');
         $this->basePage = new BasePage($this->baseLayout());
 
@@ -39,6 +40,7 @@ class Feed extends Component {
     }
 
     public function build() {
+
         $HTML = $this->basePage->build();
         $HTML = str_replace('href="Home.php?feed=' . $this->criteria . '"', 'class="disabled"', $HTML);
         return $HTML;

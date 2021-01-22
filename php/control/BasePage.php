@@ -22,7 +22,7 @@
         public function __construct(string $baseLayout) {
 
             parent::__construct(isset($baseLayout) ? $baseLayout : file_get_contents(__ROOT__.'\view\pages\BaseLayout.xhtml'));
-
+            $this->components = array();
         }
 
         public function setHeader(Header $head){ $this->header = $head;}

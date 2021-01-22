@@ -1,6 +1,6 @@
 <?php
 
-
+require_once __ROOT__ . '\model\VO\VO.php';
 class TagVO implements  VO{
 
     /**@var int | null*/

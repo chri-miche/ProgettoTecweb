@@ -2,6 +2,7 @@
 
     /** Element that has data from database or is built by it. It's our structure.*/
     require_once __ROOT__.'\model\DatabaseAccess.php';
+
     abstract class Element {
 
         // TODO: Work on it a little bit.

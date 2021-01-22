@@ -1,5 +1,7 @@
 <?php
 
+    require_once __ROOT__ . '\model\VO\VO.php';
+
     require_once __ROOT__ . '\model\DAO\ConservazioneDAO.php';
     require_once __ROOT__ . '\model\VO\GenereVO.php';
 

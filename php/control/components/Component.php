@@ -12,10 +12,11 @@
         /** @param string $HTML : Layout di base della pagina.*/
         public function __construct(string $HTML){
             /* Setta il layout della pagina e imposta la mancata costruzione della pagina.*/
-            $this->HTML = $HTML; $this->built = false;
+            $this->HTML = $HTML;
+            $this->built = false;
         }
 
-        public function returnComponent(){
+        public function returnComponent() : string {
 
             if(!$this->built) {
 
@@ -28,9 +29,13 @@
         }
 
 
-        public function notBuilt(){ $this->built = false; }
+        public function notBuilt(){
+            $this->built = false;
+        }
 
-        protected function baseLayout(){ return $this->HTML; }
+        protected function baseLayout(){
+            return $this->HTML;
+        }
 
         /** Definizione di default di build: Risolve tutti i dati che deve risolvere
             e stampa il layout di base della pagina caricato.*/
@@ -49,11 +54,13 @@
         }
 
         /** Ogni componente deve poter risolvere i dati? Possiamo fare di deafult vuoto?*/
-        public function resolveData(){ return array(); }
+        public function resolveData(){
+            return array();
+        }
 
-        public function __toString(){ return $this->returnComponent(); }
-
-
+        public function __toString(){
+            return $this->returnComponent();
+        }
     }
 
 ?>

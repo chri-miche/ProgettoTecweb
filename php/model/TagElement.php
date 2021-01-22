@@ -1,6 +1,6 @@
 <?php
 
-
+require_once __ROOT__.'\model\Element.php';
 class TagElement extends Element {
 
     protected function loadData() {

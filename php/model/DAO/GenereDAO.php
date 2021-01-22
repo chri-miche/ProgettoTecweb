@@ -26,7 +26,7 @@
             $VOArray = array();
 
             $result = $this->performMultiCAll(array(), 'get_all_genere');
-            if( isset($result['success']) && !$result['success']) return $VOArray;
+            if( isset($result['failure'])) return $VOArray;
 
 
             foreach ($result as $element){
@@ -41,6 +41,43 @@
                 $VOArray [] = new GenereVO(...$element);
 
             }
+
+            return $VOArray;
+
+        }
+
+        public function getAllFilterBy(?int $famiglia = null, ?int $ordine = null) : array {
+
+            $VOArray = array();
+
+            if(isset($famiglia)){
+
+                $famigliaVO = (new FamigliaDAO())->get($famiglia);
+
+                /** Questa chiamata da per scontato tu conosca la famiglia quindi non la va a prendere.*/
+                $result = $this->performMultiCAll(array($famiglia), 'get_all_genere_filter_by_famiglia');
+                if(isset($result['failure'])) return $VOArray;
+
+                foreach ($result as $element)
+                    $VOArray = new GenereVO(...$element, ...[$famigliaVO]);
+
+            } else if(isset($ordine)){
+
+                $ordineVO = (new OrdineDAO())->get($ordine);
+
+                $result = $this->performMultiCAll(array($ordine), 'get_all_genere_filter_by_ordine');
+                if(isset($result['failure'])) return $VOArray;
+
+                foreach ($result as $element) {
+
+                    /** Si crea per ognuno la sua famiglia.*/
+                    $famigliaVO = new FamigliaVO($element['f_id'], $element['f_nomeScientifico'], $ordineVO);
+                    unset($element['f_id'], $element['f_nomeScientifico']);
+
+                    $VOArray = new GenereVO(...$element, ...[$famigliaVO]);
+                }
+            } else
+                $VOArray = $this->getAll();
 
             return $VOArray;
 

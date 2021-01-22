@@ -91,6 +91,10 @@
         SELECT F.TagID as id, F.nomeScientifico, O.TagID as ordine, O.nomeScientifico as nomeScientifico_ordine
         FROM famiglia F INNER JOIN ordine O ON F.OrdID = O.TagID; END;
 
+    DROP PROCEDURE IF EXISTS get_all_famiglia_filter_by_ordine;
+    CREATE PROCEDURE get_all_famiglia_filter_by_ordine(IN ordine INT) BEGIN
+        SELECT F.TagID as id, F.nomeScientifico FROM famiglia F WHERE F.OrdID = ordine; END;
+
     DROP PROCEDURE IF EXISTS check_famiglia_id;
     CREATE PROCEDURE check_famiglia_id(IN id int) BEGIN
         SELECT COUNT(G.tagID) as idexists FROM famiglia G WHERE G.tagID = id LIMIT 1; END;
@@ -98,11 +102,10 @@
     DROP PROCEDURE IF EXISTS create_famiglia;
     CREATE PROCEDURE create_famiglia(IN new_nome VARCHAR(40), IN new_ordine INT) BEGIN
 
-        INSERT INTO tag(nome) VALUE (new_nome);
+        INSERT INTO tag(ID) VALUE (NULL);
         INSERT INTO famiglia(TagID, OrdID, nomeScientifico) VALUE  (LAST_INSERT_ID(), new_ordine, new_nome);
 
         SELECT LAST_INSERT_ID() as id; END;
-
 
     DROP PROCEDURE update_famiglia;
     CREATE PROCEDURE update_famiglia(IN id int, IN ordine INT, IN nomeScientifico VARCHAR(40)) BEGIN
@@ -119,6 +122,16 @@
                 O.TagID as ordine, O.nomeScientifico as nomeScientifico_ordine
         FROM genere G INNER JOIN famiglia f on G.famID = f.TagID INNER JOIN ordine o on f.OrdID = o.TagID; END;
 
+
+    DROP PROCEDURE  IF EXISTS get_all_genere_filter_by_famiglia;
+    CREATE PROCEDURE get_all_genere_filter_by_famiglia(IN fam_id INT) BEGIN
+        SELECT G.tagID as id, G.nomeScientifico FROM genere G WHERE G.tagID = famID; END;
+
+
+    DROP PROCEDURE  IF EXISTS get_all_genere_filter_by_ordine;
+    CREATE PROCEDURE get_all_genere_filter_by_ordine(IN ord_id INT) BEGIN
+        SELECT G.tagID as id, G.nomeScientifico, F.TagID as f_id, F.nomeScientifico as f_nomeScientifico FROM genere G
+        INNER JOIN famiglia f on G.famID = f.TagID WHERE F.OrdID = ord_id; END;
 
     DROP PROCEDURE IF EXISTS check_genere_id;
     CREATE PROCEDURE check_genere_id(IN id INT)

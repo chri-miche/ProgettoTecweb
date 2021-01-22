@@ -59,7 +59,7 @@
                     return !is_null($element->getId());
                 }
             }
-            /** Statement non valido.*/
+
             return false;
         }
 

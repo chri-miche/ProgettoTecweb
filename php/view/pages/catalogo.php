@@ -1,15 +1,15 @@
 <?php
 
     define('__ROOT__', dirname(dirname(dirname(__FILE__))));
+    /* Pagina di base.*/
     require_once __ROOT__ . '\control\BasePage.php';
-
+    /* Moduli.*/
     require_once __ROOT__ . '\control\components\SiteBar.php';
-    require_once __ROOT__ . '\control\components\Report.php';
     require_once __ROOT__ . '\control\components\BreadCrumb.php';
-
-    require_once __ROOT__ . '\model\BirdElement.php';
-
     require_once __ROOT__ . '\control\components\catalogo\Catalogo.php';
+    /* Elementi dal modello.*/
+    require_once __ROOT__ . '\model\BirdElement.php';
+    require_once __ROOT__ . '\model\DAO\SpecieDAO.php';
 
     $basePage = file_get_contents(__ROOT__ . '\view\BaseLayout.xhtml');
 
@@ -18,6 +18,12 @@
     /** Standard navigation for our page.*/
     $page->addComponent(new SiteBar("catalogo"));
     $page->addComponent(new BreadCrumb(array('Catalogo'=> '')));
+
+    $specieDAO = new SpecieDAO();
+
+    $genereDAO = new GenereDAO();
+    $famigliaDAO = new FamigliaDAO();
+    $ordineDAO = new OrdineDAO();
 
 
     /* Dobbiamo trovare: gli ordini, i generi e le famiglie.*/
@@ -37,34 +43,41 @@
     $famigliaList = null;
     $genereList = null;
 
-    if($ordineEnabled) { // L'ordine è stato attivato.
-        /** Se non è possibile ancora scegliere tra famiglia o genere possiamo scorrere.*/
-        if (!$famigliaEnabled && !$genereEnabled)
-            $ordineList = BirdElement::getOrdini();
-        else /* abbiamo solo l'elemento a cui appartiene la famiglia o il genere corrente. */
-            $ordineList = BirdElement::getOrdine($ordineValue);
+    if($genereEnabled) {
+
+        $genereList = $genereDAO->getAllFilterBy($famigliaValue, $ordineValue);
+
+        /** Elemento di famiglia della lista di generi attuali.(se selezionato) */
+        if($famigliaEnabled)
+            $famigliaList = $genereList[0]->getFamiglia();
+
+        /** Elemento di ordini della lista di generi attuali. (se selezionato) */
+        if($ordineEnabled)
+            $ordineList = $famigliaList->getOrdine();
+
+    } else {
+
+        if($famigliaEnabled){
+
+            $famigliaList = $famigliaDAO->getAllFilterBy($ordineValue); // Ricorda può essere null.
+
+            if($ordineEnabled) $ordineList = $famigliaList[0]->getOrdine();
+
+        } else {
+
+            $ordineList = $ordineDAO->getAll();
+
+        }
 
     }
 
-    if($famigliaEnabled) {
-        if (!$genereEnabled)
-            $famigliaList = BirdElement::getFamigle($ordineValue);
-         else
-            $famigliaList = BirdElement::getFamiglia($famigliaValue);
-    }
+    $birds = $specieDAO->getManyFilterBy($ordineEnabled ? $ordineValue : null,
+        $famigliaEnabled? $famigliaValue : null, $genereEnabled ? $genereValue : null, 20, $_GET['page']?? 0);
 
 
-    if($genereEnabled)
-        $genereList = BirdElement::getGeneri($ordineValue, $famigliaValue);
-
-    /** Creazione degli ucccelli. Potremmo mettere limite con $page e element per page. */
-    $birds = BirdElement::getBirds( $ordineEnabled ? $ordineValue : null,
-        $famigliaEnabled ? $famigliaValue : null, $genereEnabled? $genereValue : null);
-
-
-    $page->addComponent(new
-            Catalogo($birds, 'catalogo.php',$_GET['page'] ??    0, 20,
+    $page->addComponent(new Catalogo($birds, 'catalogo.php',$_GET['page'] ??    0, 20,
             $ordineList, $famigliaList, $genereList, $ordineValue, $famigliaValue, $genereValue));
+            // TODO: Non passare value, passo gli oggetti.
 
     echo $page;
 

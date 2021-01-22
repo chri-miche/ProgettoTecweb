@@ -52,6 +52,32 @@
             return $VOArray;
         }
 
+        public function getManyFilterBy(?int $genere = null, ?int $famiglia = null, ?int $ordine = null,
+                                        int $limit = 40, int $offset = 0): array{
+
+            if(!is_null($genere)){
+
+                $genereVO = (new GenereDAO())->get($genere);
+                /** Ci basta prendere il minimo indispensabile dove id genere uguale.*/
+
+            } else if(!is_null($famiglia)){
+
+                $famigliaVO = (new FamigliaDAO())->get($famiglia);
+                /** Dobbiamo fare la join con genere e prendere sia genere che specie per ognuno.*/
+
+            } else if(!is_null($ordine)){
+                $ordineVO = (new OrdineDAO())->get($ordine);
+                /** Dobbiamo fare un sacco di join. */
+
+            } else {
+                /** Nessuna selezionata ma abbiamo filtro su quantitò.*/
+                /** tutti limitati.*/
+
+            }
+
+        }
+
+
         /** @param SpecieVO $element */
         public function checkId(VO &$element) : bool {
             return $this->idValid($element, 'specie_id');

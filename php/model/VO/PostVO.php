@@ -17,6 +17,8 @@
         private $title;
         /** @var array */
         private $immagini;
+        /** @var array*/
+        private $arrayTagVO;
 
         /** PostVO constructor.
          * @param int|null $id
@@ -25,9 +27,10 @@
          * @param string $content
          * @param string | null $date
          * @param string $title
-         * @param array $immagini  */
+         * @param array $immagini
+         * @param  array $arrayTagVO*/
         public function __construct(?int $id = null, ?int $userId = null, bool $isArchived = false, string $content = '',
-                                    ?string $date = null, string $title = '', array $immagini = array()){
+                                    ?string $date = null, string $title = '', array $immagini = array(), array $arrayTagVO = array()){
             $this->id = $id;
             $this->userId = $userId;
             $this->isArchived = $isArchived;
@@ -35,6 +38,7 @@
             $this->date = $date;
             $this->title = $title;
             $this->immagini = $immagini;
+            $this->arrayTagVO = $arrayTagVO;
         }
 
         public function __get($name){ return $this->$name ?? null; }
@@ -50,7 +54,9 @@
         public function smartDump(bool $id = false): array {
 
             $array = get_object_vars($this);
+
             unset($array['immagini']);
+            unset($array['arrayTagVO']);
 
             if($id) unset($array['id']);
 
@@ -134,6 +140,20 @@
          * @param array $immagini */
         public function setImmagini(array $immagini): void{
             $this->immagini = $immagini;
+        }
+
+        /**
+         * @return array
+         */
+        public function getArrayTagVO(): array{
+            return $this->arrayTagVO;
+        }
+
+        /**
+         * @param array $arrayTagVO
+         */
+        public function setArrayTagVO(array $arrayTagVO): void{
+            $this->arrayTagVO = $arrayTagVO;
         }
 
 

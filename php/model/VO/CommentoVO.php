@@ -11,7 +11,7 @@
         private $isArchived;
         /** @var string */
         private $content;
-        /** @var DateTime*/
+        /** @var string| null*/
         private $date;
         /** Referenced post.
          *  @var  PostVO | null*/
@@ -25,7 +25,7 @@
          * @param DateTime | null $date
          * @param PostVO| null $postVO */
         public function __construct(?int $id = null, ?int $userId = null, bool $isArchived = false,
-                                    string $content = '', DateTime $date = null, PostVO $postVO = null) {
+                                    string $content = '', ?string $date = null, PostVO $postVO = null) {
 
             $this->id = $id;
             $this->userId = $userId;
@@ -101,13 +101,13 @@
 
         /**
          * @return DateTime */
-        public function getDate(): DateTime{
+        public function getDate(): ?string{
             return $this->date;
         }
 
         /**
          * @param DateTime $date */
-        public function setDate(DateTime $date): void{
+        public function setDate(?string $date): void{
             $this->date = $date;
         }
 

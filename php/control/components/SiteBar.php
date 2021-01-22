@@ -32,7 +32,7 @@
             $baseLayout = $this->baseLayout();
 
             /** To make code tidied up count the black space of the opened tag before.*/
-            if($this->user->userIdentified()){
+            if(!$this->user->userIdentified()){
 
                 $contentHTML = file_get_contents(__ROOT__.'\view\modules\LoggedOutActions.xhtml');
 

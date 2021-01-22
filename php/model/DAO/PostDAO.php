@@ -1,5 +1,6 @@
 <?php
 
+require_once __ROOT__.'\model\VO\TagVO.php';
 require_once __ROOT__.'\model\VO\PostVO.php';
 class PostDAO extends DAO {
 
@@ -12,7 +13,9 @@ class PostDAO extends DAO {
         if(isset($result['failure']))  return new PostVO();
 
         $return = new PostVO(...$result);
+
         $return->setImmagini($this->getImmagini($id));
+        $return->setArrayTagVO($this->getTags($id));
 
         return $return;
     }
@@ -30,7 +33,9 @@ class PostDAO extends DAO {
             foreach ($result as $element){
 
                 $VOApp = new PostVO(...$element);
+
                 $VOApp->setImmagini($this->getImmagini($VOApp->getId()));
+                $VOApp->setArrayTagVO($this->getTags($VOApp->getId()));
 
                 $VOArray [] = $VOApp;
             }
@@ -90,7 +95,7 @@ class PostDAO extends DAO {
 
     private function deleteImmagini(array $immagini, int $postId){
 
-        $result = false;
+        $result = true;
 
         $allImmagini = $this->getImmagini($postId);
 
@@ -101,12 +106,41 @@ class PostDAO extends DAO {
             $passArray [] = $postId; $passArray [] = $immagine;
 
             $innerResult = $this->performNoOutputModifyCall($passArray, 'delete_immagine');
-            $result &= ! isset($innerResult['failure']);
+            $result &= !isset($innerResult['failure']);
 
         }
 
+        return $result;
+    }
+
+    private function getTags(int $postId) : array{
+
+        $tagsVO = array();
+
+        $result = $this->performMultiCAll(array($postId), 'get_post_tag_all');
+
+        if(!isset($result['failure']))
+            foreach ($result as $element)
+                $tagsVO [] = new TagVO(...$element);
+
+        return $tagsVO;
 
     }
+
+    private function saveTag(TagVO $tagVO, int $postId){
+
+        $result = $this->performCall(array($postId, $tagVO->getId()), 'save_post_tag' );
+        return !isset($result['failure']);
+
+    }
+
+    private function deleteTag(TagVO $tagVO, int $postId){
+
+        $result = $this->performNoOutputModifyCall(array($postId, $tagVO->getId()), 'delete_post_tag' );
+        return !isset($result['failure']);
+
+    }
+
 
     public function checkId(VO &$element) : bool {
         return $this->idValid($element, 'post_id');
@@ -119,24 +153,40 @@ class PostDAO extends DAO {
 
         if($this->checkId($element)){
 
-            print_r($element->smartDump());
             $result = $this->performNoOutputModifyCall($element->smartDump(),'update_post');
+            /** Sistemazione dei tag.*/
+            $delete = array_diff($this->getTags($element->getId()), $element->getArrayTagVO());
+            $add = array_diff($element->getArrayTagVO(), $this->getTags($element->getId()));
 
-            $delete =$this->deleteImmagini($element->getImmagini(), $element->getId());
+            /* Eliminazione dei tag che non servono più.*/
+            foreach ($delete as $tag)
+                $this->deleteTag($tag, $element->getId());
+            /* Creazione dei nuovi tag.*/
+            foreach ($add as $tag)
+                $this->saveTag($tag, $element->getId());
 
-            if(sizeof($element->getImmagini()) > 0) $add =$this->saveImmagini($element->getImmagini(), $element->getId());
+            $success = $this->deleteImmagini($element->getImmagini(), $element->getId());
 
-            return !isset($result['failure']) && $delete && $add;
+            if(sizeof($element->getImmagini()) > 0) /* Potremmo salvare di nuovo le stesse?*/
+                $success &= $this->saveImmagini($element->getImmagini(), $element->getId());
+
+            return !isset($result['failure']) && $success;
 
         } else {
 
             $result = $this->performCall($element->smartDump(true), 'create_post');
 
-            if(!isset($result['failure']))
-                $element = new $element( ...$result, ...$element->varDumps(true));
+            $success = true;
+            if(!isset($result['failure'])) {
 
-            return !$element->id === null && $this->deleteImmagini($element->getImmagini(), $element->getId())
-                    && $this->saveImmagini($element->getImmagini(), $element->getId());
+                $element = new $element(...$result, ...$element->varDumps(true));
+                foreach ($element->getArrayTagVO() as $tagVO)
+                    $this->saveTag($tagVO, $element->getId());
+
+                $success = $this->saveImmagini($element->getImmagini(), $element->getId());
+            }
+
+            return !$element->id === null && $success;
 
         }
 

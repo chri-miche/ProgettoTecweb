@@ -288,9 +288,25 @@
         FROM post P INNER JOIN ( SELECT * FROM contenuto C WHERE C.UserID = in_id) AS C ON C.ID = P.contentID;
     END;
 
+
     DROP PROCEDURE IF EXISTS get_of_utente_post_limited;
     CREATE PROCEDURE get_of_utente_post_limited(IN in_id INT, IN in_limit INT, IN in_offset INT) BEGIN
         SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, P.title
         FROM post P INNER JOIN (
             SELECT * FROM contenuto C WHERE C.UserID = in_id LIMIT in_offset, in_limit
         ) AS C ON C.ID = P.contentID; END;
+
+
+    DROP PROCEDURE IF EXISTS get_post_tag_all;
+    CREATE PROCEDURE get_post_tag_all(IN in_id INT) BEGIN
+        SELECT T.ID, T.label FROM tag T INNER JOIN (
+            SELECT C.tagID FROM citazione C WHERE C.postID = in_id
+        ) C ON C.tagID = in_id; END;
+
+    DROP PROCEDURE IF EXISTS save_post_tag;
+    CREATE PROCEDURE save_post_tag(IN post_id INT, IN tag_id INT) BEGIN
+        INSERT INTO citazione (tagID, postID) VALUE (tag_id, post_id); END;
+
+    DROP PROCEDURE IF EXISTS delete_post_tag;
+    CREATE PROCEDURE delete_post_tag(IN post_id INT, IN tag_id INT) BEGIN
+        DELETE FROM citazione WHERE tagID = tag_id AND postID = post_id; END;

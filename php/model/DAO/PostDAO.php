@@ -97,7 +97,10 @@ class PostDAO extends DAO {
         $delete = array_diff($allImmagini, $immagini);
         foreach ($delete as $immagine){
 
-            $innerResult = $this->performNoOutputModifyCall($immagine, 'delete_immagine');
+            $passArray = array();
+            $passArray [] = $postId; $passArray [] = $immagine;
+
+            $innerResult = $this->performNoOutputModifyCall($passArray, 'delete_immagine');
             $result &= ! isset($innerResult['failure']);
 
         }

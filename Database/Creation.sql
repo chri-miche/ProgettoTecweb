@@ -66,21 +66,10 @@
 
     ) ENGINE = InnoDB;
 
-
-    CREATE TABLE Label( /* Etttichetta (relativa a uno o molti tag)*/
-
-        ID int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        text VARCHAR(255) NOT NULL
-
-    ) ENGINE = InnoDB;
-
-
     CREATE TABLE Tag(
 
         ID int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        LabelID int UNSIGNED,
-
-        FOREIGN KEY (LabelID) REFERENCES Label(ID) ON DELETE SET NULL
+        label VARCHAR(255)
 
     ) ENGINE = InnoDB;
 

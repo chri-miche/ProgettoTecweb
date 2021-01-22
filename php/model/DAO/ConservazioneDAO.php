@@ -28,7 +28,7 @@ class ConservazioneDAO extends DAO {
         $VOArray = array();
 
         $result = $this->performMultiCAll(array(), 'get_all_conservazione');
-        if( isset($result['success']) && !$result['success']) return $VOArray;
+        if(isset($result['failure'])) return $VOArray;
 
         foreach ($result as $element)  $VOArray [] = new ConservazioneVO(...$element);
 

@@ -11,7 +11,7 @@
             $result = $this->performCall(array($id), 'get_specie');
 
             /** Se fallisce la ricerca ritorniamo un elemento vuoto.*/
-            if(isset($result['success']) && !$result['success']) return new GenereVO();
+            if(isset($result['failure'])) return new GenereVO();
 
             $result['genereVO'] = (new GenereDAO())->get($result['genere']); unset($result['genere']);
             $result['conservazioneVO'] = (new ConservazioneDAO())->get($result['conservazione']); unset($result['conservazione']);
@@ -24,7 +24,7 @@
             $VOArray = array();
 
             $result = $this->performMultiCAll(array(), 'get_all_specie');
-            if( isset($result['success']) && !$result['success']) return $VOArray;
+            if(isset($result['failure'])) return $VOArray;
 
 
             foreach ($result as $element){

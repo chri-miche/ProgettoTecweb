@@ -13,7 +13,7 @@
 
             $result = $this->performCall(array($id), 'get_genere');
 
-            if(isset($result['success']) && !$result['success']) return new GenereVO();
+            if(isset($result['failure'])) return new GenereVO();
 
             $result['famigliaVO'] = (new FamigliaDAO())->get($result['famiglia']); unset($result['famiglia']);
 

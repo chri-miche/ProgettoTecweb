@@ -56,7 +56,7 @@ body {
     color: white;
 }
 
-input {
+input, textarea {
     border-style: none;
     background-color: transparent;
     outline: none;
@@ -65,7 +65,7 @@ input {
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-input:focus  {
+input:focus, textarea:focus {
     background: #D3EAFD;
 }
 
@@ -91,7 +91,7 @@ button, .button, a {
             0 1px 5px 0 rgba(0,0,0,.12);
     cursor: pointer;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
-	display: block;
+	display: inline-block;
     width: fit-content;
     margin: 2px;
 }
@@ -171,7 +171,6 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     transition: left 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
 
      */
-    transition: all 600ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .fake-input {
@@ -179,6 +178,7 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 }
 
 .tab-label a, .tab-label a:active, .tab-label button[type=submit], .tab-label button[type=submit]:active {
+    background: #D3EAFD;
     border-radius: 0;
     box-shadow: none;
 }
@@ -186,7 +186,6 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 .tab-label a:hover, .tab-label button[type=submit]:hover {
     background: #2196F3;
     color: white;
-    border-bottom: 3px solid #2196F3;
 }
 
 .tab-label a.disabled, .tab-label a.disabled:hover, .tab-label button[type=submit].disabled, .tab-label button[type=submit].disabled:hover {
@@ -194,21 +193,6 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     background: inherit;
     border-bottom: 3px solid #2196F3;
 }
-
-/*TODO forse aggiungere un'iconcina nell'after quando selezionato - desiderabile non necessario*/
-
-
-/*
-.tab-header:hover {
-    left: 5px;
-    z-index: 2;
-    box-shadow:
-            0 -3px 5px 0 rgba(0,0,0,.2),
-            0 -2px 2px 0 rgba(0,0,0,.14),
-            0 -1px 1px 0 rgba(0,0,0,.12);
-}
-
- */
 
 /* #end tabs */
 
@@ -277,7 +261,6 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     display: flex;
     background: white;
     border-radius: 2em;
-    padding: 0.5em 1em;
     box-shadow:
             0 1px 1px 0 rgba(0,0,0,0.2),
                 /*basic*/
@@ -286,15 +269,16 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     /*added*/
 }
 
-#search-form label {
-    font-size: 0.9em;
+#search-form fieldset {
+    border: none;
+    padding: 0;
+    margin-left: 1em;
 }
 
 #search-button {
     border-radius: 2em;
     box-shadow: none;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1);
-    /* TODO tornare sul bottone di ricerca*/
 }
 
 /* #end search */
@@ -304,6 +288,7 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
+    margin: 0 2em;
 }
 
 
@@ -318,10 +303,11 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 }
 
 .card {
+    height: fit-content;
 	min-width: 300px;
     width: 20vw;
-    border-radius: 0.4em;
-    margin: 0.5em;
+    border-radius: 10px;
+    margin: 10px;
     overflow: hidden;
     box-shadow:
             0 3px 1px 0 rgba(0,0,0,.2),
@@ -329,19 +315,25 @@ button.disabled:active, .button.disabled:active, a.disabled:active
             0 1px 5px 0 rgba(0,0,0,.12);
 }
 
+.img-overflow-container {
+    max-height: 175px;
+    height: fit-content;
+    overflow-y: hidden;
+}
+
 .card img {
     width: 100%;
-    border-radius: 0.4em 0.4em 0 0;
+    border-radius: 10px 10px 0 0;
 }
 
 .card-header {
-	padding: 0.5em;
+	padding: 10px;
+    height: 105px;
 }
 
 .card-content {
     background: white;
-    border-radius: 0 0 0.4em 0.4em;
-    padding: 0.5em;
+    border-radius: 0 0 10px 10px;
 }
 
 /* #end content */
@@ -578,6 +570,18 @@ a.breadcrumb-item:visited:hover {
     display: flex;
 }
 
+
+#admin-content h1 {
+    width: 100%;
+    display: inline-block;
+}
+
+#admin-content a {
+    font-size: initial;
+    font-weight: initial;
+    float: right;
+}
+
 #admin-content #content {
     margin-left: 0;
     padding-left: 2em;
@@ -587,3 +591,140 @@ a.breadcrumb-item:visited:hover {
     width: 100%;
 }
 /* #end admin*/
+
+/* #form */
+
+fieldset {
+    border-color: #1e2129;
+    border-radius: 0.5em;
+    margin: 0.5em;
+}
+
+fieldset input, fieldset textarea {
+    width: -webkit-fill-available;
+}
+/*
+legend {
+    position: absolute;
+    font-size: 0.5em;
+    transition: all 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+input:focus + legend {
+    position: initial;
+    font-size: initial;
+}
+ */
+
+
+
+/* #end form*/
+
+/* #dropdown  */
+#dropdown-content {
+    display: none;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    width: 200px;
+    z-index: 10;
+    box-shadow:
+            -1px 0 5px 5px rgba(0,0,0,0.12),
+            -1px 0 10px 10px rgba(0,0,0,0.08),
+            -1px 0 15px 15px rgba(0,0,0,0.06);
+    /* animazione si perde con display none
+    right: -200px;
+    transition: right 400ms cubic-bezier(0.25, 0.8, 0.25, 1);*/
+}
+
+#dropdown-content:target {
+    right: 0;
+    display: block;
+}
+
+#dropdown-content a {
+    width: auto;
+    position: relative;
+    display: block;
+    border-radius: 0;
+    box-shadow: none;
+    transition: inherit;
+}
+/* #end dropdown */
+
+/* #begin table */
+table {
+    width: inherit;
+}
+
+tr:nth-child(even) {
+    background: #D3EAFD;
+}
+th, td {
+    padding: 0.5em;
+    text-align: center;
+}
+
+th.action, td.action {
+    width: 100px;
+}
+/* #end table*/
+
+/* #begin image slideshow */
+.image-slideshow, .image-slideshow:target ~ #image-0 {
+    display: none;
+}
+
+#image-0, .image-slideshow:target {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-slideshow a {
+    max-width: 130px;
+}
+
+.image-slideshow img {
+    height: 500px;
+}
+/* #end image slideshow */
+
+/* #begin comments */
+ul#comments {
+    list-style: none;
+}
+
+ul#comments li {
+
+}
+
+.profile-mini img {
+    width: 40px;
+}
+
+p {
+    margin-left: 40px;
+}
+
+.profile-mini {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: inline-block;
+    align-self: center;
+}
+ul#comments li form fieldset {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+
+ul#comments li form textarea {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+
+/* #end comments */
+

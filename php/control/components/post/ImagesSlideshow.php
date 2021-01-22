@@ -12,11 +12,11 @@ class ImagesSlideshow extends BasePage
             return $value['percorsoImmagine'];
         }, $result);
         $size = sizeof($links);
-        $index = 0;
+        $index = $size - 1;
         if ($size === 0) {
             $this->addComponent(new class(file_get_contents(__ROOT__ . '/view/modules/post/NoImage.xhtml')) extends Component {});
         } else if ($size === 1) {
-            $this->addComponent(new class('<div id="image-{index}"><img src="{link}" alt="" /></div>', $links[0]) extends Component {
+            $this->addComponent(new class('<div id="image-{index}" class="image-slideshow"><img src="{link}" alt="" /></div>', $links[0]) extends Component {
                 private $data;
 
                 public function __construct(string $HTML, $link)
@@ -55,7 +55,7 @@ class ImagesSlideshow extends BasePage
                         return $this->data;
                     }
                 });
-                $index++;
+                $index--;
             }
         }
     }

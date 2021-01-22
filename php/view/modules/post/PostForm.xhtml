@@ -2,24 +2,32 @@
     <h1>Nuovo post</h1>
     <form method="post" action="NewPost.php" enctype="multipart/form-data">
         <fieldset>
-            <legend>Post</legend>
-            <label for="titolo-post">Titolo</label>
-            <input id="titolo-post" type="text" name="titolo-post" required="required"/>
+            <input id="titolo-post"
+                   type="text"
+                   name="titolo-post"
+                   required="required"
+                   aria-label="Titolo"
+                   alt="Titolo"
+                   placeholder="Titolo..."/>
+            <legend>Titolo</legend>
         </fieldset>
         <fieldset>
             <legend>Immagini</legend>
-            <label for="immagini-post">Foto</label>
             <input id="immagini-post"
                    type="file"
                    multiple="multiple"
                    name="immagini-post[]"
                    accept="image/x-png,image/gif,image/jpeg"
-            />
+                   aria-label="Foto dell'avvistamento"
+                   alt="Foto dell'avvistamento"/>
         </fieldset>
         <fieldset>
-            <legend>Contenuto</legend>
-            <label for="descrizione-post">Descrizione</label>
-            <textarea id="descrizione-post" name="descrizione-post" required="required"></textarea>
+            <legend>Descrizione</legend>
+            <textarea id="descrizione-post"
+                      name="descrizione-post"
+                      required="required"
+                      aria-label="Descrizione"
+                      placeholder="Descrizione..."></textarea>
             <!-- TODO textarea vuota -->
             <input class="fake-input" name="user-id" value="{UserID}" />
         </fieldset>

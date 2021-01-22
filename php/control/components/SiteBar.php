@@ -4,22 +4,26 @@
     require_once __ROOT__.'\control\SessionUser.php';
     require_once __ROOT__.'\control\components\browsers\NavigationButton.php';
 
-    require_once __ROOT__ . '\model\DAO\UserDAO.php';
-
     class SiteBar extends Component {
 
+        private $HTML; /** Spostare questo a private in Component e renderla una classe?
+                        Cosi da evitare che possa essere modificato una volta inizilizzata.*/
+
         private $user;
-        /*** @var string */
+        /**
+         * @var string
+         */
         private $position;
 
         /** TODO: Give user as parameter by reference? Avoid multiple definitons of SessionUser.
          * @param string|null $HTMLcontent
-         * @param string $position */
+         * @param string $position
+         */
         public function __construct(string $position, string $HTMLcontent = null) {
 
-            parent::__construct( $HTMLcontent ?? file_get_contents(__ROOT__.'\view\modules\SiteBar.xhtml'));
-
+            parent::__construct(isset($HTMLcontent) ? $HTMLcontent : file_get_contents(__ROOT__.'\view\modules\SiteBar.xhtml'));
             $this->user = new SessionUser();
+
             $this->position = $position;
 
         }
@@ -30,23 +34,21 @@
             $baseLayout = $this->baseLayout();
 
             /** To make code tidied up count the black space of the opened tag before.*/
-            if(!$this->user->userIdentified()){
+            if(!$this->user->getUser()->getId()){
 
                 $contentHTML = file_get_contents(__ROOT__.'\view\modules\LoggedOutActions.xhtml');
 
             } else {
-
-                $userVO = $this->user->getUser();
-
                 $contentHTML = file_get_contents(__ROOT__.'\view\modules\LoggedInActions.xhtml');
+                $username = $this->user->getUser()->nome;
+                $userid = $this->user->getUser()->ID;
+                $contentHTML = str_replace("{username}", $username, $contentHTML);
+                $contentHTML = str_replace("{userid}", $userid, $contentHTML);
 
-                $contentHTML = str_replace("{username}", $userVO->getNome(), $contentHTML);
-                $contentHTML = str_replace("{userid}", $userVO->getId(), $contentHTML);
-
-                if($userVO->isAdmin())
+                if($this->user->getAdmin()) {
                     $adminButton = new NavigationButton('Admin', 'Admin.php');
-
-                $newPostButton = new NavigationButton('Nuovo Post', 'NewPost.php');
+                    $contentHTML = str_replace('<admin />', $adminButton->build(), $contentHTML);
+                }
 
             }
 
@@ -58,12 +60,6 @@
             }
             if (strcasecmp($this->position, "catalogo") != 0) {
                 $navigation .= (new NavigationButton('Catalogo', 'Catalogo.php'))->build();
-            }
-            if (strcasecmp($this->position, "admin") != 0 && isset($adminButton)) {
-                $navigation .= $adminButton->build();
-            }
-            if (strcasecmp($this->position, "newpost") != 0 && isset($newPostButton)) {
-                $navigation .= $newPostButton->build();
             }
 
             $baseLayout = str_replace('<navigation />', $navigation, $baseLayout);

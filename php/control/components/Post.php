@@ -2,6 +2,7 @@
 
     require_once __ROOT__.'\model\PostElement.php';
     require_once __ROOT__.'\model\UserElement.php';
+    require_once __ROOT__.'\model\meta\Persistent.php';
     require_once __ROOT__.'\control\components\post\PostActions.php';
     require_once __ROOT__.'\control\components\post\ImagesSlideshow.php';
     require_once __ROOT__.'\control\components\post\Comments.php';

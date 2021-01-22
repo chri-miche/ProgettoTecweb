@@ -29,13 +29,13 @@ class PostActions extends Component
 
         if ($likes == "1") {
             $this->data['{likeAction}'] = 'liked';
-            $this->data['{dislikeAction}'] = 'can-dislike';
+            $this->data['{dislikeAction}'] = 'canDislike';
         } elseif ($likes == "-1") {
-            $this->data['{likeAction}'] = 'can-like';
+            $this->data['{likeAction}'] = 'canLike';
             $this->data['{dislikeAction}'] = 'disliked';
         } else {
-            $this->data['{likeAction}'] = 'can-like';
-            $this->data['{dislikeAction}'] = 'can-dislike';
+            $this->data['{likeAction}'] = 'canLike';
+            $this->data['{dislikeAction}'] = 'canDislike';
         }
 
     }

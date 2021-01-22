@@ -7,7 +7,6 @@
     class PreviewsPage extends Component {
 
         private $previews;
-
         /* Data is already the size it is required to show?*/
         public function __construct(array $data, string $previewLayout, string $HTML = null) {
             /** We don't need the layout from user.*/

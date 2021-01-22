@@ -47,17 +47,9 @@
         email VARCHAR(40) NOT NULL UNIQUE,
         password VARCHAR(14) NOT NULL,
 
+        isAdmin BOOLEAN NOT NULL DEFAULT FALSE,
+
         immagineProfilo varchar(40) NOT NULL DEFAULT ('imgs/default.png')
-
-    ) ENGINE = InnoDB;
-
-
-    CREATE TABLE Moderatore(
-
-        UserID int UNSIGNED NOT NULL PRIMARY KEY,
-        isAdmin BOOLEAN NOT NULL,
-
-        FOREIGN KEY (UserID) REFERENCES Utente(ID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
 
@@ -86,10 +78,7 @@
     CREATE TABLE Tag(
 
         ID int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        nome VARCHAR(40) UNIQUE NOT NULL,
-
         LabelID int UNSIGNED,
-        image_file VARCHAR(40),
 
         FOREIGN KEY (LabelID) REFERENCES Label(ID) ON DELETE SET NULL
 
@@ -118,7 +107,7 @@
         /** Se elimino dal sistema un ordine elimino anche tutte le famiglie
             ad esso relativo. Mi pare giusto così.*/
         FOREIGN KEY (TagID) REFERENCES Tag(ID),
-        FOREIGN KEY (OrdID) REFERENCES Ordine(TagID)
+        FOREIGN KEY (OrdID) REFERENCES Ordine(TagID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
 
@@ -131,7 +120,7 @@
         nomeScientifico VARCHAR(40) NOT NULL,
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID),
-        FOREIGN KEY (famID) REFERENCES Famiglia(TagID)
+        FOREIGN KEY (famID) REFERENCES Famiglia(TagID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
 
@@ -139,8 +128,7 @@
     CREATE TABLE Conservazione(
 
         codice varchar(2) NOT NULL PRIMARY KEY,
-
-        nome varchar(20) NOT NULL UNIQUE,
+        nome varchar(20) NOT NULL,
         probEstinzione int,
         descrizione text
 
@@ -152,6 +140,8 @@
         genID int UNSIGNED NOT NULL,
 
         nomeScientifico varchar(40) NOT NULL,
+        nomeComune varchar(40), /* Potrebbe non averlo.*/
+
         percorsoImmagine varchar(80) NOT NULL,
 
         conservazioneID varchar(2) NOT NULL,
@@ -161,50 +151,22 @@
         descrizione text NOT NULL,
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID),
-        FOREIGN KEY (genID) REFERENCES Genere(tagID),
+        FOREIGN KEY (genID) REFERENCES Genere(tagID) ON DELETE CASCADE,
         FOREIGN KEY (conservazioneID) REFERENCES Conservazione(Codice)
 
     ) ENGINE = InnoDB;
 
-
-    CREATE TABLE ZonaGeografica(
-
-        tagID int UNSIGNED NOT NULL PRIMARY KEY,
-
-        nome varchar(40) NOT NULL,
-        continente enum('Africa','America del nord', 'Sud America', 'Asia', 'Europa', 'Oceania', 'Antartide'),
-
-        FOREIGN KEY (tagID) REFERENCES Tag(ID)
-
-    ) ENGINE = InnoDB;
-
-
-    CREATE TABLE Residenza(
-
-        specieID int UNSIGNED NOT NULL,
-        zonaID int UNSIGNED NOT NULL,
-
-        periodoInizio date NOT NULL,
-        periodoFine date NOT NULL CHECK ( periodoFine > periodoInizio ), /* Data fine deve venire dopo di inizio*/
-
-        CONSTRAint residenzaID PRIMARY KEY (specieID,zonaID),
-
-        FOREIGN KEY (specieID) REFERENCES Specie(tagID) ON DELETE CASCADE,
-        FOREIGN KEY (zonaID) REFERENCES ZonaGeografica(tagID)
-
-    ) ENGINE = InnoDB;
-
-
     CREATE TABLE Contenuto(
 
-        ID int UNSIGNED NOT NULL PRIMARY KEY,
-        UserID int UNSIGNED NOT NULL, /* Primo utente in Utenti sarà deleted.*/
+        ID int UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        UserID int UNSIGNED NOT NULL DEFAULT 1, /* Primo utente in Utenti sarà deleted.*/
 
         isArchived bool NOT NULL,
         content text NOT NULL,
         data date NOT NULL,
 
-        FOREIGN KEY (UserID) REFERENCES Utente(ID)
+        /** Fare si che quando si elimina un conrenuto essa venga indirizzato allo standard user 'deleted'. */
+        FOREIGN KEY (UserID) REFERENCES Utente(ID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
 
@@ -223,29 +185,6 @@
 
     ) ENGINE = InnoDB;
 
-
-    CREATE TABLE Segnalazione(
-
-        contentID int UNSIGNED NOT NULL,
-        utenteID int UNSIGNED NOT NULL,
-
-        modResponsabile int UNSIGNED NOT NULL,
-
-        causale text,
-        elaborato bool NOT NULL default (false),
-
-        CONSTRAint segnalazioneID PRIMARY KEY (contentID,utenteID),
-
-        /* Se elimino il post o l'utente la segnalazione va eliminata, non è oiù rilevante. */
-        FOREIGN KEY (contentID) REFERENCES Contenuto(ID) ON DELETE CASCADE ,
-        FOREIGN KEY (utenteID) REFERENCES Utente(ID) ON DELETE CASCADE,
-        /* Non è possibile eliminare il moderatore responsabile se ha ancora Segnalazioni
-           da gestire, quindi default behaviour. */
-        FOREIGN KEY  (modResponsabile) REFERENCES Moderatore(UserID)
-
-    ) ENGINE = InnoDB;
-
-
     CREATE TABLE Post(
 
         contentID int UNSIGNED NOT NULL PRIMARY KEY,
@@ -254,7 +193,6 @@
         FOREIGN KEY (contentID) REFERENCES Contenuto(ID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
-
 
     CREATE TABLE ImmaginiPost(
 
@@ -280,21 +218,6 @@
 
      ) ENGINE = InnoDB;
 
-
-    CREATE TABLE Notifica(
-        utenteID int UNSIGNED NOT NULL,
-        utenteCausaID int UNSIGNED NOT NULL check (utenteCausaID != utenteID),
-        contenutoID int UNSIGNED NOT NULL,
-
-        CONSTRAint NotificaID PRIMARY KEY (utenteID,utenteCausaID,contenutoID),
-
-        FOREIGN KEY (utenteID) REFERENCES Utente(ID) ON DELETE CASCADE,
-        FOREIGN KEY (utenteCausaID) REFERENCES Utente(ID),
-        FOREIGN KEY (contenutoID) REFERENCES Contenuto(ID) ON DELETE CASCADE
-
-    ) ENGINE = InnoDB;
-
-
     CREATE TABLE Citazione(
         tagID int UNSIGNED NOT NULL,
         postID int UNSIGNED NOT NULL,
@@ -305,17 +228,3 @@
         FOREIGN KEY (postID) REFERENCES Post(contentID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
-
-    CREATE TABLE Interesse(
-
-        tagID int UNSIGNED NOT NULL,
-        userID int UNSIGNED NOT NULL,
-
-        CONSTRAINT interesseID PRIMARY KEY (tagID, userID),
-
-        FOREIGN KEY (tagID) REFERENCES Tag(ID),
-        FOREIGN KEY (userID) REFERENCES  Utente(ID)
-
-    ) ENGINE = InnoDB;
-
-

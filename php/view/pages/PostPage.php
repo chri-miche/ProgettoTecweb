@@ -22,6 +22,7 @@
     $pid = isset($_GET['id']) ? $_GET['id'] : null;
     $page->addComponent(new Post($pid,$sessionUser));
 
+
     echo $page;
 
 ?>

@@ -7,6 +7,7 @@
 
     require_once __ROOT__ .'\model\UserElement.php';
     require_once __ROOT__ .'\model\PostElement.php';
+
     // User page has: A left side bar (user side) a right content field ( description + Posts)
     class UserPage extends Component {
 
@@ -17,7 +18,7 @@
         // TODO: Get current selected posts page. Or add link to see all posts? If we add link to see all posts we display
         //  just one BrowsePage with a number of elements. Link rediredts to Browser of pages of a selected user?.
         public function __construct(int $id, string $selfReference, string $HTML = null){
-            parent::__construct(isset ($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\user\UserLayout.xhtml'));
+            parent::__construct( $HTML ?? file_get_contents(__ROOT__.'\view\modules\user\UserLayout.xhtml'));
 
             $this->user = new UserElement($id);
 
@@ -45,8 +46,7 @@
             $resolvedData['{right}'] = (new UserDetails($this->user, $this->selfReference))->returnComponent();
 
             /** Title of the coming stuff. We have now a list of posts previews. At the end of the limited previews we
-             add a reference to "see all Posts" in order to browse them all. */
-            // TODO: Move style to css.
+             add a reference to "see all Posts" in order to browse them all. */ // TODO: Move style to css.
             $resolvedData['{right}'] .= '<div style=" text-align: center; padding: 0.5em; margin: 1em 5em;" class="primary-color"> Post pubblicati dall utente: </div>';
 
 

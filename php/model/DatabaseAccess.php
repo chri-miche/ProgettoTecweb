@@ -18,10 +18,11 @@
 
                 $result = mysqli_query($connection, $query);
 
-                while($elem = mysqli_fetch_assoc($result))
-                    $return[] = $elem;
+                if(!($result === false)) /** Se risultato valido si può scorrere.*/
+                    while($elem = mysqli_fetch_assoc($result)) $return[] = $elem;
 
                 self::closeConnection($connection);
+
                 return $return;
 
             } catch (Exception $e) { return null; }
@@ -30,16 +31,38 @@
         static public function executeSingleQuery($query){
 
             try{
+
                 $connection = self::openConnection();
 
                 $result = mysqli_query($connection, $query);
 
-                $result = mysqli_fetch_assoc($result);
+                /** Se il risutlato della query è valido allora si può elaborare.*/
+                if(!($result === false))
+                    $result = mysqli_fetch_assoc($result);
 
                 self::closeConnection($connection);
+
                 return $result;
 
             } catch (Exception $e) { return null; }
+
+        }
+
+        static public function executeNoOutputUpdateQuery(string $query){
+
+            try{
+
+                /** Apertura della connessione.*/
+                $connection = self::openConnection();
+                $result = $connection->query($query);
+
+                /** Se il risultato è vero e abbiamo modificato più di una riga.*/
+                $return = $result && $connection->affected_rows > 0;
+                $connection->close();
+
+                return $return;
+
+            } catch (Exception $e) { return false; }
 
         }
 
@@ -79,9 +102,10 @@
         static public function deleteRecord(string $query){
 
             $connection = self::openConnection();
-            mysqli_query($connection, $query);
-            // echo 'here';
+            $res = mysqli_query($connection, $query);
+
             self::closeConnection($connection);
+            return $res;
 
         }
 

@@ -12,14 +12,14 @@ insert into utente(ID, nome, email, password, immagineProfilo) values
 
 Insert into moderatore(UserID, isAdmin) value (1, true);
 
-insert into contenuto(ID, UserID, isArchived, content, data) values
-    (0, 1, false, 'Abracadabra qui ci sta del testo uhahaha','1960-10-12'),
-    (1, 3, false, 'Abba','1960-10-12');
+insert into contenuto(UserID, isArchived, content, data) values
+    (1, false, 'Abracadabra qui ci sta del testo uhahaha','1960-10-12'),
+    (3, false, 'Abba','1960-10-12');
 
-
-insert into post(contentID, title) value
-    (0, 'Prova 1'),
-    (1, 'Prova 2');
+select * from contenuto;
+insert into post(contentID, title) valueS
+    (3, 'Prova 1'),
+    (4, 'Prova 2');
 
 insert into approvazione(utenteID, contentID, likes) VALUES
     (1, 0, -1),
@@ -75,3 +75,5 @@ INSERT INTO specie(tagID, genID, nomeScientifico, percorsoImmagine, conservazion
 ALTER TABLE tag MODIFY nome VARCHAR(40);
 
 INSERT INTO interesse(tagID, userID) VALUE (30, 1), (35, 1 );
+
+alter table specie add column nomeComune VARCHAR(40);

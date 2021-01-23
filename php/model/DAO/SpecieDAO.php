@@ -145,6 +145,38 @@
             return $VOArray;
         }
 
+        public function search(string $text) : array {
+
+            $VOArray = array();
+
+            $result = $this->performMultiCAll(array($text), 'search_all_specie');
+            if(isset($result['failure'])) return $VOArray;
+
+            foreach ($result as $element){
+
+                /** Creazione di un genere. Che a sua volta crea la famiglia e sua volta l ordine.*/
+                $element['genereVO'] = new GenereVO( $element['genere'], $element['nomeScientifico_genere'],
+                    new FamigliaVO($element['famiglia'], $element['nomeScientifico_famiglia'],
+                        new OrdineVO($element['ordine'],  $element['nomeScientifico_ordine'])));
+
+                /** Creazione di stato estinzione.*/
+                $element['conservazioneVO'] = new
+                    ConservazioneVO($element['conservazione'], $element['nome'], $element['probEstinzione'], $element['descrizione']);
+
+                /** Scartiamo gli attributi non più necessari.*/
+                unset($element['genere'], $element['nomeScientifico_genere'], $element['famiglia'],
+                    $element['nomeScientifico_famiglia'],  $element['ordine'], $element['nomeScientifico_ordine']);
+
+                unset($element['conservazione'],$element['nome'], $element['probEstinzione'], $element['descrizione']);
+
+                $VOArray [] = new SpecieVO(...$element);
+
+            }
+
+            return $VOArray;
+
+        }
+
 
         /** @param SpecieVO $element */
         public function checkId(VO &$element) : bool {

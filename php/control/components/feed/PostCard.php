@@ -17,12 +17,8 @@
 
         $ritorno = [];
 
-        $userVO = (new UserDAO())->get($this->postVO->getUserVO()->getId());
-        $ritorno['{nome}'] = $userVO->getNome();
-
         foreach ($this->postVO->arrayDump() as $key => $value)
             $ritorno['{' . $key . '}'] = $value;
-
 
         return $ritorno;
     }

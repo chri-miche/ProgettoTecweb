@@ -173,7 +173,7 @@
         DELETE FROM tag  WHERE ID = del_id; END;
 
 
-    DROP PROCEDURE IF EXISTS  get_specie;
+    DROP PROCEDURE IF EXISTS get_specie;
     CREATE PROCEDURE get_specie(IN in_id INT) BEGIN
 
         SELECT  S.id, S.nomeScientifico, S.nomeComune, S.altezzaMedia,
@@ -186,6 +186,22 @@
         )
 
         S ON S.conservazioneID = C.codice;  END;
+
+    DROP PROCEDURE IF EXISTS search_all_specie;
+    CREATE PROCEDURE search_all_specie(IN text VARCHAR(255)) BEGIN
+        SELECT  S.tagID as id, S.nomeScientifico, S.nomeComune, S.pesoMedio,
+                    S.altezzaMedia, S.descrizione, S.percorsoImmagine as immagine,
+                    G.tagID as genere, G.nomeScientifico as nomeScientifico_genere,
+                    F.TagID as famiglia, F.nomeScientifico as nomeScientifico_famiglia,
+                    O.TagID as ordine, O.nomeScientifico as nomeScientifico_ordine,
+                    c.codice as conservazione, C.nome, C.probEstinzione, C.descrizione
+            FROM specie S
+            INNER JOIN genere g on S.genID = g.tagID INNER JOIN conservazione c on S.conservazioneID = c.codice
+            INNER JOIN famiglia f on g.famID = f.TagID INNER JOIN ordine o on f.OrdID = o.TagID
+
+            WHERE   S.nomeScientifico LIKE text OR S.nomeComune LIKE text OR S.descrizione LIKE text OR
+                    G.nomeScientifico LIKE text OR F.nomeScientifico LIKE text OR o.nomeScientifico LIKE text
+                    OR c.codice LIKE text; END;
 
 
     DROP PROCEDURE IF EXISTS check_specie_id;
@@ -254,7 +270,7 @@
             F ON F.f_id = G.famID INNER JOIN ordine O On O.TagID = F.OrdID LIMIT in_offset, in_limit; END;
 
     DROP PROCEDURE IF EXISTS get_many_filter_specie_by_famiglia;
-    CREATE PROCEDURE get_many_filter_   specie_by_famiglia(IN fam_id INT, IN in_limit INT, IN in_offset INT) BEGIN
+    CREATE PROCEDURE get_many_filter_specie_by_famiglia(IN fam_id INT, IN in_limit INT, IN in_offset INT) BEGIN
           SELECT S.tagID as id, S.nomeScientifico, S.nomeComune, S.pesoMedio, S.altezzaMedia, S.descrizione, S.percorsoImmagine as immagine,
                 G.tagID as g_id, G.nomeScientifico as g_nomeScientifico, F.TagID as f_id, F.nomeScientifico as f_nomeScientifico,
                 O.TagID as o_id, O.nomeScientifico as o_nomeScientifico, C.codice as c_codice

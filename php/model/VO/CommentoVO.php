@@ -126,8 +126,7 @@
         }
 
 
-        public function arrayDump(): array
-        {
+        public function arrayDump(): array {
             // TODO: Implement arrayDump() method.
         }
     }

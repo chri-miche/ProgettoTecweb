@@ -193,8 +193,21 @@
         }
 
 
-        public function arrayDump(): array
-        {
-            // TODO: Implement arrayDump() method.
+        public function arrayDump(): array {
+
+            $result = get_object_vars($this);
+
+            /** Togliamo gli array.*/
+            unset($result['genereVO']);
+            unset($result['conservazioneVO']);
+
+            /** @var $counter: Contatore di elementi immagine in modo da impostare un default.*/
+            /** Sistemazione dell'utente.*/
+            $userDataToAppend = [];
+
+            $result['userId'] = $this->genereVO->getId();
+
+            $result = array_merge($result, $userDataToAppend);
+            return $result;
         }
     }

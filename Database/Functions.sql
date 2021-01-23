@@ -21,6 +21,10 @@
            (SELECT S.SeguaceID, S.SeguitoID FROM seguito S WHERE S.SeguaceID = id)
         S ON S.SeguitoID = U.ID; END;
 
+    DROP PROCEDURE IF EXISTS check_user_id;
+    CREATE PROCEDURE check_user_id(IN id INT) BEGIN
+        SELECT COUNT(U.ID) as idexists FROM utente U WHERE U.ID = id LIMIT 1; END;
+
     DROP PROCEDURE IF EXISTS check_email_unique;
     CREATE PROCEDURE check_email_unique(IN check_mail VARCHAR(40), IN usid INT) BEGIN
        SELECT COUNT(U.ID) as valid FROM utente U WHERE U.email = check_mail AND U.ID != usid;END;
@@ -36,7 +40,7 @@
         UPDATE utente U SET U.nome = in_nome, U.email = in_email, U.password = in_password,
         U.immagineProfilo = in_immagine, U.isAdmin = in_admin WHERE U.ID = in_id; END;
 
-    
+
     DROP PROCEDURE IF EXISTS create_user;
     CREATE PROCEDURE create_user(IN usernome VARCHAR(25), IN useremail VARCHAR(40), IN userpassword VARCHAR(14),
     IN immagine VARCHAR(40), IN useradmin BOOL) BEGIN
@@ -44,6 +48,18 @@
             (usernome, useremail, userpassword, immagine, useradmin);
         SELECT LAST_INSERT_ID() as id; END;
 
+    DROP PROCEDURE IF EXISTS user_is_following;
+    CREATE PROCEDURE user_is_following(IN us_id INT, IN friend_id INT)BEGIN
+        SELECT COUNT(S.SeguitoID) as follow FROM seguito S WHERE S.SeguitoID = friend_id AND S.SeguaceID = us_id; END;
+
+    DROP PROCEDURE IF EXISTS user_act_friend;
+    CREATE PROCEDURE user_act_friend(IN us_id INT, firend_id INT) BEGIN
+
+        IF((SELECT COUNT(S.SeguitoID) FROM seguito S WHERE S.SeguaceID = us_id AND S.SeguitoID = firend_id)) THEN
+            DELETE FROM seguito WHERE SeguitoID = firend_id AND SeguaceID = us_id;
+        ELSE
+            INSERT INTO seguito (SeguitoID, SeguaceID) VALUE (firend_id, us_id);
+        END IF;END;
 
 
     /* Procedure di ordine:*/

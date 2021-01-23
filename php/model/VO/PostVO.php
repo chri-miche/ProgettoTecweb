@@ -43,7 +43,7 @@
 
         public function __get($name){ return $this->$name ?? null; }
 
-        public function arrayDump(){
+        public function arrayDump() : array{
 
             $result = get_object_vars($this);
             unset($result['arrayTagVO']);

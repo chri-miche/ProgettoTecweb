@@ -3,33 +3,31 @@
 
 class FollowButton extends Component{
 
-    private $currentUser;
+    private $canOperate;
 
-    private $friend;
+    private $followerVO; /* Quello che ora segue l altro. */
+    private $followedVO; /* Quello che verrà seguito.*/
+
     private $redirect;
 
-    public function __construct(int $id, string $redirect, string $HTML = null){
+    public function __construct(UserVO $followed, string $redirect, string $HTML = null){
 
-        parent::__construct(isset($HTML)? $HTML : file_get_contents(__ROOT__.'\view\modules\user\FollowButton.xhtml'));
+        parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\user\FollowButton.xhtml'));
 
-        $this->friend = $id;
-        $this->redirect = $redirect;
+        $this->followedVO = $followed; $this->redirect = $redirect;
 
-        $this->currentUser = new SessionUser();
+        $currentUser = new SessionUser();
+        $this->followerVO = $currentUser->getUser();
+
+        $this->canOperate = $currentUser->userIdentified() && $this->followerVO->getId() != $this->followedVO->getId();
 
     }
 
     public function build() {
 
         /** If the user is not authenticated or the same as the one displayed we don't show anything.*/
-        if(!$this->currentUser->userIdentified() || $this->currentUser->getUser()->ID == $this->friend)  return null;
-
-        $baseLayout = $this->baseLayout();
-
-        foreach ($this->resolveData() as $key => $value)
-            $baseLayout = str_replace($key, $value, $baseLayout);
-
-        return $baseLayout;
+        if(!$this->canOperate)  return '';
+        return parent::build();
 
     }
 
@@ -38,12 +36,12 @@ class FollowButton extends Component{
 
         $resolvedData = [];
 
-        $resolvedData['{usid}'] = $this->friend;
+        $resolvedData['{usid}'] = $this->followedVO->getId();
         $resolvedData['{redirect}'] = $this->redirect;
 
-        $resolvedData['{add}'] = !in_array($this->friend, $this->currentUser->getUser()->amici);
+        $alreadyFollowing = (new UserDAO())->isFollowing($this->followerVO, $this->followedVO);
 
-        $resolvedData['{text}'] = $resolvedData['{add}'] ? 'Aggiungi ai seguiti' : 'Rimuovi dai seguiti.';
+        $resolvedData['{text}'] = !$alreadyFollowing ? 'Aggiungi ai seguiti' : 'Rimuovi dai seguiti.';
 
         return $resolvedData;
 

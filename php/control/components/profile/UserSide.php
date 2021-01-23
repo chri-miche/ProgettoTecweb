@@ -1,89 +1,55 @@
 <?php
 
-
-    require_once __ROOT__.'\model\TagElement.php';
-    require_once __ROOT__.'\model\UserElement.php';
-
     require_once __ROOT__.'\control\components\Component.php';
+    require_once __ROOT__ .'\model\DAO\UserDAO.php';
 
+    require_once __ROOT__.'\control\components\generics\LinkRow.php';
+    /* Diventa semplicemente la lista di amici.*/
     class UserSide extends Component {
 
-        private $user;
+        private $usid;
 
-        private $users;
-        private $userReference;
+        private $friendsArray;
+        private $userPageReference;
+
         private $friendsDisplayLimit;
 
-        private $tags;
-        private $tagReference;
-        private $tagsDisplayLimit;
 
-        // TODO: Set default values. Rsolve also profile picture and role. Add two more references. Friend list and followed list.
-        public function __construct(UserElement $user, int $maxFriendElements = 10, int $maxTagElements = 30, string $HTML = null,
-                                    string $userReference = 'UserPage.php', string $tagReference = 'Search.php') {
+        public function __construct(UserVO $user, int $maxFriends = 20, string $reference = 'UserPage.php', string $HTML = null) {
 
-            parent::__construct(isset ($HTML) ?  $HTML : file_get_contents(__ROOT__.'\view\modules\user\UserSide.xhtml'));
+            parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\user\UserSide.xhtml'));
 
-            $this->user = clone $user;
+            /** Ottenimento dati utente e suoi amici.*/
 
-            $this->users= UserElement::getFriends($this->user->ID, $maxFriendElements);
-            $this->userReference = $userReference;
+            $this->usid = $user->getId();
+            $this->friendsArray = (new UserDAO())->getFriends($user);
 
-            $this->tags = TagElement::getInterests($this->user->ID, $maxTagElements); // Get full array of data to avoid multple queries.
-            $this->tagReference = $tagReference;
-
-            $this->friendsDisplayLimit = $maxFriendElements;
-            $this->tagsDisplayLimit = $maxTagElements;
+            $this->friendsDisplayLimit = $maxFriends;
+            $this->userPageReference = $reference;
 
         }
-
-        public function build() {
-
-            $baseLayout = $this->baseLayout();
-
-            foreach ($this->resolveData() as $key => $value)
-                $baseLayout = str_replace($key, $value, $baseLayout);
-
-            return $baseLayout;
-
-        }
-
-
 
         public function resolveData() {
 
             $resolveData = [];
 
-            $resolveData['{immagineProfilo}'] = $this->user->immagineProfilo;
-
-            $resolveData['{tipologiaUtente}'] = $this->user->getModerator() ? $this->user->getAdmin() ?
-                '<div style="width: 100%; background-color: #034b72; padding-top: 1em; padding-bottom: 1em"> <div style="margin-left: 1em"> Amministratore </div> </div>' : 'Moderatore' : null; // TODO: Add style.
-
-            $list = '';
-            /** List of followed tags.*/
-            for($i = 0; $i < $this->tagsDisplayLimit &&  $i < sizeof($this->tags); $i++)
-                $list .= (new LinkRow($this->tagReference. '?id='. $this->tags[$i]->ID, $this->tags[$i]->nome))->build();
-
-            $resolveData['{tags}'] = $list;
-
-            /** Se ho più di quanto posso visualizzare mandami alla pagina: Tutti i tag seguiti.*/
-            $resolveData['{tagReference}'] = sizeof($this->tags) >= $this->tagsDisplayLimit ?
-                '<a href ="UserTags.php?id='. $this->user->ID .'"> Vedi altri tag </a>' : null;
+            /** Ogni proprietà di utente attuale.*/
+            $friendsList = ''; // Costruzione della lista di amici da presentare.
 
 
-            $list = '';
-            /** List of followed users.*/
-            for($i = 0; $i < $this->friendsDisplayLimit && $i < sizeof($this->users); $i++)
-                $list .=(new LinkRow($this->userReference .'?id='. $this->users[$i]->ID, $this->users[$i]->nome,
-                    $this->users[$i]->immagineProfilo))->build();
+            for($i = 0; $i < $this->friendsDisplayLimit && $i < sizeof($this->friendsArray); $i++) {
+                /* Riferimento alla pagina dell amico.*/
+                $friendReference = $this->userPageReference . "?id=" . $this->friendsArray[$i]->getId();
 
-            $resolveData['{users}'] = $list;
+                /** Link di accesso ad una pagina di un amico. */
+                $friendsList .= (new LinkRow($friendReference, $this->friendsArray[$i]))->build();
+            }
+
+            $resolveData['{users}'] = $friendsList;
 
             /** Se ho più di quanto posso visualizzare mandami alla pagina: Tutti gli utenti seguiti.*/
-            $resolveData['{friendsReference}'] = sizeof($this->users) >= $this->friendsDisplayLimit ?
-                '<a href="UserFriends.php?id='. $this->user->ID . '"> Vedi altri amici</a>' : null;
-
-
+            $resolveData['{friendsReference}'] = sizeof($this->friendsArray) >= $this->friendsDisplayLimit
+                ? "<a href='UserFriends.php?id=$this->usid'> Vedi altri amici </a>" : null;
 
             return $resolveData;
 

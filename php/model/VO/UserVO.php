@@ -91,4 +91,10 @@
             return array_values($data);
 
         }
+
+        public function arrayDump() : array{
+
+            return get_object_vars($this);
+
+        }
     }

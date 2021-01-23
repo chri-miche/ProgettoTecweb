@@ -47,3 +47,7 @@ require_once __ROOT__.'\model\DAO\CommentoDAO.php';
     $nDAO->save($comment);
 
     echo $postDAO->save($postVO);
+
+    $userVO = new UserVO();
+
+    print_r($userVO->arrayDump());

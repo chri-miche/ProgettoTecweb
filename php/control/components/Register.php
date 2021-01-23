@@ -6,7 +6,6 @@
     class Register extends Component {
 
         private $user;
-
         private $invalid;
 
         private $redirect;
@@ -37,10 +36,8 @@
                     /** Assegna un nuovo utente. {@see SessionUser} */
                     $this->user->setUserVO($newUser);
                 } else {
-
                     /** Show credenziali non validi.*/
                     $this->invalid = true;
-
                 }
 
             }

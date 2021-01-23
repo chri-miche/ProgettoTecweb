@@ -52,4 +52,8 @@ class TagVO implements  VO{
     }
 
 
+    public function arrayDump(): array
+    {
+        // TODO: Implement arrayDump() method.
+    }
 }

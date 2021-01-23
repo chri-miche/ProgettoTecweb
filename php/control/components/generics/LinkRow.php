@@ -6,30 +6,26 @@
 
         private $reference;
 
-        private $title;
-        private $image;
+        /** @var VO $genericVO: Implementazione di vo*/
+        private $genericVO;
 
-
-        public function __construct(string $reference, string $title, string $image = null, string $HTML = null) {
+        public function __construct(string $reference, VO $linkTypeVO, string $HTML = null) {
 
             parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\LinkRow.xhtml'));
 
             $this->reference = $reference;
-
-            $this->title = $title;
-            $this->image = isset($image) ? $image : '';
-
+            $this->genericVO = $linkTypeVO;
 
         }
 
 
         public function resolveData() {
 
-            $resolved ['{reference}'] = $this->reference;
-            $resolved ['{title}'] = $this->title;
-            $resolved ['{image}'] = $this->image;
+            $resolvedData['{reference}'] = $this->reference;
 
-            return $resolved;
+            foreach ($this->genericVO->arrayDump() as $key => $value)
+                $resolvedData['{'. $key .'}'] = $value;
 
+            return $resolvedData;
         }
     }

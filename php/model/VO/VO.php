@@ -9,8 +9,11 @@
          *  @return value | null : Valore del campo se esiste altrimenti nullo.*/
         public function __get($name);
 
-        public function varDumps(bool $id = false) : array;
+        /** Ritorna tutti i campi dell oggetto come array. In oggetti complessi è necessario
+         *  che il contenitore aggiunga i campi del figlio in modo oppurtuno.*/
+        public function arrayDump() : array;
 
+        public function varDumps(bool $id = false) : array;
         public function smartDump(bool $id = false) : array;
 
     }

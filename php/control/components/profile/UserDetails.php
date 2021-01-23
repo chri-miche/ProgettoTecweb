@@ -1,53 +1,55 @@
 <?php
-require_once __ROOT__ .'\control\components\profile\FollowButton.php';
-/** User details has button to follow.*/
-class UserDetails extends Component {
+    require_once __ROOT__.'\control\components\Component.php';
 
-    private $user;
-
-    private $showButton;
-    private $redirect;
+    require_once __ROOT__ .'\model\DAO\UserDAO.php';
 
 
-    /** We get user id in input.
-     * @param UserElement $user the selected page user.
-     * @param string $redirect the page to which we redirect when we follow someone (could be self reference).
-     * @param string|null $HTML the base layout of the component.
-     */
-    public function __construct(UserElement $user, string $redirect, bool $action = true, string $HTML = null){
-        parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\user\UserDetails.xhtml'));
+    require_once __ROOT__ .'\control\components\profile\FollowButton.php';
 
-        $this->user = clone $user;
+    /** User details has button to follow.*/
+    class UserDetails extends Component {
 
-        $this->showButton = $action;
-        if($this->showButton) $this->redirect = $redirect;
+        private $user;
 
+        private $showButton;
+        private $redirect;
+
+        /** We get user id in input.
+         * @param UserVO $user the selected page user.
+         * @param string $redirect the page to which we redirect when we follow someone (could be self reference).
+         * @param bool $action Se l azione del componente è attiva o meno.
+         * @param string|null $HTML the base layout of the component. */
+        public function __construct(UserVO $user, string $redirect, bool $action = true, string $HTML = null){
+            parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\user\UserDetails.xhtml'));
+
+            /** Utente di cui visualizzare le informazioni.*/
+            $this->user = $user;
+
+            /** Bottone di azione e possibilità di attivarlo. */
+            $this->showButton = $action;
+            if($this->showButton) $this->redirect = $redirect;
+
+        }
+
+        public function resolveData(){
+
+            $resolvedData = [];
+
+            print_r($this->user->arrayDump());
+
+            foreach ($this->user->arrayDump() as $key => $value)
+                $resolvedData["{".$key."}"] = $value;
+
+            print_r($resolvedData);
+
+            $resolvedData['{loggedActions}'] = '';
+
+            if($this->showButton && $this->user->getId() != (new SessionUser())->getUser()->getId())
+                $resolvedData['{loggedActions}'] = (new FollowButton($this->user,  $this->redirect));
+
+            // TODO: Add modify user button if you are the same as the one displayed and if we need to do so.
+
+            return $resolvedData;
+
+        }
     }
-
-    public function build() {
-
-        $baseLayout = $this->baseLayout();
-
-        foreach ($this->resolveData() as $key => $value)
-            $baseLayout = str_replace($key, $value, $baseLayout);
-
-        return $baseLayout;
-
-    }
-
-    public function resolveData(){
-
-        $resolvedData = [];
-
-        foreach ($this->user->getData() as $key => $value)
-            if(!is_array($value)) $resolvedData['{'.$key.'}'] = $value;
-
-        // TODO: Add modify user button if you are the same as the one displayed and if we need to do so.
-        $resolvedData['{loggedActions}'] = $this->showButton ?
-            (new FollowButton($this->user->ID, $this->redirect))->returnComponent() : '';
-
-
-        return $resolvedData;
-
-    }
-}

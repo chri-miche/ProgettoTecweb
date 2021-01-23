@@ -16,9 +16,10 @@
             $VOArray = array();
 
             $result = $this->performMultiCAll(array(), 'get_all_users');
-            if( isset($result['success']) && !$result['success']) return $VOArray;
+            if(isset($result['failure'])) return $VOArray;
 
-            foreach ($result as $element)  $VOArray [] = new OrdineVO(...$element);
+            foreach ($result as $element)
+                $VOArray [] = new UserVO(...$element);
 
             return $VOArray;
 
@@ -68,6 +69,20 @@
             return false;
         }
 
+        public function follow(UserVO $user, UserVO $friend) : bool{
+
+            $result = $this->performNoOutputModifyCall(array($user->getId(), $friend->getId()), 'user_act_friend');
+            return !isset($result['failure']);
+
+        }
+
+        public function isFollowing(UserVO $user, UserVO $friend) : bool{
+
+            $result = $this->performCall(array($user->getId(), $friend->getId()), 'user_is_following');
+            return !isset($result['failure']) && $result['follow'];
+
+        }
+
         public function delete(VO &$element) : bool {
             return $this->defaultDelete($element, 'delete_utente');
         }
@@ -77,18 +92,19 @@
         /** @param UserVO $element: Elemento di cui trovare gli amici.
          *  @return null | array(UserVO) : Null se non è possibile la persona abbia amici, e
             * quindi non fa parte del database corrente.*/
-        public function getFriends(UserVO &$element){
+        public function getFriends(UserVO &$element) : array{
 
+            $VOArray = []; /** Array di amici. */
             /* Se user VO non è settato o non esiste nella banca dati corrente. */
-            if(!$this->checkId($element)) return null;
+            if(!$this->checkId($element)) return $VOArray;
 
-            $query = "CALL get_all_friends($element->id)";
-            $userVOArray = []; /** Array di amici. */
+            $result = $this->performMultiCAll(array($element->getId()), 'get_all_friends');
 
-            foreach (DatabaseAccess::executeQuery($query) as $element)
-                $userVOArray = new UserVO(...$element);
+            if(!isset($result['failure']))
+                foreach ($result as $element)
+                    $VOArray [] = new UserVO(...$element);
 
-            return $userVOArray;
+            return $VOArray;
 
         }
 

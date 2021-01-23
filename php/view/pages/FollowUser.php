@@ -4,23 +4,25 @@
     require_once __ROOT__.'\control\SessionUser.php';
     require_once __ROOT__.'\model\UserElement.php';
 
-    // TODO: Move to Control
-    // Make it a class?
+    require_once __ROOT__.'\model\DAO\UserDAO.php';
 
-    $currentUser = new SessionUser();
-    $newOldFriend = $_POST['usid'];
-    $add = $_POST['add'];
+    $userDAO = new UserDAO();
 
-    if($newOldFriend != $currentUser->getUser()->ID) {
+    $currentUserVO = (new SessionUser())->getUser();
 
-        if ($add) $currentUser->getUser()->addFriend($newOldFriend);
-        else  $currentUser->getUser()->removeFriend($newOldFriend);
+    /** L utente da aggiungere.*/
+    $friendId = $_POST['usid'] ?? null;
 
-        $currentUser->updateUser();
+    echo $friendId;
+    if(is_null($friendId))
+        header("Location: Home.php");
 
-    }
+    $friendVO = $userDAO->get($friendId);
+
+    /** Adds the user to friends if he is not in it, else he removes from there*/
+    $userDAO->follow($currentUserVO, $friendVO);
 
     $previous = $_POST['previousPath'];
-    header('Location:' . $previous. $newOldFriend);
+    header("Location: $previous$friendId");
 
 ?>

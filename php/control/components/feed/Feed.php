@@ -42,7 +42,8 @@ class Feed extends Component {
     public function build() {
 
         $HTML = $this->basePage->build();
-        $HTML = str_replace('href="Home.php?feed=' . $this->criteria . '"', 'class="disabled"', $HTML);
+        $HTML = str_replace('{feed}', $this->criteria, $HTML);
+        $HTML = str_replace('href="Home.php?feed=' . $this->criteria . '"', 'aria-disabled=true', $HTML);
         return $HTML;
     }
 }

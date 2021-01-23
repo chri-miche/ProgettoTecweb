@@ -44,15 +44,12 @@ body {
 }
 
 .accent-color {
-    /*background: #afdac1;*/
-    background: #2196F3;
-    /*background: #1E88E5;*/
+    background: rgb(33,150,243);
     color: white;
 }
 
 .primary-color {
-    /*background: #00260b;*/
-    background: #1e2129;
+    background: rgb(30,33,41);
     color: white;
 }
 
@@ -61,18 +58,17 @@ input, textarea {
     background-color: transparent;
     outline: none;
     padding: 0.75em;
-    border-bottom: 3px solid #2196F3;
+    border-bottom: 3px solid rgb(33, 150, 243);
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 input:focus, textarea:focus {
-    background: #D3EAFD;
+    background: rgba(33, 150, 243, 0.3);
 }
 
 #container {
     display: flex;
     flex-flow: row;
-
     height: 100%;
     width : 100%;
 }
@@ -113,9 +109,9 @@ button:hover, .button:hover, a:hover {
             0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-button.disabled, .button.disabled, a.disabled,
-button.disabled:hover, .button.disabled:hover, a.disabled:hover,
-button.disabled:active, .button.disabled:active, a.disabled:active
+button.disabled, .button.disabled, a[aria-disabled=true], button[aria-disabled=true]
+button.disabled:hover, .button.disabled:hover, a[aria-disabled=true]:hover, button[aria-disabled=true]:hover,
+button.disabled:active, .button.disabled:active, a[aria-disabled=true]:active, button[aria-disabled=true]:active
 {
     background: inherit;
     color: inherit;
@@ -154,10 +150,10 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 }
 
 #tab-header {
-    background: #D3EAFD;
+    background: rgba(33,150,243, 0.3);
 }
 
-#tab-content {
+.tab-content {
     display: flex;
     flex-wrap: wrap;
     background: white;
@@ -165,118 +161,56 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 
 .tab-label {
     display: inline-flex;
-    /* animazione difficile da rendere con discorso disabled e via dicendo TODO desiderabile, non necessario
-    position: relative;
-    left: 0;
-    transition: left 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
-
-     */
 }
 
 .fake-input {
     display: none;
 }
 
-.tab-label a, .tab-label a:active, .tab-label button[type=submit], .tab-label button[type=submit]:active {
-    background: #D3EAFD;
+a.tab-label, a.tab-label:active, .tab-label button, .tab-label button:active {
+    background: transparent;
     border-radius: 0;
     box-shadow: none;
 }
 
-.tab-label a:hover, .tab-label button[type=submit]:hover {
-    background: #2196F3;
+a.tab-label:hover, .tab-label button:hover {
+    background: rgb(33,150,243);
     color: white;
 }
 
-.tab-label a.disabled, .tab-label a.disabled:hover, .tab-label button[type=submit].disabled, .tab-label button[type=submit].disabled:hover {
+a.tab-label[aria-disabled=true],
+a.tab-label[aria-disabled=true]:hover,
+.tab-label button[aria-disabled=true],
+.tab-label button[aria-disabled=true]:hover
+{
     color: inherit;
-    background: inherit;
-    border-bottom: 3px solid #2196F3;
+    background: transparent;
+    border-bottom: 3px solid rgb(33,150,243);
 }
 
 /* #end tabs */
 
-/* #begin sidebar */
-#sidebar {
-    padding-right: 1.5em;
-    box-shadow:
-            1px 0 1px 0 rgba(0,0,0,0.2),
-            0 1px 1px 0 rgba(0,0,0,0.2),
-            /*basicz*/
-            2px 0 2px 0 rgba(0,0,0,0.12),
-            4px 0 5px 0 rgba(0,0,0,0.1);
-            /*additionalz*/
-	position: relative;
-    z-index: 2;
-    background: #D3EAFD;
-}
-
-#sidebar {
-    margin-top: 0;
-    margin-bottom: 0;
-    list-style: none;
-}
-
-#sidebar li {
-    margin-bottom: 2em;
-}
-
-#sidebar li a {
-    background: #D3EAFD;
-    margin: 0;
-    border-radius: 0;
-    box-shadow: none;
-    transition: background-color cubic-bezier(0.25, 0.8, 0.25, 1) 400ms;
-}
-
-#sidebar li a:hover {
-    background: #2196F3;
-}
-
-#sidebar li a.disabled {
-    border-left: 3px solid #2196F3;
-}
-
-
-/* #end sidebar */
-
 /* #begin search */
-#search-bar {
-
-    height: fit-content;
-    width: 100%;
-    flex: 0  1  auto;
-
-    padding: 1.5em;
-    box-shadow:
-            0 1px 1px 0 rgba(0,0,0,0.2),
-            /*basic*/
-            0 2px 3px 0 rgba(0,0,0,0.12),
-            0 4px 5px 0 rgba(0,0,0,0.1);
-            /*added*/
-}
-
 #search-form {
-    position: relative;
+    flex: 1 1 auto;
+    margin: 0;
     display: flex;
-    background: white;
-    border-radius: 2em;
-    box-shadow:
-            0 1px 1px 0 rgba(0,0,0,0.2),
-                /*basic*/
-            0 2px 3px 0 rgba(0,0,0,0.12),
-            0 4px 5px 0 rgba(0,0,0,0.1);
-    /*added*/
+    justify-content: center;
 }
 
-#search-form fieldset {
+#search-form > fieldset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
     border: none;
-    padding: 0;
-    margin-left: 1em;
+    border-radius: 0.5em 0 0 0.5em;
+    margin: 0;
 }
 
 #search-button {
-    border-radius: 2em;
+    border-radius: 0 0.5em 0.5em 0;
+    margin: 0;
     box-shadow: none;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -340,19 +274,41 @@ button.disabled:active, .button.disabled:active, a.disabled:active
 
 /* #sitebar */
 #sitebar {
-
-    display: flex;
-    flex-direction: column;
-    background-image: url('/res/Images/banner.jpg');
+    background: rgb(30,33,41);
 }
 
+.mobile-actions {
+    display: none;
+}
 
 #actions {
     padding-left: 1em;
     padding-right: 1em;
+    background-image: url('/res/Images/banner.jpg');
     display: flex;
-    justify-content: space-between;
     align-items: center;
+}
+
+#logo {
+    height: 60px;
+    width: 60px;
+    padding: 5px;
+    background: transparent;
+    box-shadow: none;
+}
+
+#logo img{
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+#title {
+    /* TODO Pezza per il titolo, problema con il constrasto*/
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: white;
 }
 
 .dropdown-hover {
@@ -387,38 +343,6 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     width: auto;
     margin: 0;
 }
-
-#logged-out-actions {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#logged-out-action {
-    margin-right: 0.5em;
-}
-
-#logo {
-    height: 60px;
-    width: 60px;
-    padding: 5px;
-    background: transparent;
-    box-shadow: none;
-}
-
-#logo img{
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-}
-
-#title {
-    /* TODO Pezza per il titolo, problema con il constrasto*/
-    width: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    text-align: center;
-    color: white;
-}
 /* #end sitebar */
 
 /* #breadcrumb */
@@ -445,7 +369,7 @@ button.disabled:active, .button.disabled:active, a.disabled:active
     display: flex;
     align-items: center;
     text-decoration: none;
-    background: #2196F3;
+    background: rgb(33,150,243);
     color: white;
     min-width: 200px;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -478,7 +402,7 @@ a.breadcrumb-item:visited:hover {
     transform: scale(.707) rotate(45deg); /* scala la dimensione di sqrt(2)*/
     /*così si crea un rombo con assi lunghi 40px*/
     right: -20px; /*deve essere uguale metà height della breadcrumb, così si posiziona a cavallo tra due crumbs*/
-    background: #2196F3;
+    background: rgb(33,150,243);
     position: absolute;
     display: inline-block;
     box-shadow: 1px -1px rgba(0,0,0,0.25);
@@ -595,7 +519,7 @@ a.breadcrumb-item:visited:hover {
 /* #form */
 
 fieldset {
-    border-color: #1e2129;
+    border-color: rgb(30,33,41);
     border-radius: 0.5em;
     margin: 0.5em;
 }
@@ -657,7 +581,7 @@ table {
 }
 
 tr:nth-child(even) {
-    background: #D3EAFD;
+    background: rgba(33,150,243, 0.3);
 }
 th, td {
     padding: 0.5em;

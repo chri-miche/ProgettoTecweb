@@ -12,12 +12,13 @@ require_once __ROOT__.'\control\components\search\SearchTab.php';
 $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
 $page = new BasePage($basePage);
 
-$page->addComponent(new SiteBar("search"));
-
-$page->addComponent(new BreadCrumb(array("Ricerca" => "Search.php")));
-
 $keyword = $_POST["search"] ?? "";
-$entity = $_POST["entity"] ?? "post";
+$entity = $_GET["entity"] ?? "post";
+
+
+$page->addComponent(new SiteBar("search", $keyword));
+
+$page->addComponent(new BreadCrumb(array("Ricerca" => "")));
 
 $page->addComponent(new SearchTab($keyword, $entity));
 

@@ -1,35 +1,25 @@
-<!--<div class="w3-container w3-card-4" style="height: fit-content; padding:0px; display: flex; width: 100%;"> -->
-    <!--<img class="w3-padding" xml:lang="en" src="../../../res/Images/kiwi.jpg" alt="Bird watching logo" style="height: 200px"></img> -->
 <div id="sitebar">
-    <!-- Link circolare? -->
-   <!-- Mi piace parecchio la barra come l'hai fatta però come mi è stato fatto notare la barra in generale prende via troppo spazio
-        dovremmo ridurla all'essenziale.
-        <a id="banner" >
-            <img src="/res/Images/logo.png" id="logo" />
-            <em xml:lang="en" id="title">Birdwatchers </em>
-        </a>
-    -->
+    <a href="#actions" class="icon-button mobile-actions">Menu</a>
     <div id="actions">
-        <div id="menu-tabs">
-            <a href="#content" id="logo">
-                <img src="/res/Images/logo.png" alt="Vai al contenuto" />
-            </a>
+        <a href="#content" id="logo">
+            <img src="/res/Images/logo.png" alt="Vai al contenuto" />
+        </a>
 
-            <navigation />
+        <navigation />
 
-        </div>
-            <form id="search-form" action="Search.php" method="post" name="search">
-                <fieldset>
-                    <input id="search-input" name="search" alt="Effettua una ricerca" aria-label="Cerca nel sito" />
-                </fieldset>
-                <button id="search-button" class="icon-button" type="submit" name="submit">
-                    <!-- TODO icone -->
-                    Cerca
-                </button>
-            </form>
-        <div>
-            <loggedActions />
-        </div>
+        <form id="search-form" action="Search.php" method="post" name="search">
+            <fieldset>
+                <input id="search-input" name="search" alt="Effettua una ricerca" aria-label="Cerca nel sito" value="{value}" />
+            </fieldset>
+            <button id="search-button" class="icon-button" type="submit" name="submit">
+                Cerca
+            </button>
+        </form>
+
+        <loggedActions />
+
+        <a href="#sitebar" class="icon-button mobile-actions">Chiudi</a>
+
     </div>
 </div>
 

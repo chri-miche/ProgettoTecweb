@@ -14,22 +14,29 @@
          */
         private $position;
 
+        private $value;
+
         /** TODO: Give user as parameter by reference? Avoid multiple definitons of SessionUser.
+         * @param string $position
+         * @param string $defaultSearch
          * @param string|null $HTMLcontent
-         * @param string $position */
-        public function __construct(string $position, string $HTMLcontent = null) {
+         */
+        public function __construct(string $position, $defaultSearch = '', string $HTMLcontent = null) {
 
             parent::__construct($HTMLcontent ?? file_get_contents(__ROOT__.'\view\modules\SiteBar.xhtml'));
 
             $this->user = new SessionUser();
             $this->position = $position;
-
+            $this->value = $defaultSearch;
         }
 
         public function build() {
 
 
             $baseLayout = $this->baseLayout();
+
+            $baseLayout = str_replace("{value}", $this->value, $baseLayout);
+
 
             /** To make code tidied up count the black space of the opened tag before.*/
             if(!$this->user->userIdentified()){
@@ -49,7 +56,6 @@
                     $contentHTML = str_replace('<admin />', $adminButton->build(), $contentHTML);
 
                 }
-
             }
 
             $baseLayout = str_replace('<loggedActions />', $contentHTML, $baseLayout);

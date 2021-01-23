@@ -7,11 +7,13 @@ require_once __ROOT__.'\control\components\catalogo\GenericBrowser.php';
 class SearchTab extends BasePage
 {
     private $keyword;
+    private $entity;
 
     public function __construct($keyword, $entity)
     {
         parent::__construct(file_get_contents(__ROOT__."/view/modules/search/SearchTab.xhtml"));
         $this->keyword = addslashes($keyword);
+        $this->entity = $entity;
 
         switch ($entity) {
             case "commento":
@@ -37,6 +39,11 @@ class SearchTab extends BasePage
     {
         return array(
             "{keyword}" => $this->keyword,
+            "{post}" => $this->entity === 'post' ? '" aria-disabled="true" aria-selected="true" tabindex="-1" type="button' : '" type="submit',
+            "{specie}" => $this->entity === 'specie' ? '" aria-disabled="true" aria-selected="true" tabindex="-1" type="button' : '" type="submit',
+            "{commento}" => $this->entity === 'commento' ? '" aria-disabled="true" aria-selected="true" tabindex="-1" type="button' : '" type="submit',
+            'action="Search.php?entity=' . $this->entity  . '"' => '',
+            "{entity}" => $this->entity,
         );
     }
 

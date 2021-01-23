@@ -1,0 +1,259 @@
+
+body {
+    /*
+    font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+    la font size non può essere questa perché sullo schermo del portatile diventa enorme*/
+    /* font-size: 15px; la font size non può essere definita in pixel */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    font-family: Verdana, sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    background: whitesmoke;
+    flex: 1 1 auto;
+
+}
+
+.accent-color {
+    /*background: #afdac1;*/
+    background: #2196F3;
+    /*background: #1E88E5;*/
+    color: white;
+}
+
+.primary-color {
+    /*background: #00260b;*/
+    background: #1e2129;
+    color: white;
+}
+
+input, textarea {
+    border-style: none;
+    background-color: transparent;
+    outline: none;
+    padding: 0.75em;
+    border-bottom: 3px solid #2196F3;
+    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+input:focus, textarea:focus {
+    background: rgba(33, 150, 243, 0.3);
+}
+
+button, .button, a {
+    background: white;
+    color: black;
+    text-decoration: none;
+    border-style: none;
+    border-radius: 0.4em;
+    padding: 0.5em 1em;
+    font: inherit; /* altrimenti non vede il font dato*/
+    box-shadow:
+            0 3px 1px -2px rgba(0,0,0,.2),
+            0 2px 2px 0 rgba(0,0,0,.14),
+            0 1px 5px 0 rgba(0,0,0,.12);
+    cursor: pointer;
+    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+    width: fit-content;
+    margin: 2px;
+}
+
+button:active, .button:active, a:active, a:visited {
+    background: #D3EAFD;
+    color: black;
+    box-shadow:
+            0 3px 1px -2px rgba(0,0,0,.2),
+            0 2px 2px 0 rgba(0,0,0,.14),
+            0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+button:hover, .button:hover, a:hover {
+    background: #d0d0d0;
+    box-shadow:
+            0 3px 1px 0 rgba(0,0,0,.2),
+            0 2px 2px 0 rgba(0,0,0,.14),
+            0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+button.disabled, .button.disabled, a[aria-disabled=true], button[aria-disabled=true]
+button.disabled:hover, .button.disabled:hover, a[aria-disabled=true]:hover, button[aria-disabled=true]:hover,
+button.disabled:active, .button.disabled:active, a[aria-disabled=true]:active, button[aria-disabled=true]:active
+{
+    background: inherit;
+    color: inherit;
+    cursor: default;
+    position: relative;
+    z-index: 1; /* disabilitati sovrastano gli abilitati*/
+    box-shadow: none;
+}
+
+#logo {
+    display: none;
+}
+
+/* #begin sitebar */
+#sitebar {
+    display: flex;
+    justify-content: flex-end;
+    background: rgb(30,33,41);
+}
+
+#sitebar > a {
+    float: right;
+}
+
+#actions {
+    position: fixed;
+    display: none;
+    background: #1e2129;
+    width: 100vw;
+    height: 100%;
+    z-index: 10;
+}
+
+#actions:target {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+#actions fieldset {
+    border: none;
+}
+
+#actions a, #actions button {
+    background: transparent;
+    color: white;
+    box-shadow: none;
+}
+#actions a:hover, #actions button:hover {
+    background: rgba(33, 150, 243, 0.3);
+}
+
+#search-form {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+/* #end sitebar */
+
+#content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+#breadcrumb {
+    display: none;
+}
+
+
+/* #tabs*/
+
+#menu-tabs {
+    display: flex;
+    align-items: center;
+}
+
+#tab-header {
+    background: rgba(33,150,243, 0.3);
+}
+
+.tab-content {
+    display: flex;
+    flex-wrap: wrap;
+    background: white;
+}
+
+.tab-label {
+    display: inline-flex;
+}
+
+.fake-input {
+    display: none;
+}
+
+a.tab-label, a.tab-label:active, .tab-label button, .tab-label button:active {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+a.tab-label:hover, .tab-label button:hover {
+    background: rgb(33,150,243);
+    color: white;
+}
+
+a.tab-label[aria-disabled=true],
+a.tab-label[aria-disabled=true]:hover,
+.tab-label button[aria-disabled=true],
+.tab-label button[aria-disabled=true]:hover
+{
+    color: inherit;
+    background: transparent;
+    border-bottom: 3px solid rgb(33,150,243);
+}
+
+/* #end tabs */
+
+
+/* #begin card */
+.card {
+    height: fit-content;
+    width: 100vw;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.img-overflow-container {
+    max-height: 175px;
+    height: fit-content;
+    overflow-y: hidden;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.card-header {
+    padding: 10px;
+    height: 105px;
+}
+
+.card-content {
+    background: white;
+    border-radius: 0 0 10px 10px;
+}
+/* #end card */
+
+/* #login */
+img {
+    display: none;
+}
+
+#login-page {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#login-page label {
+    display: none;
+}
+
+#login-page input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* #end login*/
+
+fieldset {
+    border-color: rgb(30,33,41);
+    border-radius: 0.5em;
+    margin: 0.5em;
+}

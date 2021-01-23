@@ -38,7 +38,7 @@ class SearchTab extends BasePage {
 
             case "post":
             default:
-                
+
                 $giveVOArray = (new PostDAO())->search($this->keyword);
                 $layout = file_get_contents(__ROOT__."/view/modules/feed/PostCard.xhtml");
         }

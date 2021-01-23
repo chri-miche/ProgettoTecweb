@@ -70,7 +70,7 @@ class PostDAO extends DAO {
         $result = $this->performMultiCAll(array($element), 'search_all_post');
         if (!isset($result['failure']))
             foreach ($result as $element)
-            $VOArray = $this->buildPostVO($element);
+            $VOArray [] = $this->buildPostVO($element);
 
         return $VOArray;
 

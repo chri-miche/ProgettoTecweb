@@ -1,6 +1,17 @@
 <tr>
     <!-- TODO icon button -->
     <tableDefinitions />
-    <td class="action"><a class="icon-button" href="Admin.php?manage={table}&operation=update{keys}">Modifica</a></td>
-    <td class="action"><a class="icon-button" href="Admin.php?manage={table}&operation=confirm-delete{keys}">Elimina</a> </td>
+    <td class="action">
+        <a class="icon-button"
+           href="Admin.php?manage={table}&operation=update{keys}"
+           data-icon-name="edit"><span>Modifica</span>
+        </a>
+    </td>
+    <td class="action">
+        <a class="icon-button"
+           href="Admin.php?manage={table}&operation=confirm-delete{keys}"
+           data-icon-name="delete">
+            <span>Elimina</span>
+        </a>
+    </td>
 </tr>

@@ -32,18 +32,16 @@
 
 
         private function valid(UserVO $element){
-
             /** Controllo dei parametri necessari per la scrittura sul db.*/
-            if (!is_null( $element->getPassword()) && !is_null($element->getEmail()
-                    && !is_null($element->getNome()))){
+            if (!is_null( $element->getPassword()) && !is_null($element->getEmail() && !is_null($element->getNome()))){
 
-                $query =  is_null($element->getId())
-                    ? "CALL check_email_unique_ne('$element->email');"
-                    : "CALL check_email_unique('$element->email', $element->id);";
+                $result = is_null($element->getId())
+                    ?$this->performCall(array($element->getEmail()), 'check_email_unique_ne')
+                    :$this->performCall(array($element->getEmail(),$element->getId()), 'check_email_unique');
 
-                /* TODO: Exceptions?*/
-                return DatabaseAccess::executeSingleQuery($query)['valid'];
+                return isset($result['valid']) && !$result['valid'];
             }
+
             return false;
         }
 

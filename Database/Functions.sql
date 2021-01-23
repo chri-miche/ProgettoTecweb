@@ -7,47 +7,41 @@
 
     DROP PROCEDURE IF EXISTS get_all_users;
     CREATE PROCEDURE get_all_users() BEGIN
-      SELECT U.id as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.isAdmin as admin FROM utente U; END;
+      SELECT U.id as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.isAdmin as admin FROM utente U;END;
 
     DROP PROCEDURE IF EXISTS get_user_from_login;
     CREATE PROCEDURE get_user_from_login(IN in_email VARCHAR(40), IN in_password VARCHAR(14)) BEGIN
         SELECT U.id as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.isAdmin as admin
-        FROM utente U WHERE U.email = in_email AND U.password = in_password;
-    END;
+        FROM utente U WHERE U.email = in_email AND U.password = in_password; END;
 
     DROP PROCEDURE IF EXISTS get_all_friends;
     CREATE PROCEDURE get_all_friends(IN id int) BEGIN
-       SELECT U.ID as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.isAdmin
+       SELECT U.ID as id, U.nome, U.email, U.password, U.immagineProfilo as immagine, U.isAdmin as admin
        FROM utente U JOIN
-           (  SELECT S.SeguaceID, S.SeguitoID FROM seguito S WHERE S.SeguaceID = id)
+           (SELECT S.SeguaceID, S.SeguitoID FROM seguito S WHERE S.SeguaceID = id)
         S ON S.SeguitoID = U.ID; END;
 
     DROP PROCEDURE IF EXISTS check_email_unique;
     CREATE PROCEDURE check_email_unique(IN check_mail VARCHAR(40), IN usid INT) BEGIN
-        DECLARE valid BOOLEAN; BEGIN
-            SET valid = IF((SELECT U.ID FROM utente U WHERE U.email = check_mail AND U.ID != usid), false, true);
-            SELECT valid; END; END;
+       SELECT COUNT(U.ID) as valid FROM utente U WHERE U.email = check_mail AND U.ID != usid;END;
 
     DROP PROCEDURE IF EXISTS check_email_unique_ne;
     CREATE PROCEDURE check_email_unique_ne(IN check_mail VARCHAR(40)) BEGIN
-        DECLARE valid BOOLEAN;BEGIN
-            SET valid = IF((SELECT U.ID FROM utente U WHERE U.email = check_mail), false, true);
-            SELECT valid; END; END;
+        SELECT COUNT(U.ID) as valid FROM utente U WHERE U.email = check_mail;END;
 
 
     DROP PROCEDURE IF EXISTS update_user;
-    CREATE PROCEDURE update_user(IN id INT, IN nome VARCHAR(25), IN email VARCHAR(40), IN password VARCHAR(14),
-    IN immagine VARCHAR(40), IN admin BOOL) BEGIN
-        UPDATE utente U SET U.nome = nome, U.email = email,
-        U.password = password, U.immagineProfilo = immagine, U.admin = admin WHERE U.ID = id; END;
+    CREATE PROCEDURE update_user(IN in_id INT, IN in_nome VARCHAR(25), IN in_email VARCHAR(40),
+    IN in_password VARCHAR(14), IN in_immagine VARCHAR(40), IN in_admin BOOL) BEGIN
+        UPDATE utente U SET U.nome = in_nome, U.email = in_email, U.password = in_password,
+        U.immagineProfilo = in_immagine, U.isAdmin = in_admin WHERE U.ID = in_id; END;
 
-
-
+    
     DROP PROCEDURE IF EXISTS create_user;
     CREATE PROCEDURE create_user(IN usernome VARCHAR(25), IN useremail VARCHAR(40), IN userpassword VARCHAR(14),
-                                 IN immagine VARCHAR(40), IN usermoderatore BOOL, IN useradmin BOOL) BEGIN
-        INSERT INTO utente(nome, email, password, immagineProfilo, admin)
-        VALUE (usernome, useremail, userpassword, immagine, useradmin);
+    IN immagine VARCHAR(40), IN useradmin BOOL) BEGIN
+        INSERT INTO utente(nome, email, password, immagineProfilo, isAdmin) VALUE
+            (usernome, useremail, userpassword, immagine, useradmin);
         SELECT LAST_INSERT_ID() as id; END;
 
 
@@ -151,7 +145,7 @@
     DROP PROCEDURE IF EXISTS create_genere;
     CREATE PROCEDURE create_genere(IN nome_genere VARCHAR(40), IN famiglia INT) BEGIN
 
-        INSERT INTO tag(nome) VALUE (nome_genere); /* Da togliere unicità su nome tag.*/
+        INSERT INTO tag() VALUE (NULL); /* Da togliere unicità su nome tag.*/
         INSERT INTO genere (tagID, famID, nomeScientifico) VALUE (LAST_INSERT_ID(), famiglia, nome_genere);
 
         SELECT LAST_INSERT_ID() as id;END;
@@ -218,7 +212,6 @@
             WHERE S.tagID = id;END;
 
     /** Metodi di conservazione: **/
-
     DROP PROCEDURE IF EXISTS get_conservazione;
     CREATE PROCEDURE get_conservazione(IN id VARCHAR(2))BEGIN
         SELECT C.codice as id, C.nome, C.probEstinzione, C.descrizione FROM conservazione C WHERE C.codice = id LIMIT 1;

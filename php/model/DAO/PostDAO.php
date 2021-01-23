@@ -8,7 +8,10 @@ class PostDAO extends DAO {
      * @inheritDoc */
     private function buildPostVO(array $data) : PostVO {
 
-        $builtVO = new PostVO(...$data);
+        $userVO = (new UserDAO())->get($data['userId']);
+        unset($data['userId']);
+
+        $builtVO = new PostVO(...$data, ...[$userVO]);
 
         $builtVO->setImmagini($this->getImmagini($builtVO->getId()));
         $builtVO->setArrayTagVO($this->getTags($builtVO->getId()));
@@ -52,6 +55,22 @@ class PostDAO extends DAO {
         if(!isset($result['failure']))
             foreach ($result as $element)
                 $VOArray [] = $this->buildPostVO($element);
+
+        return $VOArray;
+
+    }
+
+    /**         $query = "select * from post p left join contenuto c on p.contentID = c.ID left join immaginipost i
+    on i.postID = p.contentID join utente u on u.ID = c.UserID where p.title like '%". $this->keyword ."%' or c.content like '%". $this->keyword ."%' group by p.contentID ;"
+     **/
+    public function search(string $element): array {
+
+        $VOArray = array();
+
+        $result = $this->performMultiCAll(array($element), 'search_all_post');
+        if (!isset($result['failure']))
+            foreach ($result as $element)
+            $VOArray = $this->buildPostVO($element);
 
         return $VOArray;
 

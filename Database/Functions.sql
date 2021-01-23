@@ -299,9 +299,16 @@
         SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, P.title
         FROM post P INNER JOIN contenuto C ON C.ID = P.contentID LIMIT offset, ilimit; END;
 
+    DROP PROCEDURE IF EXISTS search_all_post;
+    CREATE PROCEDURE search_all_post(IN in_search VARCHAR(255)) BEGIN
+        SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, P.title
+        FROM post P INNER JOIN contenuto C WHERE C.content LIKE in_search OR P.title LIKE in_search;END;
+
+
     DROP PROCEDURE IF EXISTS get_images_of_post;
     CREATE PROCEDURE get_images_of_post(IN id INT) BEGIN
         SELECT I.percorsoImmagine as immagine FROM immaginipost I WHERE I.postID = id; END;
+
 
     DROP PROCEDURE IF EXISTS add_missing_immagine;
     CREATE PROCEDURE add_missing_immagine(IN id INT, IN path VARCHAR(200)) BEGIN
@@ -376,25 +383,18 @@
 
     DROP PROCEDURE IF EXISTS get_all_commento_from_post;
     CREATE PROCEDURE get_all_commento_from_post(IN post_id INT) BEGIN
-        SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, A.postID as post
+        SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date
         FROM contenuto C INNER JOIN commento A ON  C.ID = A.contentID WHERE A.postID = post_id; END;
 
     DROP PROCEDURE IF EXISTS get_all_commento;
     CREATE PROCEDURE get_all_commento() BEGIN
-        SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, A.postID as post,
-
-               C2.ID as p_id, C2.UserID as p_userId, C.isArchived as p_isArchived,
-               C.content as p_content, C2.data as p_date, P.title as p_title
-
-        FROM contenuto C INNER JOIN commento A ON C.ID = A.contentID
-        INNER JOIN post P on A.postID = P.contentID INNER JOIN contenuto C2 ON C2.ID = P.contentID; END;
+        SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, A.postID as post
+        FROM contenuto C INNER JOIN commento A ON  C.ID = A.contentID;END;
 
     DROP PROCEDURE IF EXISTS search_all_commento;
     CREATE PROCEDURE search_all_commento(IN in_search VARCHAR(255)) BEGIN
-        SELECT CC.ID as id, CC.UserID as userId, CC.isArchived, CC.content, CC.data as date, C.postID as post,
-               PC.ID as p_id, PC.UserID as p_userId, PC.isArchived as p_isArchived, PC.data as p_date, P.title as p_title
-        FROM commento C INNER JOIN contenuto CC ON C.contentID = CC.ID INNER JOIN post P ON C.postID = P.contentID
-        INNER JOIN contenuto PC ON PC.ID = P.contentID WHERE CC.content LIKE in_search; END;
+        SELECT CC.ID as id, CC.UserID as userId, CC.isArchived, CC.content, CC.data as date, C.postID as post
+        FROM commento C INNER JOIN contenuto CC ON C.contentID = CC.ID WHERE CC.content LIKE in_search; END;
 
     DROP PROCEDURE IF EXISTS check_commento_id;
     CREATE PROCEDURE check_commento_id(IN in_id INT) BEGIN

@@ -33,19 +33,10 @@ class CommentoDAO extends DAO {
         if(!isset($result['failure']))
             foreach ($result as $element){
 
-                $postData = [];
-
+                $postVO = (new PostDAO())->get($element['post']);
                 unset($element['post']);
 
-                foreach ($element as $key=>$value)
-                    if(substr($key, 0, 2) === 'p_') {
-
-                        $postData[substr($key, 2)] = $value;
-                        unset($element[$key]);
-                    }
-
-                $element['postVO'] = new PostVO(...$postData);
-                // Creazione dell oggetto finale.
+                $element['postVO'] = $postVO;
                 $VOArray [] = new CommentoVO(...$element);
             }
 
@@ -65,7 +56,8 @@ class CommentoDAO extends DAO {
         $result = $this->performMultiCAll(array($postId), 'get_all_commento_from_post');
 
         if(!isset($result['failure'])) /** Evito più ritorni del dovuto. */
-            foreach ($result as $element) $VOArray [] = new CommentoVO(...$element, ...$parentVO);
+            foreach ($result as $element)
+                $VOArray [] = new CommentoVO(...$element, ...$parentVO);
 
         return $VOArray;
 
@@ -75,20 +67,17 @@ class CommentoDAO extends DAO {
 
         $VOArray = array();
 
-        $result = $this->performMultiCAll(array(), 'search_all_commento');
+        $result = $this->performMultiCAll(array($element), 'search_all_commento');
         if (isset($result['failure'])) return $VOArray;
 
         foreach ($result as $comment) {
 
-            $postData = [];
-            foreach ($comment as $key => $value)
-                if (substr($key, 0, 2) == 'p_') {
-                    $postData[substr($key, 2)] = $value;
-                    unset($element[$key]);
-                }
+            $postVO = (new PostDAO())->get($comment['post']);
+            unset($comment['post']);
 
-            $comment["postVO"] = new PostVO(...$postData);
-            $VOArray [] = new CommentoVO(...$element);
+            $comment['postVO'] = $postVO;
+            $VOArray [] = new CommentoVO(...$comment);
+
         }
 
         return $VOArray;

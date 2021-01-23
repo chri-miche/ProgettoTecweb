@@ -20,15 +20,14 @@ class SearchTab extends BasePage {
 
         $this->entity = $entity;
 
-        $giveVOArray = null;
+        $giveVOArray = array();
 
         switch ($entity) {
             case "commento":
 
                 $commentArrayVO = (new CommentoDAO())->search($this->keyword);
                 /** @var CommentoVO $comment*/
-                foreach ($commentArrayVO as $commentVO)
-                    $giveVOArray [] = $commentVO->getPostVO();
+                foreach ($commentArrayVO as $commentVO) $giveVOArray [] = $commentVO->getPostVO();
 
                 $layout = file_get_contents(__ROOT__."/view/modules/search/CommentCard.xhtml"); break;
 
@@ -39,13 +38,12 @@ class SearchTab extends BasePage {
 
             case "post":
             default:
+                
                 $giveVOArray = (new PostDAO())->search($this->keyword);
                 $layout = file_get_contents(__ROOT__."/view/modules/feed/PostCard.xhtml");
         }
 
         $this->addComponent(new GenericBrowser($giveVOArray, $layout, "Search.php"));
-        $query = "select m., c., u.*, p.title from commento m join contenuto c on 
-            m.contentID = c.ID join utente u on u.ID = c.UserID join post p on p.contentID = m.postID where c.content like '%". $this->keyword ."%';";
     }
 
     public function resolveData() {

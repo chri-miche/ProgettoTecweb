@@ -5,8 +5,6 @@
 
         /** @var int | null*/
         private $id;
-        /** @var int | null*/
-        private $userId;
         /** @var boolean */
         private $isArchived;
         /** @var string */
@@ -15,10 +13,13 @@
         private $date;
         /** @var string */
         private $title;
-        /** @var array */
+        /** @var UserVO $userVO */
+        private $userVO;// AUTOHR
+
         private $immagini;
         /** @var array*/
         private $arrayTagVO;
+
 
         /** PostVO constructor.
          * @param int|null $id
@@ -29,14 +30,17 @@
          * @param string $title
          * @param array $immagini
          * @param  array $arrayTagVO*/
-        public function __construct(?int $id = null, ?int $userId = null, bool $isArchived = false, string $content = '',
-                                    ?string $date = null, string $title = '', array $immagini = array(), array $arrayTagVO = array()){
+        public function __construct(?int $id = null, bool $isArchived = false, string $content = '',
+                ?string $date = null, string $title = '', ?UserVO $userVO = null, array $immagini = array(), array $arrayTagVO = array()){
+
             $this->id = $id;
-            $this->userId = $userId;
             $this->isArchived = $isArchived;
             $this->content = $content;
             $this->date = $date;
             $this->title = $title;
+
+            $this->userVO = is_null($userVO)? new UserVO() : $userVO;
+
             $this->immagini = $immagini;
             $this->arrayTagVO = $arrayTagVO;
         }
@@ -48,8 +52,10 @@
             $result = get_object_vars($this);
 
             /** Togliamo gli array.*/
+            unset($result['userVO']);
             unset($result['arrayTagVO']);
             unset($result['immagini']);
+
 
             /** @var $counter: Contatore di elementi immagine in modo da impostare un default.*/
             $counter = 0;
@@ -58,11 +64,19 @@
 
                 $result[ $counter == 0 ? 'immagine' : "immagine_$counter"] = $immagine;
                 $counter ++;
+
             }
 
-            if($counter == 0)
-                $result['immagine'] = 'default.png';
+            if($counter == 0)  $result['immagine'] = 'default.png';
 
+            /** Sistemazione dell'utente.*/
+            $userDataToAppend = [];
+            foreach ($this->userVO->arrayDump() as $key => $value)
+                $userDataToAppend["u_$key"] = $value;
+
+            $result['userId'] = $this->userVO->getId();
+
+            $result = array_merge($result, $userDataToAppend);
             return $result;
 
         }
@@ -71,7 +85,6 @@
 
             $array = get_object_vars($this);
             if($id) unset($array['id']);
-
             return array_values($array);
         }
 
@@ -82,8 +95,15 @@
             /** Togliamo gli array.*/
             unset($array['immagini']);
             unset($array['arrayTagVO']);
+            unset($array['userVO']);
 
-            if($id) unset($array['id']);
+
+            $array = array_slice($array, 0, 1, true)
+                + array('userId'=> $this->userVO->getId()) + array_slice($array,1);
+
+            if($id)
+                unset($array['id']);
+
 
             return array_values($array);
 
@@ -96,15 +116,17 @@
         }
 
         /**
-         * @return int|null */
-        public function getUserId(): ?int{
-            return $this->userId;
+         * @return UserVO
+         */
+        public function getUserVO(): UserVO {
+            return $this->userVO;
         }
 
         /**
-         * @param int|null $userId */
-        public function setUserId(?int $userId): void{
-            $this->userId = $userId;
+         * @param UserVO $userVO
+         */
+        public function setUserVO(UserVO $userVO): void {
+            $this->userVO = $userVO;
         }
 
         /**

@@ -302,7 +302,7 @@
     DROP PROCEDURE IF EXISTS search_all_post;
     CREATE PROCEDURE search_all_post(IN in_search VARCHAR(255)) BEGIN
         SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, P.title
-        FROM post P INNER JOIN contenuto C WHERE C.content LIKE in_search OR P.title LIKE in_search;END;
+        FROM post P INNER JOIN contenuto C ON P.contentID = C.ID WHERE C.content LIKE in_search OR P.title LIKE in_search;END;
 
 
     DROP PROCEDURE IF EXISTS get_images_of_post;

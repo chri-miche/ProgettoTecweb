@@ -16,7 +16,7 @@ class ImagesSlideshow extends BasePage
         if ($size === 0) {
             $this->addComponent(new class(file_get_contents(__ROOT__ . '/view/modules/post/NoImage.xhtml')) extends Component {});
         } else if ($size === 1) {
-            $this->addComponent(new class('<div id="image-{index}" class="image-slideshow"><img src="{link}" alt="" /></div>', $links[0]) extends Component {
+            $this->addComponent(new class('<div id="image-0" class="image-slideshow"><img src="{link}" alt="" /></div>', $links[0]) extends Component {
                 private $data;
 
                 public function __construct(string $HTML, $link)

@@ -157,6 +157,8 @@ button.disabled:active, .button.disabled:active, a[aria-disabled=true]:active, b
     display: flex;
     flex-wrap: wrap;
     background: white;
+    justify-content: center;
+    margin: 0 2em;
 }
 
 .tab-label {
@@ -222,7 +224,6 @@ a.tab-label[aria-disabled=true]:hover,
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
-    margin: 0 2em;
 }
 
 
@@ -405,7 +406,8 @@ a.breadcrumb-item:visited:hover {
     background: rgb(33,150,243);
     position: absolute;
     display: inline-block;
-    box-shadow: 1px -1px rgba(0,0,0,0.25);
+    border-top: 1px solid white;
+    border-right: 1px solid white;
     z-index: 1;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -431,6 +433,7 @@ a.breadcrumb-item:visited:hover {
 /* #end breadcrumb */
 /* #footer */
 #footer {
+    min-width: 300px;
     height: fit-content;
     position: relative;
     padding: 1em;
@@ -456,7 +459,6 @@ a.breadcrumb-item:visited:hover {
     height: fit-content;
     min-height: 600px;
     padding: 1em;
-    border-radius: 1em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -482,6 +484,10 @@ a.breadcrumb-item:visited:hover {
 
 #login-page button {
     align-self: center;
+}
+
+#login-page p {
+    margin-left: 0;
 }
 
 #login-form a {
@@ -596,11 +602,12 @@ th.action, td.action {
 /* #begin image slideshow */
 .image-slideshow, .image-slideshow:target ~ #image-0 {
     display: none;
+    background-image: url('http://localhost/res/Images/6-opaco.jpg');
 }
 
 #image-0, .image-slideshow:target {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -610,6 +617,19 @@ th.action, td.action {
 
 .image-slideshow img {
     height: 500px;
+}
+
+.analog-container {
+    max-width: 540px;
+    border: 10px solid white;
+    background: white;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    box-shadow:
+            0 3px 1px 0 rgba(0,0,0,.2),
+            0 2px 2px 0 rgba(0,0,0,.14),
+            0 1px 5px 0 rgba(0,0,0,.12);
 }
 /* #end image slideshow */
 
@@ -638,6 +658,12 @@ p {
     display: inline-block;
     align-self: center;
 }
+
+ul#comments li {
+    border-left: 3px solid rgba(33,150,243);
+    padding-left: 1em;
+}
+
 ul#comments li form fieldset {
     display: flex;
     align-content: center;
@@ -649,6 +675,8 @@ ul#comments li form textarea {
     margin-right: 10px;
 }
 
-
+#post-title {
+    margin: 0 40px 40px;
+}
 /* #end comments */
 

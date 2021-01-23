@@ -8,26 +8,35 @@ require_once __ROOT__."/control/components/admin/AdminWelcomePage.php";
 require_once __ROOT__."/control/components/admin/AdminPanel.php";
 require_once __ROOT__."/control/components/SiteBar.php";
 require_once __ROOT__.'\control\BasePage.php';
+require_once __ROOT__.'\control\SessionUser.php';
 
-$basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
-$page = new BasePage($basePage);
+$sessionUser = new SessionUser();
 
-$page->addComponent(new SiteBar("admin"));
+if ($sessionUser->userIdentified() && $sessionUser->getAdmin()) {
+    $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
+    $page = new BasePage($basePage);
 
-$manage = $_GET["manage"] ?? null;
-$operation = $_GET["operation"] ?? "list";
-$keys = array();
+    $page->addComponent(new SiteBar("admin"));
 
-$data = count($_POST) > 0 ? $_POST : array();
+    $manage = $_GET["manage"] ?? null;
+    $operation = $_GET["operation"] ?? "list";
+    $keys = array();
 
-foreach ($_GET as $key => $value) {
-    if ($key != "manage" && $key != "operation") {
-        $keys[$key] = $value;
+    $data = count($_POST) > 0 ? $_POST : array();
+
+    foreach ($_GET as $key => $value) {
+        if ($key != "manage" && $key != "operation") {
+            $keys[$key] = $value;
+        }
     }
+
+    $page->addComponent(new AdminPanel($manage, $operation, $keys, $data));
+
+    echo $page->build();
+} else {
+    header("Location: Login.php");
 }
 
-$page->addComponent(new AdminPanel($manage, $operation, $keys, $data));
 
-echo $page->build();
 
 ?>

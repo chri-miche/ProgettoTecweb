@@ -46,7 +46,6 @@ class CommentoDAO extends DAO {
 
                 $element['postVO'] = new PostVO(...$postData);
                 // Creazione dell oggetto finale.
-                print_r($result);
                 $VOArray [] = new CommentoVO(...$element);
             }
 
@@ -70,6 +69,29 @@ class CommentoDAO extends DAO {
 
         return $VOArray;
 
+    }
+
+    public function search(string $element): array {
+
+        $VOArray = array();
+
+        $result = $this->performMultiCAll(array(), 'search_all_commento');
+        if (isset($result['failure'])) return $VOArray;
+
+        foreach ($result as $comment) {
+
+            $postData = [];
+            foreach ($comment as $key => $value)
+                if (substr($key, 0, 2) == 'p_') {
+                    $postData[substr($key, 2)] = $value;
+                    unset($element[$key]);
+                }
+
+            $comment["postVO"] = new PostVO(...$postData);
+            $VOArray [] = new CommentoVO(...$element);
+        }
+
+        return $VOArray;
     }
 
     public function checkId(VO &$element) : bool {

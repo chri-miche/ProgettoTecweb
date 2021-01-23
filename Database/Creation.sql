@@ -80,7 +80,7 @@
         TagID int UNSIGNED NOT NULL PRIMARY KEY,
         nomeScientifico VARCHAR(40) NOT NULL UNIQUE,
 
-        FOREIGN KEY (TagID) REFERENCES Tag(ID)
+        FOREIGN KEY (TagID) REFERENCES Tag(ID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
 
@@ -91,11 +91,8 @@
         OrdID int UNSIGNED NOT NULL,
 
         nomeScientifico VARCHAR(40) NOT NULL,
-        caratteristicheComuni TEXT,
 
-        /** Se elimino dal sistema un ordine elimino anche tutte le famiglie
-            ad esso relativo. Mi pare giusto così.*/
-        FOREIGN KEY (TagID) REFERENCES Tag(ID),
+        FOREIGN KEY (TagID) REFERENCES Tag(ID) ON DELETE CASCADE,
         FOREIGN KEY (OrdID) REFERENCES Ordine(TagID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
@@ -108,11 +105,10 @@
 
         nomeScientifico VARCHAR(40) NOT NULL,
 
-        FOREIGN KEY (tagID) REFERENCES Tag(ID),
+        FOREIGN KEY (tagID) REFERENCES Tag(ID) ON DELETE CASCADE,
         FOREIGN KEY (famID) REFERENCES Famiglia(TagID) ON DELETE CASCADE
 
     ) ENGINE = InnoDB;
-
 
     CREATE TABLE Conservazione(
 
@@ -139,7 +135,7 @@
         altezzaMedia int UNSIGNED NOT NULL,
         descrizione text NOT NULL,
 
-        FOREIGN KEY (tagID) REFERENCES Tag(ID),
+        FOREIGN KEY (tagID) REFERENCES Tag(ID) ON DELETE CASCADE,
         FOREIGN KEY (genID) REFERENCES Genere(tagID) ON DELETE CASCADE,
         FOREIGN KEY (conservazioneID) REFERENCES Conservazione(Codice)
 

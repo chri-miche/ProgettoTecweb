@@ -31,39 +31,29 @@ insert into immaginipost(postID, percorsoImmagine)
     values  (0, 'AAA'), (0, 'perc2'), (0, 'bbb');
 
 
-insert into segnalazione(contentID, utenteID, modResponsabile, causale)
-    values  (0, 3, 1, 'Brutto');
 
-insert into label(ID, text) VALUES
-    (0, 'Un uccello molto rosa');
+insert into tag(ID) VALUES (0);
 
-insert into tag(ID, nome, LabelID) VALUES (0, 'Fenicottero', null);
-
-INSERT INTO tag(ID, nome, LabelID) VALUES  (8, 'Galliformes', null),
-    (10, 'Gaviiformes', null),(11, 'Sphenisciformes', null),(12, 'Procellariiformes', null),(13, 'Podicipediformes', null),(14, 'Phaethontiformes', null),(15, 'Phoenicopteriformes', null),(16, 'Ciconiiformes', null),
-    (17, 'Pelecaniformes', null),(18, 'Suliformes', null),(19, 'Accipitriformes', null),(20, 'Falconiformes', null),(21, 'Otidiformes', null),(22, 'Mesitornithiformes', null),(23, 'Cariamiformes', null);
+INSERT INTO tag(ID) VALUES  (8),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23);
 
 INSERT INTO ordine(TagID, nomeScientifico) VALUES (8, 'Galliformes'), (10, 'Gaviiformes'),
 (11, 'Sphenisciformes'),(12, 'Procellariiformes'),(13, 'Podicipediformes'),(14, 'Phaethontiformes'),(15, 'Phoenicopteriformes'),(16, 'Ciconiiformes'),
 (17, 'Pelecaniformes'),(18, 'Suliformes'),(19, 'Accipitriformes'),(20, 'Falconiformes'),(21, 'Otidiformes'),(22, 'Mesitornithiformes'),(23, 'Cariamiformes');
 
-INSERT INTO tag(ID, nome, LabelID) VALUES
-    (24,'Phoenicopteridae', null), (25,'Threskiornithidae', null), (26,'Ardeidae', null), (27,'Scopidae', null), (28,'Pelecanidae', null), (29,' Balaenicipitidae', null);
+INSERT INTO tag(ID) VALUES
+    (24), (25), (26), (27), (28), (29);
 
-INSERT INTO famiglia(TagID, OrdID, nomeScientifico, caratteristicheComuni) VALUES
-    (24,15 ,'Phoenicopteridae', null), (25, 17,'Threskiornithidae', null), (26,17,'Ardeidae', null), (27,17,'Scopidae', null), (28,17,'Pelecanidae', null), (29,17,' Balaenicipitidae', null);
+INSERT INTO famiglia(TagID, OrdID, nomeScientifico) VALUES
+    (24, 15 ,'Phoenicopteridae'), (25, 17,'Threskiornithidae'), (26,17,'Ardeidae'), (27,17,'Scopidae'), (28,17,'Pelecanidae'), (29,17,' Balaenicipitidae');
 
 
 select *from tag;
 
-INSERT INTO tag(ID, nome, LabelID) VALUES
-    (30, 'Balaeniceps', null),(31, 'Pelecanus', null),(32, 'Scopus', null),(35, 'B. rex', null),(36, 'Pelecanus conspicillatus', null),(37, 'Pelecanus crispus', null),(38, 'Pelecanus erythrorhynchos', null);
+INSERT INTO tag(ID) VALUES (30),(31),(32),(35),(36),(37),(38);
 
-INSERT INTO genere(tagID, famID, nomeScientifico) VALUES
-    (30, 28, 'Balaeniceps'),(31, 28, 'Pelecanus'),(32, 28,'Scopus');
+INSERT INTO genere(tagID, famID, nomeScientifico) VALUES (30, 28, 'Balaeniceps'),(31, 28, 'Pelecanus'),(32, 28,'Scopus');
 
-INSERT INTO conservazione(codice, nome, probEstinzione) VALUES
-    ('VU', 'Vulnerabile', 30);
+INSERT INTO conservazione(codice, nome, probEstinzione) VALUES ('VU', 'Vulnerabile', 30);
 
 INSERT INTO specie(tagID, genID, nomeScientifico, percorsoImmagine, conservazioneID, pesoMedio, altezzaMedia, descrizione) VALUES
     (35, 30, 'B. rex', '', 'VU', 200, 180, 'Bel uccello' );
@@ -71,9 +61,3 @@ INSERT INTO specie(tagID, genID, nomeScientifico, percorsoImmagine, conservazion
 INSERT INTO specie(tagID, genID, nomeScientifico, percorsoImmagine, conservazioneID, pesoMedio, altezzaMedia, descrizione) VALUES
     (36, 31, 'Pelecanus conspicillatus', '', 'VU',200, 180, 'Bel uccello' ),(37, 31, 'Pelecanus crispus', '', 'VU',200, 180, 'Bel uccello' ),(38, 31, 'Pelecanus erythrorhynchos', '', 'VU',200, 180, 'Bel uccello' );
 
-
-ALTER TABLE tag MODIFY nome VARCHAR(40);
-
-INSERT INTO interesse(tagID, userID) VALUE (30, 1), (35, 1 );
-
-alter table specie add column nomeComune VARCHAR(40);

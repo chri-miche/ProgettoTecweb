@@ -20,14 +20,9 @@
         $userVO = (new UserDAO())->get($this->postVO->getUserId());
         $ritorno['{nome}'] = $userVO->getNome();
 
-        foreach ($this->postVO->arrayDump() as $key => $value) {
-            if ($key === "immagini" && !isset($ritorno['{{percorsoImmagine}']))
-                $ritorno['{percorsoImmagine}'] = $value[0] ?? null; // TODO caso in cui non ci sono immagini
+        foreach ($this->postVO->arrayDump() as $key => $value)
+            $ritorno['{' . $key . '}'] = $value;
 
-            else
-                $ritorno['{' . $key . '}'] = $value;
-
-        }
 
         return $ritorno;
     }

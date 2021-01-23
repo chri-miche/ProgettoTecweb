@@ -30,16 +30,6 @@
 
         }
 
-        public function build() {
-
-            $baseLayout = $this->baseLayout();
-
-            foreach ($this->resolveData() as $key => $value)
-                $baseLayout = str_replace($key, $value, $baseLayout);
-
-            return $baseLayout;
-        }
-
         public function resolveData(){
 
             $resolveData = [];
@@ -61,9 +51,8 @@
 
                 }
             }
+
             $resolveData['{navigation}'] = $browsingList;
-
-
             return $resolveData;
 
     }

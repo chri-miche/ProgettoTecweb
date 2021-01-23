@@ -1,42 +1,54 @@
 <?php
 
+require_once __ROOT__.'\model\DAO\PostDAO.php';
+require_once __ROOT__.'\model\DAO\CommentoDAO.php';
+require_once __ROOT__.'\model\DAO\SpecieDAO.php';
+
 require_once __ROOT__.'\control\BasePage.php';
 require_once __ROOT__.'\control\components\catalogo\GenericBrowser.php';
 
 
-class SearchTab extends BasePage
-{
+class SearchTab extends BasePage {
     private $keyword;
     private $entity;
 
-    public function __construct($keyword, $entity)
-    {
+    public function __construct($keyword, $entity) {
         parent::__construct(file_get_contents(__ROOT__."/view/modules/search/SearchTab.xhtml"));
+
         $this->keyword = addslashes($keyword);
+        $this->keyword = "%$this->keyword%";
+
         $this->entity = $entity;
+
+        $giveVOArray = null;
 
         switch ($entity) {
             case "commento":
-                $query = "select m.*, c.*, u.*, p.title from commento m join contenuto c on m.contentID = c.ID join utente u on u.ID = c.UserID join post p on p.contentID = m.postID where c.content like '%". $this->keyword ."%';";
-                $layout = file_get_contents(__ROOT__."/view/modules/search/CommentCard.xhtml");
-                break;
+
+                $commentArrayVO = (new CommentoDAO())->search($this->keyword);
+                /** @var CommentoVO $comment*/
+                foreach ($commentArrayVO as $commentVO)
+                    $giveVOArray [] = $commentVO->getPostVO();
+
+                $layout = file_get_contents(__ROOT__."/view/modules/search/CommentCard.xhtml"); break;
+
             case "specie":
-                $query = "select * from specie where nomeScientifico like '%". $this->keyword ."%' or descrizione like '%". $this->keyword ."%';";
-                $layout = file_get_contents(__ROOT__."/view/modules/search/SpecieCard.xhtml");
-                break;
+
+                $giveVOArray = (new SpecieDAO())->search($this->keyword);
+                $layout = file_get_contents(__ROOT__."/view/modules/search/SpecieCard.xhtml"); break;
+
             case "post":
             default:
+                $giveVOArray = (new PostDAO())->search($this->keyword);
                 $layout = file_get_contents(__ROOT__."/view/modules/feed/PostCard.xhtml");
-                $query = "select * from post p left join contenuto c on p.contentID = c.ID left join immaginipost i on i.postID = p.contentID join utente u on u.ID = c.UserID where p.title like '%". $this->keyword ."%' or c.content like '%". $this->keyword ."%' group by p.contentID ;";
         }
 
-        $results = DatabaseAccess::executeQuery($query);
-
-        $this->addComponent(new GenericBrowser($results, $layout, "Search.php"));
+        $this->addComponent(new GenericBrowser($giveVOArray, $layout, "Search.php"));
+        $query = "select m., c., u.*, p.title from commento m join contenuto c on 
+            m.contentID = c.ID join utente u on u.ID = c.UserID join post p on p.contentID = m.postID where c.content like '%". $this->keyword ."%';";
     }
 
-    public function resolveData()
-    {
+    public function resolveData() {
         return array(
             "{keyword}" => $this->keyword,
             "{post}" => $this->entity === 'post' ? '" aria-disabled="true" aria-selected="true" tabindex="-1" type="button' : '" type="submit',

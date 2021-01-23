@@ -241,6 +241,30 @@
     CREATE PROCEDURE check_conservazione_id(IN id VARCHAR(2)) BEGIN
         SELECT COUNT(C.codice) as idexists FROM conservazione C WHERE C.codice = id LIMIT 1; END;
 
+    DROP PROCEDURE IF EXISTS get_many_filter_specie_by_ordine;
+    CREATE PROCEDURE get_many_filter_specie_by_ordine(IN ord_id INT, IN in_limit INT, IN in_offset INT) BEGIN
+        SELECT S.tagID as id, S.nomeScientifico, S.nomeComune, S.pesoMedio, S.altezzaMedia, S.descrizione, S.percorsoImmagine as immagine,
+               G.tagID as g_id, G.nomeScientifico as g_nomeScientifico, F.f_id, F.f_nomeScientifico, O.TagID as o_id, O.nomeScientifico as o_nomeScientifico,
+               C.codice as c_codice
+        FROM specie S INNER JOIN conservazione c on S.conservazioneID = c.codice
+            INNER JOIN genere G on S.genID = G.tagID
+                INNER JOIN
+                    (SELECT F.TagID as f_id, F.nomeScientifico as f_nomeScientifico, F.OrdID
+                    FROM famiglia F WHERE F.OrdID = ord_id)
+            F ON F.f_id = G.famID INNER JOIN ordine O On O.TagID = F.OrdID LIMIT in_offset, in_limit; END;
+
+    DROP PROCEDURE IF EXISTS get_many_filter_specie_by_famiglia;
+    CREATE PROCEDURE get_many_filter_   specie_by_famiglia(IN fam_id INT, IN in_limit INT, IN in_offset INT) BEGIN
+          SELECT S.tagID as id, S.nomeScientifico, S.nomeComune, S.pesoMedio, S.altezzaMedia, S.descrizione, S.percorsoImmagine as immagine,
+                G.tagID as g_id, G.nomeScientifico as g_nomeScientifico, F.TagID as f_id, F.nomeScientifico as f_nomeScientifico,
+                O.TagID as o_id, O.nomeScientifico as o_nomeScientifico, C.codice as c_codice
+        FROM specie S
+            INNER JOIN conservazione C ON S.conservazioneID = C.codice
+            INNER JOIN genere G ON S.genID = G.tagID INNER JOIN famiglia F ON G.famID = F.TagID
+            INNER JOIN ordine O ON F.OrdID = O.TagID WHERE F.TagID = fam_id LIMIT in_offset, in_limit;
+    END;
+
+
     DROP PROCEDURE IF EXISTS create_conservazione;
     CREATE PROCEDURE create_conservazione(IN icodice VARCHAR(2), IN inome VARCHAR(20),
     IN iprobEstinzione INT, IN idescrizione TEXT) BEGIN
@@ -365,6 +389,12 @@
         FROM contenuto C INNER JOIN commento A ON C.ID = A.contentID
         INNER JOIN post P on A.postID = P.contentID INNER JOIN contenuto C2 ON C2.ID = P.contentID; END;
 
+    DROP PROCEDURE IF EXISTS search_all_commento;
+    CREATE PROCEDURE search_all_commento(IN in_search VARCHAR(255)) BEGIN
+        SELECT CC.ID as id, CC.UserID as userId, CC.isArchived, CC.content, CC.data as date, C.postID as post,
+               PC.ID as p_id, PC.UserID as p_userId, PC.isArchived as p_isArchived, PC.data as p_date, P.title as p_title
+        FROM commento C INNER JOIN contenuto CC ON C.contentID = CC.ID INNER JOIN post P ON C.postID = P.contentID
+        INNER JOIN contenuto PC ON PC.ID = P.contentID WHERE CC.content LIKE in_search; END;
 
     DROP PROCEDURE IF EXISTS check_commento_id;
     CREATE PROCEDURE check_commento_id(IN in_id INT) BEGIN

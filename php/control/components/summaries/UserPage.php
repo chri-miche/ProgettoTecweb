@@ -44,8 +44,7 @@
 
             // Barra a destra per i post utente.
             $postVOArray = (new PostDAO())->getOfUtente($this->user->getId(),10, 0);
-
-            print_r($postVOArray);
+            
             $resolvedData['{right}'] = '';
 
             $postLayout = file_get_contents(__ROOT__.'\view\modules\user\PostCard.xhtml');

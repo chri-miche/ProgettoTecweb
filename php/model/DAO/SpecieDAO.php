@@ -52,29 +52,97 @@
             return $VOArray;
         }
 
+        //TODO: this
         public function getManyFilterBy(?int $genere = null, ?int $famiglia = null, ?int $ordine = null,
-                                        int $limit = 40, int $offset = 0): array{
+                                        int $limit = -1, int $offset = 0): array{
+
+            $VOArray = array();
 
             if(!is_null($genere)){
 
                 $genereVO = (new GenereDAO())->get($genere);
+
                 /** Ci basta prendere il minimo indispensabile dove id genere uguale.*/
+                $result = $this->performMultiCAll(array($genereVO->getId(), $limit, $offset), 'get_many_filter_specie_by_genere');
+                if(isset($result['failure'])) return $VOArray;
+
+                foreach ($result as $specie) {
+
+                    $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
+                    unset($specie['c_codice']);
+
+                    $VOArray [] = new SpecieVO(...$specie, ...[$genereVO], ...[$conservazioneVO]);
+
+                }
 
             } else if(!is_null($famiglia)){
 
                 $famigliaVO = (new FamigliaDAO())->get($famiglia);
                 /** Dobbiamo fare la join con genere e prendere sia genere che specie per ognuno.*/
 
+                $result = $this->performMultiCAll(array($famigliaVO->getId(),$limit, $offset), 'get_many_filter_specie_by_famiglia');
+                if(isset($result['failure'])) return $VOArray;
+
+
+                foreach ($result as $specie) {
+
+                    $genereVO = new GenereVO($specie['g_id'], $specie['g_nomeScientifico']);
+                    $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
+
+                    unset($specie['g_id'], $specie['g_nomeScientifico']);
+                    unset($specie['c_codice']);
+
+                    $VOArray [] = new SpecieVO(...$specie, ...[$genereVO], ...[$conservazioneVO]);
+
+                }
+
             } else if(!is_null($ordine)){
                 $ordineVO = (new OrdineDAO())->get($ordine);
                 /** Dobbiamo fare un sacco di join. */
+
+                $result = $this->performMultiCAll(array($ordineVO->getId(),$limit, $offset), 'get_many_filter_specie_by_ordine');
+                if(isset($result['failure'])) return $VOArray;
+
+                foreach ($result as $specie){
+
+                    $famigliaVO = new FamigliaVO($specie['f_id'], $specie['f_nomeScientifico'], $ordineVO);
+                    $genereVO = new GenereVO($specie['g_id'], $specie['g_nomeScientifico'], $famigliaVO);
+
+                    $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
+
+
+                    unset($specie['g_id'], $specie['g_nomeScientifico'], $specie['f_id'], $specie['f_nomeScientifico']);
+                    unset($specie['c_codice']);
+
+                    $VOArray [] = new SpecieVO(...$specie, ...[$genereVO], ...[$conservazioneVO]);
+                }
 
             } else {
                 /** Nessuna selezionata ma abbiamo filtro su quantitò.*/
                 /** tutti limitati.*/
 
+                $result = $this->performMultiCAll(array($limit, $offset), 'get_many_specie');
+                if(isset($result['failure'])) return $VOArray;
+
+                foreach ($result as $specie){
+
+                    $ordineVO = new OrdineVO($specie['o_id'], $specie['o_nomeScientifico']);
+                    $famigliaVO = new FamigliaVO($specie['f_id'], $specie['f_nomeScientifico'], $ordineVO);
+                    $genereVO = new GenereVO($specie['g_id'], $specie['g_nomeScientifico'], $famigliaVO);
+
+                    $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
+
+
+                    unset($specie['g_id'], $specie['g_nomeScientifico'], $specie['f_id'], $specie['f_nomeScientifico']);
+                    unset($specie['o_id'], $specie['o_nomeScientifico']);
+                    unset($specie['c_codice']);
+
+                    $VOArray [] = new SpecieVO(...$specie, ...[$genereVO], ...[$conservazioneVO]);
+
+                }
             }
 
+            return $VOArray;
         }
 
 

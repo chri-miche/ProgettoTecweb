@@ -1,67 +1,41 @@
 <?php
-
     require_once __ROOT__ . '\control\components\Component.php';
+
+    require_once __ROOT__ . '\model\DAO\SpecieDAO.php';
+
     require_once __ROOT__ . '\control\components\catalogo\GenericBrowser.php';
 
-    /** Il catalogo prende in input un array di uccelli già disposto e un array di
-        ordini (id e nome) famiglia (id e nome) e di genere (id e nome).*/
     class Catalogo extends Component {
 
-        private $birds;
+        private $ordineVOArray;
+        private $famigliaVOArray;
+        private $genereVOArray;
 
-        private $ordineList;
-        private $currentOrdine;
-
-        private $famigliaList;
-        private $currentFamiglia;
-
-        private $genereList;
-        private $currentGenere;
 
         private $birdBrowser;
 
-        /**
-         * Catalogo constructor.
-         * @param array $birds
+        /***
+         * @param array $specieVOArray
          * @param string $selfReference
          * @param int $page
          * @param int $elemPerPage
-         * @param array|null $ordini
-         * @param array|null $famiglie
-         * @param array|null $generi
-         * @param int|null $ordinePosition
-         * @param int|null $famigliaPosition
-         * @param int|null $generePosition
-         * @param string|null $HTML
-         */
-        public function __construct(array $birds,
-                                string $selfReference, int $page = 0, int $elemPerPage = 10,
-                                array $ordini = null, array $famiglie = null, array $generi = null,
-                                int $ordinePosition = null, int $famigliaPosition = null, int $generePosition = null, string $HTML = null) {
+         * @param array $ordineVOArray
+         * @param array $famigliaVOArray
+         * @param array $genereVOArray
+         * @param string|null $HTML */
+        public function __construct(array $specieVOArray, string $selfReference = 'catalogo.php', int $page = 0, int $elemPerPage = 10,
+                                array $ordineVOArray = array(), array $famigliaVOArray = array(), array $genereVOArray = array(), string $HTML = null) {
 
-            parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\catalogo\Catalogo.xhtml'));
+            parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\catalogo\Catalogo.xhtml'));
 
-            $this->ordineList = $ordini;
-            $this->currentOrdine = $ordinePosition;
+            /** Ottenimento di Genre, Famiglia, Ordini vettore. Se ha grandezza 1 non è selezionabile.*/
+            $this->ordineVOArray = $ordineVOArray;
+            $this->famigliaVOArray = $famigliaVOArray;
+            $this->genereVOArray = $genereVOArray;
 
-            $this->famigliaList = $famiglie;
-            $this->currentFamiglia = $famigliaPosition;
-
-            $this->genereList = $generi;
-            $this->currentGenere = $generePosition;
 
             $previewLayout = file_get_contents(__ROOT__.'\view\modules\catalogo\BirdCard.xhtml');
-            $this->birdBrowser = new GenericBrowser($birds, $previewLayout,  $selfReference, $page, $elemPerPage);
-        }
-
-        public function build(){
-
-            $baseLayout = $this->baseLayout();
-
-            foreach ($this->resolveData() as $key => $value)
-                $baseLayout = str_replace($key, $value, $baseLayout);
-
-            return $baseLayout;
+            $this->birdBrowser = new GenericBrowser($specieVOArray, $previewLayout, $selfReference, $page, $elemPerPage);
 
         }
 

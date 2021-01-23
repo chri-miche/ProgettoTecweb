@@ -46,7 +46,23 @@
         public function arrayDump() : array{
 
             $result = get_object_vars($this);
+
+            /** Togliamo gli array.*/
             unset($result['arrayTagVO']);
+            unset($result['immagini']);
+
+            /** @var $counter: Contatore di elementi immagine in modo da impostare un default.*/
+            $counter = 0;
+
+            foreach ($this->immagini as $immagine){
+
+                $result[ $counter == 0 ? 'immagine' : "immagine_$counter"] = $immagine;
+                $counter ++;
+            }
+
+            if($counter == 0)
+                $result['immagine'] = 'default.png';
+
             return $result;
 
         }
@@ -63,6 +79,7 @@
 
             $array = get_object_vars($this);
 
+            /** Togliamo gli array.*/
             unset($array['immagini']);
             unset($array['arrayTagVO']);
 

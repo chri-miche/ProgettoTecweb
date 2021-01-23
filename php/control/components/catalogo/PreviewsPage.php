@@ -20,6 +20,7 @@
         }
 
         public function build(){
+
             $baseLayout = $this->baseLayout();
 
             foreach ($this->resolvedData() as $key => $value)
@@ -35,7 +36,6 @@
 
             foreach ($this->previews as $preview)
                 $resolvedData['{previews}'] .= $preview->returnComponent();
-
             return $resolvedData;
         }
     }

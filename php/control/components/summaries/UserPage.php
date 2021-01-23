@@ -45,13 +45,14 @@
             // Barra a destra per i post utente.
             $postVOArray = (new PostDAO())->getOfUtente($this->user->getId(),10, 0);
 
+            print_r($postVOArray);
             $resolvedData['{right}'] = '';
 
             $postLayout = file_get_contents(__ROOT__.'\view\modules\user\PostCard.xhtml');
             if(sizeof($postVOArray) > 0){
 
-                $resolvedData['{right}'] .= (new PreviewsPage($postVOArray, $postLayout));
-                $resolvedData['{right}'] = "<div> <a href='postUtente.php?usid= '".$this->user->getId() ."> 
+                $resolvedData['{right}'] .= (new PreviewsPage($postVOArray, $postLayout))->returnComponent();
+                $resolvedData['{right}'] .= "<div> <a href='postUtente.php?usid= '".$this->user->getId() ."> 
                                                     Vedi tutti i post dell utente.</a></div>";
             } else {
 

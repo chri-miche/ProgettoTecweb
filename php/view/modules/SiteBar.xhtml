@@ -1,5 +1,6 @@
 <div id="sitebar">
-    <a href="#actions" class="icon-button mobile-actions">Menu</a>
+    <a href="#actions" class="icon-button mobile-actions" data-icon-name="menu">
+        <span>Menu</span></a>
     <div id="actions">
         <a href="#content" id="logo">
             <img src="/res/Images/logo.png" alt="Vai al contenuto" />
@@ -11,14 +12,18 @@
             <fieldset>
                 <input id="search-input" name="search" alt="Effettua una ricerca" aria-label="Cerca nel sito" value="{value}" />
             </fieldset>
-            <button id="search-button" class="icon-button" type="submit" name="submit">
-                Cerca
+            <button id="search-button" class="icon-button" type="submit" name="submit"  data-icon-name="search">
+                <span>Cerca</span>
             </button>
         </form>
 
         <loggedActions />
 
-        <a href="#sitebar" class="icon-button mobile-actions">Chiudi</a>
+        <a href="#sitebar"
+           class="icon-button mobile-actions"
+           data-icon-name="close">
+            <span>Chiudi</span>
+        </a>
 
     </div>
 </div>

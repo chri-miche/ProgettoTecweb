@@ -12,7 +12,35 @@ body {
     margin: 0;
     background: whitesmoke;
     flex: 1 1 auto;
+}
 
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url(/icons/MaterialIcons-Regular.woff2) format('woff2'),
+    url(icons/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.icon-button {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0;
+}
+
+.icon-button span {
+    display: none;
+    margin: 0 auto;
+}
+
+.icon-button:after {
+    font-family: 'Material Icons', Verdana, sans-serif;
+    font-size: 1.5em;
+    content: attr(data-icon-name);
 }
 
 .accent-color {

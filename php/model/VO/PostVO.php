@@ -74,8 +74,6 @@
             foreach ($this->userVO->arrayDump() as $key => $value)
                 $userDataToAppend["u_$key"] = $value;
 
-            $result['userId'] = $this->userVO->getId();
-
             $result = array_merge($result, $userDataToAppend);
             return $result;
 

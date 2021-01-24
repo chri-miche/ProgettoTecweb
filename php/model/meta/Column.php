@@ -53,7 +53,11 @@ class Column
     }
 
     public function required() {
-        return $this->rawColumn['IS_NULLABLE'] === 'NO';
+        return $this->rawColumn['IS_NULLABLE'] === 'NO' && $this->rawColumn['EXTRA'] !== 'auto_increment';
+    }
+
+    public function isKey() {
+        return $this->rawColumn['COLUMN_KEY'] === 'PRI';
     }
 
     public function setValue($newval) {
@@ -83,6 +87,14 @@ class Column
         if (!isset($newval) && $this->required()) {
             $this->error = "Il campo è richiesto.";
             return false;
+        }
+        if ($this->columnName() === 'email') {
+            $reg = '/[a-zA-Z1-9]+@[a-zA-Z1-9]+\.(com|it|me|io|org|de|fr)/';
+            if (!preg_match($reg, $newval)) {
+                $this->error = "Formato email non valido";
+                $this->value = null;
+                return false;
+            }
         }
         $this->value = $newval;
         unset($this->error);

@@ -7,6 +7,10 @@ class AdminForm extends Component
 
     private $persistent;
     private $action;
+    /**
+     * @var bool
+     */
+    private $showErrors = false;
 
     public function __construct($manage, $keys = array(), $defaultPersistent = null)
     {
@@ -15,15 +19,18 @@ class AdminForm extends Component
         $this->action = count($keys) === 0 ? "create" : "update";
 
         if (isset($defaultPersistent)) {
+            $this->showErrors = true;
             $this->persistent = $defaultPersistent;
         } else {
-            ($this->persistent = new Persistent($manage))->setDefaultValues();
+            $this->persistent = new Persistent($manage);
 
             if (count($keys) > 0) {
                 foreach ($keys as $column => $value) {
                     $this->persistent->set($column, $value);
                 }
                 $this->persistent = $this->persistent->getUniqueFromProto();
+            } else {
+                $this->persistent->setDefaultValues();
             }
         }
     }
@@ -34,14 +41,14 @@ class AdminForm extends Component
 
         $keyFields = '';
         foreach ($this->persistent->keyfields() as $keyfield) {
-            $keyFields .= (new FormField($keyfield))->build();
+            $keyFields .= (new FormField($keyfield, $this->showErrors))->build();
         }
 
         $HTML = str_replace("<keyFields />", $keyFields, $HTML);
 
         $fields = '';
         foreach ($this->persistent->fields() as $field) {
-            $fields .= (new FormField($field))->build();
+            $fields .= (new FormField($field, $this->showErrors))->build();
         }
 
         $HTML = str_replace("<fields />", $fields, $HTML);

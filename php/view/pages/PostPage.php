@@ -131,7 +131,7 @@
             }
         }
 
-        if ($redirect) {
+        if (!empty($redirect)) {
             // redirect per pulire le variabili
             header("Location: PostPage.php?id=$postID");
         } else {

@@ -44,14 +44,11 @@ body {
 }
 
 .accent-color {
-    /*background: #afdac1;*/
     background: #2196F3;
-    /*background: #1E88E5;*/
     color: white;
 }
 
 .primary-color {
-    /*background: #00260b;*/
     background: #1e2129;
     color: white;
 }

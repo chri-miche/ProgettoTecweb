@@ -544,8 +544,11 @@ fieldset {
 }
 
 fieldset input, fieldset textarea {
+    /* TODO  */
     width: -webkit-fill-available;
+    width: -moz-available;
 }
+
 /*
 legend {
     position: absolute;
@@ -557,8 +560,6 @@ input:focus + legend {
     font-size: initial;
 }
  */
-
-
 
 /* #end form*/
 

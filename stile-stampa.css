@@ -4,6 +4,10 @@ body {
     background-color: #fff;
 }
 
+img {
+    max-width: 540px;
+}
+
 a {
     display: inline-block;
 }
@@ -44,9 +48,24 @@ a[href^="#"]::first-letter {
     margin-bottom: 1em;
 }
 
-#tab-header:before {
-    content: "Post più ";
+#tab-header form:not([action]) {
+    display: block;
 }
+
+#tab-header form:not([action]) button {
+    background: white;
+    color: black;
+    border-style: none;
+    font-size: 1.5em;
+    font-family: inherit;
+}
+
+
+#tab-header form:not([action]) button:before {
+    content: "Risultati della ricerca per ";
+}
+
+
 
 a.tab-label[aria-selected=false] {
     display: none;
@@ -71,4 +90,37 @@ dt {
 .breadcrumb-item:after, #home-crumb:after {
     content: ">";
     padding: 0.25em;
+}
+
+#admin-navigation {
+    display: none;
+}
+
+.icon-button {
+    display: none;
+}
+
+td.action, th.action {
+    display: none;
+}
+
+form {
+    display: none;
+}
+
+
+#information-content ul {
+    list-style: inside;
+}
+
+#information-content ul > li::marker {
+    content: attr(data-mark);
+}
+
+.profile-mini img {
+    display: none;
+}
+
+#comments {
+    list-style: none;
 }

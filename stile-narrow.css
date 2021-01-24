@@ -540,7 +540,7 @@ ul#comments li form textarea {
 
 #information-side {
     padding: 1em;
-    align-self: stretch;
+    align-self: center;
 }
 
 #information-content {
@@ -560,6 +560,13 @@ ul#comments li form textarea {
     justify-content: center;
 }
 
+#information-content ul {
+    list-style: inside;
+}
+
+#information-content ul > li::marker {
+    content: attr(data-mark);
+}
 /* #end user*/
 
 /* */

@@ -1,11 +1,16 @@
-    <div class="" style=" margin-top: 3vh; width:100%; display: flex; justify-content: center; flex-wrap: wrap; align-self: center">
 
+<div id="content">
         <!-- Qui va la navigation (form) -->
-        <form>
-           <fieldset>
-               {menuLayout}
-           </fieldset>
-        </form>
-         <!-- Pagina di elementi -->
-        {contentsPage}
-    </div>
+        <div id="user-side">
+            <form>
+               <fieldset>
+                   {menuLayout}
+               </fieldset>
+            </form>
+        </div>
+
+        <div id="user-content">
+             <!-- Pagina di elementi -->
+            {contentsPage}
+        </div>
+</div>

@@ -108,7 +108,7 @@ button:hover, .button:hover, a:hover {
             0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-button.disabled, .button.disabled, a[aria-selected=true], button[aria-selected=true]
+button.disabled, .button.disabled, a[aria-selected=true], button[aria-selected=true],
 button.disabled:hover, .button.disabled:hover, a[aria-selected=true]:hover, button[aria-selected=true]:hover,
 button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, button[aria-selected=true]:active
 {
@@ -120,12 +120,20 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
     box-shadow: none;
 }
 
+.selected-button, .selected-button:hover, .selected-button:active  {
+    background: rgba(0, 100, 0, 0.2);
+    color: black;
+    cursor: default;
+    position: relative;
+    z-index: 1; /* disabilitati sovrastano gli abilitati*/
+    box-shadow: none;
+}
+
 .screen-reader-hint {
     visibility: hidden;
     position: absolute;
 }
 
-/* TODO purgare */
 .sidebar-shadow {
     z-index: 0;
     box-shadow:
@@ -756,7 +764,6 @@ ul#comments li form textarea {
 
 #user-side {
     float: left;
-    max-width: 200px;
     min-width: 200px;
     padding: 1em;
     align-self: stretch;
@@ -775,4 +782,10 @@ ul#comments li form textarea {
 }
 
 /* #end user*/
+
+/* #begin buttons */
+.selected-button {
+
+}
+/* #end buttons */
 

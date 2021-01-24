@@ -104,7 +104,7 @@
                 $baseHTML .= "<button class='selected-button' disabled='disabled'> Ordine </button>";
                 $baseHTML .= "<input type='hidden' name='oSelected[]' value='1' />";
             } else{
-                $baseHTML .= "<button class='unselectable-button' disabled='disabled'> Ordine </button>";
+                $baseHTML .= "<button class='disabled' disabled='disabled'> Ordine </button>";
             }
 
             /** Pulsante per filtrare per famiglia, da mostrare se non è stato scelto un gnere o se non abbiamo giò scelto lo stesso.*/
@@ -114,7 +114,7 @@
                 $baseHTML .= "<button class='selected-button' disabled='disabled'> Famiglia </button>";
                 $baseHTML .= "<input type='hidden' name='fSelected[]' value='1'/>";
             } else{
-                $baseHTML .= "<button class='unselectable-button' disabled='disabled'> Famiglia </button>";
+                $baseHTML .= "<button class='disabled' disabled='disabled'> Famiglia </button>";
 
             }
 

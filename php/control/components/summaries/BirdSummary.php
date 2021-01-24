@@ -1,6 +1,5 @@
 <?php
     require_once __ROOT__.'\control\components\summaries\PageFiller.php';
-    require_once __ROOT__.'\model\BirdElement.php';
     require_once __ROOT__.'\model\DAO\SpecieDAO.php';
 
     class BirdSummary extends PageFiller {

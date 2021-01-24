@@ -2,8 +2,6 @@
     define('__ROOT__', dirname(dirname(dirname(__FILE__))));
 
     require_once __ROOT__.'\control\SessionUser.php';
-    require_once __ROOT__.'\model\UserElement.php';
-
     require_once __ROOT__.'\model\DAO\UserDAO.php';
 
     $userDAO = new UserDAO();

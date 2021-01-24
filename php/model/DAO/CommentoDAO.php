@@ -17,6 +17,7 @@ class CommentoDAO extends DAO {
         if(isset($result['failure'])) return new CommentoVO();
 
         $result['postVO'] = (new PostDAO())->get($result['post']); unset($result['post']);
+        $result['author'] = (new UserDAO())->get($result['userId']); unset($result['userId']);
 
         return new CommentoVO(...$result);
     }
@@ -35,8 +36,11 @@ class CommentoDAO extends DAO {
 
                 $postVO = (new PostDAO())->get($element['post']);
                 unset($element['post']);
-
                 $element['postVO'] = $postVO;
+
+                $result['author'] = (new UserDAO())->get($result['userId']);
+                unset($result['userId']);
+
                 $VOArray [] = new CommentoVO(...$element);
             }
 
@@ -56,8 +60,10 @@ class CommentoDAO extends DAO {
         $result = $this->performMultiCAll(array($postId), 'get_all_commento_from_post');
 
         if(!isset($result['failure'])) /** Evito più ritorni del dovuto. */
-            foreach ($result as $element)
-                $VOArray [] = new CommentoVO(...$element, ...[$parentVO]);
+            foreach ($result as $element) {
+                $authorVO = (new UserDAO())->get($element['userId']); unset($element['userId']);
+                $VOArray [] = new CommentoVO(...$element, ...[$parentVO],...[$authorVO]);
+            }
 
         return $VOArray;
 
@@ -72,10 +78,12 @@ class CommentoDAO extends DAO {
 
         foreach ($result as $comment) {
 
-            $postVO = (new PostDAO())->get($comment['post']);
+            $comment['postVO'] = (new PostDAO())->get($comment['post']);
             unset($comment['post']);
 
-            $comment['postVO'] = $postVO;
+            $comment['author'] = (new UserDAO())->get($comment['userId']);
+            unset($comment['userId']);
+
             $VOArray [] = new CommentoVO(...$comment);
 
         }
@@ -102,6 +110,7 @@ class CommentoDAO extends DAO {
 
             /** Se esiste l id del oggetto corrente, quello va semplicemente aggiornata.*/
             if ($this->checkId($element)) {
+                print_r($element->smartDump());
 
                 $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_commento');
                 return isset($result['failure']);
@@ -109,6 +118,7 @@ class CommentoDAO extends DAO {
             } else {
 
                 $result = $this->performCall($element->smartDump(true), 'create_commento');
+                print_r($result);
                 if(!isset($result['failure'])) $element = new $element(...$result, ...$element->varDumps(true));
                 /* Ritorna vero se è stato costruito l oggetto falso altrimenti.*/
                 return !$element->getId() === null;

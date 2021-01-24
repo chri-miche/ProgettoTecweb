@@ -50,16 +50,21 @@ class AdminPanel extends Component
                         $persistent = new Persistent($manage, $data);
                         $success = $persistent->commitFromProto($operation);
                         if ($success) {
-                            $this->component = new class extends PageFiller {
-                                public function __construct()
+                            $this->component = new class($manage) extends PageFiller {
+                                private $manage;
+
+                                public function __construct($manage)
                                 {
                                     parent::__construct(file_get_contents(__ROOT__.'/view/modules/admin/LandingPage.xhtml'));
+                                    $this->manage = $manage;
                                 }
 
                                 public function resolveData()
                                 {
                                     return array(
                                         "{message}" => "Operazione eseguita con successo",
+                                        "{result}" => "success",
+                                        "{manage}" => $this->manage
                                         );
                                 }
                             };
@@ -76,30 +81,38 @@ class AdminPanel extends Component
                 case "delete":
                     $persistent = new Persistent($manage, $keys);
                     if ($persistent->deleteFromProto()) {
-                        $this->component = new class extends PageFiller {
-                            public function __construct()
+                        $this->component = new class($manage) extends PageFiller {
+                            private $manage;
+                            public function __construct($manage)
                             {
                                 parent::__construct(file_get_contents(__ROOT__.'/view/modules/admin/LandingPage.xhtml'));
+                                $this->manage = $manage;
                             }
 
                             public function resolveData()
                             {
                                 return array(
                                     "{message}" => "Cancellazione eseguita con successo",
+                                    "{result}" => "success",
+                                    "{manage}" => $this->manage
                                 );
                             }
                         };
                     } else {
-                        $this->component = new class extends PageFiller {
-                            public function __construct()
+                        $this->component = new class($manage) extends PageFiller {
+                            private $manage;
+                            public function __construct($manage)
                             {
                                 parent::__construct(file_get_contents(__ROOT__.'/view/modules/admin/LandingPage.xhtml'));
+                                $this->manage = $manage;
                             }
 
                             public function resolveData()
                             {
                                 return array(
                                     "{message}" => "Errore durante la cancellazione",
+                                    "{result}" => "failure",
+                                    "{manage}" => $this->manage
                                 );
                             }
                         };

@@ -47,13 +47,13 @@
     if($gSelected) $gVOArray = $genereDAO->getAllFilterBy($fValue, $oValue);
 
     if($fSelected){
-        if($gSelected) $fVOArray [] = $gVOArray[0]->getFamigliaVO();
+        if($gSelected && !empty($gVOArray)) $fVOArray [] = $gVOArray[0]->getFamigliaVO();
         else $fVOArray = $famigliaDAO->getAllFilterBy($oValue);
     }
 
     if($oSelected){
-        if($gSelected) $oVOArray []= $gVOArray[0]->getFamigliaVO()->getOrdineVO();
-        else if($fSelected && empty($fVOArray)) $oVOArray [] = $fVOArray[0]->getOrdineVO();
+        if($gSelected && !empty($gVOArray)) $oVOArray []= $gVOArray[0]->getFamigliaVO()->getOrdineVO();
+        else if($fSelected && !empty($fVOArray)) $oVOArray [] = $fVOArray[0]->getOrdineVO();
         else $oVOArray = $ordineDAO->getAll();
     }
 

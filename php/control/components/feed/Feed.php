@@ -32,10 +32,9 @@ class Feed extends Component {
         $results = DatabaseAccess::executeQuery($query . $orderby . ' desc limit 10;');
         $this->basePage = new BasePage($this->baseLayout());
 
-        foreach ($results as $result) {
+        foreach ($results as $result)
             $this->basePage->addComponent(new PostCard($result['contentID']));
-        }
-
+        
         $this->criteria = $criteria;
     }
 

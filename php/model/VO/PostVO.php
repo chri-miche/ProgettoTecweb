@@ -67,12 +67,17 @@
 
             }
 
-            if($counter == 0)  $result['immagine'] = 'default.png';
+            if($counter == 0) $result['immagine'] = 'default.png';
 
             /** Sistemazione dell'utente.*/
             $userDataToAppend = [];
             foreach ($this->userVO->arrayDump() as $key => $value)
                 $userDataToAppend["u_$key"] = $value;
+
+            for($i = 0; $i < sizeof($this->arrayTagVO); $i++){
+                foreach ($this->arrayTagVO[$i]->arrayDump() as $key => $value)
+                    $result["t_$i$key"] = $value;
+            }
 
             $result = array_merge($result, $userDataToAppend);
             return $result;

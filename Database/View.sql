@@ -3,13 +3,13 @@ select
     post.contentID,
     IFNULL(a.likes, 0) as likes,
     contenuto.data,
-    (select count(1) from commento where commento.contentID = post.contentID) as commenti
+    (select count(1) from commento where commento.postID = post.contentID) as commenti
 from post
 left join (select contentID, sum(likes) as likes from approvazione group by contentID) a
 	on post.contentID = a.contentID
 join contenuto
     on contenuto.ID = post.contentID;
-
+drop view if exists vw_post;
 /**
     view per facilitare la query dei post per l'ordinamento nella pagina iniziale
     attributi:

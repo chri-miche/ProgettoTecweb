@@ -1,52 +1,44 @@
 <?php
 
+require_once __ROOT__.'\model\DAO\CommentoDAO.php';
+class Comments extends BasePage {
 
-class Comments extends BasePage
-{
-    public function __construct(PostElement $post, SessionUser &$user)
-    {
+    public function __construct(PostVO $post, SessionUser &$user) {
         parent::__construct("<component />");
 
-        $result = DatabaseAccess::executeQuery("select * from commento c join contenuto cm on c.contentID = cm.ID join utente u on u.ID = cm.UserID where postID = '" . $post->getId() . "';");
+        $commentVOArray = (new CommentoDAO)->getAllOfPost($post->getId());
 
-        foreach ($result as $row) {
+        foreach ($commentVOArray as $commentVO)
+            $this->addComponent(new
+            Class($commentVO->arraydump(), file_get_contents(__ROOT__ . '/view/modules/post/Comment.xhtml')) extends Component {
 
-            $data = array();
-            foreach ($row as $key => $value) {
-                $data["{" . $key . "}"] = $value;
-            }
+                private $commentData;
 
-            $this->addComponent(new class(file_get_contents(__ROOT__ . '/view/modules/post/Comment.xhtml'), $data) extends Component {
-
-                private $row;
-
-                public function __construct(string $HTML, $row) {
-                    parent::__construct($HTML);
-                    $this->row = $row;
+                public function __construct(array $data, string $HTML) {
+                    parent::__construct($HTML); $this->commentData = $data;
                 }
 
                 public function resolveData() {
-                    return $this->row;
+                    $resolvedData = [];
+                    foreach ($this->commentData as $key =>$value) $resolvedData["{".$key."}"] = $value;
+                    return $resolvedData;
                 }
-            });
-        }
+        });
 
         $data = array();
-        $data["{contentID}"] = $post->getData()["contentID"];
+
+        $data["{contentID}"] = $post->getId();
         $data["{idUtente}"] = $user->getUser()->getId();
 
-        $this->addComponent(new class(file_get_contents(__ROOT__ . '/view/modules/post/InsertComment.xhtml'), $data) extends Component {
+        $this->addComponent(new class($data, file_get_contents(__ROOT__ . '/view/modules/post/InsertComment.xhtml')) extends Component {
 
             private $data;
 
-            public function __construct(string $HTML, $data)
-            {
-                parent::__construct($HTML);
-                $this->data = $data;
+            public function __construct(array $data, string $HTML) {
+                parent::__construct($HTML); $this->data = $data;
             }
 
-            public function resolveData()
-            {
+            public function resolveData() {
                 return $this->data;
             }
         });

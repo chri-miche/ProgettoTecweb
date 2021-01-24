@@ -1,10 +1,8 @@
 <?php
 
 
-class ImagesSlideshow extends BasePage
-{
-    public function __construct($idPost)
-    {
+class ImagesSlideshow extends BasePage {
+    public function __construct($idPost) {
         parent::__construct("<component />");
 
         $result = DatabaseAccess::executeQuery("select percorsoImmagine from immaginipost i where postID = '$idPost';");

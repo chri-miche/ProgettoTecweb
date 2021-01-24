@@ -370,6 +370,41 @@
 
         SELECT LAST_INSERT_ID() as id; END;
 
+    DROP PROCEDURE IF EXISTS like_post;
+    CREATE PROCEDURE like_post(IN in_userid INT, IN in_postid INT)BEGIN
+        SET @likes = (SELECT A.likes FROM approvazione A WHERE A.contentID = in_postid AND A.utenteID = in_userid);
+        IF isnull(@likes) THEN /** Non lo ha likeato*/
+            INSERT INTO approvazione(utenteID, contentID, likes) VALUE (in_userid, in_postid, 1);
+        ELSE /** Ha già likeato, ora dobbiamo vedere se droppare (tolgo like) oppure metter like da dislike.*/
+            IF @likes THEN
+                DELETE FROM approvazione WHERE in_userid = utenteID AND in_postid = contentID;
+            ELSE
+                UPDATE approvazione SET likes = 1 WHERE contentID = in_postid AND utenteID = in_userid;
+            END IF;
+        END IF; END;
+
+
+    DROP PROCEDURE IF EXISTS dislike_post;
+    CREATE PROCEDURE dislike_post(IN in_userid INT, IN in_postid INT)
+    BEGIN DECLARE a INT;BEGIN
+        SET @likes = (SELECT A.likes FROM approvazione A WHERE A.contentID = in_postid AND A.utenteID = in_userid);
+        IF isnull(@likes) THEN /** Non lo ha likeato*/
+            INSERT INTO approvazione(utenteID, contentID, likes) VALUE (in_userid, in_postid, 0);
+        ELSE /** Ha già likeato, ora dobbiamo vedere se droppare (tolgo like) oppure metter like da dislike.*/
+            IF NOT @likes THEN
+                DELETE FROM approvazione WHERE in_userid = utenteID AND in_postid = contentID;
+            ELSE
+                UPDATE approvazione SET likes = 0 WHERE contentID = in_postid AND utenteID = in_userid;
+            END IF;
+        END IF; END;END;
+
+    DROP PROCEDURE IF EXISTS getLikes;
+    CREATE PROCEDURE getLikes(IN p_id INT) BEGIN
+        SET @count = (SELECT (2 * SUM(A.likes) - COUNT(A.likes)) as likes FROM approvazione A WHERE A.contentID = p_id);
+        IF ISNULL(@count) THEN SELECT 0 as likes;
+        ELSE SELECT @count as likes; END IF;
+    END;
+
     DROP PROCEDURE IF EXISTS get_of_utente_post_all;
     CREATE PROCEDURE get_of_utente_post_all(IN in_id INT) BEGIN
         SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, P.title
@@ -444,3 +479,8 @@
     DROP PROCEDURE IF EXISTS delete_content;
     CREATE PROCEDURE delete_content(IN in_id INT) BEGIN
         DELETE FROM contenuto WHERE ID = in_id; END;
+
+
+    DROP PROCEDURE IF EXISTS check_user_likes_post;
+    CREATE PROCEDURE check_user_likes_post(IN post_id INT, IN us_id INT) BEGIN
+        SELECT A.likes FROM approvazione A WHERE A.utenteID = us_id AND A.contentID = post_id; END;

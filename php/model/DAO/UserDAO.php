@@ -69,6 +69,15 @@
             return false;
         }
 
+        public function likes(PostVO $postVO, UserVO $userVO) {
+
+            $result = $this->performCall(array($postVO->getId(), $userVO->getId()), 'check_user_likes_post');
+            if(isset($result['failure'])) return null;
+            return isset($result['likes']) && $result['likes'];
+
+        }
+
+
         public function follow(UserVO $user, UserVO $friend) : bool{
 
             $result = $this->performNoOutputModifyCall(array($user->getId(), $friend->getId()), 'user_act_friend');

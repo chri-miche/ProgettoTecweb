@@ -543,10 +543,8 @@ fieldset {
     margin: 0.5em;
 }
 
-fieldset input, fieldset textarea {
-    /* TODO  */
-    width: -webkit-fill-available;
-    width: -moz-available;
+fieldset > * {
+    display: block;
 }
 
 /*
@@ -826,6 +824,14 @@ ul#comments li form textarea {
     width: 100%;
 }
 
+#admin-navigation ~ form {
+    min-width: 400px;
+    width: 35vw;
+}
+
+#admin-navigation ~ form fieldset > input {
+    width: calc(100% - 28px); /*100% - border e padding*/
+}
 /* #end admin*/
 
 

@@ -109,9 +109,9 @@ button:hover, .button:hover, a:hover {
             0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-button.disabled, .button.disabled, a[aria-disabled=true], button[aria-disabled=true]
-button.disabled:hover, .button.disabled:hover, a[aria-disabled=true]:hover, button[aria-disabled=true]:hover,
-button.disabled:active, .button.disabled:active, a[aria-disabled=true]:active, button[aria-disabled=true]:active
+button.disabled, .button.disabled, a[aria-selected=true], button[aria-selected=true]
+button.disabled:hover, .button.disabled:hover, a[aria-selected=true]:hover, button[aria-selected=true]:hover,
+button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, button[aria-selected=true]:active
 {
     background: inherit;
     color: inherit;
@@ -161,8 +161,8 @@ button.disabled:active, .button.disabled:active, a[aria-disabled=true]:active, b
     margin: 0 2em;
 }
 
-.tab-label {
-    display: inline-flex;
+form.tab-label {
+    display: inline;
 }
 
 .fake-input {
@@ -180,10 +180,10 @@ a.tab-label:hover, .tab-label button:hover {
     color: white;
 }
 
-a.tab-label[aria-disabled=true],
-a.tab-label[aria-disabled=true]:hover,
-.tab-label button[aria-disabled=true],
-.tab-label button[aria-disabled=true]:hover
+a.tab-label[aria-selected=true],
+a.tab-label[aria-selected=true]:hover,
+.tab-label button[aria-selected=true],
+.tab-label button[aria-selected=true]:hover
 {
     color: inherit;
     background: transparent;
@@ -415,7 +415,7 @@ a.breadcrumb-item:visited:hover {
     content: ""; /* altrimenti non si visualizza */
     height: 40px; /*deve essere uguale alla height della breadcrumb*/
     width: 40px; /*deve essere uguale alla height della breadcrumb*/
-    transform: scale(.707) rotate(45deg); /* scala la dimensione di sqrt(2)*/
+    transform: scale(.7) rotate(45deg); /* scala la dimensione di sqrt(2)*/
     /*così si crea un rombo con assi lunghi 40px*/
     right: -20px; /*deve essere uguale metà height della breadcrumb, così si posiziona a cavallo tra due crumbs*/
     background: rgb(33,150,243);
@@ -448,13 +448,11 @@ a.breadcrumb-item:visited:hover {
 /* #end breadcrumb */
 /* #footer */
 #footer {
-    min-width: 300px;
     height: fit-content;
     position: relative;
     padding: 1em;
     bottom: 0;
 }
-
 /* #end footer */
 
 /* #login */

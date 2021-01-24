@@ -23,7 +23,7 @@
 
         if ($sessionUser->userIdentified()) {
             $redirect = true;
-            $idUtente = $sessionUser->getUser()->getData()['ID'];
+            $idUtente = $sessionUser->getUser()->getId();
 
             if (isset($_GET['comment']) && $_GET['comment'] === '1') {
                 DatabaseAccess::transaction(function () use($idUtente, $postID) {

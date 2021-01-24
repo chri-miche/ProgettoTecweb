@@ -257,8 +257,8 @@
     CREATE PROCEDURE check_conservazione_id(IN id VARCHAR(2)) BEGIN
         SELECT COUNT(C.codice) as idexists FROM conservazione C WHERE C.codice = id LIMIT 1; END;
 
-    DROP PROCEDURE IF EXISTS get_many_filter_specie_by_ordine;
-    CREATE PROCEDURE get_many_filter_specie_by_ordine(IN ord_id INT, IN in_limit INT, IN in_offset INT) BEGIN
+    DROP PROCEDURE IF EXISTS get_all_filter_specie_by_ordine;
+    CREATE PROCEDURE get_all_filter_specie_by_ordine(IN ord_id INT) BEGIN
         SELECT S.tagID as id, S.nomeScientifico, S.nomeComune, S.pesoMedio, S.altezzaMedia, S.descrizione, S.percorsoImmagine as immagine,
                G.tagID as g_id, G.nomeScientifico as g_nomeScientifico, F.f_id, F.f_nomeScientifico, O.TagID as o_id, O.nomeScientifico as o_nomeScientifico,
                C.codice as c_codice
@@ -267,17 +267,28 @@
                 INNER JOIN
                     (SELECT F.TagID as f_id, F.nomeScientifico as f_nomeScientifico, F.OrdID
                     FROM famiglia F WHERE F.OrdID = ord_id)
-            F ON F.f_id = G.famID INNER JOIN ordine O On O.TagID = F.OrdID LIMIT in_offset, in_limit; END;
+            F ON F.f_id = G.famID INNER JOIN ordine O On O.TagID = F.OrdID; END;
 
-    DROP PROCEDURE IF EXISTS get_many_filter_specie_by_famiglia;
-    CREATE PROCEDURE get_many_filter_specie_by_famiglia(IN fam_id INT, IN in_limit INT, IN in_offset INT) BEGIN
+    DROP PROCEDURE IF EXISTS get_all_filter_specie_by_famiglia;
+    CREATE PROCEDURE get_all_filter_specie_by_famiglia(IN fam_id INT) BEGIN
           SELECT S.tagID as id, S.nomeScientifico, S.nomeComune, S.pesoMedio, S.altezzaMedia, S.descrizione, S.percorsoImmagine as immagine,
                 G.tagID as g_id, G.nomeScientifico as g_nomeScientifico, F.TagID as f_id, F.nomeScientifico as f_nomeScientifico,
                 O.TagID as o_id, O.nomeScientifico as o_nomeScientifico, C.codice as c_codice
         FROM specie S
             INNER JOIN conservazione C ON S.conservazioneID = C.codice
             INNER JOIN genere G ON S.genID = G.tagID INNER JOIN famiglia F ON G.famID = F.TagID
-            INNER JOIN ordine O ON F.OrdID = O.TagID WHERE F.TagID = fam_id LIMIT in_offset, in_limit;
+            INNER JOIN ordine O ON F.OrdID = O.TagID WHERE F.TagID = fam_id;
+    END;
+
+    DROP PROCEDURE IF EXISTS get_all_filter_specie_by_genere;
+    CREATE PROCEDURE get_all_filter_specie_by_genere(IN gen_id INT) BEGIN
+          SELECT S.tagID as id, S.nomeScientifico, S.nomeComune, S.pesoMedio, S.altezzaMedia, S.descrizione, S.percorsoImmagine as immagine,
+                G.tagID as g_id, G.nomeScientifico as g_nomeScientifico, F.TagID as f_id, F.nomeScientifico as f_nomeScientifico,
+                O.TagID as o_id, O.nomeScientifico as o_nomeScientifico, C.codice as c_codice
+        FROM specie S
+            INNER JOIN conservazione C ON S.conservazioneID = C.codice
+            INNER JOIN genere G ON S.genID = G.tagID INNER JOIN famiglia F ON G.famID = F.TagID
+            INNER JOIN ordine O ON F.OrdID = O.TagID WHERE G.TagID = gen_id;
     END;
 
 

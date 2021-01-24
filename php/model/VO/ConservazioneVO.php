@@ -103,8 +103,7 @@
 
         }
 
-        public function arrayDump(): array
-        {
-            // TODO: Implement arrayDump() method.
+        public function arrayDump(): array {
+            return get_object_vars($this);
         }
     }

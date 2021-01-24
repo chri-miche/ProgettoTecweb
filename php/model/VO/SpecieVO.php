@@ -201,13 +201,12 @@
             unset($result['genereVO']);
             unset($result['conservazioneVO']);
 
-            /** @var $counter: Contatore di elementi immagine in modo da impostare un default.*/
-            /** Sistemazione dell'utente.*/
-            $userDataToAppend = [];
+            foreach ($this->genereVO->arrayDump() as $key => $value)
+                $result["g_$key"] = $value;
 
-            $result['userId'] = $this->genereVO->getId();
+            foreach ($this->conservazioneVO->arrayDump() as $key => $value)
+                $result["c_$key"] = $value;
 
-            $result = array_merge($result, $userDataToAppend);
             return $result;
         }
     }

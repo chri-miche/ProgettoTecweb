@@ -256,6 +256,21 @@ a.tab-label[aria-disabled=true]:hover,
     overflow-y: hidden;
 }
 
+.img-overflow-container.bird-card{
+    max-height: 500px;
+    height: fit-content;
+    overflow-y: hidden;
+}
+
+.bird-description{
+
+    flex: auto;
+
+    padding-left: 7em;
+    padding-top: 1em;
+}
+
+
 .card img {
     width: 100%;
     border-radius: 10px 10px 0 0;

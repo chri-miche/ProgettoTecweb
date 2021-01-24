@@ -70,8 +70,17 @@
 
         }
 
-        public function arrayDump(): array
-        {
-            // TODO: Implement arrayDump() method.
+        public function arrayDump(): array {
+
+            $result = get_object_vars($this);
+
+            /** Togliamo gli array.*/
+            unset($result['ordineVO']);
+
+            foreach ($this->ordineVO->arrayDump() as $key => $value)
+                $result["o_$key"] = $value;
+
+
+            return $result;
         }
     }

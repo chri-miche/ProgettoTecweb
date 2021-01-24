@@ -79,7 +79,15 @@
         }
 
         public function arrayDump(): array {
-            // TODO: Implement arrayDump() method.
+            $result = get_object_vars($this);
+
+            /** Togliamo gli array.*/
+            unset($result['famigliaVO']);
+
+            foreach ($this->famigliaVO->arrayDump() as $key => $value)
+                $result["f_$key"] = $value;
+
+            return $result;
         }
     }
 

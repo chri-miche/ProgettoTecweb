@@ -56,6 +56,8 @@
         }
 
         public function arrayDump(): array {
-            // TODO: Implement arrayDump() method.
+
+            return get_object_vars($this);
+
         }
     }

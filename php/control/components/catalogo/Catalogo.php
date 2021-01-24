@@ -24,7 +24,7 @@
          * @param array $genereVOArray
          * @param string|null $HTML */
         public function __construct(array $specieVOArray, string $selfReference = 'catalogo.php', int $page = 0, int $elemPerPage = 10,
-                                array $ordineVOArray = array(), array $famigliaVOArray = array(), array $genereVOArray = array(), string $HTML = null) {
+                array $ordineVOArray = array(), array $famigliaVOArray = array(), array $genereVOArray = array(), string $HTML = null) {
 
             parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\catalogo\Catalogo.xhtml'));
 
@@ -52,31 +52,26 @@
         }
 
         private function resolveDropDown(){
-            // TODO: str replace?
-            $baseHTML = '<div class="dropdown-hover">';
 
-            if(!isset($this->genereList)) {
-                $baseHTML .= '<button class="button" disabled="disabled">+</button>
-                                <div class="dropdown-content" style="width: 300px">';
-                $baseHTML .= '<button type="submit" value="true" name="genereEnabled"> Genere</button>';
+            $baseHTML = file_get_contents(__ROOT__.'\view\modules\catalogo\radioSelect.xhtml');
 
-                if(!isset($this->famigliaList)) {
+            $defDisabled = "disabled = 'disabled'";
+            $defChecked = "checked = checked";
+            $defHidden = "<input type='hidden' name='{name}' value='true' />";
 
-                    $baseHTML .= '<button type="submit" value="true" name="famigliaEnabled">  Famiglia</button>';
+            /** Se sono abilitati.*/
+            $baseHTML = str_replace("{g_checked}",empty($this->genereVOArray) ? '': $defChecked, $baseHTML);
 
-                    if(!isset($this->ordineList))
-                        $baseHTML .='<button type="submit" value="true" name="ordineEnabled"> Ordine</button>';
-                     else $baseHTML .= '<input hidden="hidden" value="true" name="ordineEnabled"/>';
+            $baseHTML = str_replace("{f_disabled}", empty($this->genereVOArray) ? '' :$defDisabled, $baseHTML);
+            $baseHTML = str_replace("{f_checked}", empty($this->famigliaVOArray) ? '' : $defChecked, $baseHTML);
+            $baseHTML = str_replace("{f_hidden}", empty($this->famigliaVOArray)? '': str_replace("{name}", "famigliaHidden", $defHidden), $baseHTML);
 
-                } else
-                    $baseHTML .= '<input  hidden="hidden" value="true" name="famigliaEnabled"/>';
+            $baseHTML = str_replace("{o_disabled}", empty($this->genereVOArray) && empty($this->famigliaVOArray)? '': $defDisabled, $baseHTML);
+            $baseHTML = str_replace("{o_checked}", empty($this->ordineVOArray) ? '' : $defChecked, $baseHTML);
+            $baseHTML = str_replace("{o_hidden}", empty($this->ordineVOArray)? '': str_replace("{name}", "ordineHidden", $defHidden), $baseHTML);
 
-                $baseHTML .= '</div>';
-
-            } else
-                $baseHTML .= '<input  hidden="hidden" value="true" name="genereEnabled"/>';
-
-            return $baseHTML . '</div>';
+            return $baseHTML;
+            /** RADIO AL POSTO DI QUESTO.**/
 
         }
 
@@ -84,14 +79,16 @@
 
             $resolvedHTML = '';
 
-            if(isset($this->ordineList)) {
+            // TODO: Rifare tutto.
+
+            if(isset($this->ordineVOArray)) {
                 /* Mostriamo gli ordini da scegliere se è possibile tale scelta.
                 Però prima si guarda se si ha dentro la family navigation o la genere navigation. */
-                if (isset($this->famigliaList) || isset($this->genereList))
+                if (isset($this->famigliaVOArray) || isset($this->genereList))
                     /** Siamo in condizione di non selezionabilità.*/
                     // Show the cardboard of the current selection. It also gives the input of the selction as hidden
-                    $resolvedHTML .= "<div>" . reset($this->ordineList) . "</div> 
-                        <input hidden='hidden' value='" . key($this->ordineList) . "' name='ordineValue' />
+                    $resolvedHTML .= "<div>" . reset($this->ordineVOArray) . "</div> 
+                        <input hidden='hidden' value='" . key($this->ordineVOArray) . "' name='ordineValue' />
                         <input hidden='hidden' value='' name='ordineEnabled' />";
 
                 else {
@@ -101,8 +98,8 @@
                     $resolvedHTML .= '<button type="submit"  value="true" name="ordineDisable"> - </button>';
                     /* Tutte le possibili selezioni del menu.*/
                     $resolvedHTML .= '<select name="ordineValue" id="ordineValue">';
-                    echo $this->currentOrdine;
-                    foreach ($this->ordineList as $key => $value)
+
+                    foreach ($this->ordineVOArray as $key => $value)
                         if($key == $this->currentOrdine)
                             $resolvedHTML .= "<option value='$key' selected='selected'> $value </option>";
                         else

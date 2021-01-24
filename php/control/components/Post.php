@@ -38,11 +38,6 @@
 
             }
 
-            // print_r($this->post);
-            // print_r($this->postUser);
-
-            // print_r(UserElement::getInterestsIds($this->postUser->ID));
-
         }
 
         public function resolveData()

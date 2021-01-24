@@ -9,6 +9,7 @@ require_once __ROOT__.'\control\components\catalogo\GenericBrowser.php';
 
 
 class SearchTab extends BasePage {
+
     private $keyword;
     private $entity;
 
@@ -16,8 +17,6 @@ class SearchTab extends BasePage {
         parent::__construct(file_get_contents(__ROOT__."/view/modules/search/SearchTab.xhtml"));
 
         $this->keyword = addslashes($keyword);
-        $this->keyword = "%$this->keyword%";
-
         $this->entity = $entity;
 
         $giveVOArray = array();
@@ -25,7 +24,7 @@ class SearchTab extends BasePage {
         switch ($entity) {
             case "commento":
 
-                $commentArrayVO = (new CommentoDAO())->search($this->keyword);
+                $commentArrayVO = (new CommentoDAO())->search("%$this->keyword%");
                 /** @var CommentoVO $comment*/
                 foreach ($commentArrayVO as $commentVO) $giveVOArray [] = $commentVO->getPostVO();
 
@@ -33,14 +32,15 @@ class SearchTab extends BasePage {
 
             case "specie":
 
-                $giveVOArray = (new SpecieDAO())->search($this->keyword);
+                $giveVOArray = (new SpecieDAO())->search("%$this->keyword%");
                 $layout = file_get_contents(__ROOT__."/view/modules/search/SpecieCard.xhtml"); break;
 
             case "post":
             default:
 
-                $giveVOArray = (new PostDAO())->search($this->keyword);
+                $giveVOArray = (new PostDAO())->search("%$this->keyword%");
                 $layout = file_get_contents(__ROOT__."/view/modules/feed/PostCard.xhtml");
+
         }
 
         $this->addComponent(new GenericBrowser($giveVOArray, $layout, "Search.php"));

@@ -13,7 +13,7 @@
     /** L utente da aggiungere.*/
     $friendId = $_POST['usid'] ?? null;
 
-    echo $friendId;
+    // echo $friendId;
     if(is_null($friendId))
         header("Location: Home.php");
 

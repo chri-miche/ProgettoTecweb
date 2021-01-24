@@ -1,15 +1,10 @@
 <div id="user-actions">
     <a id="dropdown-button" href="#dropdown-content">{username}</a>
-    <!--
-    TODO accessibilità
-
-    TODO valutare ul li
-    -->
     <div id="dropdown-content" class="primary-color">
         <a href="UserPage.php?id={userid}"> Profilo </a>
         <a href="Logout.php" xml:lang="en"> Logout </a>
         <a href="NewPost.php">Scrivi un post</a>
         <admin />
-        <a href="#dropdown-button">Chiudi menù</a>
+        <a href="#dropdown-button" id="close-dropdown">Chiudi menù</a>
     </div>
 </div>

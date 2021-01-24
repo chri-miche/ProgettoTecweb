@@ -596,9 +596,6 @@ input:focus + legend {
 /* #end dropdown */
 
 /* #begin table */
-table {
-    width: inherit;
-}
 
 tr:nth-child(even) {
     background: rgba(33,150,243, 0.3);
@@ -756,7 +753,7 @@ ul#comments li form textarea {
     align-self: stretch;
 }
 
-#information-content, #admin-content {
+#information-content {
     flex-grow: 1;
     display: flex;
     align-items: center;
@@ -792,6 +789,7 @@ ul#comments li form textarea {
 }
 
 #admin-content {
+    flex-grow: 1;
     width: 85vw;
 }
 
@@ -822,6 +820,10 @@ ul#comments li form textarea {
 
 #table-container {
     overflow-x: scroll;
+}
+
+#table-container table {
+    width: 100%;
 }
 /* #end admin*/
 

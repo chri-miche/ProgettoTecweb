@@ -151,6 +151,27 @@ class PostDAO extends DAO {
         return $this->idValid($element, 'post_id');
     }
 
+    public function like(UserVO $userVO, PostVO $postVO) : bool {
+
+        $result = $this->performNoOutputModifyCall(array($userVO->getId(),$postVO->getId()),'like_post');
+        return !isset($result['failure']);
+    }
+
+    public function dislike(UserVO $userVO, PostVO $postVO) : bool {
+
+        $result = $this->performNoOutputModifyCall(array($userVO->getId(),$postVO->getId()),'dislike_post');
+        return !isset($result['failure']);
+    }
+
+    public function getLikes(PostVO $postVO) : int {
+
+        $result = $this->performCall(array($postVO->getId()), 'getLikes');
+        if(isset($result['failure'])) return 0;
+
+        return $result['likes'];
+    }
+
+
     /**
      * @inheritDoc
      * @param PostVO $element */

@@ -18,7 +18,7 @@
     $pageUser = (new UserDAO())->get($id);
 
     $page->addComponent(new SiteBar('PostUtente'));
-    // TODO: Mettere nome dell'utente nella breadcrumb?
+    
     $page->addComponent(new BreadCrumb(array('Utente' => 'UserPage.php?id='.$pageUser->getId(), 'I Post di: '. $pageUser->getNome()=>'')));
 
     $page->addComponent(new Title("Post pubblicati",null, "I post che l'utente ha pubblicato sulla piattaforma."));

@@ -40,6 +40,22 @@
 
         public function __get($name){ return $this->$name ?? null; }
 
+        public function arrayDump(): array {
+
+            $result = get_object_vars($this);
+
+            /** Togliamo gli array.*/
+            unset($result['postVO']);
+
+            /** @var $counter: Contatore di elementi immagine in modo da impostare un default.*/
+
+            foreach ($this->postVO->arrayDump() as $key => $value)
+                $result["p_$key"] = $value;
+
+            return $result;
+
+        }
+
         public function varDumps(bool $id = false): array {
 
             $array = get_object_vars($this);
@@ -125,8 +141,4 @@
             $this->postVO = $postVO;
         }
 
-
-        public function arrayDump(): array {
-            // TODO: Implement arrayDump() method.
-        }
     }

@@ -35,12 +35,8 @@
 
             $resolvedData = [];
 
-            print_r($this->user->arrayDump());
-
             foreach ($this->user->arrayDump() as $key => $value)
                 $resolvedData["{".$key."}"] = $value;
-
-            print_r($resolvedData);
 
             $resolvedData['{loggedActions}'] = '';
 

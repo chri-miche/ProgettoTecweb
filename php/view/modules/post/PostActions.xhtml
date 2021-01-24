@@ -1,13 +1,18 @@
 <div id="like-actions">
-    <a href="PostPage.php?id={contentID}&{likeAction}=1"
+
+    <a href="PostPage.php?id={id}&liked=1"
        class="icon-button"
-       id="{likeAction}"
+       id="{hasLiked}"
        data-icon-name="thumb_up"
        title="Mi piace"><span>Mi piace</span></a>
-    <a href="PostPage.php?id={contentID}&{dislikeAction}=1"
+
+    <span> {likes} </span>
+
+    <a href="PostPage.php?id={id}&disliked=1"
        class="icon-button"
-       id="{dislikeAction}"
+       id="{hasDisliked}"
        data-icon-name="thumb_down"
        title="Non mi piace"
        xml:lang="en"><span>Non mi piace</span></a>
+
 </div>

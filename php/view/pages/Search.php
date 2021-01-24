@@ -20,7 +20,6 @@
     $currentPage = $_GET['page']?? 0;
 
     $page->addComponent(new SiteBar("search", $keyword));
-
     $page->addComponent(new BreadCrumb(array("Ricerca" => "")));
 
     $page->addComponent(new SearchTab($keyword, $entity, $currentPage));

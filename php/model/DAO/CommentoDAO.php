@@ -57,7 +57,7 @@ class CommentoDAO extends DAO {
 
         if(!isset($result['failure'])) /** Evito più ritorni del dovuto. */
             foreach ($result as $element)
-                $VOArray [] = new CommentoVO(...$element, ...$parentVO);
+                $VOArray [] = new CommentoVO(...$element, ...[$parentVO]);
 
         return $VOArray;
 

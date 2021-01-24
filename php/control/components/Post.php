@@ -1,102 +1,72 @@
 <?php
 
-    require_once __ROOT__.'\model\PostElement.php';
-    require_once __ROOT__.'\model\UserElement.php';
+    require_once __ROOT__.'\model\DAO\PostDAO.php';
+    require_once __ROOT__.'\model\DAO\UserDAO.php';
+
     require_once __ROOT__.'\model\meta\Persistent.php';
+
     require_once __ROOT__.'\control\components\post\PostActions.php';
     require_once __ROOT__.'\control\components\post\ImagesSlideshow.php';
     require_once __ROOT__.'\control\components\post\Comments.php';
 
-    //TODO: Remove globals inside of Post and other Components.
-    // TODO: Move to be postSummary. And also create CommentSummary.
     class Post extends Component {
 
         /** @var $user SessionUser Current user */
         private $user;
-        private $postUser;
+
 
         private $post;
-        private $creator;
-
-        private $interpol = null;
+        private $creatorVO;
 
         /***
-         * @param int $pid
+         * @param PostVO $post
          * @param SessionUser $user
-         * @param string|null $HTML
-         */
-        public function __construct(int $pid, SessionUser &$user, string $HTML = null) {
+         * @param string|null $HTML */
+        public function __construct(PostVO &$post, SessionUser &$user, string $HTML = null) {
+            parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\Post.xhtml'));
 
             $this->user = $user;
 
-            parent::__construct(isset($HTML) ? $HTML : file_get_contents(__ROOT__.'\view\modules\Post.xhtml'));
-
-            if(isset($pid) && PostElement::checkID($pid)){
-
-                $this->post = new PostElement($pid);
-                $this->postUser = (new UserDAO())->get($this->post->UserID);
-
-            }
+            $this->post = $post;
+            $this->creatorVO = $this->post->getUserVO();
 
         }
 
-        public function resolveData()
-        {
-            if (!isset($this->interpol)) {
-                $ref = $this->post->getData();
-                $this->interpol = array();
-                foreach ($ref as $key => $value) {
-                    $this->interpol['{' . $key . '}'] = $value;
-                }
-                $this->interpol['{nome}'] = $this->postUser->getNome();
-                $this->interpol['{UserID}'] = $this->postUser->getId();
-            }
-            return $this->interpol;
+        public function resolveData() {
+
+            $resolvedData = $this->post->arrayDump();
+            $resolvedData['likes'] = (new PostDAO())->getLikes($this->post);
+
+            print_r($resolvedData);
+
+            return $resolvedData;
         }
 
-        function build()
-        {
-            $html = parent::build();
-            $images = (new ImagesSlideshow($this->interpol['{contentID}']))->build();
+        function build() {
 
-            $html = str_replace("<images />", $images, $html);
+            $baseLayout = $this->baseLayout();
+
+            foreach ($this->resolveData() as $key => $value)
+                $baseLayout = str_replace("{".$key."}", $value, $baseLayout);
+
+            /** Immagini dei post.*/
+            $images = (new ImagesSlideshow($this->post->getId()))->build();
+            $baseLayout = str_replace("<images />", $images, $baseLayout);
 
             if ($this->user->userIdentified()) {
+
                 $postActions = (new PostActions($this->post, $this->user))->build();
-                $html = str_replace("<actions />", $postActions, $html);
+                $baseLayout = str_replace("<actions />", $postActions, $baseLayout);
 
                 $comments = (new Comments($this->post, $this->user))->build();
-                $html = str_replace("<comments />", $comments, $html);
+                $baseLayout = str_replace("<comments />", $comments, $baseLayout);
+
             } else {
-                $html = str_replace("<comments />", "<li>Per commentare bisogna aver effettuato l'accesso.</li>", $html);
+                $baseLayout = str_replace("<comments />", "<li>Per commentare bisogna aver effettuato l'accesso.</li>", $baseLayout);
             }
 
-            return $html;
+            return $baseLayout;
         }
 
-
-
-        /** Ausliari per dividere la costruzione di un post.*/
-
-        private static function posterData(UserElement $user){
-                $ret = "";
-                /* strReplace may be the way to go but we try by builing it from hand.*/
-                $ret .= '<header class="w3-container w3-blue"><h1>';
-
-                $ret .= '<img src= "'. $user->immagine . '"></img>';
-                $ret .= 'Creato da :' .$user->nome . "  ";
-
-                return $ret."</h1></header>";
-
-        }
-
-        private function postContent(){
-
-        }
-
-        private function commentsContent(){
-
-
-        }
 
     }

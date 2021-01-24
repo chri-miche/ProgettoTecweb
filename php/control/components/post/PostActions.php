@@ -1,47 +1,50 @@
 <?php
 
 
-class PostActions extends Component
-{
+class PostActions extends Component {
 
-    private $data;
+    private $postVO;
+    private $userLiked;
 
-    public function __construct(PostElement $post, SessionUser &$utente)
-    {
+    public function __construct(PostVO $postVO, SessionUser &$utente) {
+
         parent::__construct(file_get_contents(__ROOT__.'/view/modules/post/PostActions.xhtml'));
-        $this->data = array();
-        $this->data["{contentID}"] = $post->getData()["contentID"];
-        $this->data["{idUtente}"] = $utente->getUser()->getId();
 
-
-
-        $liked = DatabaseAccess::executeSingleQuery("select likes from approvazione where contentID = '" .
-            $post->getData()["contentID"] .
-            "' and utenteID ='" .
-            $utente->getUser()->getId() .
-            "';");
-
-        if (empty($liked)) {
-            $likes = "0";
-        } else {
-            $likes = $liked['likes'];
-        }
-
-        if ($likes == "1") {
-            $this->data['{likeAction}'] = 'liked';
-            $this->data['{dislikeAction}'] = 'canDislike';
-        } elseif ($likes == "-1") {
-            $this->data['{likeAction}'] = 'canLike';
-            $this->data['{dislikeAction}'] = 'disliked';
-        } else {
-            $this->data['{likeAction}'] = 'canLike';
-            $this->data['{dislikeAction}'] = 'canDislike';
-        }
-
+        $this->postVO = $postVO;
+        $this->userLiked = (new UserDAO())->likes($this->postVO, $utente->getUser());
     }
 
-    public function resolveData()
-    {
-        return $this->data;
+    public function resolveData() {
+
+        $resolvedData = [];
+
+        $resolvedData["{id}"] = $this->postVO->getId();
+
+        /** User liked or hasn't liked the post.*/
+
+        if(is_null($this->userLiked)) {
+
+            $resolvedData['{hasLiked}'] = 'canLike';
+            $resolvedData['{hasDisliked}'] = 'canDislike';
+
+        } else {
+
+            if($this->userLiked){
+
+                $resolvedData['{{hasLiked}'] = 'canLike';
+                $resolvedData['{hasDisliked}'] = 'disliked';
+
+            } else {
+
+                $resolvedData['{hasLiked}'] = 'like';
+                $resolvedData['{{hasDisliked}'] = 'canDislike';
+
+            }
+        }
+
+        $numberLikes =  (new PostDAO())->getLikes($this->postVO);
+        $resolvedData['{likes}'] = $numberLikes >= 0 ? "+$numberLikes" : "$numberLikes";
+
+        return $resolvedData;
     }
 }

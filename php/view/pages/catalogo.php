@@ -1,14 +1,13 @@
 <?php
 
     define('__ROOT__', dirname(dirname(dirname(__FILE__))));
-    /* Pagina di base.*/
+
     require_once __ROOT__ . '\control\BasePage.php';
-    /* Moduli.*/
+
     require_once __ROOT__ . '\control\components\SiteBar.php';
     require_once __ROOT__ . '\control\components\BreadCrumb.php';
     require_once __ROOT__ . '\control\components\catalogo\Catalogo.php';
-    /* Elementi dal modello.*/
-    require_once __ROOT__ . '\model\BirdElement.php';
+
     require_once __ROOT__ . '\model\DAO\SpecieDAO.php';
 
     $basePage = file_get_contents(__ROOT__ . '\view\BaseLayout.xhtml');
@@ -44,17 +43,37 @@
 
     $oVOArray = array(); $fVOArray = array(); $gVOArray = array();
 
-    if($gSelected) $gVOArray = $genereDAO->getAllFilterBy($fValue, $oValue);
+
+
+    if($gSelected)
+        $gVOArray = $genereDAO->getAllFilterBy($fValue, $oValue);
 
     if($fSelected){
-        if($gSelected && !empty($gVOArray)) $fVOArray [] = $gVOArray[0]->getFamigliaVO();
-        else $fVOArray = $famigliaDAO->getAllFilterBy($oValue);
+        if($gSelected)
+            if(!empty($gVOArray))
+                $fVOArray [] = $gVOArray[0]->getFamigliaVO();
+            else
+                $fVOArray [] = $famigliaDAO->get($fValue);
+        else
+            $fVOArray = $famigliaDAO->getAllFilterBy($oValue);
     }
 
     if($oSelected){
-        if($gSelected && !empty($gVOArray)) $oVOArray []= $gVOArray[0]->getFamigliaVO()->getOrdineVO();
-        else if($fSelected && !empty($fVOArray)) $oVOArray [] = $fVOArray[0]->getOrdineVO();
-        else $oVOArray = $ordineDAO->getAll();
+        if($gSelected) {
+            if(!empty($gVOArray))
+                $oVOArray [] = $gVOArray[0]->getFamigliaVO()->getOrdineVO();
+            else
+                $oVOArray []= $ordineDAO->get($oValue);
+
+        } else if($fSelected){
+
+            if(!empty($fVOArray))
+                $oVOArray [] = $gVOArray[0]->getOrdineVO();
+            else
+                $oVOArray[]= $ordineDAO->get($oValue);
+
+        } else
+            $oVOArray = $ordineDAO->getAll();
     }
 
 

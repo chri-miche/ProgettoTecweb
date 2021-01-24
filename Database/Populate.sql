@@ -2,7 +2,6 @@
 USE WebBirdDB;
 */
 
-Insert into Tag(ID, nome, LabelID) VALUES (1, 'Pinguini', null);
 Insert into ordine(TagID, nomeScientifico) VALUES (1, 'Pengus Maestos');
 insert into utente(ID, nome, email, password, immagineProfilo) values
     (1, 'Jacopo', 'jacopo.fichera98@gmail.com', 'risiko', 'immagine.jpg'),
@@ -10,7 +9,6 @@ insert into utente(ID, nome, email, password, immagineProfilo) values
     (4, 'John Wick', 'john@wick.gun', 'risiko', 'img.jpg'),
     (5, 'Adam Sandler', 'adam@sandler.funny', 'risiko', 'img.jpg');
 
-Insert into moderatore(UserID, isAdmin) value (1, true);
 
 insert into contenuto(UserID, isArchived, content, data) values
     (1, false, 'Abracadabra qui ci sta del testo uhahaha','1960-10-12'),

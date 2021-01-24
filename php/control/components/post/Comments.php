@@ -20,14 +20,12 @@ class Comments extends BasePage
 
                 private $row;
 
-                public function __construct(string $HTML, $row)
-                {
+                public function __construct(string $HTML, $row) {
                     parent::__construct($HTML);
                     $this->row = $row;
                 }
 
-                public function resolveData()
-                {
+                public function resolveData() {
                     return $this->row;
                 }
             });

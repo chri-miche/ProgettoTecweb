@@ -161,7 +161,7 @@ p {
     font-size: 0.75em;
 }
 
-p.text-truncate {
+.text-truncate {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -181,6 +181,7 @@ p.text-truncate {
 
 #tab-header {
     background: rgba(33,150,243, 0.3);
+    align-self: stretch;
 }
 
 .tab-content {
@@ -744,6 +745,10 @@ ul#comments li form textarea {
     list-style: none;
 }
 
+#information-side li{
+    width: 100%;
+}
+
 #information-side {
     float: left;
     min-width: 200px;
@@ -753,6 +758,9 @@ ul#comments li form textarea {
 
 #information-content, #admin-content {
     flex-grow: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 .preview {
     display: flex;

@@ -22,9 +22,8 @@
             $this->currentPage = $currentPage;
             $this->numberPages = count($elements) / $elementsPerPage;
 
-            /** Array of the current elements we consider (as we are in a given page). */
-            $newElementsList = array_slice($elements, $this->numberPages * $currentPage,
-                $this->numberPages * $currentPage + $elementsPerPage);
+
+            $newElementsList = array_slice($elements, $elementsPerPage * $currentPage, $elementsPerPage);
 
             $this->previewPage = new PreviewsPage($newElementsList, $previewLayout, $browsePageHTML);
 
@@ -45,9 +44,9 @@
                 for ($i = 0; $i < $this->numberPages; $i++){
 
                     if ($i == $this->currentPage) // Se ci troviamo in pagina correntemente selezionata. TODO: togliere "a"
-                        $browsingList .= '<a href= "" class="w3-button w3-red">' . ($i + 1) . '</a>';
+                        $browsingList .= '<a href= "#" class="selected-button page-select">' . ($i + 1) . '</a>';
                     else // stile alternativo. (link selezionabile che porta alla pagina successiva).
-                        $browsingList .= '<a href="' . $this->nextPageReference . $i . '" class="w3-button">' . ($i + 1) . '</a>';
+                        $browsingList .= '<a href="' . $this->nextPageReference . $i . '" class="page-select">' . ($i + 1) . '</a>';
 
                 }
             }

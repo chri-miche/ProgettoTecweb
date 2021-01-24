@@ -746,8 +746,12 @@ ul#comments li form textarea {
     width: 168px;
 }
 
-#user-information  {
+#user-information {
     display: flex;
+}
+
+#user-side ul {
+    list-style: none;
 }
 
 #user-side {

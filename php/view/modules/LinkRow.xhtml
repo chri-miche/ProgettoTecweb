@@ -3,8 +3,10 @@
     <!-- Questo componente visualizza un link con stile definito. (elemento di una lista) -->
     <!-- Ogni sostitutizione del default deve presentare i campi {} affinché il componente sia sensato. -->
 <li>
-    <img src="{immagine}" />
-    <a href="{reference}">
+    <a href="UserPage.php?id={reference}">
+        <div class="profile-mini">
+            <img alt="" src="{immagine}" />
+        </div>
         {nome}
     </a>
 </li>

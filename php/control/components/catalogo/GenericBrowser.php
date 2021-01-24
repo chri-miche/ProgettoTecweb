@@ -17,7 +17,7 @@
 
             parent::__construct( $HTML ?? file_get_contents(__ROOT__.'\view\modules\browsing\Browser.xhtml'));
 
-            $this->nextPageReference = $nextPageReference .'?page=';
+            $this->nextPageReference = $nextPageReference .'page=';
 
             $this->currentPage = $currentPage;
             $this->numberPages = count($elements) / $elementsPerPage;

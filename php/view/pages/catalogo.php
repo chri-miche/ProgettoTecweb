@@ -26,56 +26,48 @@
     $ordineDAO = new OrdineDAO();
 
 
-    /* Dobbiamo trovare: gli ordini, i generi e le famiglie.*/
+    /** Selected ovvero che abbiamo deciso di filtrare per quel valroe. */
+    /* _GET contiene 1 se è selezionato 0 altrimenti.*/
 
-    $ordineEnabled = isset($_GET['ordineEnabled']); /* What to add is known now.*/
-    $famigliaEnabled = isset($_GET['famigliaEnabled']); /* What to add is known now.*/
-    $genereEnabled = isset($_GET['genereEnabled']); /* What to add is known now.*/
+    $oSelected = $_GET['oSelected'] ?? array();
+    $oSelected = !(count($oSelected) > 1 || count($oSelected) == 0);
 
-    /* I valori delle selezioni se esistono */
-    $ordineValue =  $_GET['ordineValue'] ?? null;
-    $famigliaValue = $_GET['famigliaValue'] ?? null;
-    $genereValue =  $_GET['genereValue'] ?? null;
+    $fSelected = $_GET['fSelected'] ?? array();
+    $fSelected = !(count($fSelected) > 1 || count($fSelected) == 0);
 
+    $gSelected = $_GET['gSelected'] ?? array();
+    $gSelected = !(count($gSelected) > 1 || count($gSelected)== 0);
 
-    // Init delle liste.
-    $ordineList = array();
-    $famigliaList = array();
-    $genereList = array();
+    $oValue = $oSelected ? $_GET['oValue'] ?? null : null;
+    $fValue = $fSelected ? $_GET['fValue'] ?? null : null;
+    $gValue = $gSelected ? $_GET['gValue'] ?? null : null;
 
-    if($genereEnabled) {
+    $oVOArray = array(); $fVOArray = array(); $gVOArray = array();
 
-        $genereList = $genereDAO->getAllFilterBy($famigliaValue, $ordineValue);
+    if($gSelected) $gVOArray = $genereDAO->getAllFilterBy($fValue, $oValue);
 
-        /** Elemento di famiglia della lista di generi attuali.(se selezionato) */
-        if($famigliaEnabled && sizeof($genereList) > 0) $famigliaList []= $genereList[0]->getFamigliaVO();
-
-        /** Elemento di ordini della lista di generi attuali. (se selezionato) */
-        if($ordineEnabled && sizeof($famigliaList) > 0)
-            $ordineList []= $famigliaList[0]->getOrdineVO();
-
-    } else {
-
-        if($famigliaEnabled){
-
-            $famigliaList = $famigliaDAO->getAllFilterBy($ordineValue); // Ricorda può essere null.
-
-            if($ordineEnabled && sizeof($famigliaList) > 0)
-                $ordineList []= $famigliaList[0]->getOrdineVO();
-
-        } else {
-
-            if($ordineEnabled) $ordineList = $ordineDAO->getAll();
-
-        }
-
+    if($fSelected){
+        if($gSelected) $fVOArray [] = $gVOArray[0]->getFamigliaVO();
+        else $fVOArray = $famigliaDAO->getAllFilterBy($oValue);
     }
 
-    $birds = $specieDAO->getAllFilterBy($genereEnabled ? $genereValue : null,$famigliaEnabled? $famigliaValue : null,$ordineEnabled ? $ordineValue : null);
+    if($oSelected){
+        if($gSelected) $oVOArray []= $gVOArray[0]->getFamigliaVO()->getOrdineVO();
+        else if($fSelected && empty($fVOArray)) $oVOArray [] = $fVOArray[0]->getOrdineVO();
+        else $oVOArray = $ordineDAO->getAll();
+    }
 
 
-    $page->addComponent(new Catalogo($birds, 'catalogo.php',$_GET['page'] ?? 0, 20, $ordineList,
-        $famigliaList, $genereList, $ordineValue, $famigliaValue, $genereValue));
+    /** Ottieni tutte le specie considerando i parametri necessari. */
+    $birds = $specieDAO->getAllFilterBy($gSelected ? $gValue : null,$fSelected? $fValue : null,$oSelected ? $oValue : null);
+
+    $page->addComponent(
+        new Catalogo($birds, 'catalogo.php',$_GET['page'] ?? 0, 20,
+            $oVOArray, $fVOArray, $gVOArray, /** Array delle selezioni possibili.*/
+            $oSelected, $fSelected, $gSelected,
+            $oValue, $fValue, $gValue));  /** Valori selezionati per le voci scelte se definiti.*/
+
+
     echo $page;
 
 ?>

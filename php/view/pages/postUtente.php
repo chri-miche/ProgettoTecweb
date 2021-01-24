@@ -32,7 +32,7 @@
     $postList = (new PostDAO())->getOfUtente($pageUser->getId());
 
     $page->addComponent(new GenericBrowser($postList, $tagPreviewLayout,
-        'postUtente.php?usid='.$pageUser->getId()."&", $_GET['page'] ?? 0, 2));
+        'postUtente.php?usid='.$pageUser->getId()."&", $_GET['page'] ?? 0, 8));
 
     echo $page;
 

@@ -65,6 +65,10 @@ input:focus, textarea:focus {
     background: rgba(33, 150, 243, 0.3);
 }
 
+form {
+    text-align: center;
+}
+
 #container {
     display: flex;
     flex-flow: row;
@@ -246,6 +250,7 @@ a.tab-label[aria-selected=true]:hover,
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
+    align-items: center;
 }
 
 
@@ -485,7 +490,7 @@ a.breadcrumb-item:visited:hover {
     justify-content: center;
     align-items: center;
 }
-#login-form {
+#form-container {
     background: white;
     color: black;
     width: 20vw;
@@ -500,18 +505,18 @@ a.breadcrumb-item:visited:hover {
     align-items: stretch;
 }
 
-#login-form form {
+#form-container form {
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 
-#login-form form input {
+#form-container form input {
     margin: 10px;
     text-align: center;
 }
 
-#login-form img {
+#form-container img {
     width: 75%;
     align-self: center;
 }
@@ -524,37 +529,10 @@ a.breadcrumb-item:visited:hover {
     margin-left: 0;
 }
 
-#login-form a {
+#form-container a {
     display: inline;
 }
 /* #end login*/
-
-/* #admin */
-#admin-content {
-    display: flex;
-}
-
-
-#admin-content h1 {
-    width: 100%;
-    display: inline-block;
-}
-
-#admin-content a {
-    font-size: initial;
-    font-weight: initial;
-    float: right;
-}
-
-#admin-content #content {
-    margin-left: 0;
-    padding-left: 2em;
-}
-
-#table-container {
-    width: 100%;
-}
-/* #end admin*/
 
 /* #form */
 
@@ -670,6 +648,7 @@ th.action, td.action {
 
 /* #begin comments */
 ul#comments {
+    align-self: stretch;
     list-style: none;
 }
 
@@ -694,6 +673,7 @@ ul#comments li {
 #like-actions {
     display: flex;
     justify-content: space-evenly;
+    align-self: stretch;
 }
 
 #liked, #liked:visited {
@@ -757,9 +737,10 @@ ul#comments li form textarea {
 /* #begin information page*/
 #information-page {
     display: flex;
+    align-self: stretch;
 }
 
-#information-side ul {
+#information-side ul, #admin-navigation ul {
     list-style: none;
 }
 
@@ -770,7 +751,7 @@ ul#comments li form textarea {
     align-self: stretch;
 }
 
-#information-content {
+#information-content, #admin-content {
     flex-grow: 1;
 }
 .preview {
@@ -791,5 +772,49 @@ ul#comments li form textarea {
 
 /* #end information*/
 
+/* #admin */
+
+
+#admin-navigation {
+    padding: 2px;
+}
+
+#admin-navigation {
+    width: 15vw;
+}
+
+#admin-content {
+    width: 85vw;
+}
+
+#admin-navigation ul {
+    margin: 0;
+    padding: 0;
+}
+
+#admin-navigation a {
+    width: auto;
+    position: relative;
+    display: block;
+    border-radius: 0;
+    box-shadow: none;
+    transition: inherit;
+}
+
+#admin-content a {
+    font-size: initial;
+    font-weight: initial;
+    float: right;
+}
+
+#admin-content #content {
+    margin-left: 0;
+    padding-left: 2em;
+}
+
+#table-container {
+    overflow-x: scroll;
+}
+/* #end admin*/
 
 

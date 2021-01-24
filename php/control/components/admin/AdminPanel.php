@@ -9,10 +9,13 @@ class AdminPanel extends Component
 {
 
     private static $entities = array(
-        "famiglia" => "Famiglie",
         "tag" => "Tag",
-        "moderatore" => "Moderatori",
-        "utente" => "Utenti"
+        "utente" => "Utenti",
+        "specie" => "Specie",
+        "famiglia" => "Famiglie",
+        "genere" => "Genere",
+        "conservazione" => "Conservazione",
+        "post" => "Post",
     );
 
     private $navigation;
@@ -26,7 +29,12 @@ class AdminPanel extends Component
         $this->manage = $manage;
         $this->navigation = "";
         foreach (AdminPanel::$entities as $key => $value) {
-            $this->navigation .= "<li><a href='Admin.php?manage=$key'>$value</a></li>";
+            if ($key !== $manage) {
+                $this->navigation .= "<li><a href='Admin.php?manage=$key'>$value</a></li>";
+            } else {
+                $this->navigation .= "<li><a aria-selected='true'>$value</a></li>";
+
+            }
         }
 
         $this->component = null;

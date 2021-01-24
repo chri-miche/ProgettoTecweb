@@ -1,4 +1,4 @@
-<div id="table-container">
+<div id="admin-content">
     <h1>{title}
         <a class="icon-button"
            href="Admin.php?manage={table}&operation=update"
@@ -7,17 +7,20 @@
             <span>Nuovo</span>
         </a> <!-- TODO icon button -->
     </h1>
+    <div id="table-container">
 
-    <!-- TODO accessibilità -->
-    <table cellspacing="0" summary="Questa tabella rappresenta il contenuto di {title}, per la modifica della banca dati.">
-        <thead class="primary-color">
+        <!-- TODO accessibilità -->
+        <table cellspacing="0" summary="Questa tabella rappresenta il contenuto di {title}, per la modifica della banca dati.">
+            <thead class="primary-color">
             <tr>
                 <!-- TODO accessibilità -->
                 <tableHeaders /><th class="action">Modifica</th><th class="action">Elimina</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <tableRows />
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
+

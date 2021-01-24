@@ -50,7 +50,7 @@
 
             $VOArray = array();
 
-            if(isset($famiglia)){
+            if(!is_null($famiglia)){
 
                 $famigliaVO = (new FamigliaDAO())->get($famiglia);
 
@@ -59,7 +59,7 @@
                 if(isset($result['failure'])) return $VOArray;
 
                 foreach ($result as $element)
-                    $VOArray = new GenereVO(...$element, ...[$famigliaVO]);
+                    $VOArray []= new GenereVO(...$element, ...[$famigliaVO]);
 
             } else if(isset($ordine)){
 
@@ -74,7 +74,7 @@
                     $famigliaVO = new FamigliaVO($element['f_id'], $element['f_nomeScientifico'], $ordineVO);
                     unset($element['f_id'], $element['f_nomeScientifico']);
 
-                    $VOArray = new GenereVO(...$element, ...[$famigliaVO]);
+                    $VOArray []= new GenereVO(...$element, ...[$famigliaVO]);
                 }
             } else
                 $VOArray = $this->getAll();

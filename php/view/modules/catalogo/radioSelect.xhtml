@@ -1,17 +1,6 @@
 
 <form action="catalogo.php" method="get">
-    <div>
-        <input type="checkbox" id="ordineBox" name="ordineEnabled" {o_disabled} value="true" {o_checked} />
-        <label for="ordineBox"> Ordine </label>
-        {o_hidden}
+    {buttonsShow}
 
-        <input type="checkbox" id="famigliaBox" name="famigliaEnabled" {f_disabled} value="true" {f_checked} />
-        <label for="famigliaBox"> Famiglia </label>
-        {f_hidden}
-
-        <input type="checkbox" id="genereBox" name="genereEnabled" value="true" {g_checked} />
-        <label for="genereBox"> Genere</label>
-
-        <button type="submit" value="Submit"> Conferma le nuove selezioni</button>
-    </div>
+    {selectTipo}
 </form>

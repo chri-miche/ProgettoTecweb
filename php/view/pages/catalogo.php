@@ -28,9 +28,9 @@
 
     /* Dobbiamo trovare: gli ordini, i generi e le famiglie.*/
 
-    $ordineEnabled = isset($_GET['ordineEnabled']) && !isset($_GET['ordineDisable']); /* What to add is known now.*/
-    $famigliaEnabled = isset($_GET['famigliaEnabled']) && !isset($_GET['famigliaDisable']); /* What to add is known now.*/
-    $genereEnabled = isset($_GET['genereEnabled']) && !isset($_GET['genereDisable']); /* What to add is known now.*/
+    $ordineEnabled = isset($_GET['ordineEnabled']); /* What to add is known now.*/
+    $famigliaEnabled = isset($_GET['famigliaEnabled']); /* What to add is known now.*/
+    $genereEnabled = isset($_GET['genereEnabled']); /* What to add is known now.*/
 
     /* I valori delle selezioni se esistono */
     $ordineValue =  $_GET['ordineValue'] ?? null;
@@ -48,11 +48,10 @@
         $genereList = $genereDAO->getAllFilterBy($famigliaValue, $ordineValue);
 
         /** Elemento di famiglia della lista di generi attuali.(se selezionato) */
-        if($famigliaEnabled)
-            $famigliaList []= $genereList[0]->getFamigliaVO();
+        if($famigliaEnabled && sizeof($genereList) > 0) $famigliaList []= $genereList[0]->getFamigliaVO();
 
         /** Elemento di ordini della lista di generi attuali. (se selezionato) */
-        if($ordineEnabled)
+        if($ordineEnabled && sizeof($famigliaList) > 0)
             $ordineList []= $famigliaList[0]->getOrdineVO();
 
     } else {
@@ -61,23 +60,22 @@
 
             $famigliaList = $famigliaDAO->getAllFilterBy($ordineValue); // Ricorda può essere null.
 
-            if($ordineEnabled)
+            if($ordineEnabled && sizeof($famigliaList) > 0)
                 $ordineList []= $famigliaList[0]->getOrdineVO();
 
         } else {
 
-            $ordineList = $ordineDAO->getAll();
+            if($ordineEnabled) $ordineList = $ordineDAO->getAll();
 
         }
 
     }
 
-    $birds = $specieDAO->getAllFilterBy($ordineEnabled ? $ordineValue : null,
-        $famigliaEnabled? $famigliaValue : null, $genereEnabled ? $genereValue : null);
+    $birds = $specieDAO->getAllFilterBy($genereEnabled ? $genereValue : null,$famigliaEnabled? $famigliaValue : null,$ordineEnabled ? $ordineValue : null);
 
-    foreach ($birds as $bird) print_r($bird->arrayDump());
 
-    $page->addComponent(new Catalogo($birds, 'catalogo.php',$_GET['page'] ?? 0, 20, $ordineList, $famigliaList, $genereList));
+    $page->addComponent(new Catalogo($birds, 'catalogo.php',$_GET['page'] ?? 0, 20, $ordineList,
+        $famigliaList, $genereList, $ordineValue, $famigliaValue, $genereValue));
     echo $page;
 
 ?>

@@ -140,7 +140,7 @@
 
     DROP PROCEDURE  IF EXISTS get_all_genere_filter_by_famiglia;
     CREATE PROCEDURE get_all_genere_filter_by_famiglia(IN fam_id INT) BEGIN
-        SELECT G.tagID as id, G.nomeScientifico FROM genere G WHERE G.tagID = famID; END;
+        SELECT G.tagID as id, G.nomeScientifico FROM genere G WHERE G.famID = fam_id; END;
 
 
     DROP PROCEDURE  IF EXISTS get_all_genere_filter_by_ordine;
@@ -272,8 +272,7 @@
     DROP PROCEDURE IF EXISTS get_all_filter_specie_by_famiglia;
     CREATE PROCEDURE get_all_filter_specie_by_famiglia(IN fam_id INT) BEGIN
           SELECT S.tagID as id, S.nomeScientifico, S.nomeComune, S.pesoMedio, S.altezzaMedia, S.descrizione, S.percorsoImmagine as immagine,
-                G.tagID as g_id, G.nomeScientifico as g_nomeScientifico, F.TagID as f_id, F.nomeScientifico as f_nomeScientifico,
-                O.TagID as o_id, O.nomeScientifico as o_nomeScientifico, C.codice as c_codice
+                G.tagID as g_id, G.nomeScientifico as g_nomeScientifico, C.codice as c_codice
         FROM specie S
             INNER JOIN conservazione C ON S.conservazioneID = C.codice
             INNER JOIN genere G ON S.genID = G.tagID INNER JOIN famiglia F ON G.famID = F.TagID
@@ -283,8 +282,7 @@
     DROP PROCEDURE IF EXISTS get_all_filter_specie_by_genere;
     CREATE PROCEDURE get_all_filter_specie_by_genere(IN gen_id INT) BEGIN
           SELECT S.tagID as id, S.nomeScientifico, S.nomeComune, S.pesoMedio, S.altezzaMedia, S.descrizione, S.percorsoImmagine as immagine,
-                G.tagID as g_id, G.nomeScientifico as g_nomeScientifico, F.TagID as f_id, F.nomeScientifico as f_nomeScientifico,
-                O.TagID as o_id, O.nomeScientifico as o_nomeScientifico, C.codice as c_codice
+                 C.codice as c_codice
         FROM specie S
             INNER JOIN conservazione C ON S.conservazioneID = C.codice
             INNER JOIN genere G ON S.genID = G.tagID INNER JOIN famiglia F ON G.famID = F.TagID

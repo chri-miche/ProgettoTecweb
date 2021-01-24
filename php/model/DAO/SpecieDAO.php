@@ -85,11 +85,12 @@
 
                 foreach ($result as $specie) {
 
-                    $genereVO = new GenereVO($specie['g_id'], $specie['g_nomeScientifico']);
+                    $genereVO = new GenereVO($specie['g_id'], $specie['g_nomeScientifico'], $famigliaVO);
                     $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
 
                     unset($specie['g_id'], $specie['g_nomeScientifico']);
                     unset($specie['c_codice']);
+
 
                     $VOArray [] = new SpecieVO(...$specie, ...[$genereVO], ...[$conservazioneVO]);
 
@@ -105,6 +106,8 @@
                 foreach ($result as $specie){
 
                     $famigliaVO = new FamigliaVO($specie['f_id'], $specie['f_nomeScientifico'], $ordineVO);
+                    unset($specie['o_id'], $specie['o_nomeScientifico']);
+
                     $genereVO = new GenereVO($specie['g_id'], $specie['g_nomeScientifico'], $famigliaVO);
 
                     $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);

@@ -1,48 +1,42 @@
 
-    <div id="title">
+<div id="content">
 
+    <div id="title">
         <h1> {nomeScientifico} </h1>
         <h2> {nomeComune} </h2>
     </div>
 
-    <div id="container">
-        <div class="bird-description">
-                <span>Ordine: <a href="{refOrdine}{ordID}" > {g_f_o_nomeScientifico} </a>
-                    > Famiglia: <a href="{refFamiglia}{famID}"> {g_f_nomeScientifico}</a>
-                    > Genere: <a href="{refGenere}{genID}" > {g_nomeScientifico} </a></span>
-
-            <h3> Descrizione </h3>
-            <p>
-                {descrizione}
-            </p>
+    <div id="information-page" >
+        <div id="information-content">
+            <ul>
+                <li data-mark="Ordine">: <a href="{refOrdine}{ordID}"> {g_f_o_nomeScientifico} </a></li>
+                <li data-mark="Famiglia">: <a href="{refFamiglia}{famID}"> {g_f_nomeScientifico}</a></li>
+                <li data-mark="Genere">: <a href="{refGenere}{genID}"> {g_nomeScientifico} </a></li>
+            </ul>
         </div>
 
-        <div class="card">
+        <div id="information-side" class="card">
 
             <div class="img-overflow-container bird-card">
-                <img src="/res/Images/birds/brexside.jpg"></img>
+                <img src="/res/Images/birds/brexside.jpg" />
             </div>
 
 
-                <h3> Informazioni generali:</h3>
-                <p>
-                    Nome scientifico: {nomeScientifico} <br />
-                    Peso medio: {pesoMedio}  kg<br />
-                    Altezza media: {altezzaMedia} cm <br />
-                </p>
+            <h3> Informazioni generali:</h3>
+            <p>Nome scientifico: {nomeScientifico}</p>
+            <p>Peso medio: {pesoMedio}  kg</p>
+            <p>Altezza media: {altezzaMedia} cm</p>
 
-                <h3> Stato conservazione</h3>
-                <p>
-                    Stato: {c_nome} - {c_id}    <br />
-                    Probabilità di estinzione: {c_probEstinzione}     <br />
+            <h3> Stato conservazione</h3>
+            <p>Stato: {c_nome} - {c_id}    </p>
+            <p>Probabilità di estinzione: {c_probEstinzione}</p>
+            <p>{c_descrizione}</p>
 
-                    <br />
-                    {c_descrizione}
-                </p>
-
-                <img src='/res/Images/birds/statoConservazione/{c_descrizione}.png'></img>
+            <img src='/res/Images/birds/statoConservazione/{c_descrizione}.png' />
 
         </div>
-
     </div>
 
+
+
+</div>

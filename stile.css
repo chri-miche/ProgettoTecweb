@@ -342,9 +342,8 @@ a.tab-label[aria-selected=true]:hover,
 }
 
 #title {
-    /* TODO Pezza per il titolo, problema con il constrasto*/
     width: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(30,33,41, 1);
     text-align: center;
     color: white;
 }
@@ -753,26 +752,27 @@ ul#comments li form textarea {
 .profile-big img {
     width: 168px;
 }
+/* #end user*/
 
-#user-information {
+/* #begin information page*/
+#information-page {
     display: flex;
 }
 
-#user-side ul {
+#information-side ul {
     list-style: none;
 }
 
-#user-side {
+#information-side {
     float: left;
     min-width: 200px;
     padding: 1em;
     align-self: stretch;
 }
 
-#user-content {
+#information-content {
     flex-grow: 1;
 }
-
 .preview {
     display: flex;
     flex-wrap: wrap;
@@ -781,11 +781,15 @@ ul#comments li form textarea {
     margin-right: 2em;
 }
 
-/* #end user*/
-
-/* #begin buttons */
-.selected-button {
-
+#information-content ul {
+    list-style: inside;
 }
-/* #end buttons */
+
+#information-content ul > li::marker {
+    content: attr(data-mark);
+}
+
+/* #end information*/
+
+
 

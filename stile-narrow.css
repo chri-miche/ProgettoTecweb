@@ -514,7 +514,7 @@ ul#comments li form textarea {
     display: inline;
 }
 
-#user-information  {
+#information-page  {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -529,16 +529,16 @@ ul#comments li form textarea {
     float: right;
 }
 
-#user-information img {
+#information-page img {
     display: inline-block;
 }
 
-#user-side {
+#information-side {
     padding: 1em;
     align-self: stretch;
 }
 
-#user-content {
+#information-content {
     display: flex;
     flex-direction: column;
     align-items: center;

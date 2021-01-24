@@ -18,6 +18,7 @@
     $page = new BasePage($basePage);
 
     $page->addComponent(new SiteBar("uccello"));
+    $page->addComponent(new BreadCrumb(array("Catalogo" => "Catalogo.php", "Uccello" => "")));
 
     isset($_GET['id']) ? $id = $_GET['id'] : $id = null;
 

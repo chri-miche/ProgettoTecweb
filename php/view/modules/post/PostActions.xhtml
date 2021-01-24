@@ -1,13 +1,13 @@
-<div>
+<div id="like-actions">
     <a href="PostPage.php?id={contentID}&{likeAction}=1"
-       class="icon-button {likeAction}"
+       class="icon-button"
+       id="{likeAction}"
        data-icon-name="thumb_up"
-       xml:lang="en"><span>Like</span></a>
+       title="Mi piace"><span>Mi piace</span></a>
     <a href="PostPage.php?id={contentID}&{dislikeAction}=1"
-       class="icon-button {dislikeAction}"
+       class="icon-button"
+       id="{dislikeAction}"
        data-icon-name="thumb_down"
-       xml:lang="en"><span>Dislike</span></a>
-    <!-- TODO rimuovere o implementare
-    <a href="PostActions.php?id={contentID}&user={idUtente}&star={favAction}" class="icon-button" data-icon-name="bookmark"><span>{favActionDescription}</span></a>
-    -->
+       title="Non mi piace"
+       xml:lang="en"><span>Non mi piace</span></a>
 </div>

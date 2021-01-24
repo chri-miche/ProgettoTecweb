@@ -43,7 +43,7 @@ class Feed extends Component {
 
         $HTML = $this->basePage->build();
         $HTML = str_replace('{feed}', $this->criteria, $HTML);
-        $HTML = str_replace('href="Home.php?feed=' . $this->criteria . '"', 'aria-disabled=true', $HTML);
+        $HTML = str_replace('href="Home.php?feed=' . $this->criteria . '" aria-selected="false"', 'href="#panel-'. $this->criteria . '" aria-selected=true', $HTML);
         return $HTML;
     }
 }

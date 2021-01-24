@@ -61,7 +61,7 @@
 
                 $query = substr($query, 0, -1);
             }
-            echo $query .')';
+            // echo $query .')';
             return $query .');';
         }
 
@@ -90,7 +90,7 @@
             if(is_null($element->getId())) return false;
             $result = DatabaseAccess::executeSingleQuery("CALL check_$name($element->id);")['idexists'] ?? false;
 
-            echo $result;
+            // echo $result;
 
             if(!$result) $element = new $element(null, ...$element->varDumps(true));
 

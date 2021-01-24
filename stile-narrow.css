@@ -25,8 +25,8 @@ body {
 }
 
 .icon-button {
-    height: 40px;
-    width: 40px;
+    height: 2.2em;
+    width: 2.2em;
     border-radius: 50%;
     text-align: center;
     padding: 0;
@@ -105,9 +105,9 @@ button:hover, .button:hover, a:hover {
             0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-button.disabled, .button.disabled, a[aria-disabled=true], button[aria-disabled=true]
-button.disabled:hover, .button.disabled:hover, a[aria-disabled=true]:hover, button[aria-disabled=true]:hover,
-button.disabled:active, .button.disabled:active, a[aria-disabled=true]:active, button[aria-disabled=true]:active
+button.disabled, .button.disabled, a[aria-selected=true], button[aria-selected=true]
+button.disabled:hover, .button.disabled:hover, a[aria-selected=true]:hover, button[aria-selected=true]:hover,
+button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, button[aria-selected=true]:active
 {
     background: inherit;
     color: inherit;
@@ -126,6 +126,8 @@ button.disabled:active, .button.disabled:active, a[aria-disabled=true]:active, b
     display: flex;
     justify-content: space-between;
     background: rgb(30,33,41);
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
 }
 
 #sitebar > a {
@@ -133,8 +135,9 @@ button.disabled:active, .button.disabled:active, a[aria-disabled=true]:active, b
     background: transparent;
     color: white;
     box-shadow: none;
-    height: 40px;
-    width: 40px;
+    height: 2.2em;
+    width: 2.2em;
+    padding: 0;
 }
 
 .mobile-actions img {
@@ -155,6 +158,16 @@ button.disabled:active, .button.disabled:active, a[aria-disabled=true]:active, b
     width: 100vw;
     height: 100%;
     z-index: 10;
+}
+
+#dropdown-button {
+    display: none;
+}
+
+#dropdown-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #actions:target {
@@ -215,8 +228,8 @@ button.disabled:active, .button.disabled:active, a[aria-disabled=true]:active, b
     max-width: 300px;
 }
 
-.tab-label {
-    display: inline-flex;
+form.tab-label {
+    display: inline;
 }
 
 .fake-input {
@@ -234,10 +247,10 @@ a.tab-label:hover, .tab-label button:hover {
     color: white;
 }
 
-a.tab-label[aria-disabled=true],
-a.tab-label[aria-disabled=true]:hover,
-.tab-label button[aria-disabled=true],
-.tab-label button[aria-disabled=true]:hover
+a.tab-label[aria-selected=true],
+a.tab-label[aria-selected=true]:hover,
+.tab-label button[aria-selected=true],
+.tab-label button[aria-selected=true]:hover
 {
     color: inherit;
     background: transparent;
@@ -336,7 +349,6 @@ fieldset {
 }
 
 #footer {
-    min-width: 300px;
     height: fit-content;
     position: relative;
     padding: 1em;
@@ -357,12 +369,12 @@ fieldset {
 }
 
 .image-slideshow a {
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 2.2em;
+    min-height: 2.2em;
 }
 
 .image-slideshow img {
-    height: 500px;
+    max-height: 500px;
     display: inline-block;
 }
 
@@ -409,11 +421,8 @@ ul#comments li {
 }
 
 .profile-mini img {
+    display: inline-block;
     width: 40px;
-}
-
-p {
-    margin-left: 40px;
 }
 
 .profile-mini {
@@ -423,7 +432,30 @@ p {
     overflow: hidden;
     display: inline-block;
     align-self: center;
+    vertical-align: middle;
 }
+
+#like-actions {
+    align-self: stretch;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#liked, #liked:visited {
+    background: darkgreen;
+    color: white;
+}
+
+#disliked, #disliked:visited {
+    background: darkred;
+    color: white;
+}
+
+#liked:hover, #disliked:hover {
+    background: initial;
+    color: initial;
+}
+
 
 ul#comments li {
     border-left: 3px solid rgba(33,150,243);

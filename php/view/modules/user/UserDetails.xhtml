@@ -1,12 +1,14 @@
-
-        <img src="/res/images/{immagine}" style="width: 10%;"></img>
-
-        <div style="width: 80%">
-            <div style="width: 100%">Nome utente - Email</div>
-            <h2>{nome} - {email}</h2>
-        </div>
-
-        <div style="width: fit-content;">
-            {loggedActions}
-        </div>
+<div id="user-details">
+    <div class="profile-big">
+        <img src="/res/images/{immagine}" alt="" />
     </div>
+
+    <h1>{nome}</h1>
+
+    <p class="text-truncate" title="{email}">
+        {email}
+    </p>
+
+    {loggedActions}
+
+</div>

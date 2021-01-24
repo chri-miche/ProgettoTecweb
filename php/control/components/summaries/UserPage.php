@@ -51,11 +51,10 @@
             if(sizeof($postVOArray) > 0){
 
                 $resolvedData['{right}'] .= (new PreviewsPage($postVOArray, $postLayout))->returnComponent();
-                $resolvedData['{right}'] .= "<div> <a href='postUtente.php?usid= '".$this->user->getId() ."> 
-                                                    Vedi tutti i post dell utente.</a></div>";
+                $resolvedData['{right}'] .= "<a href='postUtente.php?usid= '".$this->user->getId() .">Vedi tutti i post dell utente.</a>";
             } else {
 
-                $resolvedData['{right}'] .= '<div style="width: 100%; text-align: center"><img src="\res\images\wow-such-empty.png" style="height: 100%"> </img></div>';
+                $resolvedData['{right}'] .= '<img src="\res\images\wow-such-empty.png" alt="Questo utente non ha ancora postato nulla" />';
 
             }
             return $resolvedData;

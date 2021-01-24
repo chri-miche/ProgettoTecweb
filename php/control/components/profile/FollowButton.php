@@ -41,7 +41,7 @@ class FollowButton extends Component{
 
         $alreadyFollowing = (new UserDAO())->isFollowing($this->followerVO, $this->followedVO);
 
-        $resolvedData['{text}'] = !$alreadyFollowing ? 'Aggiungi ai seguiti' : 'Rimuovi dai seguiti.';
+        $resolvedData['{text}'] = !$alreadyFollowing ? 'Aggiungi ai seguiti' : 'Rimuovi dai seguiti';
 
         return $resolvedData;
 

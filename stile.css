@@ -3,7 +3,6 @@ Il foglio di stile è strutturato come segue:
     - definizioni senza contesto
     - contesto typography
     - contesto tabs
-    - contesto sidebar
     - contesto search
     - contesto content
     - contesto sitebar
@@ -126,7 +125,21 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
     position: absolute;
 }
 
+/* TODO purgare */
+.sidebar-shadow {
+    z-index: 0;
+    box-shadow:
+            1px 0 0 0 rgba(0,0,0,0.12),
+            1px 0 2px 2px rgba(0,0,0,0.08),
+            1px 0 5px 5px rgba(0,0,0,0.06);
+}
+
 /* #typography */
+
+p {
+    margin-left: 40px;
+}
+
 .title {
     padding-left: 1em;
 }
@@ -136,8 +149,13 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
     font-size: 0.75em;
 }
 
-.text-truncate {
+p.text-truncate {
     text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 2em;
+    margin-left: 0;
+    margin-right: 1em;
 }
 
 /* #end typography */
@@ -163,10 +181,6 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
 
 form.tab-label {
     display: inline;
-}
-
-.fake-input {
-    display: none;
 }
 
 a.tab-label, a.tab-label:active, .tab-label button, .tab-label button:active {
@@ -656,14 +670,6 @@ ul#comments li {
 
 }
 
-.profile-mini img {
-    width: 40px;
-}
-
-p {
-    margin-left: 40px;
-}
-
 .profile-mini {
     width: 40px;
     height: 40px;
@@ -672,6 +678,10 @@ p {
     display: inline-block;
     align-self: center;
     vertical-align: middle;
+}
+
+.profile-mini img {
+    width: 40px;
 }
 
 #like-actions {
@@ -714,4 +724,51 @@ ul#comments li form textarea {
     margin: 0 40px 40px;
 }
 /* #end comments */
+
+/* #begin user */
+
+.profile-big {
+    width: 168px;
+    height: 168px;
+    border-radius: 84px;
+    overflow: hidden;
+    display: inline-block;
+    align-self: center;
+    vertical-align: middle;
+    border: 4px solid white;
+    box-shadow:
+            0 3px 1px 0 rgba(0,0,0,.2),
+            0 2px 2px 0 rgba(0,0,0,.14),
+            0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.profile-big img {
+    width: 168px;
+}
+
+#user-information  {
+    display: flex;
+}
+
+#user-side {
+    float: left;
+    max-width: 200px;
+    min-width: 200px;
+    padding: 1em;
+    align-self: stretch;
+}
+
+#user-content {
+    flex-grow: 1;
+}
+
+.preview {
+    display: flex;
+    flex-wrap: wrap;
+    background: white;
+    justify-content: center;
+    margin-right: 2em;
+}
+
+/* #end user*/
 

@@ -14,7 +14,7 @@
     /** Controlla se è stata inserita la password valida.*/
     $validPassword = isset($_POST['password']) && isset($_POST['password2']) && $_POST['password'] == $_POST['password2'];
 
-    echo $validPassword;
+    // echo $validPassword;
 
     $page->addComponent(new Register($_POST['username']?? null,
         $validPassword? $_POST['password'] : null, $_POST['email']?? null));

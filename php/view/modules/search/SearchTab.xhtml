@@ -4,19 +4,19 @@
         <form class="tab-label"
               action="Search.php?entity=post"
               method="post">
-            <input class="fake-input" name="search" value="{keyword}"/>
+            <input type="hidden" name="search" value="{keyword}"/>
             <button aria-controls="panel-post"
                     data-attributes="{post}"
                     role="tab" xml:lang="en">Posts</button>
         </form>
         <form class="tab-label" action="Search.php?entity=specie" method="post">
-            <input class="fake-input" name="search" value="{keyword}"/>
+            <input type="hidden" name="search" value="{keyword}"/>
             <button aria-controls="panel-specie"
                     data-attributes="{specie}"
                     role="tab">Specie</button>
         </form>
         <form class="tab-label" action="Search.php?entity=commento" method="post">
-            <input class="fake-input" name="search" value="{keyword}"/>
+            <input type="hidden" name="search" value="{keyword}"/>
             <button aria-controls="panel-commento"
                     data-attributes="{commento}"
                     role="tab">Commenti</button>

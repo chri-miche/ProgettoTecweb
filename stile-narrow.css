@@ -167,6 +167,10 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
     align-items: center;
 }
 
+#close-dropdown {
+    display: none;
+}
+
 #actions:target {
     display: flex;
     flex-direction: column;
@@ -178,19 +182,24 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
     border: none;
 }
 
-#actions a, #actions button {
+#actions * {
     background: transparent;
     color: white;
     box-shadow: none;
 }
+
 #actions a:hover, #actions button:hover {
+    background: rgba(33, 150, 243, 0.3);
+}
+
+#actions input:focus {
     background: rgba(33, 150, 243, 0.3);
 }
 
 #search-form {
     margin: 0;
     display: flex;
-    justify-content: center;
+    align-items: center;
 }
 /* #end sitebar */
 
@@ -402,15 +411,22 @@ fieldset {
     font-size: 0.75em;
 }
 
-.text-truncate {
+p.text-truncate {
     text-overflow: ellipsis;
+    overflow: hidden;
+    height: 2em;
+    margin-left: 0;
+    margin-right: 1em;
+    white-space: nowrap;
 }
+
 
 /* #end typography */
 
 /* #begin comments */
 ul#comments {
     list-style: none;
+    padding: 0;
 }
 
 ul#comments li {
@@ -473,5 +489,66 @@ ul#comments li form textarea {
 #post-title {
     margin: 0 40px 40px;
 }
-
 /* #end comments */
+
+
+/* #begin user */
+
+.profile-big {
+    width: 84px;
+    height: 84px;
+    border-radius: 42px;
+    overflow: hidden;
+    display: inline-block;
+    align-self: center;
+    vertical-align: middle;
+    border: 4px solid white;
+    box-shadow:
+            0 3px 1px 0 rgba(0,0,0,.2),
+            0 2px 2px 0 rgba(0,0,0,.14),
+            0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.profile-big img {
+    width: 84px;
+    display: inline;
+}
+
+#user-information  {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#user-details > * {
+    display: block;
+}
+
+#user-details > .profile-big {
+    display: inline;
+    float: right;
+}
+
+#user-information img {
+    display: inline-block;
+}
+
+#user-side {
+    padding: 1em;
+    align-self: stretch;
+}
+
+#user-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview {
+    display: flex;
+    flex-wrap: wrap;
+    background: white;
+    justify-content: center;
+}
+
+/* #end user*/

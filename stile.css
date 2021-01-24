@@ -157,7 +157,7 @@ p {
     font-size: 0.75em;
 }
 
-p.text-truncate {
+.text-truncate {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -763,6 +763,10 @@ ul#comments li form textarea {
 
 #information-side ul {
     list-style: none;
+}
+
+#information-side li{
+    width: 100%;
 }
 
 #information-side {

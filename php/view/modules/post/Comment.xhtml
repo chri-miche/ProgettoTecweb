@@ -1,9 +1,12 @@
 <li>
-    <div class="profile-mini">
-        <img alt="" src="{immagineProfilo}" />
-    </div>
-    <span class="subtitle">
-        {nome} ha scritto in data {data}
-    </span>
+    <a href="User?id={UserID}">
+        <div class="profile-mini">
+            <img alt="" src="{immagineProfilo}" />
+        </div>
+        {nome}
+    </a>
+    <p class="subtitle">
+        ha scritto in data {data}
+    </p>
     <p>{content}</p>
 </li>

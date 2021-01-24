@@ -670,6 +670,27 @@ p {
     overflow: hidden;
     display: inline-block;
     align-self: center;
+    vertical-align: middle;
+}
+
+#like-actions {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#liked, #liked:visited {
+    background: darkgreen;
+    color: white;
+}
+
+#disliked, #disliked:visited {
+    background: darkred;
+    color: white;
+}
+
+#liked:hover, #disliked:hover {
+    background: initial;
+    color: initial;
 }
 
 ul#comments li {

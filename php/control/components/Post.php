@@ -34,7 +34,7 @@
             if(isset($pid) && PostElement::checkID($pid)){
 
                 $this->post = new PostElement($pid);
-                $this->postUser = new UserElement($this->post->UserID);
+                $this->postUser = (new UserDAO())->get($this->post->UserID);
 
             }
 
@@ -48,8 +48,8 @@
                 foreach ($ref as $key => $value) {
                     $this->interpol['{' . $key . '}'] = $value;
                 }
-                $this->interpol['{nome}'] = $this->postUser->getData()['nome'];
-                $this->interpol['{UserID}'] = $this->postUser->getData()['ID'];
+                $this->interpol['{nome}'] = $this->postUser->getNome();
+                $this->interpol['{UserID}'] = $this->postUser->getId();
             }
             return $this->interpol;
         }

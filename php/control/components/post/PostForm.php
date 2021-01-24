@@ -9,7 +9,7 @@ class PostForm extends Component
     {
         parent::__construct(file_get_contents(__ROOT__.'/view/modules/post/PostForm.xhtml'));
         $this->data = array();
-        $this->data['{UserID}'] = $sessionUser->getUser()->getData()['ID'];
+        $this->data['{UserID}'] = $sessionUser->getUser()->getId();
 
         if (isset($defaults['titolo-post']))
             $this->data['titolo-post'] = $defaults['titolo-post'];

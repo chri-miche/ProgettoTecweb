@@ -4,6 +4,28 @@ body {
     background-color: #fff;
 }
 
+a {
+    display: inline-block;
+}
+
+a:not([href^="#"]):after {
+    content: "[" attr(href) "]";
+}
+
+a[href^="#"] {
+    text-decoration: none;
+    color: black;
+}
+
+a[href^="#"]:visited {
+    text-decoration: none;
+    color: black;
+}
+a[href^="#"]::first-letter {
+    text-transform: lowercase;
+}
+
+
 #logo {
     display: none;
 }
@@ -12,11 +34,21 @@ body {
     display: none;
 }
 
-.card a {
-    display: none;
+.card {
+
+    overflow: auto;
 }
 
-a.tab-label {
+#tab-header {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+#tab-header:before {
+    content: "Post più ";
+}
+
+a.tab-label[aria-selected=false] {
     display: none;
 }
 
@@ -30,4 +62,13 @@ dt {
 
 .card img {
     float: right;
+}
+
+#footer {
+    display: none;
+}
+
+.breadcrumb-item:after, #home-crumb:after {
+    content: ">";
+    padding: 0.25em;
 }

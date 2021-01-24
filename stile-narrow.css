@@ -160,6 +160,16 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
     z-index: 10;
 }
 
+#dropdown-button {
+    display: none;
+}
+
+#dropdown-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #actions:target {
     display: flex;
     flex-direction: column;
@@ -411,6 +421,7 @@ ul#comments li {
 }
 
 .profile-mini img {
+    display: inline-block;
     width: 40px;
 }
 
@@ -421,7 +432,30 @@ ul#comments li {
     overflow: hidden;
     display: inline-block;
     align-self: center;
+    vertical-align: middle;
 }
+
+#like-actions {
+    align-self: stretch;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#liked, #liked:visited {
+    background: darkgreen;
+    color: white;
+}
+
+#disliked, #disliked:visited {
+    background: darkred;
+    color: white;
+}
+
+#liked:hover, #disliked:hover {
+    background: initial;
+    color: initial;
+}
+
 
 ul#comments li {
     border-left: 3px solid rgba(33,150,243);

@@ -11,14 +11,14 @@ class PostActions extends Component
         parent::__construct(file_get_contents(__ROOT__.'/view/modules/post/PostActions.xhtml'));
         $this->data = array();
         $this->data["{contentID}"] = $post->getData()["contentID"];
-        $this->data["{idUtente}"] = $utente->getUser()->getData()['ID'];
+        $this->data["{idUtente}"] = $utente->getUser()->getId();
 
 
 
         $liked = DatabaseAccess::executeSingleQuery("select likes from approvazione where contentID = '" .
             $post->getData()["contentID"] .
             "' and utenteID ='" .
-            $utente->getUser()->getData()['ID'] .
+            $utente->getUser()->getId() .
             "';");
 
         if (empty($liked)) {

@@ -22,13 +22,8 @@
             $this->currentPage = $currentPage;
             $this->numberPages = count($elements) / $elementsPerPage;
 
-            echo $this->numberPages;
-            echo $this->numberPages * $currentPage;
-            echo $elementsPerPage;
 
             $newElementsList = array_slice($elements, $elementsPerPage * $currentPage, $elementsPerPage);
-
-            print_r($newElementsList);
 
             $this->previewPage = new PreviewsPage($newElementsList, $previewLayout, $browsePageHTML);
 

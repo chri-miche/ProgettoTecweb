@@ -1,13 +1,11 @@
 <?php
     define('__ROOT__', dirname(dirname(dirname(__FILE__))));
 
-    // TODO: Identico per amici e tag.
-
     require_once __ROOT__ . '\view\pages\standardLayoutIncludes.php';
 
-    require_once __ROOT__.'\model\PostElement.php';
     require_once __ROOT__.'\control\components\catalogo\GenericBrowser.php';
     require_once __ROOT__.'\control\components\profile\UserDetails.php';
+    require_once __ROOT__.'\control\components\Title.php';
 
     require_once __ROOT__ . '\model\DAO\UserDAO.php';
     require_once __ROOT__.'\model\DAO\PostDAO.php';
@@ -24,7 +22,8 @@
     // TODO: Mettere nome dell'utente nella breadcrumb?
     $page->addComponent(new BreadCrumb(array('Utente' => 'UserPage.php?id='.$pageUser->getId(), 'I Post di: '. $pageUser->getNome()=>'')));
 
-    // TODO: Change to a "cardborard" of the user (as summary).
+    $page->addComponent(new Title("Post pubblicati",null, "I post che l'utente ha pubblicato sulla piattaforma."));
+
     $page->addComponent(new UserDetails($pageUser, "postUtente.php?usid=", false));
 
     $tagPreviewLayout = file_get_contents(__ROOT__.'\view\modules\user\PostCard.xhtml');

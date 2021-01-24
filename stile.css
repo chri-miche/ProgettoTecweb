@@ -177,6 +177,7 @@ p.text-truncate {
 
 #tab-header {
     background: rgba(33,150,243, 0.3);
+    align-self: stretch;
 }
 
 .tab-content {
@@ -246,6 +247,7 @@ a.tab-label[aria-selected=true]:hover,
     display: flex;
     flex-direction: column;
     flex: 1 1 auto;
+    align-items: center;
 }
 
 

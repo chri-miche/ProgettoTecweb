@@ -37,10 +37,15 @@
             foreach ($this->specieVO->arrayDump() as $key => $value)
                 if(!is_array($value))  $swapData['{'.$key .'}'] = $value;
 
-           /** References to the previous pages.*/
-            $swapData['{refOrdine}'] = $this->catalogoReference. $this->specieVO->getGenereVO()->getId();
-            $swapData['{refFamiglia}'] = $this->catalogoReference. $this->specieVO->getGenereVO()->getFamigliaVO()->getId();
-            $swapData['{refGenere}'] = $this->catalogoReference . $this->specieVO->getGenereVO()->getFamigliaVO()->getOrdineVO()->getId();
+           /** Link al catalogo.*/
+            $swapData['{refOrdine}'] = $this->catalogoReference ."?oSelected%5B%5D=1&&oValue=".
+                $this->specieVO->getGenereVO()->getFamigliaVO()->getOrdineVO()->getId();
+
+            $swapData['{refFamiglia}'] = $this->catalogoReference."?oSelected%5B%5D=1&fSelected%5B%5D=1&fValue=".
+                $this->specieVO->getGenereVO()->getFamigliaVO()->getId();
+
+            $swapData['{refGenere}'] = $this->catalogoReference ."?oSelected%5B%5D=1&fSelected%5B%5D=1&gSelected%5B%5D=1&gValue="
+                . $this->specieVO->getGenereVO()->getId();
 
             return $swapData;
 

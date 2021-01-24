@@ -13,7 +13,7 @@ class SearchTab extends BasePage {
     private $keyword;
     private $entity;
 
-    public function __construct($keyword, $entity) {
+    public function __construct($keyword, $entity, $currentPage = 0) {
         parent::__construct(file_get_contents(__ROOT__."/view/modules/search/SearchTab.xhtml"));
 
         $this->keyword = addslashes($keyword);
@@ -43,7 +43,7 @@ class SearchTab extends BasePage {
 
         }
 
-        $this->addComponent(new GenericBrowser($giveVOArray, $layout, "Search.php"));
+        $this->addComponent(new GenericBrowser($giveVOArray, $layout, "Search.php?",$currentPage));
     }
 
     public function resolveData() {

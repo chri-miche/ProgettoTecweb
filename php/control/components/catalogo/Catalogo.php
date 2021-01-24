@@ -94,8 +94,6 @@
 
             $baseHTML = '';
 
-
-
             /** Pulsante per filtrare per ordine è da mostrare se non è selezionato un ordine corrente e se non sono abilitati gli altri due.*/
             // Se ordine non è quindi stato selezionato e non abbiamo famiglia o genere.
             if(!$this->oSelected && !($this->fSelected || $this->gSelected)) {

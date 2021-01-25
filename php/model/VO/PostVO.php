@@ -67,7 +67,7 @@
 
             }
 
-            if($counter == 0) $result['immagine'] = 'default.png';
+            if($counter == 0) $result['immagine'] = 'res'. DIRECTORY_SEPARATOR . 'PostImages'. DIRECTORY_SEPARATOR .'default.jpg';
 
             /** Sistemazione dell'utente.*/
             $userDataToAppend = [];

@@ -79,8 +79,6 @@
             /** Filtri applicabili.*/
             $menuLayout = str_replace("{buttonsShow}", $this->resolveButtons(), $menuLayout);
 
-            // TODO:
-            /** Se un filtro non è applicabile allora è possibile che sia navigabile come selezione.*/
             $menuLayout = str_replace("{selectTipo}", $this->resolveNavigation(), $menuLayout);
 
             $resolvedData['{menuLayout}'] = $menuLayout;

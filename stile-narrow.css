@@ -68,6 +68,7 @@ input:focus, textarea:focus {
 
 form {
     text-align: center;
+    background: white;
 }
 
 button, .button, a {

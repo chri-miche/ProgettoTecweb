@@ -2,7 +2,7 @@
 
 require_once 'TableHeader.php';
 require_once 'TableRow.php';
-require_once 'Persistent.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "meta" .  DIRECTORY_SEPARATOR . "Persistent.php";
 
 
 class AdminTable extends Component

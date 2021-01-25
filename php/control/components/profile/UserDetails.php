@@ -43,7 +43,6 @@
             if($this->showButton && $this->user->getId() != (new SessionUser())->getUser()->getId())
                 $resolvedData['{loggedActions}'] = (new FollowButton($this->user,  $this->redirect));
 
-            // TODO: Add modify user button if you are the same as the one displayed and if we need to do so.
 
             return $resolvedData;
 

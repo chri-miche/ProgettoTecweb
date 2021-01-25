@@ -1,6 +1,6 @@
 <?php
 
-    define('__ROOT__', dirname(dirname(dirname(__FILE__))));
+define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
 
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "BasePage.php";
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Login.php";

@@ -17,8 +17,6 @@
         }
 
         function build() {
-            //https://codepen.io/iamglynnsmith/pen/BRGjgW
-            // TODO: Move this stuff to file and just make a strreplace.
 
             $ret = "";
 

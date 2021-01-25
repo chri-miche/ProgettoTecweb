@@ -52,7 +52,6 @@
             return $VOArray;
         }
 
-        //TODO: this
         public function getAllFilterBy(?int $genere = null, ?int $famiglia = null, ?int $ordine = null): array{
 
             $VOArray = array();

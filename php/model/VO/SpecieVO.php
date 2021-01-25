@@ -27,7 +27,7 @@
 
         /** Genere VO.*/
         private $genereVO; // Esso contiene un famiglia DAO che a sua volta contiene un ordine DAO.
-        /** Conservazione VO. TODO */
+        /** Conservazione VO. */
         private $conservazioneVO;
 
         /**

@@ -32,10 +32,8 @@
 
             $resolvedData = [];
             /** Se utente non esiste si viene reindirizzati a home.*/
-            if(!$this->userExists) header('Location: Home.php');
+            if(!$this->userExists) header('Location: index.php');
 
-
-            // TODO: Move user details to top.
             /** Nuovo layout prevede i dettagli in cima. Sotto due pannelli (1 amici, 1 per post)*/
             $resolvedData['{top}'] = (new UserDetails($this->user, $this->selfReference))->returnComponent();
 

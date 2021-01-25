@@ -15,6 +15,7 @@ define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
     if($sessionUser->userIdentified()) {
 
         $userVO = $sessionUser->getUser();
+
         if (isset($_POST['submit-profile-pic']) && isset($_GET['id']) && $_GET['id'] == $userVO->getId()){
 
             $name = basename($_FILES["input-file"]["name"]);
@@ -30,12 +31,12 @@ define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
             $tentativi = 0;
             while (file_exists($rootParent . $proposedPath)) {
                 $tentativi++;
-                $proposedPath = "res" . DIRECTORY_SEPARATOR . ($tentativi === 0 ? '' : $tentativi) . "$name";
+                $proposedPath = DIRECTORY_SEPARATOR . "res" . DIRECTORY_SEPARATOR . ($tentativi === 0 ? '' : $tentativi) . "$name";
             }
 
             if (move_uploaded_file($tmp_name, $rootParent . $proposedPath)) {
 
-                $userVO->setImmagine(addslashes($proposedPath));
+                $userVO->setImmagine($name);
                 $result = (new UserDAO())->save($userVO);
 
             } else {

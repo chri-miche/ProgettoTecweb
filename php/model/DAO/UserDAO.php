@@ -52,7 +52,7 @@
 
                 if($this->checkId($element)){
 
-                    $result = $this->performNoOutputModifyCall($element->smartDump(true), 'update_user');
+                    $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_user');
                     return !isset($result['failure']);
 
                 } else {

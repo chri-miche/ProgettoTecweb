@@ -10,11 +10,11 @@ class AdminPanel extends Component
 
     private static $entities = array(
         "utente" => "Utenti",
+        "ordine" => "Ordine",
         "specie" => "Specie",
         "famiglia" => "Famiglie",
         "genere" => "Genere",
         "conservazione" => "Conservazione",
-        "post" => "Post",
     );
 
     private $navigation;

@@ -27,15 +27,15 @@
 
     CREATE TABLE Utente(
 
-        ID int UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-        nome VARCHAR(25) NOT NULL,
+        ID int UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT comment 'Identificativo',
+        nome VARCHAR(25) NOT NULL comment 'Nome',
 
-        email VARCHAR(40) NOT NULL UNIQUE,
-        password VARCHAR(14) NOT NULL,
+        email VARCHAR(40) NOT NULL UNIQUE comment 'Email',
+        password VARCHAR(14) NOT NULL comment 'Password',
 
-        isAdmin BOOLEAN NOT NULL DEFAULT FALSE,
+        isAdmin BOOLEAN NOT NULL DEFAULT FALSE comment 'Abilitato all\'amministrazione',
 
-        immagineProfilo varchar(40) NOT NULL DEFAULT ('res/default.png')
+        immagineProfilo varchar(40) NOT NULL DEFAULT ('res/default.png') comment 'Immagine di profilo'
 
     ) ENGINE = InnoDB;
 
@@ -54,7 +54,7 @@
 
     CREATE TABLE Tag(
 
-        ID int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        ID int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
 
     ) ENGINE = InnoDB;
 
@@ -62,8 +62,8 @@
 
     CREATE TABLE Ordine(
 
-        TagID int UNSIGNED NOT NULL PRIMARY KEY,
-        nomeScientifico VARCHAR(40) NOT NULL UNIQUE,
+        TagID int UNSIGNED NOT NULL PRIMARY KEY comment 'Tag',
+        nomeScientifico VARCHAR(40) NOT NULL UNIQUE comment 'Nome scientifico',
 
         FOREIGN KEY (TagID) REFERENCES Tag(ID) ON DELETE CASCADE
 
@@ -72,10 +72,10 @@
 
     CREATE TABLE Famiglia(
 
-        TagID int UNSIGNED NOT NULL PRIMARY KEY,
-        OrdID int UNSIGNED NOT NULL,
+        TagID int UNSIGNED NOT NULL PRIMARY KEY comment 'Tag',
+        OrdID int UNSIGNED NOT NULL comment 'Ordine',
 
-        nomeScientifico VARCHAR(40) NOT NULL,
+        nomeScientifico VARCHAR(40) NOT NULL comment 'Nome scientifico',
 
         FOREIGN KEY (TagID) REFERENCES Tag(ID) ON DELETE CASCADE,
         FOREIGN KEY (OrdID) REFERENCES Ordine(TagID) ON DELETE CASCADE
@@ -85,10 +85,10 @@
 
     CREATE TABLE Genere(
 
-        tagID int UNSIGNED NOT NULL PRIMARY KEY,
-        famID int UNSIGNED NOT NULL,
+        tagID int UNSIGNED NOT NULL PRIMARY KEY comment 'Tag',
+        famID int UNSIGNED NOT NULL comment 'Famiglia',
 
-        nomeScientifico VARCHAR(40) NOT NULL,
+        nomeScientifico VARCHAR(40) NOT NULL comment 'Nome scientifico',
 
         FOREIGN KEY (tagID) REFERENCES Tag(ID) ON DELETE CASCADE,
         FOREIGN KEY (famID) REFERENCES Famiglia(TagID) ON DELETE CASCADE
@@ -97,10 +97,10 @@
 
     CREATE TABLE Conservazione(
 
-        codice varchar(2) NOT NULL PRIMARY KEY,
-        nome varchar(20) NOT NULL,
-        probEstinzione int,
-        descrizione text
+        codice varchar(2) NOT NULL PRIMARY KEY comment 'Codice',
+        nome varchar(20) NOT NULL comment 'Nome',
+        probEstinzione int comment 'Probabilità di estinzione (%)',
+        descrizione text comment 'Descrizione'
 
     ) ENGINE = InnoDB;
 

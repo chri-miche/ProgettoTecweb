@@ -1,13 +1,5 @@
 <div id="user-details">
-    <form id="profile-form" action="UserPage.php?id={id}" method="post" enctype="multipart/form-data">
-        <fieldset>
-            <label for="input-file" class="profile-big">
-                <img src="/res/images/{immagine}" alt="" />
-            </label>
-            <input id="input-file" type="file" name="input-file" accept="image" required="required" />
-            <button type="submit" name="submit-profile-pic">Cambia immagine profilo</button>
-        </fieldset>
-   </form>
+    <profile-pic />
 
     <h1>{nome}</h1>
 

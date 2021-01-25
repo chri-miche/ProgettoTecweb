@@ -727,6 +727,10 @@ ul#comments li form textarea {
     width: 168px;
 }
 
+#profile-form {
+    background: transparent;
+}
+
 #profile-form fieldset {
     display: flex;
     flex-direction: column;

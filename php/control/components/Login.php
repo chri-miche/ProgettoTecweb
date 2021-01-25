@@ -1,8 +1,8 @@
 <?php
 
 
-    require_once __ROOT__.'\control\components\Component.php';
-    require_once __ROOT__.'\control\SessionUser.php';
+    require_once "Component.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php";
 
     class Login extends Component {
 
@@ -14,7 +14,7 @@
         public function __construct(string $email = null, string $password = null,
                                     string $redirect = 'Location: Home.php',string $HTML = null) {
 
-            parent::__construct ($HTML ?? (file_get_contents(__ROOT__.'\view\modules\login\login.xhtml')));
+            parent::__construct ($HTML ?? (file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "login" . DIRECTORY_SEPARATOR . "login.xhtml")));
             $this->redirect = $redirect;
 
             $this->user = new SessionUser();
@@ -46,7 +46,7 @@
                 return $this->baseLayout();
 
             if(!$this->user->userIdentified() && $this->loggedNow)
-                return file_get_contents(__ROOT__.'\view\modules\login\loginFailure.xhtml');
+                return file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "login" . DIRECTORY_SEPARATOR . "loginFailure.xhtml");
 
         }
 

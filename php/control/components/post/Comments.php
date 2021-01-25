@@ -1,6 +1,6 @@
 <?php
 
-require_once __ROOT__.'\model\DAO\CommentoDAO.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "CommentoDAO.php";
 class Comments extends BasePage {
 
     public function __construct(PostVO $post, SessionUser &$user) {
@@ -10,7 +10,7 @@ class Comments extends BasePage {
 
         foreach ($commentVOArray as $commentVO)
             $this->addComponent(new
-            Class($commentVO->arraydump(), file_get_contents(__ROOT__ . '/view/modules/post/Comment.xhtml')) extends Component {
+            Class($commentVO->arraydump(), file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "post" . DIRECTORY_SEPARATOR . "Comment.xhtml")) extends Component {
 
                 private $commentData;
 
@@ -30,7 +30,7 @@ class Comments extends BasePage {
         $data["{contentID}"] = $post->getId();
         $data["{idUtente}"] = $user->getUser()->getId();
 
-        $this->addComponent(new class($data, file_get_contents(__ROOT__ . '/view/modules/post/InsertComment.xhtml')) extends Component {
+        $this->addComponent(new class($data, file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "post" . DIRECTORY_SEPARATOR . "InsertComment.xhtml")) extends Component {
 
             private $data;
 

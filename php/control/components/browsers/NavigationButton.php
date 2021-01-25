@@ -1,6 +1,6 @@
 <?php
 
-require_once __ROOT__.'\control\components\summaries\PageFiller.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "summaries" . DIRECTORY_SEPARATOR . "PageFiller.php";
 
 class NavigationButton extends PageFiller {
 
@@ -8,7 +8,7 @@ class NavigationButton extends PageFiller {
     private $disabled;
 
     public function __construct($text, $link, $disabled = false) {
-        parent::__construct(file_get_contents(__ROOT__.'\view\modules\browsing\NavigationButton.xhtml'));
+        parent::__construct(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "browsing" . DIRECTORY_SEPARATOR . "NavigationButton.xhtml"));
 
         $this->data = array("{text}" => $text, "{link}" => $link);
         $this->disabled = $disabled;

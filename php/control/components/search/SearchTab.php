@@ -1,11 +1,11 @@
 <?php
 
-require_once __ROOT__.'\model\DAO\PostDAO.php';
-require_once __ROOT__.'\model\DAO\CommentoDAO.php';
-require_once __ROOT__.'\model\DAO\SpecieDAO.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "PostDAO.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "CommentoDAO.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "SpecieDAO.php";
 
-require_once __ROOT__.'\control\BasePage.php';
-require_once __ROOT__.'\control\components\catalogo\GenericBrowser.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "BasePage.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "catalogo" . DIRECTORY_SEPARATOR . "GenericBrowser.php";
 
 
 class SearchTab extends BasePage {
@@ -14,7 +14,7 @@ class SearchTab extends BasePage {
     private $entity;
 
     public function __construct($keyword, $entity, $currentPage = 0) {
-        parent::__construct(file_get_contents(__ROOT__."/view/modules/search/SearchTab.xhtml"));
+        parent::__construct(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "search" . DIRECTORY_SEPARATOR . "SearchTab.xhtml"));
 
         $this->keyword = addslashes($keyword);
         $this->entity = $entity;
@@ -27,18 +27,18 @@ class SearchTab extends BasePage {
                 $giveVOArray = (new CommentoDAO())->search("%$this->keyword%");
                 /** @var CommentoVO $comment*/
 
-                $layout = file_get_contents(__ROOT__."/view/modules/search/CommentCard.xhtml"); break;
+                $layout = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "search" . DIRECTORY_SEPARATOR . "CommentCard.xhtml"); break;
 
             case "specie":
 
                 $giveVOArray = (new SpecieDAO())->search("%$this->keyword%");
-                $layout = file_get_contents(__ROOT__."/view/modules/search/SpecieCard.xhtml"); break;
+                $layout = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "search" . DIRECTORY_SEPARATOR . "SpecieCard.xhtml"); break;
 
             case "post":
             default:
 
                 $giveVOArray = (new PostDAO())->search("%$this->keyword%");
-                $layout = file_get_contents(__ROOT__."/view/modules/feed/PostCard.xhtml");
+                $layout = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "feed" . DIRECTORY_SEPARATOR . "PostCard.xhtml");
 
         }
 

@@ -1,10 +1,10 @@
 <?php
 
-    require_once __ROOT__.'\control\components\Component.php';
-    require_once __ROOT__.'\control\SessionUser.php';
-    require_once __ROOT__.'\control\components\browsers\NavigationButton.php';
+    require_once "Component.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "browsers" . DIRECTORY_SEPARATOR . "NavigationButton.php";
 
-    require_once __ROOT__ . '\model\DAO\UserDAO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "UserDAO.php";
 
     class SiteBar extends Component {
 
@@ -23,7 +23,7 @@
          */
         public function __construct(string $position, $defaultSearch = '', string $HTMLcontent = null) {
 
-            parent::__construct($HTMLcontent ?? file_get_contents(__ROOT__.'\view\modules\SiteBar.xhtml'));
+            parent::__construct($HTMLcontent ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "SiteBar.xhtml"));
 
             $this->user = new SessionUser();
             $this->position = $position;
@@ -41,11 +41,11 @@
             /** To make code tidied up count the black space of the opened tag before.*/
             if(!$this->user->userIdentified()){
 
-                $contentHTML = file_get_contents(__ROOT__.'\view\modules\LoggedOutActions.xhtml');
+                $contentHTML = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "LoggedOutActions.xhtml");
 
             } else {
                 $userVO = $this->user->getUser();
-                $contentHTML = file_get_contents(__ROOT__.'\view\modules\LoggedInActions.xhtml');
+                $contentHTML = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "LoggedInActions.xhtml");
 
                 $contentHTML = str_replace("{username}", $userVO->getNome(), $contentHTML);
                 $contentHTML = str_replace("{userid}", $userVO->getId(), $contentHTML);

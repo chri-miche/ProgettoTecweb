@@ -1,8 +1,8 @@
 <?php
     define('__ROOT__', dirname(dirname(dirname(__FILE__))));
 
-    require_once __ROOT__.'\control\SessionUser.php';
-    require_once __ROOT__.'\model\DAO\UserDAO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "UserDAO.php";
 
     $userDAO = new UserDAO();
 

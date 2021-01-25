@@ -4,11 +4,11 @@
     define('__ROOT__', dirname(dirname(dirname(__FILE__))));
 
 
-    require_once __ROOT__.'\control\BasePage.php';
-    require_once __ROOT__.'\control\components\Login.php';
-    require_once __ROOT__.'\control\components\Register.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "BasePage.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Login.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Register.php";
 
-    $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
+    $basePage = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "BaseLayout.xhtml");
 
     $page = new BasePage($basePage);
 

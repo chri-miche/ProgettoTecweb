@@ -1,6 +1,6 @@
 <?php
 
-require_once __ROOT__ . '\model\VO\ConservazioneVO.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "ConservazioneVO.php";
 
 class ConservazioneDAO extends DAO {
     /** @var $defaultDAO */

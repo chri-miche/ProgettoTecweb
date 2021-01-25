@@ -1,9 +1,9 @@
 <?php
 
-require_once __ROOT__.'/control/components/admin/AdminTable.php';
-require_once __ROOT__.'/control/components/admin/AdminWelcomePage.php';
-require_once __ROOT__.'/control/components/admin/AdminForm.php';
-require_once __ROOT__.'/control/components/admin/ConfirmDelete.php';
+require_once 'AdminTable.php';
+require_once 'AdminWelcomePage.php';
+require_once 'AdminForm.php';
+require_once 'ConfirmDelete.php';
 
 class AdminPanel extends Component
 {

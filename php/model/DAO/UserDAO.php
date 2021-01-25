@@ -1,6 +1,6 @@
 <?php
-    require_once __ROOT__.'\model\DAO\DAO.php';
-    require_once __ROOT__.'\model\VO\UserVO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "DAO.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "UserVO.php";
 
     class UserDAO extends DAO {
 

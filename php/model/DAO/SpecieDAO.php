@@ -1,8 +1,8 @@
 <?php
 
-    require_once __ROOT__ . '\model\VO\SpecieVO.php';
-    require_once __ROOT__ . '\model\DAO\ConservazioneDAO.php';
-    require_once __ROOT__ . '\model\DAO\GenereDAO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "SpecieVO.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "ConservazioneDAO.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "GenereDAO.php";
 
     class SpecieDAO extends DAO {
 

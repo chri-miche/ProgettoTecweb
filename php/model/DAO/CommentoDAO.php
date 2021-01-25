@@ -1,7 +1,7 @@
 <?php
 
-require_once __ROOT__.'\model\DAO\PostDAO.php';
-require_once __ROOT__.'\model\VO\CommentoVO.php';
+require_once 'PostDAO.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "CommentoVO.php";
 
 
 class CommentoDAO extends DAO {

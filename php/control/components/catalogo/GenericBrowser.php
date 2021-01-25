@@ -1,6 +1,6 @@
 <?php
-    require_once __ROOT__ . '\control\components\Component.php';
-    require_once __ROOT__ . '\control\components\catalogo\PreviewsPage.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Component.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "catalogo" . DIRECTORY_SEPARATOR . "PreviewsPage.php";
 
     // TODO : Move in browser.
     class GenericBrowser extends Component {
@@ -15,7 +15,7 @@
         public function __construct(array $elements, string $previewLayout, string $nextPageReference, int $currentPage = 0,
                                     int $elementsPerPage = 10, string $HTML = null, string $browsePageHTML = null){
 
-            parent::__construct( $HTML ?? file_get_contents(__ROOT__.'\view\modules\browsing\Browser.xhtml'));
+            parent::__construct( $HTML ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "browsing" . DIRECTORY_SEPARATOR . "Browser.xhtml"));
 
             $this->nextPageReference = $nextPageReference .'page=';
 

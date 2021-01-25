@@ -1,11 +1,11 @@
 <?php
 
-    require_once __ROOT__.'\model\DAO\DAO.php';
-    require_once __ROOT__.'\model\DAO\FamigliaDAO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "DAO.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "FamigliaDAO.php";
 
-    require_once __ROOT__.'\model\VO\OrdineVO.php';
-    require_once __ROOT__.'\model\VO\FamigliaVO.php';
-    require_once __ROOT__.'\model\VO\GenereVO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "OrdineVO.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "FamigliaVO.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "GenereVO.php";
 
     class GenereDAO extends DAO{
 

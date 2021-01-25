@@ -1,7 +1,7 @@
 <?php
 
-require_once __ROOT__.'\model\VO\TagVO.php';
-require_once __ROOT__.'\model\VO\PostVO.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "TagVO.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "PostVO.php";
 class PostDAO extends DAO {
 
     /**

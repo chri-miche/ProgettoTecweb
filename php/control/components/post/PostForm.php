@@ -6,7 +6,7 @@ class PostForm extends Component
     private $data;
 
     public function __construct(SessionUser &$sessionUser, $defaults = array()) {
-        parent::__construct(file_get_contents(__ROOT__.'/view/modules/post/PostForm.xhtml'));
+        parent::__construct(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "post" . DIRECTORY_SEPARATOR . "PostForm.xhtml"));
 
         $this->data = array();
         $this->data['{UserID}'] = $sessionUser->getUser()->getId();

@@ -1,13 +1,13 @@
 <?php
 
-    require_once __ROOT__.'\model\DAO\PostDAO.php';
-    require_once __ROOT__.'\model\DAO\UserDAO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "PostDAO.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "UserDAO.php";
 
-    require_once __ROOT__.'\model\meta\Persistent.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "meta" . DIRECTORY_SEPARATOR . "Persistent.php";
 
-    require_once __ROOT__.'\control\components\post\PostActions.php';
-    require_once __ROOT__.'\control\components\post\ImagesSlideshow.php';
-    require_once __ROOT__.'\control\components\post\Comments.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "post" . DIRECTORY_SEPARATOR . "PostActions.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "post" . DIRECTORY_SEPARATOR . "ImagesSlideshow.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "post" . DIRECTORY_SEPARATOR . "Comments.php";
 
     class Post extends Component {
 
@@ -23,7 +23,7 @@
          * @param SessionUser $user
          * @param string|null $HTML */
         public function __construct(PostVO &$post, SessionUser &$user, string $HTML = null) {
-            parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\Post.xhtml'));
+            parent::__construct($HTML ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "Post.xhtml"));
 
             $this->user = $user;
 

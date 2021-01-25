@@ -1,6 +1,6 @@
 <?php
 
-    require_once __ROOT__.'\model\VO\VO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "VO.php";
 
     abstract class DAO {
 

@@ -1,9 +1,9 @@
 <?php
-    require_once __ROOT__ . '\control\components\Component.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Component.php";
 
-    require_once __ROOT__ . '\model\DAO\SpecieDAO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "SpecieDAO.php";
 
-    require_once __ROOT__ . '\control\components\catalogo\GenericBrowser.php';
+    require_once "GenericBrowser.php";
 
     class Catalogo extends Component {
 
@@ -51,7 +51,7 @@
                 bool $oSelected = false, bool $fSelected = false, bool $gSelected = false,
                 ?int $ordineSelection = null,?int $famigliaSelection = null,?int $genereSelection = null, string $HTML = null ) {
 
-            parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\catalogo\Catalogo.xhtml'));
+            parent::__construct($HTML ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "catalogo" . DIRECTORY_SEPARATOR . "Catalogo.xhtml"));
 
             $this->ordineVOArray = $ordineVOArray;
             $this->ordineSelection = $ordineSelection;
@@ -65,7 +65,7 @@
             $this->genereSelection = $genereSelection;
             $this->gSelected = $gSelected;
 
-            $previewLayout = file_get_contents(__ROOT__.'\view\modules\catalogo\BirdCard.xhtml');
+            $previewLayout = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "catalogo" . DIRECTORY_SEPARATOR . "BirdCard.xhtml");
             $this->birdBrowser = new GenericBrowser($specieVOArray, $previewLayout, $selfReference, $page, $elemPerPage);
 
         }
@@ -74,7 +74,7 @@
 
             $resolvedData = [];
 
-            $menuLayout = file_get_contents(__ROOT__.'\view\modules\catalogo\radioSelect.xhtml');
+            $menuLayout = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "catalogo" . DIRECTORY_SEPARATOR . "radioSelect.xhtml");
 
             /** Filtri applicabili.*/
             $menuLayout = str_replace("{buttonsShow}", $this->resolveButtons(), $menuLayout);

@@ -1,15 +1,13 @@
 <?php
 define('__ROOT__', dirname(dirname(dirname(__FILE__))));
 
-require_once __ROOT__.'\control\SessionUser.php';
-require_once __ROOT__.'\control\BasePage.php';
-require_once __ROOT__.'\control\components\SiteBar.php';
-require_once __ROOT__.'\control\components\BreadCrumb.php';
-require_once __ROOT__.'\model\meta\Persistent.php';
-require_once __ROOT__.'\control\components\post\PostForm.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "pages" . DIRECTORY_SEPARATOR . "standardLayoutIncludes.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "meta" . DIRECTORY_SEPARATOR . "Persistent.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "post" . DIRECTORY_SEPARATOR . "PostForm.php";
 
 $sessionUser = new SessionUser();
-$page = new BasePage(file_get_contents(__ROOT__.'\view\BaseLayout.xhtml'));
+$page = new BasePage(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "BaseLayout.xhtml"));
 
 $page->addComponent(new SiteBar("newpost"));
 

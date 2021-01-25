@@ -2,19 +2,16 @@
 
 define('__ROOT__', dirname(dirname(dirname(__FILE__))));
 
-// TODO directory separator?
 
-require_once __ROOT__."/control/components/admin/AdminWelcomePage.php";
-require_once __ROOT__."/control/components/admin/AdminPanel.php";
-require_once __ROOT__."/control/components/SiteBar.php";
-require_once __ROOT__.'\control\BasePage.php';
-require_once __ROOT__.'\control\SessionUser.php';
-require_once __ROOT__.'\control\components\BreadCrumb.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "pages" . DIRECTORY_SEPARATOR . "standardLayoutIncludes.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "admin" . DIRECTORY_SEPARATOR . "AdminWelcomePage.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "admin" . DIRECTORY_SEPARATOR . "AdminPanel.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php";
 
 $sessionUser = new SessionUser();
 
 if ($sessionUser->userIdentified() && $sessionUser->getAdmin()) {
-    $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
+    $basePage = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "BaseLayout.xhtml");
     $page = new BasePage($basePage);
 
     $page->addComponent(new SiteBar("admin"));

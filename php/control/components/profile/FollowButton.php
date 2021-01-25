@@ -12,7 +12,7 @@ class FollowButton extends Component{
 
     public function __construct(UserVO $followed, string $redirect, string $HTML = null){
 
-        parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\user\FollowButton.xhtml'));
+        parent::__construct($HTML ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . "FollowButton.xhtml"));
 
         $this->followedVO = $followed; $this->redirect = $redirect;
 

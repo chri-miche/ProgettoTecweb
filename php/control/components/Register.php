@@ -1,7 +1,7 @@
 <?php
 
-    require_once __ROOT__.'\control\components\Component.php';
-    require_once __ROOT__.'\control\SessionUser.php';
+    require_once "Component.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php";
 
     class Register extends Component {
 
@@ -19,7 +19,7 @@
         public function __construct(?string $username = null, ?string $password = null, ?string $email = null,
             string $redirect = 'Location: Home.php', string $HTML = null) {
 
-            parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\Register.xhtml'));
+            parent::__construct($HTML ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "Register.xhtml"));
 
             $this->invalid = false;
 

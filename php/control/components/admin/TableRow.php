@@ -1,6 +1,6 @@
 <?php
 
-require_once __ROOT__.'/control/components/admin/TableDefinition.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "admin" . DIRECTORY_SEPARATOR . "TableDefinition.php";
 
 class TableRow extends Component
 {
@@ -9,7 +9,7 @@ class TableRow extends Component
 
     public function __construct(Persistent $field)
     {
-        parent::__construct(file_get_contents(__ROOT__.'/view/modules/admin/TableRow.xhtml'));
+        parent::__construct(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "admin" . DIRECTORY_SEPARATOR . "TableRow.xhtml"));
         $this->field = $field;
     }
 

@@ -1,10 +1,10 @@
 <?php
-    require_once __ROOT__.'\control\components\Component.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Component.php";
 
-    require_once __ROOT__ .'\model\DAO\UserDAO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "UserDAO.php";
 
 
-    require_once __ROOT__ .'\control\components\profile\FollowButton.php';
+    require_once "FollowButton.php";
 
     /** User details has button to follow.*/
     class UserDetails extends Component {
@@ -20,7 +20,7 @@
          * @param bool $action Se l azione del componente è attiva o meno.
          * @param string|null $HTML the base layout of the component. */
         public function __construct(UserVO $user, string $redirect, bool $action = true, string $HTML = null){
-            parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\user\UserDetails.xhtml'));
+            parent::__construct($HTML ?? file_get_contents(__ROOT__."" . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . "UserDetails.xhtml"));
 
             /** Utente di cui visualizzare le informazioni.*/
             $this->user = $user;

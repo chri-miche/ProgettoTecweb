@@ -1,6 +1,6 @@
 <?php
-    require_once __ROOT__.'\control\components\summaries\PageFiller.php';
-    require_once __ROOT__.'\model\DAO\SpecieDAO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "summaries" . DIRECTORY_SEPARATOR . "PageFiller.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "SpecieDAO.php";
 
     class BirdSummary extends PageFiller {
 
@@ -10,7 +10,7 @@
 
         public function __construct($id, string $catalogoReference = 'catalogo.php', string $HTML = null){
 
-            parent::__construct(file_get_contents(__ROOT__.'\view\modules\BirdSummary.xhtml'));
+            parent::__construct(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "BirdSummary.xhtml"));
 
             $this->specieVO = (new SpecieDAO())->get($id);
 

@@ -1,7 +1,7 @@
 <?php
     /** @VO rappresenta un elemento di database manipolabile.
      * dotato di : costruttore, setter e getter. (proprio semplicemente dati).*/
-    require_once __ROOT__.'\model\DatabaseAccess.php';
+    require_once __ROOT__."" . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DatabaseAccess.php";
     interface  VO {
 
         /** Ottieni elemento del campo dato in input.

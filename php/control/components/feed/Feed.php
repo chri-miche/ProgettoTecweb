@@ -1,6 +1,6 @@
 <?php
-require_once __ROOT__.'\model\DatabaseAccess.php';
-require_once 'PostCard.php';
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DatabaseAccess.php";
+require_once "PostCard.php";
 
 class Feed extends Component {
 
@@ -10,7 +10,7 @@ class Feed extends Component {
     // criteria can be popularity time controviersial
     public function __construct(string $criteria) {
         // construct parent
-        parent::__construct(file_get_contents(__ROOT__.'\view\modules\feed\Feed.xhtml'));
+        parent::__construct(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "feed" . DIRECTORY_SEPARATOR . "Feed.xhtml"));
 
         $query = 'select * from vw_post ';
 

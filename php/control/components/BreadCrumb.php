@@ -11,7 +11,7 @@
          * @param string|null $HTML  */
         public function __construct(array $crumb, string $HTML = null) {
 
-            parent::__construct( $HTML ?? file_get_contents(__ROOT__.'\view\modules\BreadCrumb.xhtml'));
+            parent::__construct( $HTML ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "BreadCrumb.xhtml"));
             $this->previous = $crumb;
 
         }

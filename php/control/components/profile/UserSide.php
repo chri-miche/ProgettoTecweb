@@ -1,9 +1,9 @@
 <?php
 
-    require_once __ROOT__.'\control\components\Component.php';
-    require_once __ROOT__ .'\model\DAO\UserDAO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Component.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "UserDAO.php";
 
-    require_once __ROOT__.'\control\components\generics\LinkRow.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "generics" . DIRECTORY_SEPARATOR . "LinkRow.php";
     /* Diventa semplicemente la lista di amici.*/
     class UserSide extends Component {
 
@@ -17,7 +17,7 @@
 
         public function __construct(UserVO $user, int $maxFriends = 20, string $reference = 'UserPage.php', string $HTML = null) {
 
-            parent::__construct($HTML ?? file_get_contents(__ROOT__.'\view\modules\user\UserSide.xhtml'));
+            parent::__construct($HTML ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . "UserSide.xhtml"));
 
             /** Ottenimento dati utente e suoi amici.*/
 

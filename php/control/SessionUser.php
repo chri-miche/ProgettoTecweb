@@ -1,8 +1,8 @@
 <?php
 
 
-    require_once __ROOT__.'\model\VO\UserVO.php';
-    require_once __ROOT__.'\model\DAO\UserDAO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "UserVO.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "UserDAO.php";
 
     class SessionUser {
 

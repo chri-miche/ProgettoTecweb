@@ -1,6 +1,6 @@
 <?php
 
-require_once __ROOT__.'/control/components/admin/FormField.php';
+require_once 'FormField.php';
 
 class AdminForm extends Component
 {

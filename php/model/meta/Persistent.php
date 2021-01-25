@@ -219,5 +219,5 @@ class Persistent {
             $column->setValue($column->defaultValue());
         }
     }
-
 }
+?>

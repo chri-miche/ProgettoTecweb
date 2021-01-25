@@ -1,7 +1,7 @@
 <?php
 
-    require_once __ROOT__ . '\model\VO\VO.php';
-    require_once __ROOT__ . '\model\VO\PostVO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "VO.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "PostVO.php";
 
     class CommentoVO implements VO {
 

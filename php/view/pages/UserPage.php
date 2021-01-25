@@ -2,15 +2,12 @@
     /** Pagina del singolo uccello. */
     define('__ROOT__', dirname(dirname(dirname(__FILE__))));
 
-    require_once __ROOT__ . '\control\BasePage.php';
-
-    require_once __ROOT__ . '\control\components\SiteBar.php';
-    require_once __ROOT__ . '\control\components\BreadCrumb.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "pages" . DIRECTORY_SEPARATOR . "standardLayoutIncludes.php";
 
     /** Page specific. */
-    require_once __ROOT__ . '\control\components\summaries\UserPage.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "summaries" . DIRECTORY_SEPARATOR . "UserPage.php";
 
-    $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
+    $basePage = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "BaseLayout.xhtml");
 
     if (isset($_POST['submit-profile-pic']) && isset($_GET['id'])) {
         $name = basename($_FILES["input-file"]["name"]);

@@ -8,7 +8,7 @@ class TableHeader extends Component
 
     public function __construct(Column $field)
     {
-        parent::__construct(file_get_contents(__ROOT__.'/view/modules/admin/TableHeader.xhtml'));
+        parent::__construct(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "admin" . DIRECTORY_SEPARATOR . "TableHeader.xhtml"));
         $this->columnName = $field->columnDescription();
     }
 

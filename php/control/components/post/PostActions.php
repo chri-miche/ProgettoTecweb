@@ -8,7 +8,7 @@ class PostActions extends Component {
 
     public function __construct(PostVO $postVO, SessionUser &$utente) {
 
-        parent::__construct(file_get_contents(__ROOT__.'/view/modules/post/PostActions.xhtml'));
+        parent::__construct(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "post" . DIRECTORY_SEPARATOR . "PostActions.xhtml"));
 
         $this->postVO = $postVO;
         $this->userLiked = (new UserDAO())->likes($this->postVO, $utente->getUser());

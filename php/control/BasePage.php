@@ -1,6 +1,6 @@
 <?php
 
-    require_once __ROOT__.'\control\components\Component.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Component.php";
     class BasePage extends Component {
 
         private const COMPONENT_EXPR = '/<component \/>/';
@@ -14,7 +14,7 @@
 
         public function __construct(string $baseLayout) {
 
-            parent::__construct($baseLayout ?? file_get_contents(__ROOT__.'\view\pages\BaseLayout.xhtml'));
+            parent::__construct($baseLayout ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "pages" . DIRECTORY_SEPARATOR . "BaseLayout.xhtml"));
             $this->components = array();
         }
 

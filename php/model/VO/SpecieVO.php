@@ -1,9 +1,9 @@
 <?php
 
-    require_once __ROOT__ . '\model\VO\VO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "VO.php";
 
-    require_once __ROOT__ . '\model\DAO\ConservazioneDAO.php';
-    require_once __ROOT__ . '\model\VO\GenereVO.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "ConservazioneDAO.php";
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "GenereVO.php";
 
     class SpecieVO implements VO {
 

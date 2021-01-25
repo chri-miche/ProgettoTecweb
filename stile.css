@@ -165,7 +165,6 @@ p {
     margin-left: 0;
     margin-right: 1em;
 }
-
 /* #end typography */
 
 /* #tabs*/
@@ -274,6 +273,25 @@ a.tab-label[aria-selected=true]:hover,
             0 3px 1px 0 rgba(0,0,0,.2),
             0 2px 2px 0 rgba(0,0,0,.14),
             0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.card dt a {
+    color: inherit;
+    background: transparent;
+    box-shadow: none;
+    padding: 0.5em;
+    width: calc(100% - 2em);
+}
+
+.card dt a:hover {
+    background: rgba(33,150,243, 0.2);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
 }
 
 .img-overflow-container {
@@ -623,7 +641,7 @@ th.action, td.action {
 }
 
 .image-slideshow img {
-    height: 500px;
+    max-height: 500px;
 }
 
 .analog-container {

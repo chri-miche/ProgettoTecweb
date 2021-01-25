@@ -20,6 +20,10 @@ class PostActions extends Component {
 
         $resolvedData["{id}"] = $this->postVO->getId();
 
+        $likes = (new PostDAO())->getLikes($this->postVO);
+
+        $resolvedData['{likes}'] = $likes >= 0 ? "+$likes" : "$likes";
+
         /** User liked or hasn't liked the post.*/
 
         if(is_null($this->userLiked)) {

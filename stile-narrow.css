@@ -285,6 +285,25 @@ a.tab-label[aria-selected=true]:hover,
             0 1px 5px 0 rgba(0,0,0,.12);
 }
 
+.card dt a {
+    color: inherit;
+    background: transparent;
+    box-shadow: none;
+    padding: 0.5em;
+    width: calc(100% - 2em);
+}
+
+.card dt a:hover {
+    background: rgba(33,150,243, 0.2);
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
+}
+
 .img-overflow-container {
     max-height: 175px;
     height: fit-content;
@@ -425,7 +444,11 @@ p.text-truncate {
     white-space: nowrap;
 }
 
-
+abbr.icon:after {
+    margin: 0.5em;
+    content: attr(data-icon-name);
+    font-family: 'Material Icons', Verdana, sans-serif;
+}
 /* #end typography */
 
 /* #begin comments */

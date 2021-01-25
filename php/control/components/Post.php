@@ -33,12 +33,7 @@
         }
 
         public function resolveData() {
-
-            $resolvedData = $this->post->arrayDump();
-            $likes = (new PostDAO())->getLikes($this->post);
-
-            $resolvedData['likes'] = $likes >= 0 ? "+$likes" : "$likes";
-            return $resolvedData;
+            return $this->post->arrayDump();
         }
 
         function build() {

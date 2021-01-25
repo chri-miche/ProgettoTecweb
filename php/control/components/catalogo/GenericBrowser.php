@@ -14,7 +14,10 @@
         public function __construct(array $elements, string $previewLayout, string $nextPageReference, int $currentPage = 0,
                                     int $elementsPerPage = 10, string $HTML = null, string $browsePageHTML = null){
 
-            parent::__construct( $HTML ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "browsing" . DIRECTORY_SEPARATOR . "Browser.xhtml"));
+            parent::__construct( $HTML ?? (
+                count($elements) > 0
+                    ? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "browsing" . DIRECTORY_SEPARATOR . "Browser.xhtml")
+                    : '<img src="\res\images\wow-such-empty.png" alt="Questa ricerca non ha prodotto risultati" />'));
 
             $this->nextPageReference = $nextPageReference .'page=';
 

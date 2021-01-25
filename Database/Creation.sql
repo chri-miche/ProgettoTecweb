@@ -35,7 +35,7 @@
 
         isAdmin BOOLEAN NOT NULL DEFAULT FALSE,
 
-        immagineProfilo varchar(40) NOT NULL DEFAULT ('imgs/default.png')
+        immagineProfilo varchar(40) NOT NULL DEFAULT ('res/default.png')
 
     ) ENGINE = InnoDB;
 

@@ -38,7 +38,6 @@
             $likes = (new PostDAO())->getLikes($this->post);
 
             $resolvedData['likes'] = $likes >= 0 ? "+$likes" : "$likes";
-
             return $resolvedData;
         }
 

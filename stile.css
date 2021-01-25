@@ -189,6 +189,7 @@ p {
 
 form.tab-label {
     display: inline;
+    background: transparent;
 }
 
 a.tab-label, a.tab-label:active, .tab-label button, .tab-label button:active {

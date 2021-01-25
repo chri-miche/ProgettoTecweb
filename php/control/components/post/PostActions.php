@@ -31,13 +31,13 @@ class PostActions extends Component {
 
             if($this->userLiked){
 
-                $resolvedData['{{hasLiked}'] = 'canLike';
-                $resolvedData['{hasDisliked}'] = 'disliked';
+                $resolvedData['{hasLiked}'] = 'liked';
+                $resolvedData['{hasDisliked}'] = 'canDislike';
 
             } else {
 
-                $resolvedData['{hasLiked}'] = 'like';
-                $resolvedData['{{hasDisliked}'] = 'canDislike';
+                $resolvedData['{hasLiked}'] = 'canLike';
+                $resolvedData['{hasDisliked}'] = 'disliked';
 
             }
         }

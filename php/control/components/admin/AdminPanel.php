@@ -9,7 +9,6 @@ class AdminPanel extends Component
 {
 
     private static $entities = array(
-        "tag" => "Tag",
         "utente" => "Utenti",
         "specie" => "Specie",
         "famiglia" => "Famiglie",

@@ -18,9 +18,13 @@ define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
         if (isset($_POST['submit-profile-pic']) && isset($_GET['id']) && $_GET['id'] == $userVO->getId()){
 
             $name = basename($_FILES["input-file"]["name"]);
-            $tmp_name = basename($_FILES["input-file"]["tmp_name"]);
+            $tmp_name = $_FILES["input-file"]["tmp_name"];
 
             $rootParent = dirname(__ROOT__);
+
+            if ((!is_dir($rootParent . DIRECTORY_SEPARATOR . "res") && !mkdir($rootParent . DIRECTORY_SEPARATOR . "res") || !is_writable($rootParent . DIRECTORY_SEPARATOR . "res"))) {
+                throw new Exception("Error creating folder res");
+            };
             $proposedPath = DIRECTORY_SEPARATOR . "res" . DIRECTORY_SEPARATOR . "$name";
 
             $tentativi = 0;
@@ -35,7 +39,7 @@ define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
                 $result = (new UserDAO())->save($userVO);
 
             } else {
-                throw new Exception("Non è stato possibile salvare le foto");
+                throw new Exception("Non è stato possibile salvare la foto");
             }
         }
     }

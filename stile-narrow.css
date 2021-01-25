@@ -523,6 +523,9 @@ ul#comments li form textarea {
     width: 84px;
     display: inline;
 }
+#profile-form {
+    background: transparent;
+}
 
 #profile-form fieldset {
     border: none;

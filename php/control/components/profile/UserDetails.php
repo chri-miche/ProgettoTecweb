@@ -19,8 +19,18 @@
          * @param string $redirect the page to which we redirect when we follow someone (could be self reference).
          * @param bool $action Se l azione del componente è attiva o meno.
          * @param string|null $HTML the base layout of the component. */
-        public function __construct(UserVO $user, string $redirect, bool $action = true, string $HTML = null){
-            parent::__construct($HTML ?? file_get_contents(__ROOT__."" . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . "UserDetails.xhtml"));
+        public function __construct(UserVO $user, string $redirect, bool $action = true, string $HTML = null) {
+
+            $HTML = file_get_contents(__ROOT__."" . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . "UserDetails.xhtml");
+            $sessionUser = new SessionUser();
+            if (isset($sessionUser) && $sessionUser->getUser()->getId() === $user->getId()) {
+                $component = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . "CambiaImmagineProfilo.xhtml");
+            } else {
+                $component = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . "ImmagineProfilo.xhtml");
+            }
+            $HTML = str_replace("<profile-pic />", $component, $HTML);
+
+            parent::__construct($HTML);
 
             /** Utente di cui visualizzare le informazioni.*/
             $this->user = $user;
@@ -45,6 +55,5 @@
 
 
             return $resolvedData;
-
         }
     }

@@ -13,6 +13,9 @@
         private $date;
         /** @var string */
         private $title;
+
+        private $likes;
+
         /** @var UserVO $userVO */
         private $userVO;// AUTOHR
 
@@ -32,7 +35,7 @@
          * @param array $arrayTagVO
          */
         public function __construct(?int $id = null, bool $isArchived = false, string $content = '',
-                                    ?string $date = null, string $title = '', ?UserVO $userVO = null, array $immagini = array()){
+                                    ?string $date = null, string $title = '', int $likes = 0, ?UserVO $userVO = null, array $immagini = array()){
 
             $this->id = $id;
             $this->isArchived = $isArchived;
@@ -40,6 +43,7 @@
             $this->date = $date;
             $this->title = $title;
 
+            $this->likes = 0;
             $this->userVO = is_null($userVO)? new UserVO() : $userVO;
 
             $this->immagini = $immagini;
@@ -177,6 +181,20 @@
          * @param array $immagini */
         public function setImmagini(array $immagini): void{
             $this->immagini = $immagini;
+        }
+
+        /**
+         * @return int
+         */
+        public function getLikes(): int{
+            return $this->likes;
+        }
+
+        /**
+         * @param int $likes
+         */
+        public function setLikes(int $likes): void{
+            $this->likes = $likes;
         }
 
 

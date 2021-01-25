@@ -19,8 +19,6 @@ class SearchTab extends BasePage {
         $this->keyword = addslashes($keyword);
         $this->entity = $entity;
 
-        $giveVOArray = array();
-
         switch ($entity) {
             case "commento":
 

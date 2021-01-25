@@ -3,14 +3,26 @@
 require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "VO" . DIRECTORY_SEPARATOR . "PostVO.php";
 class PostDAO extends DAO {
 
+    private function getLikesByID(int $id) : int{
+
+        $result = $this->performCall(array($id), 'getLikes');
+        if(isset($result['failure'])) return 0;
+
+        return $result['likes'];
+
+    }
+
     /**
      * @inheritDoc */
     private function buildPostVO(array $data) : PostVO {
 
-        $userVO = (new UserDAO())->get($data['userId']);
+
+        $data['likes'] = $this->getLikesByID($data['id']);
+        $data['userVO'] = (new UserDAO())->get($data['userId']);
+
         unset($data['userId']);
 
-        $builtVO = new PostVO(...$data, ...[$userVO]);
+        $builtVO = new PostVO(...$data);
 
         $builtVO->setImmagini($this->getImmagini($builtVO->getId()));
 
@@ -81,6 +93,8 @@ class PostDAO extends DAO {
         $result = $limit > 0 /** Se è impostato un limite allora lo consideriamo con il suo offset.*/
             ? $this->performMultiCAll(array($userId, $limit, $offset),'get_of_utente_post_limited' )
             : $this->performMultiCAll(array($userId), 'get_of_utente_post_all');
+
+        print_r($result);
 
         if(!isset($result['failure']))
             foreach ($result as $element)

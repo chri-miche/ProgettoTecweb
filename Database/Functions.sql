@@ -415,9 +415,8 @@
     DROP PROCEDURE IF EXISTS get_of_utente_post_limited;
     CREATE PROCEDURE get_of_utente_post_limited(IN in_id INT, IN in_limit INT, IN in_offset INT) BEGIN
         SELECT C.ID as id, C.UserID as userId, C.isArchived, C.content, C.data as date, P.title
-        FROM post P INNER JOIN (
-            SELECT * FROM contenuto C WHERE C.UserID = in_id LIMIT in_offset, in_limit
-        ) AS C ON C.ID = P.contentID; END;
+        FROM post P INNER JOIN contenuto C ON p.contentID = C.ID
+        WHERE C.UserID = in_id LIMIT in_offset, in_limit; END;
 
 
     DROP PROCEDURE IF EXISTS get_post_tag_all;

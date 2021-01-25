@@ -275,7 +275,7 @@ a.tab-label[aria-selected=true]:hover,
             0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-.card dt a {
+.card dt h2 a {
     color: inherit;
     background: transparent;
     box-shadow: none;

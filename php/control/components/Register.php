@@ -17,7 +17,7 @@
          * @param string $redirect : Page which to redirect to if already autenticated.
          * @param string|null $HTML : Page layout. */
         public function __construct(?string $username = null, ?string $password = null, ?string $email = null,
-            string $redirect = 'Location: Home.php', string $HTML = null) {
+            string $redirect = 'Location: index.php', string $HTML = null) {
 
             parent::__construct($HTML ?? file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "Register.xhtml"));
 

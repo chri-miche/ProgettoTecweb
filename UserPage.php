@@ -1,10 +1,10 @@
 <?php
     /** Pagina del singolo uccello. */
-    define('__ROOT__', dirname(dirname(dirname(__FILE__))));
+define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
 
-    require_once __ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "pages" . DIRECTORY_SEPARATOR . "standardLayoutIncludes.php";
+    require_once "standardLayoutIncludes.php";
 
-    require_once __ROOT__.'\control\SessionUser.php';
+    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php";
     /** Page specific. */
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "summaries" . DIRECTORY_SEPARATOR . "UserPage.php";
 

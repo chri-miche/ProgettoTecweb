@@ -12,7 +12,7 @@
         private $loggedNow;
 
         public function __construct(string $email = null, string $password = null,
-                                    string $redirect = 'Location: Home.php',string $HTML = null) {
+                                    string $redirect = 'Location: index.php',string $HTML = null) {
 
             parent::__construct ($HTML ?? (file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "login" . DIRECTORY_SEPARATOR . "login.xhtml")));
             $this->redirect = $redirect;

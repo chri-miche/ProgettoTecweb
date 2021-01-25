@@ -1,7 +1,7 @@
 <?php
-    define('__ROOT__', dirname(dirname(dirname(__FILE__))));
+define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
 
-    require_once __ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "pages" . DIRECTORY_SEPARATOR . "standardLayoutIncludes.php";
+    require_once "standardLayoutIncludes.php";
 
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "catalogo" . DIRECTORY_SEPARATOR . "GenericBrowser.php";
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Title.php";
@@ -14,7 +14,7 @@
     $basePage = file_get_contents(__ROOT__."" . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "BaseLayout.xhtml");
     $page = new BasePage($basePage);
 
-    $id = $_GET['usid'] ?? header('Location: Home.php');
+    $id = $_GET['usid'] ?? header('Location: index.php');
     $pageUser = (new UserDAO())->get($id);
 
     $page->addComponent(new SiteBar('PostUtente'));

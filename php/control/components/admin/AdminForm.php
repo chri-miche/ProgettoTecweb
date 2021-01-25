@@ -53,7 +53,7 @@ class AdminForm extends Component
 
         $HTML = str_replace("<fields />", $fields, $HTML);
 
-        // TODO read update
+
 
         $HTML = str_replace("{table}", $this->persistent->tableName(), $HTML);
 

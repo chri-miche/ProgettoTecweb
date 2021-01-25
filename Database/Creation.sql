@@ -25,7 +25,6 @@
 
     DROP TABLE IF EXISTS Tag;
 
-    /*TODO: Change all keys to snakecase*/
     CREATE TABLE Utente(
 
         ID int UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,

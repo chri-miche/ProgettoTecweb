@@ -1,5 +1,5 @@
 <?php
-    define('__ROOT__', dirname(dirname(dirname(__FILE__))));
+define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
 
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php";
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "UserDAO.php";
@@ -13,7 +13,7 @@
 
     // echo $friendId;
     if(is_null($friendId))
-        header("Location: Home.php");
+        header("Location: index.php");
 
     $friendVO = $userDAO->get($friendId);
 

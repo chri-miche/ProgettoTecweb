@@ -1,19 +1,18 @@
 <div id="content">
-    <!-- TODO controllare screen reader -->
     <div id="tab-header"
          role="tablist">
         <a class="tab-label"
            role="tab"
            aria-controls="panel-popularity"
-           href="Home.php?feed=popularity" aria-selected="false">Popolari</a>
+           href="index.php?feed=popularity" aria-selected="false">Popolari</a>
         <a class="tab-label"
            role="tab"
            aria-controls="panel-time"
-           href="Home.php?feed=time" aria-selected="false">Recenti</a>
+           href="index.php?feed=time" aria-selected="false">Recenti</a>
         <a class="tab-label"
            role="tab"
            aria-controls="panel-controversial"
-           href="Home.php?feed=controversial" aria-selected="false">Discussi</a>
+           href="index.php?feed=controversial" aria-selected="false">Discussi</a>
     </div>
     <div id="panel-{feed}" class="tab-content">
         <component />

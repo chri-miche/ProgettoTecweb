@@ -21,11 +21,6 @@ Box shadow:
     altri usati sono quelli del material design
 */
 
-/*
-TODO color rgba al posto di hex per fare opacity
-*/
-
-
 body {
     /*
     font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
@@ -67,6 +62,7 @@ input:focus, textarea:focus {
 
 form {
     text-align: center;
+    background: white;
 }
 
 #container {
@@ -225,6 +221,7 @@ a.tab-label[aria-selected=true]:hover,
     margin: 0;
     display: flex;
     justify-content: center;
+    background: transparent;
 }
 
 #search-form > fieldset {

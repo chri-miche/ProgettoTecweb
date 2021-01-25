@@ -2,7 +2,6 @@
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Component.php";
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "catalogo" . DIRECTORY_SEPARATOR . "PreviewsPage.php";
 
-    // TODO : Move in browser.
     class GenericBrowser extends Component {
 
         private $previewPage;
@@ -43,7 +42,7 @@
             if($this->numberPages >= 1) {
                 for ($i = 0; $i < $this->numberPages; $i++){
 
-                    if ($i == $this->currentPage) // Se ci troviamo in pagina correntemente selezionata. TODO: togliere "a"
+                    if ($i == $this->currentPage)
                         $browsingList .= '<a href= "#" class="selected-button page-select">' . ($i + 1) . '</a>';
                     else // stile alternativo. (link selezionabile che porta alla pagina successiva).
                         $browsingList .= '<a href="' . $this->nextPageReference . $i . '" class="page-select">' . ($i + 1) . '</a>';

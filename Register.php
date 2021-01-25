@@ -1,7 +1,7 @@
 <?php
     /** @checked true*/
     /** Same impagination as login*/
-    define('__ROOT__', dirname(dirname(dirname(__FILE__))));
+define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
 
 
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "BasePage.php";

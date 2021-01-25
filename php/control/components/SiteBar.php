@@ -16,7 +16,7 @@
 
         private $value;
 
-        /** TODO: Give user as parameter by reference? Avoid multiple definitons of SessionUser.
+        /**
          * @param string $position
          * @param string $defaultSearch
          * @param string|null $HTMLcontent
@@ -62,7 +62,7 @@
             $navigation = '';
 
             if (strcasecmp($this->position, "home") != 0) {
-                $navigation = '<a href="Home.php" xml:lang="en"> Home </a>';
+                $navigation = '<a href="index.php" xml:lang="en"> Home </a>';
             }
             if (strcasecmp($this->position, "catalogo") != 0) {
                 $navigation .= (new NavigationButton('Catalogo', 'Catalogo.php'))->build();

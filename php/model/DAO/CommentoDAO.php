@@ -110,7 +110,6 @@ class CommentoDAO extends DAO {
 
             /** Se esiste l id del oggetto corrente, quello va semplicemente aggiornata.*/
             if ($this->checkId($element)) {
-                print_r($element->smartDump());
 
                 $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_commento');
                 return isset($result['failure']);
@@ -118,7 +117,6 @@ class CommentoDAO extends DAO {
             } else {
 
                 $result = $this->performCall($element->smartDump(true), 'create_commento');
-                print_r($result);
                 if(!isset($result['failure'])) $element = new $element(...$result, ...$element->varDumps(true));
                 /* Ritorna vero se è stato costruito l oggetto falso altrimenti.*/
                 return !$element->getId() === null;

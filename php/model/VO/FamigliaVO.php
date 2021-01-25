@@ -10,7 +10,6 @@
         private $nomeScientifico;
         private $ordineVO;
 
-        // TODO: Change constructor to pass real variables? Ora come ora usalro è un casino.
         public function __construct(int $id = null, string $nomeScientifico = null, OrdineVO $ordineVO = null) {
 
             $this->id = $id; $this->nomeScientifico = $nomeScientifico;

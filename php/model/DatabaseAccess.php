@@ -85,7 +85,6 @@
 
         }
 
-        /* TODO: Check this, it was done in a hurry. Not checked yet.*/
         static public function writeRecord($query){
 
             $connection = self::openConnection();

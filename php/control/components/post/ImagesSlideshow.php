@@ -13,7 +13,7 @@ class ImagesSlideshow extends BasePage {
         if ($size === 0) {
             $this->addComponent(new class(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "post" . DIRECTORY_SEPARATOR . "NoImage.xhtml")) extends Component {});
         } else if ($size === 1) {
-            $this->addComponent(new class('<div id="image-0" class="image-slideshow"><img src="{link}" alt="" /></div>', $links[0]) extends Component {
+            $this->addComponent(new class('<div id="image-0" class="image-slideshow"><div class="analog-container"><img src="{link}" alt="" /></div></div>', $links[0]) extends Component {
                 private $data;
 
                 public function __construct(string $HTML, $link)

@@ -20,6 +20,11 @@
         foreach ($this->postVO->arrayDump() as $key => $value)
             $ritorno['{' . $key . '}'] = $value;
 
+        $likes = (new PostDAO())->getLikes($this->postVO);
+
+        $ritorno['{likes}'] = $likes;
+        $ritorno['{iconName}'] = $likes >= 0 ? 'thumb_up' : 'thumb_down';
+
         return $ritorno;
     }
 }

@@ -1,4 +1,4 @@
-<div class="card primary-color">
+<div class="card">
     <!-- fixed height card -->
     <div class="img-overflow-container">
         <img src="{immagine}" alt=""/>
@@ -6,11 +6,10 @@
     <!--a un cieco non importa sapere che cosa ci sia qui,
         e nemmeno agli algoritmi di ricerca-->
     <!-- prima cosa, immagine con altezza % (nostretch) -->
-    <dt class="card-header accent-color">
-        <h2>{nomeScientifico}</h2>
-        <h3 class="subtitle">{nomeComune}</h3>
+    <dt class="card-header primary-color">
+        <h2><a class="text-truncate" href="uccello.php?id={id}">{nomeScientifico}</a></h2>
     </dt>
     <dd>
-        <a href="uccello.php?id={id}">Leggi altro</a>
+        <h3 class="subtitle">{nomeComune}</h3>
     </dd>
 </div>

@@ -24,9 +24,8 @@ class SearchTab extends BasePage {
         switch ($entity) {
             case "commento":
 
-                $commentArrayVO = (new CommentoDAO())->search("%$this->keyword%");
+                $giveVOArray = (new CommentoDAO())->search("%$this->keyword%");
                 /** @var CommentoVO $comment*/
-                foreach ($commentArrayVO as $commentVO) $giveVOArray [] = $commentVO->getPostVO();
 
                 $layout = file_get_contents(__ROOT__."/view/modules/search/CommentCard.xhtml"); break;
 

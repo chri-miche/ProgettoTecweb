@@ -144,7 +144,7 @@
 
             $resolvedHTML = '';
             $resolvedHTML .= "<button type='submit' value='1' name='$selectVar'> - </button>";
-            if(!empty($inArrayVO)) {
+            if(!empty($inArrayVO) && !is_null($inArrayVO[0]->getId())) {
 
                 $firstVO = $inArrayVO[0];
                 $resolvedHTML .= $this->makeSelect($firstVO->getId(), $varName, $label);

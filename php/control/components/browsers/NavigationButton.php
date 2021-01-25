@@ -10,25 +10,22 @@ class NavigationButton extends PageFiller {
     public function __construct($text, $link, $disabled = false) {
         parent::__construct(file_get_contents(__ROOT__.'\view\modules\browsing\NavigationButton.xhtml'));
 
-        $this->data = array(
-            "{text}" => $text,
-            "{link}" => $link);
-
+        $this->data = array("{text}" => $text, "{link}" => $link);
         $this->disabled = $disabled;
+
     }
 
-    public function build()
-    {
+    public function build() {
         $HTML = parent::build();
-        if ($this->disabled) {
+
+        if ($this->disabled)
             $HTML = str_replace('href="' . $this->data["{link}"] . '"', 'class="disabled"', $HTML);
-        }
+
         return $HTML;
 
     }
 
-    public function resolveData()
-    {
+    public function resolveData() {
         return $this->data;
     }
 }

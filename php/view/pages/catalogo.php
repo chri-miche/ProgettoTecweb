@@ -68,7 +68,7 @@
         } else if($fSelected){
 
             if(!empty($fVOArray))
-                $oVOArray [] = $fVOArray[0]->getOrdineVO();
+                $oVOArray []= $fVOArray[0]->getOrdineVO();
             else
                 $oVOArray[]= $ordineDAO->get($oValue);
 

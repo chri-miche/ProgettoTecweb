@@ -10,8 +10,6 @@
 
     require_once __ROOT__ . '\control\components\summaries\BirdSummary.php';
 
-    require_once __ROOT__ . '\model\TagElement.php';
-
     $basePage = file_get_contents(__ROOT__.'\view\BaseLayout.xhtml');
 
     $page = new BasePage($basePage);

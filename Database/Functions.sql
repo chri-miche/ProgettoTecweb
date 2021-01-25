@@ -461,8 +461,8 @@
          SELECT COUNT(P.contentID) AS idexists FROM commento P WHERE P.contentID = in_id LIMIT 1; END;
 
     DROP PROCEDURE IF EXISTS create_commento;
-    CREATE PROCEDURE create_commento(IN in_user INT, IN in_isArchived BOOL,
-    IN in_content TEXT, IN in_date VARCHAR(30), IN in_post INT) BEGIN
+    CREATE PROCEDURE create_commento(IN in_isArchived BOOL,
+    IN in_content TEXT, IN in_date VARCHAR(30), IN in_post INT, IN in_user INT) BEGIN
         INSERT INTO contenuto(ID, UserID, isArchived, content, data) VALUES
         (NULL, in_user, in_isArchived, in_content, NOW());
 
@@ -470,8 +470,8 @@
         SELECT LAST_INSERT_ID() as id;END;
 
     DROP PROCEDURE IF EXISTS update_commento;
-    CREATE PROCEDURE update_commento(IN in_id INT, IN in_user INT, IN in_isArchived BOOL,
-    IN in_content TEXT, IN in_date VARCHAR(30), IN in_post INT) BEGIN
+    CREATE PROCEDURE update_commento(IN in_id INT, IN in_isArchived BOOL,
+    IN in_content TEXT, IN in_date VARCHAR(30), IN in_post INT, IN in_user INT) BEGIN
 
         UPDATE contenuto SET UserID = in_user, isArchived = in_isArchived, content = in_content WHERE ID = in_id;
         UPDATE commento SET postID = in_post WHERE contentID = in_id; END;

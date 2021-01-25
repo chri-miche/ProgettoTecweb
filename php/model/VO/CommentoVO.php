@@ -7,8 +7,6 @@
 
         /** @var int | null*/
         private $id;
-        /** @var int | null*/
-        private $userId;
         /** @var boolean */
         private $isArchived;
         /** @var string */
@@ -18,23 +16,29 @@
         /** Referenced post.
          *  @var  PostVO | null*/
         private $postVO;
+        /** @var UserVO $author*/
+        private $author;
 
-        /** CommentoVO constructor.
+
+        /**
+         * CommentoVO constructor.
          * @param int|null $id
-         * @param int|null $userId
          * @param bool $isArchived
          * @param string $content
-         * @param DateTime | null $date
-         * @param PostVO| null $postVO */
-        public function __construct(?int $id = null, ?int $userId = null, bool $isArchived = false,
-                                    string $content = '', ?string $date = null, PostVO $postVO = null) {
+         * @param string|null $date
+         * @param PostVO|null $postVO
+         * @param UserVO|null $author
+         */
+        public function __construct(?int $id = null, bool $isArchived = false, string $content = '',
+                                    ?string $date = null, PostVO $postVO = null, UserVO $author = null) {
 
             $this->id = $id;
-            $this->userId = $userId;
             $this->isArchived = $isArchived;
             $this->content = $content;
             $this->date = $date;
-            $this->postVO = $postVO;
+
+            $this->postVO = isset($postVO) ? $postVO : new PostVO();
+            $this->author = isset($author) ? $author : new UserVO();
 
         }
 
@@ -46,11 +50,16 @@
 
             /** Togliamo gli array.*/
             unset($result['postVO']);
+            unset($result['author']);
+
 
             /** @var $counter: Contatore di elementi immagine in modo da impostare un default.*/
 
             foreach ($this->postVO->arrayDump() as $key => $value)
                 $result["p_$key"] = $value;
+
+            foreach ($this->author->arrayDump() as $key => $value)
+                $result["a_$key"] = $value;
 
             return $result;
 
@@ -69,7 +78,9 @@
             $return = get_object_vars($this);
 
             if($id) unset($return['id']);
+
             $return['postVO'] = $this->postVO->getId();
+            $return['author'] = $this->author->getId();
 
             return array_values($return);
 
@@ -79,18 +90,6 @@
          * @return int|null */
         public function getId(): ?int{
             return $this->id;
-        }
-
-        /**
-         * @return int|null */
-        public function getUserId(): ?int{
-            return $this->userId;
-        }
-
-        /**
-         * @param int|null $userId */
-        public function setUserId(?int $userId): void{
-            $this->userId = $userId;
         }
 
         /**
@@ -139,6 +138,19 @@
          * @param PostVO|null $postVO */
         public function setPostVO(?PostVO $postVO): void {
             $this->postVO = $postVO;
+        }
+
+        /**
+         * @return UserVO */
+        public function getAuthor(): UserVO {
+            return $this->author;
+        }
+
+        /**
+         * @param UserVO $author
+         */
+        public function setAuthor(UserVO $author): void {
+            $this->author = $author;
         }
 
     }

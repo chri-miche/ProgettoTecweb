@@ -19,14 +19,17 @@
     $page->addComponent(new BreadCrumb(array('Post' => '')));
 
     $postVO = (new PostDAO())->get($_GET['id']?? -1);
+
     /** Se il post è valido.*/
     if($postVO->getId()){
 
         if($sessionUser->userIdentified()){
             if(isset($_GET['comment']) && $_GET['comment']) {
 
-                $commentVO = new CommentoVO(null, $sessionUser->getUser()->getId(),false, $_POST["commento"], null, $postVO);
+                $commentVO = new CommentoVO(null,false, $_POST["commento"], null, $postVO, $sessionUser->getUser());
                 $transaction = (new CommentoDAO())->save($commentVO);
+
+                echo $transaction;
 
             } else if(isset($_GET['liked']) && $_GET['liked']){
 

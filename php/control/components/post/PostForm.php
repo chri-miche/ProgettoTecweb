@@ -5,9 +5,9 @@ class PostForm extends Component
 {
     private $data;
 
-    public function __construct(SessionUser &$sessionUser, $defaults = array())
-    {
+    public function __construct(SessionUser &$sessionUser, $defaults = array()) {
         parent::__construct(file_get_contents(__ROOT__.'/view/modules/post/PostForm.xhtml'));
+
         $this->data = array();
         $this->data['{UserID}'] = $sessionUser->getUser()->getId();
 
@@ -18,8 +18,7 @@ class PostForm extends Component
 
     }
 
-    public function resolveData()
-    {
+    public function resolveData() {
         return $this->data;
     }
 

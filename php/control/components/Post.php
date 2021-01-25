@@ -37,8 +37,6 @@
             $resolvedData = $this->post->arrayDump();
             $resolvedData['likes'] = (new PostDAO())->getLikes($this->post);
 
-            print_r($resolvedData);
-
             return $resolvedData;
         }
 

@@ -41,10 +41,6 @@ class PostActions extends Component {
 
             }
         }
-
-        $numberLikes =  (new PostDAO())->getLikes($this->postVO);
-        $resolvedData['{likes}'] = $numberLikes >= 0 ? "+$numberLikes" : "$numberLikes";
-
         return $resolvedData;
     }
 }

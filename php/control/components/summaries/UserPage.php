@@ -1,6 +1,5 @@
 <?php
 
-    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "profile" . DIRECTORY_SEPARATOR . "UserSide.php";
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "profile" . DIRECTORY_SEPARATOR . "UserDetails.php";
 
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "catalogo" . DIRECTORY_SEPARATOR . "GenericBrowser.php";
@@ -37,12 +36,9 @@
             /** Nuovo layout prevede i dettagli in cima. Sotto due pannelli (1 amici, 1 per post)*/
             $resolvedData['{top}'] = (new UserDetails($this->user, $this->selfReference))->returnComponent();
 
-            // Barra a sinistra degli amici.
-            $resolvedData['{left}'] = (new UserSide($this->user))->returnComponent();
-
             // Barra a destra per i post utente.
-            $postVOArray = (new PostDAO())->getOfUtente($this->user->getId(),10, 0);
-            
+            $postVOArray = (new PostDAO())->getOfUtente($this->user->getId(),8, 0);
+
             $resolvedData['{right}'] = '';
 
             $postLayout = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . "PostCard.xhtml");

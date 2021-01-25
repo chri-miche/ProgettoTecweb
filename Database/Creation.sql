@@ -39,19 +39,6 @@
 
     ) ENGINE = InnoDB;
 
-    /** Sistemare un po' i nomi, non troppo chiari.*/
-    CREATE TABLE Seguito(
-
-        SeguitoID int UNSIGNED NOT NULL,
-        SeguaceID int UNSIGNED NOT NULL,
-
-        CONSTRAint SeguitoKey PRIMARY KEY (SeguitoID,SeguaceID),
-
-        FOREIGN KEY (SeguaceID) REFERENCES Utente(ID) ON DELETE CASCADE,
-        FOREIGN KEY (SeguitoID) REFERENCES Utente(ID) ON DELETE CASCADE
-
-    ) ENGINE = InnoDB;
-
     CREATE TABLE Tag(
 
         ID int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY

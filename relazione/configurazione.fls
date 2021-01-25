@@ -1,0 +1,12 @@
+PWD d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione
+INPUT c:/texlive/2019/texmf.cnf
+INPUT c:/texlive/2019/texmf-dist/web2c/texmf.cnf
+INPUT c:/texlive/2019/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/configurazione.tex
+OUTPUT d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/configurazione.log
+INPUT c:/texlive/2019/texmf-dist/tex/latex/subfiles/subfiles.cls
+INPUT c:/texlive/2019/texmf-dist/tex/latex/subfiles/subfiles.cls
+INPUT c:/texlive/2019/texmf-dist/tex/latex/tools/verbatim.sty
+INPUT c:/texlive/2019/texmf-dist/tex/latex/tools/verbatim.sty
+INPUT c:/texlive/2019/texmf-dist/tex/latex/import/import.sty
+INPUT c:/texlive/2019/texmf-dist/tex/latex/import/import.sty

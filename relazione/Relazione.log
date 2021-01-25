@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.10)  25 JAN 2021 12:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.10)  25 JAN 2021 14:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -43,26 +43,26 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
  (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/Relazione.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 4.
+(Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 4.
+(Font)              <5> on input line 3.
 )
 \tf@toc=\write3
 \openout3 = `Relazione.toc'.
 
  [1
 
-{c:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/introduzione.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/sviluppo.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/progettazione.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/design.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/htmlcss.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/phpmysql.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/js.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/accessibilita.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/installazione.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/configurazione.tex) [2] (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/Relazione.aux) ) 
+{c:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/introduzione.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/progettazione.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/design.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/htmlcss.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/phpmysql.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/js.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/accessibilita.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/installazione.tex) (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/configurazione.tex) [2] (d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/Relazione.aux) ) 
 Here is how much of TeX's memory you used:
- 324 strings out of 492163
- 5583 string characters out of 6129075
+ 320 strings out of 492163
+ 5429 string characters out of 6129075
  64600 words of memory out of 5000000
- 4731 multiletter control sequences out of 15000+600000
+ 4730 multiletter control sequences out of 15000+600000
  5158 words of font info for 19 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  27i,4n,20p,204b,101s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/Relazione.pdf (2 pages, 45642 bytes).
+Output written on d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/Relazione.pdf (2 pages, 45220 bytes).
 PDF statistics:
  23 PDF objects out of 1000 (max. 8388607)
  15 compressed objects within 1 object stream

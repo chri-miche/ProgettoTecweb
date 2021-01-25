@@ -1,11 +1,10 @@
 \contentsline {section}{\numberline {1}Introduzione}{2}%
 \contentsline {section}{\numberline {2}Sviluppo}{2}%
-\contentsline {section}{\numberline {3}Sviluppo}{2}%
-\contentsline {subsection}{\numberline {3.1}Progettazione}{2}%
-\contentsline {subsection}{\numberline {3.2}Design}{2}%
-\contentsline {subsection}{\numberline {3.3}HTML e CSS}{2}%
-\contentsline {subsection}{\numberline {3.4}PHP e mySQL}{2}%
-\contentsline {subsection}{\numberline {3.5}Javascript}{2}%
-\contentsline {section}{\numberline {4}Accessibilita}{2}%
-\contentsline {section}{\numberline {5}Installazione}{2}%
-\contentsline {section}{\numberline {6}Configurazione}{2}%
+\contentsline {subsection}{\numberline {2.1}Progettazione}{2}%
+\contentsline {subsection}{\numberline {2.2}Design}{2}%
+\contentsline {subsection}{\numberline {2.3}HTML e CSS}{2}%
+\contentsline {subsection}{\numberline {2.4}PHP e mySQL}{2}%
+\contentsline {subsection}{\numberline {2.5}Javascript}{2}%
+\contentsline {section}{\numberline {3}Accessibilita}{2}%
+\contentsline {section}{\numberline {4}Installazione}{2}%
+\contentsline {section}{\numberline {5}Configurazione}{2}%

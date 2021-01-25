@@ -1,0 +1,43 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.10)  25 JAN 2021 14:06
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/configurazione.tex
+(d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/configurazione.tex
+LaTeX2e <2019-10-01> patch level 3
+(c:/texlive/2019/texmf-dist/tex/latex/subfiles/subfiles.cls
+Document Class: subfiles 2019/10/30 v1.5 Multi-file projects (class)
+Preamble taken from file `../realazione.tex'
+(c:/texlive/2019/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2019/11/10 v1.5r LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks14
+\verbatim@line=\toks15
+\verbatim@in@stream=\read1
+) (c:/texlive/2019/texmf-dist/tex/latex/import/import.sty
+Package: import 2009/03/23  v 5.1
+)
+
+! LaTeX Error: File `realazione.tex' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: tex)
+
+Enter file name: 
+c:/texlive/2019/texmf-dist/tex/latex/subfiles/subfiles.cls:59: Emergency stop.
+<read *> 
+         
+l.59 \subimport{\subfiles@dir}{\subfiles@base}
+                                              ^^M
+*** (cannot \read from terminal in nonstop modes)
+
+ 
+Here is how much of TeX's memory you used:
+ 83 strings out of 492163
+ 1719 string characters out of 6129075
+ 60846 words of memory out of 5000000
+ 4534 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 25i,0n,21p,189b,16s stack positions out of 5000i,500n,10000p,200000b,80000s
+c:/texlive/2019/texmf-dist/tex/latex/subfiles/subfiles.cls:59:  ==> Fatal error occurred, no output PDF file produced!

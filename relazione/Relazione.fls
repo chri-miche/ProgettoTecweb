@@ -26,8 +26,6 @@ OUTPUT d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/Relazione.pdf
 INPUT c:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/introduzione.tex
 INPUT d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/introduzione.tex
-INPUT d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/sviluppo.tex
-INPUT d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/sviluppo.tex
 INPUT c:/texlive/2019/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT c:/texlive/2019/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT d:/Universita/TecWeb/Progetto/ProgettoTecweb/relazione/progettazione.tex

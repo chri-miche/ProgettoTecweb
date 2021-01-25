@@ -39,8 +39,9 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
             $post->commitFromProto();
 
             if (isset($_FILES['immagini-post'])) {
-                $folders = array('/res', '/res/PostImages');
-                $uploads_dir = '/res/PostImages/User' . $_POST['user-id'];
+                $folders = array(DIRECTORY_SEPARATOR . 'res',
+                    DIRECTORY_SEPARATOR . 'res'. DIRECTORY_SEPARATOR . 'PostImages');
+                $uploads_dir = DIRECTORY_SEPARATOR . 'res' . DIRECTORY_SEPARATOR . 'PostImages'. DIRECTORY_SEPARATOR . 'User' . $_POST['user-id'];
                 foreach ($_FILES["immagini-post"]["error"] as $key => $error) {
                     if ($error == UPLOAD_ERR_OK) {
                         $rootParent = dirname(__ROOT__);
@@ -50,7 +51,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
                         // further validation/sanitation of the filename may be appropriate
                         $name = basename($_FILES["immagini-post"]["name"][$key]);
 
-                        $proposedPath = "$uploads_dir/$name";
+                        $proposedPath = "$uploads_dir" . DIRECTORY_SEPARATOR . "$name";
 
 
                         foreach ($folders as $folder) {
@@ -66,7 +67,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
                         $tentativi = 0;
                         while (file_exists($rootParent.$proposedPath)) {
                             $tentativi++;
-                            $proposedPath = "$uploads_dir/" . ($tentativi === 0 ? '' : $tentativi) . "$name";
+                            $proposedPath = "$uploads_dir" . DIRECTORY_SEPARATOR . ($tentativi === 0 ? '' : $tentativi) . "$name";
                         }
 
                         if(move_uploaded_file($tmp_name, $rootParent.$proposedPath)) {

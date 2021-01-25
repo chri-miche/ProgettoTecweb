@@ -727,6 +727,14 @@ ul#comments li form textarea {
 .profile-big img {
     width: 168px;
 }
+
+#profile-form fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+
+}
 /* #end user*/
 
 /* #begin information page*/

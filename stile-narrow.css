@@ -518,6 +518,10 @@ ul#comments li form textarea {
     display: inline;
 }
 
+#profile-form fieldset {
+    border: none;
+}
+
 #information-page  {
     display: flex;
     flex-direction: column;

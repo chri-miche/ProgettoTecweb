@@ -17,21 +17,22 @@
         private $userVO;// AUTOHR
 
         private $immagini;
-        /** @var array*/
-        private $arrayTagVO;
 
 
-        /** PostVO constructor.
+
+        /**
+         * PostVO constructor.
          * @param int|null $id
-         * @param int|null $userId
          * @param bool $isArchived
          * @param string $content
-         * @param string | null $date
+         * @param string|null $date
          * @param string $title
+         * @param UserVO|null $userVO
          * @param array $immagini
-         * @param  array $arrayTagVO*/
+         * @param array $arrayTagVO
+         */
         public function __construct(?int $id = null, bool $isArchived = false, string $content = '',
-                ?string $date = null, string $title = '', ?UserVO $userVO = null, array $immagini = array(), array $arrayTagVO = array()){
+                                    ?string $date = null, string $title = '', ?UserVO $userVO = null, array $immagini = array()){
 
             $this->id = $id;
             $this->isArchived = $isArchived;
@@ -42,7 +43,7 @@
             $this->userVO = is_null($userVO)? new UserVO() : $userVO;
 
             $this->immagini = $immagini;
-            $this->arrayTagVO = $arrayTagVO;
+
         }
 
         public function __get($name){ return $this->$name ?? null; }
@@ -53,7 +54,6 @@
 
             /** Togliamo gli array.*/
             unset($result['userVO']);
-            unset($result['arrayTagVO']);
             unset($result['immagini']);
 
 
@@ -74,11 +74,6 @@
             foreach ($this->userVO->arrayDump() as $key => $value)
                 $userDataToAppend["u_$key"] = $value;
 
-            for($i = 0; $i < sizeof($this->arrayTagVO); $i++){
-                foreach ($this->arrayTagVO[$i]->arrayDump() as $key => $value)
-                    $result["t_$i$key"] = $value;
-            }
-
             $result = array_merge($result, $userDataToAppend);
             return $result;
 
@@ -97,15 +92,13 @@
 
             /** Togliamo gli array.*/
             unset($array['immagini']);
-            unset($array['arrayTagVO']);
             unset($array['userVO']);
 
 
             $array = array_slice($array, 0, 1, true)
-                + array('userId'=> $this->userVO->getId()) + array_slice($array,1);
+            + array('userId'=> $this->userVO->getId()) + array_slice($array,1);
 
-            if($id)
-                unset($array['id']);
+            if($id) unset($array['id']);
 
 
             return array_values($array);
@@ -163,12 +156,6 @@
         }
 
         /**
-         * @param string $date */
-        public function setDate(string $date): void{
-            $this->date = $date;
-        }
-
-        /**
          * @return string */
         public function getTitle(): string{
             return $this->title;
@@ -192,19 +179,6 @@
             $this->immagini = $immagini;
         }
 
-        /**
-         * @return array
-         */
-        public function getArrayTagVO(): array{
-            return $this->arrayTagVO;
-        }
-
-        /**
-         * @param array $arrayTagVO
-         */
-        public function setArrayTagVO(array $arrayTagVO): void{
-            $this->arrayTagVO = $arrayTagVO;
-        }
 
 
     }

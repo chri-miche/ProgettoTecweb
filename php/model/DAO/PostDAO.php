@@ -1,6 +1,5 @@
 <?php
 
-require_once __ROOT__.'\model\VO\TagVO.php';
 require_once __ROOT__.'\model\VO\PostVO.php';
 class PostDAO extends DAO {
 
@@ -14,7 +13,6 @@ class PostDAO extends DAO {
         $builtVO = new PostVO(...$data, ...[$userVO]);
 
         $builtVO->setImmagini($this->getImmagini($builtVO->getId()));
-        $builtVO->setArrayTagVO($this->getTags($builtVO->getId()));
 
         return $builtVO;
 
@@ -70,7 +68,7 @@ class PostDAO extends DAO {
         $result = $this->performMultiCAll(array($element), 'search_all_post');
         if (!isset($result['failure']))
             foreach ($result as $element)
-            $VOArray [] = $this->buildPostVO($element);
+                $VOArray [] = $this->buildPostVO($element);
 
         return $VOArray;
 
@@ -104,7 +102,7 @@ class PostDAO extends DAO {
         return $immagini;
     }
 
-    private function saveImmagine(string $immagine, int $postId) : bool {
+    public function saveImmagine(string $immagine, int $postId) : bool {
 
         $result = $this->performNoOutputModifyCall(array($postId, $immagine), 'add_missing_immagine' );
         return !isset($result['failure']);
@@ -117,35 +115,6 @@ class PostDAO extends DAO {
         return !isset($result['failure']);
 
     }
-
-    private function getTags(int $postId) : array{
-
-        $tagsVO = array();
-
-        $result = $this->performMultiCAll(array($postId), 'get_post_tag_all');
-
-        if(!isset($result['failure']))
-            foreach ($result as $element)
-                $tagsVO [] = new TagVO(...$element);
-
-        return $tagsVO;
-
-    }
-
-    private function saveTag(TagVO $tagVO, int $postId){
-
-        $result = $this->performNoOutputModifyCall(array($postId, $tagVO->getId()), 'save_post_tag' );
-        return !isset($result['failure']);
-
-    }
-
-    private function deleteTag(TagVO $tagVO, int $postId){
-
-        $result = $this->performNoOutputModifyCall(array($postId, $tagVO->getId()), 'delete_post_tag' );
-        return !isset($result['failure']);
-
-    }
-
 
     public function checkId(VO &$element) : bool {
         return $this->idValid($element, 'post_id');
@@ -180,16 +149,6 @@ class PostDAO extends DAO {
         if($this->checkId($element)){
 
             $result = $this->performNoOutputModifyCall($element->smartDump(),'update_post');
-            /** Sistemazione dei tag.*/
-            $delete = array_diff($this->getTags($element->getId()), $element->getArrayTagVO());
-            $add = array_diff($element->getArrayTagVO(), $this->getTags($element->getId()));
-
-            /* Eliminazione dei tag che non servono più.*/
-            foreach ($delete as $tag)
-                $this->deleteTag($tag, $element->getId());
-            /* Creazione dei nuovi tag.*/
-            foreach ($add as $tag)
-                $this->saveTag($tag, $element->getId());
 
             /** Sistemazione delle immagini. */
             $delete = array_diff($this->getImmagini($element->getId()), $element->getImmagini());
@@ -210,14 +169,11 @@ class PostDAO extends DAO {
 
                 $element = new $element(...$result, ...$element->varDumps(true));
 
-                foreach ($element->getArrayTagVO() as $tagVO)
-                    $this->saveTag($tagVO, $element->getId());
-
                 foreach ($element->getImmagini() as $immagine)
                     $this->saveImmagine($immagine, $element->getId());
             }
 
-            return !$element->getId() === null;
+            return !is_null($element->getId());
 
         }
 

@@ -342,7 +342,7 @@
                 (SELECT I.postID FROM immaginipost I WHERE I.postID = id AND I.percorsoImmagine = path LIMIT 1),
                 true, false);
 
-            IF !img_exists THEN INSERT INTO immaginipost (postID, percorsoImmagine)  VALUE (id, path); END IF;
+            IF NOT img_exists THEN INSERT INTO immaginipost (postID, percorsoImmagine)  VALUE (id, path); END IF;
         END;
     END;
 

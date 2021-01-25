@@ -94,7 +94,6 @@ class PostDAO extends DAO {
             ? $this->performMultiCAll(array($userId, $limit, $offset),'get_of_utente_post_limited' )
             : $this->performMultiCAll(array($userId), 'get_of_utente_post_all');
 
-        print_r($result);
 
         if(!isset($result['failure']))
             foreach ($result as $element)

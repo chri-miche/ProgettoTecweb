@@ -908,4 +908,8 @@ ul#comments li form textarea {
 
 /* #end admin*/
 
+#user-details{
+    display: flex;
+    align-items: center;
+}
 

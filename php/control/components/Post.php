@@ -56,7 +56,7 @@
                 $baseLayout = str_replace("<comments />", $comments, $baseLayout);
 
             } else {
-                $baseLayout = str_replace("<comments />", "<li>Per commentare bisogna aver effettuato l'accesso.</li>", $baseLayout);
+                $baseLayout = str_replace("<comments />", "<li>Per leggere o effettuare un commento bisogna aver prima effettuato l'accesso.</li>", $baseLayout);
             }
 
             return $baseLayout;

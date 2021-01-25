@@ -210,8 +210,8 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
 #content {
     display: flex;
     flex-direction: column;
-    flex: 1 1 auto;
     align-items: center;
+
 }
 
 #breadcrumb {
@@ -493,6 +493,11 @@ ul#comments li form textarea {
 #post-title {
     margin: 0 40px 40px;
 }
+
+#post-content {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
 /* #end comments */
 
 
@@ -544,7 +549,7 @@ ul#comments li form textarea {
 
 #information-side {
     padding: 1em;
-    align-self: center;
+    align-self: stretch;
 }
 
 #information-content {
@@ -555,6 +560,8 @@ ul#comments li form textarea {
 
 #information-side ul, #admin-navigation ul {
     list-style: none;
+    display: flex;
+    flex-wrap: 1;
 }
 
 .preview {

@@ -241,6 +241,7 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
 
 form.tab-label {
     display: inline;
+    background: transparent;
 }
 
 .fake-input {

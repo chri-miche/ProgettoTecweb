@@ -23,8 +23,10 @@ define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
 
         if($sessionUser->userIdentified()){
             if(isset($_GET['comment']) && $_GET['comment']) {
+                $comment = strip_tags($_POST["commento"]);
+                $comment = htmlentities($comment);
 
-                $commentVO = new CommentoVO(null,false, $_POST["commento"], null, $postVO, $sessionUser->getUser());
+                $commentVO = new CommentoVO(null,false, $comment, null, $postVO, $sessionUser->getUser());
                 $transaction = (new CommentoDAO())->save($commentVO);
 
                 echo $transaction;

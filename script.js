@@ -26,6 +26,9 @@ document.querySelectorAll("table").forEach(table => {
     }
 })
 
+const option = document.getElementById("password-login");
+option.innerHTML +='<button id="pw-button" type="button" class="icon-button" data-icon-name="visibility" title="Mostra" onclick="togglePasswordVisibility()"> <span> Mostra </span></button>';
+
 function sortTable(table, headerIndex, direction) {
     const dir = direction === 'asc' ? 1 : -1;
     let rows = Array.from(table.tBodies[0].rows);
@@ -61,4 +64,25 @@ function sortTable(table, headerIndex, direction) {
 
 }
 
+function togglePasswordVisibility() {
+
+    const password = document.getElementById("password");
+    const visualization = document.getElementById("pw-button");
+
+    if(password.type === "password"){
+
+        password.type = "text";
+        visualization.setAttribute("data-icon-name", "visibility_off");
+        visualization.setAttribute("title", "Nascondi");
+        visualization.innerHTML = visualization.innerHTML.replace("Mostra", "Nascondi")
+
+    } else{
+
+        password.type = password.type === "password" ? "text" : "password";
+        visualization.setAttribute("data-icon-name", "visibility");
+        visualization.setAttribute("title", "Mostra");
+        visualization.innerHTML = visualization.innerHTML.replace("Nascondi", "Mostra")
+
+    }
+}
 

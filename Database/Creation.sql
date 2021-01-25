@@ -3,29 +3,17 @@
    Creazione del database. Rilascio delle possibli tabelle.
    (Pirma vengono droppate le entità più deboli).*/
 
-    DROP TABLE IF EXISTS CertificatoUtente;
-    DROP TABLE IF EXISTS Certificato;
-    DROP TABLE IF EXISTS EnteRiconosciuto;
-
-    DROP TABLE IF EXISTS Notifica;
     DROP TABLE IF EXISTS Commento;
 
     DROP TABLE IF EXISTS ImmaginiPost;
-    DROP TABLE IF EXISTS Citazione;
     DROP TABLE IF EXISTS Post;
 
-    DROP TABLE IF EXISTS Segnalazione;
     DROP TABLE IF EXISTS Approvazione;
 
     DROP TABLE IF EXISTS Contenuto;
 
     DROP TABLE IF EXISTS Seguito;
-    DROP TABLE IF EXISTS Interesse;
-    DROP TABLE IF EXISTS Moderatore;
     DROP TABLE IF EXISTS Utente;
-
-    DROP TABLE IF EXISTS Residenza;
-    DROP TABLE IF EXISTS ZonaGeografica;
 
     DROP TABLE IF EXISTS Specie;
     DROP TABLE IF EXISTS Genere;
@@ -36,7 +24,6 @@
     DROP TABLE IF EXISTS Conservazione;
 
     DROP TABLE IF EXISTS Tag;
-    DROP TABLE IF EXISTS Label;
 
     /*TODO: Change all keys to snakecase*/
     CREATE TABLE Utente(
@@ -69,7 +56,6 @@
     CREATE TABLE Tag(
 
         ID int UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        label VARCHAR(255)
 
     ) ENGINE = InnoDB;
 
@@ -203,13 +189,3 @@
 
      ) ENGINE = InnoDB;
 
-    CREATE TABLE Citazione(
-        tagID int UNSIGNED NOT NULL,
-        postID int UNSIGNED NOT NULL,
-
-        CONSTRAint citazioneID PRIMARY KEY (tagID,postID),
-
-        FOREIGN KEY (tagID) REFERENCES Tag(ID) ON DELETE CASCADE,
-        FOREIGN KEY (postID) REFERENCES Post(contentID) ON DELETE CASCADE
-
-    ) ENGINE = InnoDB;

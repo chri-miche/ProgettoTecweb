@@ -35,7 +35,7 @@
 
         isAdmin BOOLEAN NOT NULL DEFAULT FALSE comment 'Abilitato all\'amministrazione',
 
-        immagineProfilo varchar(40) NOT NULL DEFAULT ('res/default.png') comment 'Immagine di profilo'
+        immagineProfilo varchar(40) NOT NULL DEFAULT 'res/default.png' comment 'Immagine di profilo'
 
     ) ENGINE = InnoDB;
 
@@ -167,7 +167,7 @@
     CREATE TABLE ImmaginiPost(
 
         postID int UNSIGNED NOT NULL,
-        percorsoImmagine varchar(200) NOT NULL,
+        percorsoImmagine varchar(100) NOT NULL,
 
         CONSTRAINT immaginiPostID PRIMARY KEY (postID,percorsoImmagine),
 

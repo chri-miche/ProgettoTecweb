@@ -27,7 +27,7 @@ document.querySelectorAll("table").forEach(table => {
 })
 
 const option = document.getElementById("password-login");
-option.innerHTML +='<button id="pw-button" type="button" class="icon-button" data-icon-name="visibility" title="Mostra" onclick="togglePasswordVisibility()"> <span> Mostra </span></button>';
+option?.innerHTML +='<button id="pw-button" type="button" class="icon-button" data-icon-name="visibility" title="Mostra" onclick="togglePasswordVisibility()"> <span> Mostra </span></button>';
 
 function sortTable(table, headerIndex, direction) {
     const dir = direction === 'asc' ? 1 : -1;

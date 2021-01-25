@@ -4,10 +4,10 @@
 
         private const HOST = 'localhost';
 
-        private const USER = 'root';
-        private const PASSWORD = '';
+        private const USER = 'cmichele';
+        private const PASSWORD = 'keimai7Ieyipoh7W';
 
-        private const DB_NAME = 'WebBirdDB';
+        private const DB_NAME = 'cmichele';
 
         static public function executeQuery($query){
 

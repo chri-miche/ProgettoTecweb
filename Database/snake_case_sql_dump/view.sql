@@ -1,0 +1,30 @@
+create view vw_post as
+select
+    post.content_id,
+    IFNULL(a.likes, 0) as likes,
+    contenuto.data,
+    (select count(1) from commento where commento.post_id = post.content_id) as commenti
+from post
+left join (select content_id, sum(likes) as likes from approvazione group by content_id) a
+  on post.content_id = a.content_id
+join contenuto
+    on contenuto.id = post.content_id;
+drop view if exists vw_post;
+/**
+    view per facilitare la query dei post per l'ordinamento nella pagina iniziale
+    attributi:
+        content_id // id del post
+        likes // somma del numero dei like
+        data // data del contenuto
+        commenti // numero di commenti (fatto con una select di un placeholder per speeeed)
+*/
+
+CREATE VIEW bird_summary AS
+    SELECT  s.tag_id, s.nome_scientifico, s.percorso_immagine,
+            o.tag_id as ord_id, o.nome_scientifico as nome_ordine,
+            f.tag_id as fam_id, f.nome_scientifico as nome_famiglia,
+            g.tag_id as gen_id, g.nome_scientifico as nome_genere
+    FROM specie AS s
+        INNER JOIN genere AS g on s.gen_id = g.tag_id
+        INNER JOIN famiglia AS f on g.fam_id = f.tag_id
+        INNER JOIN ordine o on f.ord_id = o.tag_id

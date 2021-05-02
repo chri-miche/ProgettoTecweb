@@ -18,20 +18,20 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
     $result = DatabaseAccess::transaction(function () use (&$redirectID) {
         try {
             $content = new Persistent('contenuto', array(
-                "ID" => null,
-                "UserID" => $_POST['user-id'],
-                "isArchived" => 0,
+                "id" => null,
+                "user_id" => $_POST['user-id'],
+                "is_archived" => 0,
                 "content" => $_POST['descrizione-post'],
                 "data" => date('Y-m-d'),
             ));
             $content->commitFromProto();
             $content = $content->getUniqueFromProto();
-            $id = $content->get('ID');
+            $id = $content->get('id');
             if (!isset($id)) {
                 throw new Exception("Inserimento non a buon fine");
             }
             $post = new Persistent('post', array(
-                'contentID' => $content->get('ID'),
+                'content_id' => $content->get('id'),
                 'title' => $_POST['titolo-post']
             ));
             $post->commitFromProto();
@@ -70,8 +70,8 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
 
                         if(move_uploaded_file($tmp_name, $rootParent.$proposedPath)) {
                             $immagine = new Persistent('immaginipost', array(
-                                'postID' => $id,
-                                'percorsoImmagine' => $proposedPath
+                                'post_id' => $id,
+                                'percorso_immagine' => $proposedPath
                             ));
                             $immagine->commitFromProto();
                         } else {

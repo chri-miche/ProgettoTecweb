@@ -4,9 +4,9 @@ class ImagesSlideshow extends BasePage {
     public function __construct($idPost) {
         parent::__construct("<component />");
 
-        $result = DatabaseAccess::executeQuery("select percorsoImmagine from immaginipost i where postID = '$idPost';");
+        $result = DatabaseAccess::executeQuery("select percorso_immagine from immaginipost i where post_id = '$idPost';");
         $links = array_map(function ($value) {
-            return $value['percorsoImmagine'];
+            return $value['percorso_immagine'];
         }, $result);
         $size = sizeof($links);
         $index = $size - 1;

@@ -18,9 +18,9 @@ class PostDAO extends DAO {
 
 
         $data['likes'] = $this->getLikesByID($data['id']);
-        $data['userVO'] = (new UserDAO())->get($data['userId']);
+        $data['userVO'] = (new UserDAO())->get($data['user_id']);
 
-        unset($data['userId']);
+        unset($data['user_id']);
 
         $builtVO = new PostVO(...$data);
 

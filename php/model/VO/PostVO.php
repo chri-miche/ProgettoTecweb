@@ -34,11 +34,11 @@
          * @param array $immagini
          * @param array $arrayTagVO
          */
-        public function __construct(?int $id = null, bool $isArchived = false, string $content = '',
+        public function __construct(?int $id = null, bool $is_archived = false, string $content = '',
                                     ?string $date = null, string $title = '', int $likes = 0, ?UserVO $userVO = null, array $immagini = array()){
 
             $this->id = $id;
-            $this->isArchived = $isArchived;
+            $this->isArchived = $is_archived;
             $this->content = $content;
             $this->date = $date;
             $this->title = $title;

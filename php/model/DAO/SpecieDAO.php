@@ -30,22 +30,22 @@
             foreach ($result as $element){
 
                     /** Creazione di un genere. Che a sua volta crea la famiglia e sua volta l ordine.*/
-                    $element['genereVO'] = new GenereVO( $element['genere'], $element['nomeScientifico_genere'],
-                        new FamigliaVO($element['famiglia'], $element['nomeScientifico_famiglia'],
-                            new OrdineVO($element['ordine'],  $element['nomeScientifico_ordine'])));
+                    $element['genereVO'] = new GenereVO( $element['genere'], $element['nome_scientifico_genere'],
+                        new FamigliaVO($element['famiglia'], $element['nome_scientifico_famiglia'],
+                            new OrdineVO($element['ordine'],  $element['nome_scientifico_ordine'])));
 
                     /** Creazione di stato estinzione.*/
                     $element['conservazioneVO'] = new ConservazioneVO(
                         $element['conservazione'], $element['nome'],
-                        $element['probEstinzione'], $element['descrizione']);
+                        $element['prob_estinzione'], $element['descrizione']);
 
                     /** Scartiamo gli attributi non più necessari.*/
-                    unset($element['genere'], $element['nomeScientifico_genere'],
-                        $element['famiglia'],  $element['nomeScientifico_famiglia'],
-                        $element['ordine'], $element['nomeScientifico_ordine']);
+                    unset($element['genere'], $element['nome_scientifico_genere'],
+                        $element['famiglia'],  $element['nome_scientifico_famiglia'],
+                        $element['ordine'], $element['nome_scientifico_ordine']);
 
                     unset($element['conservazione'],$element['nome'],
-                        $element['probEstinzione'], $element['descrizione']);
+                        $element['prob_estinzione'], $element['descrizione']);
 
                     $VOArray [] = new SpecieVO(...$element);
             }
@@ -138,19 +138,19 @@
             foreach ($result as $element){
 
                 /** Creazione di un genere. Che a sua volta crea la famiglia e sua volta l ordine.*/
-                $element['genereVO'] = new GenereVO( $element['genere'], $element['nomeScientifico_genere'],
-                    new FamigliaVO($element['famiglia'], $element['nomeScientifico_famiglia'],
-                        new OrdineVO($element['ordine'],  $element['nomeScientifico_ordine'])));
+                $element['genereVO'] = new GenereVO( $element['genere'], $element['nome_scientifico_genere'],
+                    new FamigliaVO($element['famiglia'], $element['nome_scientifico_famiglia'],
+                        new OrdineVO($element['ordine'],  $element['nome_scientifico_ordine'])));
 
                 /** Creazione di stato estinzione.*/
                 $element['conservazioneVO'] = new
-                    ConservazioneVO($element['conservazione'], $element['nome'], $element['probEstinzione'], $element['descrizione']);
+                    ConservazioneVO($element['conservazione'], $element['nome'], $element['prob_estinzione'], $element['descrizione']);
 
                 /** Scartiamo gli attributi non più necessari.*/
-                unset($element['genere'], $element['nomeScientifico_genere'], $element['famiglia'],
-                    $element['nomeScientifico_famiglia'],  $element['ordine'], $element['nomeScientifico_ordine']);
+                unset($element['genere'], $element['nome_scientifico_genere'], $element['famiglia'],
+                    $element['nome_scientifico_famiglia'],  $element['ordine'], $element['nome_scientifico_ordine']);
 
-                unset($element['conservazione'],$element['nome'], $element['probEstinzione'], $element['descrizione']);
+                unset($element['conservazione'],$element['nome'], $element['prob_estinzione'], $element['descrizione']);
 
                 $VOArray [] = new SpecieVO(...$element);
 

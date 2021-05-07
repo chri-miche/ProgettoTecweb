@@ -31,12 +31,12 @@
 
             foreach ($result as $element){
 
-                $element['famigliaVO'] = new FamigliaVO($element['famiglia'], $element['nomeScientifico_famiglia'],
-                    new OrdineVO($element['ordine'],  $element['nomeScientifico_ordine']));
+                $element['famigliaVO'] = new FamigliaVO($element['famiglia'], $element['nome_scientifico_famiglia'],
+                    new OrdineVO($element['ordine'],  $element['nome_scientifico_ordine']));
 
                 /** Scartiamo gli attributi non più necessari.*/
-                unset($element['famiglia'],  $element['nomeScientifico_famiglia'],
-                    $element['ordine'], $element['nomeScientifico_ordine']);
+                unset($element['famiglia'],  $element['nome_scientifico_famiglia'],
+                    $element['ordine'], $element['nome_scientifico_ordine']);
 
                 $VOArray [] = new GenereVO(...$element);
 
@@ -71,8 +71,8 @@
                 foreach ($result as $element) {
 
                     /** Si crea per ognuno la sua famiglia.*/
-                    $famigliaVO = new FamigliaVO($element['f_id'], $element['f_nomeScientifico'], $ordineVO);
-                    unset($element['f_id'], $element['f_nomeScientifico']);
+                    $famigliaVO = new FamigliaVO($element['f_id'], $element['f_nome_scientifico'], $ordineVO);
+                    unset($element['f_id'], $element['f_nome_scientifico']);
 
                     $VOArray []= new GenereVO(...$element, ...[$famigliaVO]);
                 }

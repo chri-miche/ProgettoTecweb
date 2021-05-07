@@ -31,8 +31,8 @@
 
             foreach ($result as $element){
                     /** Creazione di sotto oggetti.*/
-                    $element['ordineVO'] = new OrdineVO($element['ordine'], $element['nomeScientifico_ordine']);
-                    unset($element['ordine'], $element['nomeScientifico_ordine']);
+                    $element['ordineVO'] = new OrdineVO($element['ordine'], $element['nome_scientifico_ordine']);
+                    unset($element['ordine'], $element['nome_scientifico_ordine']);
 
                     // Creazione dell oggetto finale.
                     $VOArray [] = new FamigliaVO(...$element);

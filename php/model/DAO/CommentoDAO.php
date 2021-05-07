@@ -17,7 +17,7 @@ class CommentoDAO extends DAO {
         if(isset($result['failure'])) return new CommentoVO();
 
         $result['postVO'] = (new PostDAO())->get($result['post']); unset($result['post']);
-        $result['author'] = (new UserDAO())->get($result['userId']); unset($result['userId']);
+        $result['author'] = (new UserDAO())->get($result['user_id']); unset($result['user_id']);
 
         return new CommentoVO(...$result);
     }
@@ -38,8 +38,8 @@ class CommentoDAO extends DAO {
                 unset($element['post']);
                 $element['postVO'] = $postVO;
 
-                $result['author'] = (new UserDAO())->get($result['userId']);
-                unset($result['userId']);
+                $result['author'] = (new UserDAO())->get($result['user_id']);
+                unset($result['user_id']);
 
                 $VOArray [] = new CommentoVO(...$element);
             }
@@ -61,7 +61,7 @@ class CommentoDAO extends DAO {
 
         if(!isset($result['failure'])) /** Evito più ritorni del dovuto. */
             foreach ($result as $element) {
-                $authorVO = (new UserDAO())->get($element['userId']); unset($element['userId']);
+                $authorVO = (new UserDAO())->get($element['user_id']); unset($element['user_id']);
                 $VOArray [] = new CommentoVO(...$element, ...[$parentVO],...[$authorVO]);
             }
 
@@ -81,8 +81,8 @@ class CommentoDAO extends DAO {
             $comment['postVO'] = (new PostDAO())->get($comment['post']);
             unset($comment['post']);
 
-            $comment['author'] = (new UserDAO())->get($comment['userId']);
-            unset($comment['userId']);
+            $comment['author'] = (new UserDAO())->get($comment['user_id']);
+            unset($comment['user_id']);
 
             $VOArray [] = new CommentoVO(...$comment);
 

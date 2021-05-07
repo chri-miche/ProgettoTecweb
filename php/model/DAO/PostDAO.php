@@ -5,7 +5,7 @@ class PostDAO extends DAO {
 
     private function getLikesByID(int $id) : int{
 
-        $result = $this->performCall(array($id), 'getLikes');
+        $result = $this->performCall(array($id), 'get_likes');
         if(isset($result['failure'])) return 0;
 
         return $result['likes'];
@@ -147,7 +147,7 @@ class PostDAO extends DAO {
 
     public function getLikes(PostVO $postVO) : int {
 
-        $result = $this->performCall(array($postVO->getId()), 'getLikes');
+        $result = $this->performCall(array($postVO->getId()), 'get_likes');
         if(isset($result['failure'])) return 0;
 
         return $result['likes'];

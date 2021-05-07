@@ -100,7 +100,7 @@
 
 
             $array = array_slice($array, 0, 1, true)
-            + array('userId'=> $this->userVO->getId()) + array_slice($array,1);
+            + array('user_id'=> $this->userVO->getId()) + array_slice($array,1);
 
             if($id) unset($array['id']);
 

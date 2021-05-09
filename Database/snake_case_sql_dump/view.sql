@@ -10,7 +10,7 @@ from post
 join contenuto
     on contenuto.id = post.content_id
 join approvazione a
-    on approvazione.content_id = post.content_id
+    on a.content_id = post.content_id
 group by a.content_id;
 
 

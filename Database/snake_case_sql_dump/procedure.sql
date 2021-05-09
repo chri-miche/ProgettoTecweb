@@ -11,7 +11,7 @@
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `add_missing_immagine`(IN id INT, IN path VARCHAR(200))
+CREATE PROCEDURE `add_missing_immagine`(IN id INT, IN path VARCHAR(200))
 BEGIN
 
         DECLARE img_exists BOOL; BEGIN
@@ -44,7 +44,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_commento_id`(IN in_id INT)
+CREATE PROCEDURE `check_commento_id`(IN in_id INT)
 BEGIN
 
          SELECT COUNT(p.content_id) AS idexists FROM commento p WHERE p.content_id = in_id LIMIT 1; END ;;
@@ -63,7 +63,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_conservazione_id`(IN id VARCHAR(2))
+CREATE PROCEDURE `check_conservazione_id`(IN id VARCHAR(2))
 BEGIN
 
         SELECT COUNT(c.codice) as idexists FROM conservazione c WHERE c.codice = id LIMIT 1; END ;;
@@ -82,7 +82,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_email_unique`(IN check_mail VARCHAR(40), IN usid INT)
+CREATE PROCEDURE `check_email_unique`(IN check_mail VARCHAR(40), IN usid INT)
 BEGIN
 
        SELECT COUNT(u.id) as valid FROM utente u WHERE u.email = check_mail AND u.id != usid;END ;;
@@ -101,7 +101,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_email_unique_ne`(IN check_mail VARCHAR(40))
+CREATE PROCEDURE `check_email_unique_ne`(IN check_mail VARCHAR(40))
 BEGIN
 
         SELECT COUNT(u.id) as valid FROM utente u WHERE u.email = check_mail;END ;;
@@ -120,7 +120,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_famiglia_id`(IN id int)
+CREATE PROCEDURE `check_famiglia_id`(IN id int)
 BEGIN
 
         SELECT COUNT(g.tag_id) as idexists FROM famiglia g WHERE g.tag_id = id LIMIT 1; END ;;
@@ -139,7 +139,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_genere_id`(IN id INT)
+CREATE PROCEDURE `check_genere_id`(IN id INT)
 BEGIN SELECT COUNT(g.tag_id) as idexists FROM genere g WHERE g.tag_id = id LIMIT 1; END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -156,7 +156,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_ordine_id`(IN ordine INT)
+CREATE PROCEDURE `check_ordine_id`(IN ordine INT)
 BEGIN
 
        SELECT COUNT(o.tag_id) as idexists FROM ordine o WHERE o.tag_id = ordine LIMIT 1; END ;;
@@ -175,7 +175,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_post_id`(IN in_id INT)
+CREATE PROCEDURE `check_post_id`(IN in_id INT)
 BEGIN
 
          SELECT COUNT(p.content_id) AS idexists FROM post p WHERE p.content_id = in_id LIMIT 1; END ;;
@@ -194,7 +194,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_specie_id`(IN check_id INT)
+CREATE PROCEDURE `check_specie_id`(IN check_id INT)
 BEGIN SELECT COUNT(s.tag_id) AS idexists FROM specie s WHERE s.tag_id = check_id LIMIT  1; END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -211,7 +211,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_user_id`(IN id INT)
+CREATE PROCEDURE `check_user_id`(IN id INT)
 BEGIN
 
         SELECT COUNT(u.id) as idexists FROM utente u WHERE u.id = id LIMIT 1; END ;;
@@ -230,7 +230,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `check_user_likes_post`(IN post_id INT, IN us_id INT)
+CREATE PROCEDURE `check_user_likes_post`(IN post_id INT, IN us_id INT)
 BEGIN
 
         SELECT a.likes FROM approvazione a WHERE a.utente_id = us_id AND a.content_id = post_id; END ;;
@@ -249,7 +249,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_commento`(IN in_is_archived BOOL,
+CREATE PROCEDURE `create_commento`(IN in_is_archived BOOL,
 
     IN in_content TEXT, IN in_date VARCHAR(30), IN in_post INT, IN in_user INT)
 BEGIN
@@ -278,7 +278,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_conservazione`(IN icodice VARCHAR(2), IN inome VARCHAR(20),
+CREATE PROCEDURE `create_conservazione`(IN icodice VARCHAR(2), IN inome VARCHAR(20),
 
     IN iprob_estinzione INT, IN idescrizione TEXT)
 BEGIN
@@ -305,7 +305,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_famiglia`(IN new_nome VARCHAR(40), IN new_ordine INT)
+CREATE PROCEDURE `create_famiglia`(IN new_nome VARCHAR(40), IN new_ordine INT)
 BEGIN
 
 
@@ -332,7 +332,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_genere`(IN nome_genere VARCHAR(40), IN famiglia INT)
+CREATE PROCEDURE `create_genere`(IN nome_genere VARCHAR(40), IN famiglia INT)
 BEGIN
 
 
@@ -359,7 +359,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_ordine`(IN nome VARCHAR(40))
+CREATE PROCEDURE `create_ordine`(IN nome VARCHAR(40))
 BEGIN
 
         INSERT INTO tag(id) VALUE (NULL);
@@ -384,7 +384,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_post`(IN in_user_id INT, IN in_is_archived BOOL, IN in_content TEXT,
+CREATE PROCEDURE `create_post`(IN in_user_id INT, IN in_is_archived BOOL, IN in_content TEXT,
 
     IN in_date VARCHAR(300), IN in_title VARCHAR(200))
 BEGIN
@@ -413,7 +413,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_specie`(IN in_nome_scientifico VARCHAR(40), IN in_nome_comune VARCHAR(40),IN in_peso_medio INT,
+CREATE PROCEDURE `create_specie`(IN in_nome_scientifico VARCHAR(40), IN in_nome_comune VARCHAR(40),IN in_peso_medio INT,
 
     IN in_altezza_media INT, IN in_descrizione TEXT, IN in_percorso_immagine VARCHAR(80),IN genere INT, IN conservazione VARCHAR(2))
 BEGIN
@@ -450,7 +450,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `create_user`(IN usernome VARCHAR(25), IN useremail VARCHAR(40), IN userpassword VARCHAR(14),
+CREATE PROCEDURE `create_user`(IN usernome VARCHAR(25), IN useremail VARCHAR(40), IN userpassword VARCHAR(14),
 
     IN immagine VARCHAR(40), IN useradmin BOOL)
 BEGIN
@@ -475,7 +475,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_content`(IN in_id INT)
+CREATE PROCEDURE `delete_content`(IN in_id INT)
 BEGIN
 
         DELETE FROM contenuto WHERE id = in_id; END ;;
@@ -494,7 +494,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_genere`(IN del_id INT)
+CREATE PROCEDURE `delete_genere`(IN del_id INT)
 BEGIN
 
         DELETE FROM genere WHERE tag_id = del_id;
@@ -515,7 +515,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_immagine`(IN id INT, IN path VARCHAR(200))
+CREATE PROCEDURE `delete_immagine`(IN id INT, IN path VARCHAR(200))
 BEGIN
 
         DELETE FROM immaginipost WHERE post_id = id AND percorso_immagine = path;END ;;
@@ -534,7 +534,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_ordine`(IN del_id INT)
+CREATE PROCEDURE `delete_ordine`(IN del_id INT)
 BEGIN
 
         DELETE FROM ordine  WHERE tag_id = del_id;
@@ -555,7 +555,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_post_tag`(IN post_id INT, IN tag_id INT)
+CREATE PROCEDURE `delete_post_tag`(IN post_id INT, IN tag_id INT)
 BEGIN
 
         DELETE FROM citazione WHERE tag_id = tag_id AND post_id = post_id; END ;;
@@ -574,7 +574,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `dislike_post`(IN in_userid INT, IN in_postid INT)
+CREATE PROCEDURE `dislike_post`(IN in_userid INT, IN in_postid INT)
 BEGIN DECLARE a INT;BEGIN
 
         SET @likes = (SELECT a.likes FROM approvazione a WHERE a.content_id = in_postid AND a.utente_id = in_userid);
@@ -611,7 +611,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_likes`(IN p_id INT)
+CREATE PROCEDURE `get_likes`(IN p_id INT)
 BEGIN
 
         SET @count = (SELECT (2 * SUM(a.likes) - COUNT(a.likes)) as likes FROM approvazione a WHERE a.content_id = p_id);
@@ -636,7 +636,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_commento`()
+CREATE PROCEDURE `get_all_commento`()
 BEGIN
 
         SELECT c.id as id, c.user_id as user_id, c.is_archived, c.content, c.data as date, a.post_id as post
@@ -657,7 +657,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_commento_from_post`(IN post_id INT)
+CREATE PROCEDURE `get_all_commento_from_post`(IN post_id INT)
 BEGIN
 
         SELECT c.id as id, c.user_id as user_id, c.is_archived, c.content, c.data as date
@@ -678,7 +678,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_conservazione`()
+CREATE PROCEDURE `get_all_conservazione`()
 BEGIN
 
         SELECT c.codice as id, c.nome, c.prob_estinzione, c.descrizione FROM conservazione c; END ;;
@@ -697,7 +697,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_famiglia`()
+CREATE PROCEDURE `get_all_famiglia`()
 BEGIN
 
         SELECT f.tag_id as id, f.nome_scientifico, o.tag_id as ordine, o.nome_scientifico as nome_scientifico_ordine
@@ -718,7 +718,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_famiglia_filter_by_ordine`(IN ordine INT)
+CREATE PROCEDURE `get_all_famiglia_filter_by_ordine`(IN ordine INT)
 BEGIN
 
         SELECT f.tag_id as id, f.nome_scientifico FROM famiglia f WHERE f.ord_id = ordine; END ;;
@@ -737,7 +737,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_filter_specie_by_famiglia`(IN fam_id INT)
+CREATE PROCEDURE `get_all_filter_specie_by_famiglia`(IN fam_id INT)
 BEGIN
 
           SELECT s.tag_id as id, s.nome_scientifico, s.nome_comune, s.peso_medio, s.altezza_media, s.descrizione, s.percorso_immagine as immagine,
@@ -768,7 +768,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_filter_specie_by_genere`(IN gen_id INT)
+CREATE PROCEDURE `get_all_filter_specie_by_genere`(IN gen_id INT)
 BEGIN
 
           SELECT s.tag_id as id, s.nome_scientifico, s.nome_comune, s.peso_medio, s.altezza_media, s.descrizione, s.percorso_immagine as immagine,
@@ -799,7 +799,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_filter_specie_by_ordine`(IN ord_id INT)
+CREATE PROCEDURE `get_all_filter_specie_by_ordine`(IN ord_id INT)
 BEGIN
 
         SELECT s.tag_id as id, s.nome_scientifico, s.nome_comune, s.peso_medio, s.altezza_media, s.descrizione, s.percorso_immagine as immagine,
@@ -834,7 +834,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_friends`(IN id int)
+CREATE PROCEDURE `get_all_friends`(IN id int)
 BEGIN
 
        SELECT u.id as id, u.nome, u.email, u.password, u.immagine_profilo as immagine, u.is_admin as admin
@@ -859,7 +859,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_genere`()
+CREATE PROCEDURE `get_all_genere`()
 BEGIN
 
         SELECT  g.tag_id as id, g.nome_scientifico, f.tag_id as famiglia, f.nome_scientifico as nome_scientifico_famiglia,
@@ -882,7 +882,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_genere_filter_by_famiglia`(IN fam_id INT)
+CREATE PROCEDURE `get_all_genere_filter_by_famiglia`(IN fam_id INT)
 BEGIN
 
         SELECT g.tag_id as id, g.nome_scientifico FROM genere g WHERE g.fam_id = fam_id; END ;;
@@ -901,7 +901,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_genere_filter_by_ordine`(IN ord_id INT)
+CREATE PROCEDURE `get_all_genere_filter_by_ordine`(IN ord_id INT)
 BEGIN
 
         SELECT g.tag_id as id, g.nome_scientifico, f.tag_id as f_id, f.nome_scientifico as f_nome_scientifico FROM genere g
@@ -922,7 +922,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_ordini`()
+CREATE PROCEDURE `get_all_ordini`()
 BEGIN
 
         SELECT o.tag_id as id, o.nome_scientifico FROM ordine o; END ;;
@@ -941,7 +941,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_post`()
+CREATE PROCEDURE `get_all_post`()
 BEGIN
 
         SELECT c.id as id, c.user_id as user_id, c.is_archived, c.content, c.data as date, p.title
@@ -964,7 +964,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_specie`()
+CREATE PROCEDURE `get_all_specie`()
 BEGIN
 
             SELECT  s.tag_id as id, s.nome_scientifico, s.nome_comune, s.peso_medio,
@@ -999,7 +999,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_all_users`()
+CREATE PROCEDURE `get_all_users`()
 BEGIN
 
       SELECT u.id as id, u.nome, u.email, u.password, u.immagine_profilo as immagine, u.is_admin as admin FROM utente u;END ;;
@@ -1018,7 +1018,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_commento`(IN in_id INT)
+CREATE PROCEDURE `get_commento`(IN in_id INT)
 BEGIN
 
         SELECT c.id as id, c.user_id as user_id, c.is_archived, c.content, c.data as date, a.post_id as post FROM contenuto c INNER JOIN
@@ -1041,7 +1041,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_conservazione`(IN id VARCHAR(2))
+CREATE PROCEDURE `get_conservazione`(IN id VARCHAR(2))
 BEGIN
 
         SELECT c.codice as id, c.nome, c.prob_estinzione, c.descrizione FROM conservazione c WHERE c.codice = id LIMIT 1;
@@ -1062,7 +1062,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_famiglia`(IN id INT)
+CREATE PROCEDURE `get_famiglia`(IN id INT)
 BEGIN
 
        SELECT f.tag_id as id, f.nome_scientifico, f.ord_id as ordine
@@ -1083,7 +1083,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_genere`(IN id INT)
+CREATE PROCEDURE `get_genere`(IN id INT)
 BEGIN
 
         SELECT g.nome_scientifico, g.tag_id as id, g.fam_id as famiglia FROM genere g WHERE g.tag_id = id LIMIT 1; END ;;
@@ -1102,7 +1102,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_images_of_post`(IN id INT)
+CREATE PROCEDURE `get_images_of_post`(IN id INT)
 BEGIN
 
         SELECT i.percorso_immagine as immagine FROM immaginipost i WHERE i.post_id = id; END ;;
@@ -1121,7 +1121,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_many_post`(IN ilimit INT, IN offset INT)
+CREATE PROCEDURE `get_many_post`(IN ilimit INT, IN offset INT)
 BEGIN
 
         SELECT c.id as id, c.user_id as user_id, c.is_archived, c.content, c.data as date, p.title
@@ -1142,7 +1142,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_of_utente_post_all`(IN in_id INT)
+CREATE PROCEDURE `get_of_utente_post_all`(IN in_id INT)
 BEGIN
 
         SELECT c.id as id, c.user_id as user_id, c.is_archived, c.content, c.data as date, p.title
@@ -1165,7 +1165,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_of_utente_post_limited`(IN in_id INT, IN in_limit INT, IN in_offset INT)
+CREATE PROCEDURE `get_of_utente_post_limited`(IN in_id INT, IN in_limit INT, IN in_offset INT)
 BEGIN
 
         SELECT c.id as id, c.user_id as user_id, c.is_archived, c.content, c.data as date, p.title
@@ -1190,7 +1190,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_ordine`(IN id int)
+CREATE PROCEDURE `get_ordine`(IN id int)
 BEGIN
 
         SELECT o.tag_id as id, o.nome_scientifico
@@ -1211,7 +1211,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_post`(IN id INT)
+CREATE PROCEDURE `get_post`(IN id INT)
 BEGIN
 
         SELECT c.id as id, c.user_id as user_id, c.is_archived, c.content, c.data as date, p.title
@@ -1234,7 +1234,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_post_tag_all`(IN in_id INT)
+CREATE PROCEDURE `get_post_tag_all`(IN in_id INT)
 BEGIN
 
         SELECT t.id, t.label FROM tag t INNER JOIN (
@@ -1257,7 +1257,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_specie`(IN in_id INT)
+CREATE PROCEDURE `get_specie`(IN in_id INT)
 BEGIN
 
 
@@ -1296,7 +1296,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user`(IN in_id int)
+CREATE PROCEDURE `get_user`(IN in_id int)
 BEGIN
 
         SELECT u.id as id, u.nome, u.email, u.password, u.immagine_profilo as immagine, u.is_admin as admin
@@ -1317,7 +1317,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `get_user_from_login`(IN in_email VARCHAR(40), IN in_password VARCHAR(14))
+CREATE PROCEDURE `get_user_from_login`(IN in_email VARCHAR(40), IN in_password VARCHAR(14))
 BEGIN
 
         SELECT u.id as id, u.nome, u.email, u.password, u.immagine_profilo as immagine, u.is_admin as admin
@@ -1338,7 +1338,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `like_post`(IN in_userid INT, IN in_postid INT)
+CREATE PROCEDURE `like_post`(IN in_userid INT, IN in_postid INT)
 BEGIN
 
         SET @likes = (SELECT a.likes FROM approvazione a WHERE a.content_id = in_postid AND a.utente_id = in_userid);
@@ -1375,7 +1375,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `save_post_tag`(IN post_id INT, IN tag_id INT)
+CREATE PROCEDURE `save_post_tag`(IN post_id INT, IN tag_id INT)
 BEGIN
 
         INSERT INTO citazione (tag_id, post_id) VALUE (tag_id, post_id); END ;;
@@ -1394,7 +1394,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `search_all_commento`(IN in_search VARCHAR(255))
+CREATE PROCEDURE `search_all_commento`(IN in_search VARCHAR(255))
 BEGIN
 
         SELECT cc.id as id, cc.user_id as user_id, cc.is_archived, cc.content, cc.data as date, c.post_id as post
@@ -1415,7 +1415,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `search_all_post`(IN in_search VARCHAR(255))
+CREATE PROCEDURE `search_all_post`(IN in_search VARCHAR(255))
 BEGIN
 
         SELECT c.id as id, c.user_id as user_id, c.is_archived, c.content, c.data as date, p.title
@@ -1436,7 +1436,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `search_all_specie`(IN text VARCHAR(255))
+CREATE PROCEDURE `search_all_specie`(IN text VARCHAR(255))
 BEGIN
 
         SELECT  s.tag_id as id, s.nome_scientifico, s.nome_comune, s.peso_medio,
@@ -1479,7 +1479,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_commento`(IN in_id INT, IN in_is_archived BOOL,
+CREATE PROCEDURE `update_commento`(IN in_id INT, IN in_is_archived BOOL,
 
     IN in_content TEXT, IN in_date VARCHAR(30), IN in_post INT, IN in_user INT)
 BEGIN
@@ -1504,7 +1504,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_conservazione`(IN icodice VARCHAR(2), IN inome VARCHAR(20),
+CREATE PROCEDURE `update_conservazione`(IN icodice VARCHAR(2), IN inome VARCHAR(20),
 
     IN iprob_estinzione INT, IN idescrizione TEXT)
 BEGIN
@@ -1527,7 +1527,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_famiglia`(IN id int, IN ordine INT, IN nome_scientifico VARCHAR(40))
+CREATE PROCEDURE `update_famiglia`(IN id int, IN ordine INT, IN nome_scientifico VARCHAR(40))
 BEGIN
 
         UPDATE famiglia f SET f.nome_scientifico = nome_scientifico, f.ord_id = ordine WHERE f.tag_id = id; END ;;
@@ -1546,7 +1546,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_genere`(IN id INT, IN famiglia INT, IN nome VARCHAR(40))
+CREATE PROCEDURE `update_genere`(IN id INT, IN famiglia INT, IN nome VARCHAR(40))
 BEGIN UPDATE genere g SET g.nome_scientifico = nome, g.fam_id = famiglia WHERE g.tag_id = id;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1563,7 +1563,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_ordine`(IN id INT, IN nome VARCHAR(40))
+CREATE PROCEDURE `update_ordine`(IN id INT, IN nome VARCHAR(40))
 BEGIN
 
         UPDATE ordine o SET o.nome_scientifico = nome WHERE o.tag_id = id;END ;;
@@ -1582,7 +1582,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_post`(IN in_id INT, IN in_user_id INT, IN in_is_archived BOOL, IN in_content TEXT,
+CREATE PROCEDURE `update_post`(IN in_id INT, IN in_user_id INT, IN in_is_archived BOOL, IN in_content TEXT,
 
     IN in_date VARCHAR(300), IN in_title VARCHAR(200))
 BEGIN
@@ -1607,7 +1607,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_specie`(IN id INT, IN in_nome_scientifico VARCHAR(40), IN in_nome_comune VARCHAR(40),
+CREATE PROCEDURE `update_specie`(IN id INT, IN in_nome_scientifico VARCHAR(40), IN in_nome_comune VARCHAR(40),
 
         IN in_peso_medio INT, IN in_altezza_media INT, IN in_descrizione TEXT, IN in_percorso_immagine VARCHAR(80),
 
@@ -1638,7 +1638,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_user`(IN in_id INT, IN in_nome VARCHAR(25), IN in_email VARCHAR(40),
+CREATE PROCEDURE `update_user`(IN in_id INT, IN in_nome VARCHAR(25), IN in_email VARCHAR(40),
 
     IN in_password VARCHAR(14), IN in_immagine VARCHAR(40), IN in_admin BOOL)
 BEGIN
@@ -1661,7 +1661,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `user_act_friend`(IN us_id INT, firend_id INT)
+CREATE PROCEDURE `user_act_friend`(IN us_id INT, firend_id INT)
 BEGIN
 
 
@@ -1690,7 +1690,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `user_is_following`(IN us_id INT, IN friend_id INT)
+CREATE PROCEDURE `user_is_following`(IN us_id INT, IN friend_id INT)
 BEGIN
 
         SELECT COUNT(s.seguito_id) as follow FROM seguito s WHERE s.seguito_id = friend_id AND s.seguace_id = us_id; END ;;
@@ -1699,22 +1699,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-
---
--- Final view structure for view `vw_post`
---
-
-/*!50001 DROP TABLE IF EXISTS `vw_post`*/;
-/*!50001 DROP VIEW IF EXISTS `vw_post`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_general_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `vw_post` AS select `webbirddb`.`post`.`content_id` AS `content_id`,ifnull(`a`.`likes`,0) AS `likes`,`webbirddb`.`contenuto`.`data` AS `data`,(select count(1) from `webbirddb`.`commento` where `webbirddb`.`commento`.`content_id` = `webbirddb`.`post`.`content_id`) AS `commenti` from ((`webbirddb`.`post` left join (select `webbirddb`.`approvazione`.`content_id` AS `content_id`,sum(`webbirddb`.`approvazione`.`likes`) AS `likes` from `webbirddb`.`approvazione` group by `webbirddb`.`approvazione`.`content_id`) `a` on(`webbirddb`.`post`.`content_id` = `a`.`content_id`)) join `webbirddb`.`contenuto` on(`webbirddb`.`contenuto`.`id` = `webbirddb`.`post`.`content_id`)) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;

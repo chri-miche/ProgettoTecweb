@@ -80,7 +80,7 @@ button, .button, a {
     border-radius: 0.4em;
     padding: 0.5em 1em;
     font: inherit; /* altrimenti non vede il font dato*/
-    box-shadow:
+    box-shadow: /* TODO pensavo di togliere il box shadow dai bottoni / link, tenere invece il layout rialzato per le card */
             0 3px 1px -2px rgba(0,0,0,.2),
             0 2px 2px 0 rgba(0,0,0,.14),
             0 1px 5px 0 rgba(0,0,0,.12);
@@ -583,7 +583,7 @@ input:focus + legend {
     position: fixed;
     height: 100%;
     top: 0;
-    width: 200px;
+    width: 100%;
     z-index: 10;
     box-shadow:
             -1px 0 5px 5px rgba(0,0,0,0.12),
@@ -596,7 +596,21 @@ input:focus + legend {
 
 #dropdown-content:target {
     right: 0;
-    display: block;
+    display: flex;
+}
+
+#dropdown-content #close-dropdown {
+    width: 70%;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex; /*TODO rivedere*/
+    justify-content: center;
+    align-items: center;
+}
+
+#dropdown-content #menu-list {
+    width: 30%;
 }
 
 #dropdown-content a {
@@ -606,6 +620,7 @@ input:focus + legend {
     border-radius: 0;
     box-shadow: none;
     transition: inherit;
+    text-align: end;
 }
 /* #end dropdown */
 

@@ -1,10 +1,18 @@
 <div id="user-actions">
     <a id="dropdown-button" href="#dropdown-content">{username}</a>
-    <div id="dropdown-content" class="primary-color">
-        <a href="UserPage.php?id={userid}"> Profilo </a>
-        <a href="Logout.php" xml:lang="en"> Logout </a>
-        <a href="NewPost.php">Scrivi un post</a>
-        <admin />
-        <a href="#dropdown-button" id="close-dropdown">Chiudi menù</a>
+    <div id="dropdown-content">
+        <a href="#dropdown-button"
+           id="close-dropdown">
+            <span>
+            Chiudi menù
+            </span>
+        </a>
+        <div id="menu-list" class="primary-color">
+            <!-- TODO elenco puntato -->
+            <a href="UserPage.php?id={userid}"> Profilo </a>
+            <a href="Logout.php" xml:lang="en"> Logout </a>
+            <a href="NewPost.php">Scrivi un post</a>
+            <admin />
+        </div>
     </div>
 </div>

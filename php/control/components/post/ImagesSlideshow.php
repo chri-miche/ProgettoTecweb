@@ -6,7 +6,13 @@ class ImagesSlideshow extends BasePage {
 
         $result = DatabaseAccess::executeQuery("select percorso_immagine from immaginipost i where post_id = '$idPost';");
         $links = array_map(function ($value) {
-            return $value['percorso_immagine'];
+            // esempio: 'img src="Utente10/8obsdx.png"' con preg_replace diventa Utente10obd...
+            // perche' /8 = l'ottavo match
+            // non ci era mai capitato di avere un'immagine che iniziasse con un numero, quindi questo problema
+            // ci era scappato
+            // preg_quote non risolve il problema perche' leva via anche tutti i tag html
+            // bisogna fare l'escape proprio per questo specifico caso
+            return str_replace('\\', '/', $value['percorso_immagine']);;
         }, $result);
         $size = sizeof($links);
         $index = $size - 1;

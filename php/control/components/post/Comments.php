@@ -27,8 +27,8 @@ class Comments extends BasePage {
 
         $data = array();
 
-        $data["{contentID}"] = $post->getId();
-        $data["{idUtente}"] = $user->getUser()->getId();
+        $data["{content_id}"] = $post->getId();
+        $data["{id_utente}"] = $user->getUser()->getId();
 
         $this->addComponent(new class($data, file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "post" . DIRECTORY_SEPARATOR . "InsertComment.xhtml")) extends Component {
 

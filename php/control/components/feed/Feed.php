@@ -33,7 +33,7 @@ class Feed extends Component {
         $this->basePage = new BasePage($this->baseLayout());
 
         foreach ($results as $result)
-            $this->basePage->addComponent(new PostCard($result['contentID']));
+            $this->basePage->addComponent(new PostCard($result['content_id']));
 
         $this->criteria = $criteria;
     }

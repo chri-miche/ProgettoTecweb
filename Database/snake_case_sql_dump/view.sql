@@ -3,14 +3,15 @@ DROP VIEW IF EXISTS vw_post;
 create view vw_post as
 select
     post.content_id,
-    IFNULL(a.likes, 0) as likes,
+    IFNULL(sum(a.likes), 0) as likes,
     contenuto.data,
     (select count(1) from commento where commento.post_id = post.content_id) as commenti
 from post
-left join (select content_id, sum(likes) as likes from approvazione group by content_id) a
-  on post.content_id = a.content_id
 join contenuto
-    on contenuto.id = post.content_id;
+    on contenuto.id = post.content_id
+join approvazione a
+    on approvazione.content_id = post.content_id
+group by a.content_id;
 
 
 DROP VIEW IF EXISTS bird_summary;

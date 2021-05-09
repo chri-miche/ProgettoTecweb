@@ -147,7 +147,7 @@ DROP TABLE IF EXISTS `immaginipost`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `immaginipost` (
   `post_id` int(10) unsigned NOT NULL,
-  `percorso_immagine` varchar(200) NOT NULL,
+  `percorso_immagine` varchar(175) NOT NULL,
   PRIMARY KEY (`post_id`,`percorso_immagine`),
   CONSTRAINT `immaginipost_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`content_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

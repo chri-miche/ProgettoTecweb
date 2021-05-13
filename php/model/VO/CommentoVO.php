@@ -29,11 +29,11 @@
          * @param PostVO|null $postVO
          * @param UserVO|null $author
          */
-        public function __construct(?int $id = null, bool $isArchived = false, string $content = '',
+        public function __construct(?int $id = null, bool $is_archived = false, string $content = '',
                                     ?string $date = null, PostVO $postVO = null, UserVO $author = null) {
 
             $this->id = $id;
-            $this->isArchived = $isArchived;
+            $this->isArchived = $is_archived;
             $this->content = $content;
             $this->date = $date;
 

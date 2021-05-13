@@ -12,7 +12,7 @@ class ImagesSlideshow extends BasePage {
             // ci era scappato
             // preg_quote non risolve il problema perche' leva via anche tutti i tag html
             // bisogna fare l'escape proprio per questo specifico caso
-            return str_replace('\\', '/', $value['percorso_immagine']);;
+            return str_replace('\\', '/', $value['percorso_immagine']);
         }, $result);
         $size = sizeof($links);
         $index = $size - 1;

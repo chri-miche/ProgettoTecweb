@@ -2,6 +2,7 @@
 
 define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
 
+    require_once "filters.php";
     require_once "standardLayoutIncludes.php";
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php ";
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Post.php";
@@ -23,8 +24,10 @@ define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
 
         if($sessionUser->userIdentified()){
             if(isset($_GET['comment']) && $_GET['comment']) {
-                $comment = strip_tags($_POST["commento"]);
-                $comment = htmlentities($comment);
+                // $comment = strip_tags($_POST["commento"]);
+                // $comment = htmlentities($comment);
+
+                $comment = sanitize_simple_markdown($_POST["commento"]);
 
                 $commentVO = new CommentoVO(null,false, $comment, null, $postVO, $sessionUser->getUser());
                 $transaction = (new CommentoDAO())->save($commentVO);

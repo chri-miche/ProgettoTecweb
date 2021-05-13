@@ -45,7 +45,7 @@
             if(sizeof($postVOArray) > 0){
 
                 $resolvedData['{right}'] .= (new PreviewsPage($postVOArray, $postLayout))->returnComponent();
-                $resolvedData['{right}'] .= "<a href='postUtente.php?usid=".$this->user->getId() ."'>Vedi tutti i post dell utente.</a>";
+                $resolvedData['{right}'] .= "<a href='postUtente.php?usid=".$this->user->getId() ."'>Vedi tutti i post dell'utente.</a>";
             } else {
 
                 $resolvedData['{right}'] .= '<img src="\res\images\wow-such-empty.png" alt="Questo utente non ha ancora postato nulla" />';

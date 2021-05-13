@@ -21,7 +21,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
                 "id" => null,
                 "user_id" => $_POST['user-id'],
                 "is_archived" => 0,
-                "content" => $_POST['descrizione-post'],
+                "content" => sanitize_simple_markdown($_POST['descrizione-post']),
                 "data" => date('Y-m-d'),
             ));
             $content->commitFromProto();
@@ -32,7 +32,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
             }
             $post = new Persistent('post', array(
                 'content_id' => $content->get('id'),
-                'title' => $_POST['titolo-post']
+                'title' => sanitize_simple_text($_POST['titolo-post'])
             ));
             $post->commitFromProto();
 
@@ -71,7 +71,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
                         if(move_uploaded_file($tmp_name, $rootParent.$proposedPath)) {
                             $immagine = new Persistent('immaginipost', array(
                                 'post_id' => $id,
-                                'percorso_immagine' => $proposedPath
+                                'percorso_immagine' => str_replace('\\', '/', $proposedPath)
                             ));
                             $immagine->commitFromProto();
                         } else {

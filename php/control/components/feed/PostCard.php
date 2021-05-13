@@ -17,8 +17,14 @@
 
         $ritorno = [];
 
-        foreach ($this->postVO->arrayDump() as $key => $value)
-            $ritorno['{' . $key . '}'] = $value;
+        foreach ($this->postVO->arrayDump() as $key => $value) {
+            if ($key == 'immagine') {
+                $ritorno['{immagine}'] = str_replace('\\', '/', $value);;
+            } else {
+                $ritorno['{' . $key . '}'] = $value;
+            }
+        }
+
 
         $likes = (new PostDAO())->getLikes($this->postVO);
 

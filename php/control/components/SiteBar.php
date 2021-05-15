@@ -53,7 +53,9 @@
                 if($this->user->getAdmin()) {
 
                     $adminButton = new NavigationButton('Admin', 'Admin.php');
-                    $contentHTML = str_replace('<admin />', $adminButton->build(), $contentHTML);
+                    $contentHTML = str_replace('<admin />',
+                        '<li>' . $adminButton->build() . '</li>',
+                        $contentHTML);
 
                 }
             }

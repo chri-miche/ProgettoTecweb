@@ -85,7 +85,7 @@ button, .button, a {
             0 2px 2px 0 rgba(0,0,0,.14),
             0 1px 5px 0 rgba(0,0,0,.12);
     cursor: pointer;
-    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
 	display: inline-block;
     width: fit-content;
     margin: 2px;
@@ -94,18 +94,10 @@ button, .button, a {
 button:active, .button:active, a:active, a:visited {
     background: #D3EAFD;
     color: black;
-    box-shadow:
-            0 3px 1px -2px rgba(0,0,0,.2),
-            0 2px 2px 0 rgba(0,0,0,.14),
-            0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 button:hover, .button:hover, a:hover {
     background: #d0d0d0;
-    box-shadow:
-            0 3px 1px 0 rgba(0,0,0,.2),
-            0 2px 2px 0 rgba(0,0,0,.14),
-            0 1px 5px 0 rgba(0,0,0,.12);
 }
 
 button.disabled, .button.disabled, a[aria-selected=true], button[aria-selected=true],
@@ -245,10 +237,7 @@ a.tab-label[aria-selected=true]:hover,
 
 /* #begin content */
 #content {
-    display: flex;
-    flex-direction: column;
     flex: 1 1 auto;
-    align-items: center;
     background: white;
 }
 
@@ -393,15 +382,6 @@ a.tab-label[aria-selected=true]:hover,
     z-index: 10;
     transition: all 0.5s ease-out;
     opacity: 1;
-}
-
-.dropdown-content a {
-    position: relative;
-    transition: inherit;
-    border-radius: 0;
-    box-shadow: none;
-    width: auto;
-    margin: 0;
 }
 /* #end sitebar */
 
@@ -581,14 +561,10 @@ input:focus + legend {
 #dropdown-content {
     display: none;
     position: fixed;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
     top: 0;
-    width: 100%;
     z-index: 10;
-    box-shadow:
-            -1px 0 5px 5px rgba(0,0,0,0.12),
-            -1px 0 10px 10px rgba(0,0,0,0.08),
-            -1px 0 15px 15px rgba(0,0,0,0.06);
     /* animazione si perde con display none
     right: -200px;
     transition: right 400ms cubic-bezier(0.25, 0.8, 0.25, 1);*/
@@ -597,30 +573,44 @@ input:focus + legend {
 #dropdown-content:target {
     right: 0;
     display: flex;
+    align-items: stretch;
 }
 
 #dropdown-content #close-dropdown {
-    width: 70%;
+    width: 80%;
     margin: 0;
+    border-radius: 0;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    display: flex; /*TODO rivedere*/
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#dropdown-content #menu-list {
-    width: 30%;
+ul.menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex: 1 1 auto;
 }
 
-#dropdown-content a {
-    width: auto;
-    position: relative;
-    display: block;
-    border-radius: 0;
+ul.menu li {
+    border-bottom: solid 1px #D3EAFD;
+}
+
+ul.menu a {
+    background: inherit;
+    color: inherit;
     box-shadow: none;
-    transition: inherit;
-    text-align: end;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    margin: 0;
+}
+
+ul.menu a:hover {
+    background: #D3EAFD;
+    color: black;
 }
 /* #end dropdown */
 
@@ -778,7 +768,7 @@ ul#comments li form textarea {
     align-self: stretch;
 }
 
-#information-side ul, #admin-navigation ul {
+#information-side ul {
     list-style: none;
 }
 
@@ -787,9 +777,8 @@ ul#comments li form textarea {
 }
 
 #information-side {
-    float: left;
+    float: right;
     padding: 1em;
-    align-self: stretch;
 }
 
 #information-content {
@@ -818,15 +807,6 @@ ul#comments li form textarea {
 
 /* #admin */
 
-
-#admin-navigation {
-    padding: 2px;
-}
-
-#admin-navigation {
-    width: 15vw;
-}
-
 #admin-content {
     flex-grow: 1;
     width: 85vw;
@@ -838,20 +818,6 @@ ul#comments li form textarea {
 #admin-content h1 {
     margin-left: 1em;
     margin-right: 1em;
-}
-
-#admin-navigation ul {
-    margin: 0;
-    padding: 0;
-}
-
-#admin-navigation a {
-    width: auto;
-    position: relative;
-    display: block;
-    border-radius: 0;
-    box-shadow: none;
-    transition: inherit;
 }
 
 #admin-content a {
@@ -872,6 +838,10 @@ ul#comments li form textarea {
 
 #table-container table {
     width: 100%;
+}
+
+#admin-navigation {
+    width: 30%;
 }
 
 #admin-navigation ~ form {
@@ -926,4 +896,5 @@ ul#comments li form textarea {
     display: flex;
     align-items: center;
 }
+
 

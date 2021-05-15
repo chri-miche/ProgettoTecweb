@@ -9,8 +9,8 @@ define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
 
     $page = new BasePage($basePage);
 
-    $username = isset($_POST['username']) ? $_POST['username'] : null;
-    $password = isset($_POST['password']) ? $_POST['password'] : null;
+    $username = $_POST['email'] ?? null;
+    $password = $_POST['password'] ?? null;
 
     $page->addComponent(new Login($username, $password));
 

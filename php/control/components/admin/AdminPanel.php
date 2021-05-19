@@ -17,23 +17,17 @@ class AdminPanel extends Component
         "conservazione" => "Conservazione",
     );
 
-    private $navigation;
     private $component;
     private $manage;
+    private $voices = [];
 
     public function __construct($manage = null, $operation = "list", $keys = null, $data = null)
     {
         parent::__construct(file_get_contents(__ROOT__.'/view/modules/admin/AdminPanel.xhtml'));
 
         $this->manage = $manage;
-        $this->navigation = "";
         foreach (AdminPanel::$entities as $key => $value) {
-            if ($key !== $manage) {
-                $this->navigation .= "<li><a href='Admin.php?manage=$key'>$value</a></li>";
-            } else {
-                $this->navigation .= "<li><a aria-selected='true'>$value</a></li>";
-
-            }
+            $this->voices[] = [$value, "admin.php?manage=$key"];
         }
 
         $this->component = null;
@@ -135,7 +129,7 @@ class AdminPanel extends Component
 
     public function build()
     {
-        $HTML = str_replace("{navigation}", $this->navigation, $this->baseLayout());
+        $HTML = str_replace("<menu />", (new Menu($this->manage ?? 'welcome', $this->voices))->build(), $this->baseLayout());
         $HTML = str_replace("<content />", $this->component->build(), $HTML);
         $HTML = str_replace("{table}", $this->manage, $HTML);
         return $HTML;

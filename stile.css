@@ -608,10 +608,15 @@ ul.menu a {
     margin: 0;
 }
 
-ul.menu a:hover {
+ul.menu a:hover, ul.menu a.disabled {
     background: #D3EAFD;
     color: black;
 }
+
+ul.menu a.disabled {
+    cursor: default;
+}
+
 /* #end dropdown */
 
 /* #begin table */

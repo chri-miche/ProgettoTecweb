@@ -1,10 +1,11 @@
 <?php
 
-    require_once "Component.php";
-    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php";
-    require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "browsers" . DIRECTORY_SEPARATOR . "NavigationButton.php";
+require_once "Component.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "SessionUser.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "browsers" . DIRECTORY_SEPARATOR . "NavigationButton.php";
+require_once "Menu.php";
 
-    require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "UserDAO.php";
+require_once __ROOT__ . DIRECTORY_SEPARATOR . "model" . DIRECTORY_SEPARATOR . "DAO" . DIRECTORY_SEPARATOR . "UserDAO.php";
 
     class SiteBar extends Component {
 
@@ -15,6 +16,8 @@
         private $position;
 
         private $value;
+
+        private $voci = [];
 
         /**
          * @param string $position
@@ -47,17 +50,22 @@
                 $userVO = $this->user->getUser();
                 $contentHTML = file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "LoggedInActions.xhtml");
 
-                $contentHTML = str_replace("{username}", $userVO->getNome(), $contentHTML);
-                $contentHTML = str_replace("{userid}", $userVO->getId(), $contentHTML);
+                $actions = [
+                    ['Profilo', 'UserPage.php?id={userid}'],
+                    ['<span xml:lang="en">Logout</span>', 'logout.php'],
+                    ['Nuovo post', 'newpost.php']
+                ];
 
                 if($this->user->getAdmin()) {
 
-                    $adminButton = new NavigationButton('Admin', 'Admin.php');
-                    $contentHTML = str_replace('<admin />',
-                        '<li>' . $adminButton->build() . '</li>',
-                        $contentHTML);
+                    $actions[] = ['Pannello di amministrazione', 'admin.php'];
 
                 }
+
+                $contentHTML = str_replace('<menu />', (new Menu($this->position, $actions)), $contentHTML);
+
+                $contentHTML = str_replace("{username}", $userVO->getNome(), $contentHTML);
+                $contentHTML = str_replace("{userid}", $userVO->getId(), $contentHTML);
             }
 
             $baseLayout = str_replace('<loggedActions />', $contentHTML, $baseLayout);

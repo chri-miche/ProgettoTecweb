@@ -1,0 +1,78 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{graphicx}
+\graphicspath{ {img/} }
+
+\usepackage{multirow}
+
+\begin{document}
+
+TODO 
+- indirizzo web del sito
+- coppie username pwd 
+- - user user
+- - admin admin
+christian.micheletti@studenti.unipd.it
+jacopo.fichera@studenti.unipd.it
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Analisi}
+\subsection{Utenza}
+Sono previsti tre tipi di utenza, in base al livello di autorità: \textbf{utente non autenticato}, \textbf{utente autenticato} e \textbf{amministratore}. Le funzionalità sono associate alla classe di utenza a cui sono rivolte, e un livello di autorità ha accesso anche alle funzionalità dei livelli minori. In altre parole, le funzionalità pubbliche sono disponibili per ogni classe di utenza, le funzionalità dell'utente standard sono disponibili sia per questi ultimi sia per gli amministratori e le funzionalità amministrative sono esclusive degli amministratori.
+\subsection{Funzionalità pubbliche}
+\paragraph{Accesso pubblico.} Una sezione dell'applicativo e alcune funzionalità sono di accesso pubblico. L'accesso pubblico è attivo per default, quando ci si collega alla pagina \texttt{/home.php}. La pagina principale è composta da una sezione di ricerca e navigazione, una fascia dove si riportano le informazioni sulla propria posizione e il \textbf{feed}. Il feed è composto da tre modalità di ricerca: tra i più recenti, i più popolari e i più dibattuti.
+\paragraph{Registrazione di un nuovo account.} Si effettua alla pagina \texttt{/register.php}. Occorre inserire il proprio nome utente, l'indirizzo e-mail e una password.
+\paragraph{Ricerca post.} La funzionalità si utilizza tramite l'input di ricerca in alto (desktop) o nel menù laterale (mobile), scrivendo il testo da cercare, per poi premere "invio" oppure cliccare il tasto "ricerca".  
+\paragraph{Visualizzazione di un post.} Che si sia arrivati dal feed o dai risultati della ricerca, ogni visitatore può visualizzare le informazioni del post: il titolo, il nome dell'utente che l'ha postato, i commenti e le immagini dell'avvistamento. Un visitatore non autenticato da qui può anche visitare il profilo degli utenti che hanno commentato o dell'utente che ha postato.
+\paragraph{Catalogo.} Il catalogo permette di cercare delle informazioni sugli uccelli, suddivisi per ordine, famiglia e classe.
+\subsection{Funzionalità per utenti}
+\paragraph{Accesso all'area riservata.} 
+Si effettua dalla pagina \texttt{/login.php}. Occorre inserire l'e-mail e la password scelte al momento della creazione dell'account. 
+\paragraph{Funzionalità di interazione con il post.} Un utente autenticato può lasciare un commento, lasciare un like o un dislike sul post che sta leggendo.
+\paragraph{Modifica del profilo personale.} TODO
+\paragraph{Aggiungere degli amici.} TODO
+\paragraph{Creazione di un Post.} TODO
+\subsection{Funzionalità di amministrazione}
+\paragraph{Gestione raw delle tabelle.} TODO
+
+\section{Navigazione}
+
+\section{Sviluppo}
+\subsection{Database}
+\subsection{Backend}
+Il backend è stato sviluppato interamente in php 7.0.2. Non sono stati usati framework esterni, ma è stato implementato un framework liberamente ispirato alle tecnologie più recenti. 
+\subsubsection{Il framework Component}
+Il framework è organizzato secondo il paradigma ad oggetti. La classe principale è la classe astratta Component. Ogni componente erediterà le funzionalità di questa classe. La public interface di ogni component si può riassumere come segue:
+\begin{itemize}
+\item un costruttore che prende una stringa che corrisponde al contenuto da mostrare, con dei placeholder per i dati da sostituire;
+\item un metodo \texttt{build} che sostituisce i placeholder, costruendo la pagina e restituendola;
+\item un metodo \texttt{returnComponent} che costruisce la pagina se non era ancora stata costruita;
+\item un metodo di conversione automatica in stringa, che corrisponde ad una chiamata \texttt{returnComponent()};
+\item un metodo \texttt{notBuilt} che indica di ricostruire la pagina alla prossima \texttt{returnComponent()};
+\item un metodo \texttt{resolveData} che restituisce un array associativo contenente i dati da sostituire nei placeholder. Deve essere sovrascritto nelle implementazioni delle classi figlie.
+\end{itemize}
+\subsubsection{Test}
+\subsection{Interfaccia}
+\subsubsection{Test}
+\subsubsection{Registrazione}
+\begin{center}
+\begin{tabular}{|c|c|c|r|}
+\hline
+\textbf{Nome utente} & \textbf{Password} & \textbf{e-mail} & \textbf{Risultato} \\
+\hline
+Alfonso Cuaron & alcua & alfie@cuar.it & \textbf{Successo} \\
+John Wick & wick & john@wick.gun & \textbf{Successo} \\
+\hline
+\end{tabular}
+\end{center}
+
+
+\end{document}

@@ -27,6 +27,7 @@ class Persistent {
     }
 
     private function loadMetadata() {
+        // TODO INI PER PARAMETRIZZARE
         $host = 'localhost';
         $user = 'root';
         $password = '';

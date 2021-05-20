@@ -1,22 +1,21 @@
 #TODO
-- MENU link su se stesso
-- UTENTE sistemare visualizzazione
-- ADMIN aggiungi rimozione post
-- INTERFACCIA unificare input ricerca e inserimento messaggio
-- ADMIN sistemare visualizzazione
-- ADMIN commenti sulle colonne del db
-- ADMIN se la tabella è vuota mettere such empty
-- ADMIN bottone navigazione indietro
 - PERSISTENT (ADMIN) 0 = null
-- FOOTER fotter
-- PERMESSI FILE PHP e directory
-- RICERCA utente
-- GENERALE link e bottoni diversi? link = mat-button ; button = mat-raised-button
-- GENERALE migliorare la navigazione
+- PERMESSI FILE PHP e directory (non deve essere possibile navigare tra le directory)
+- ADMIN commenti sulle colonne del db
+- CONFIG INI con info sulla connessione e sul db
+- CONTENUTO ADMIN bottone navigazione indietro
+- CONTENUTO GENERALE migliorare la navigazione
+- CONTENUTO FOOTER scrivere testo non lorem ipsum
+- CONTENUTO ADMIN se la tabella è vuota mettere such empty
+- LAYOUT unificare input ricerca e inserimento messaggio
+- LAYOUT UTENTE sistemare visualizzazione
+- LAYOUT link e bottoni diversi! (ok discorso rottura convenzioni esterne ma meglio non troppo) link = mat-button ; button = mat-raised-button
+- LAYOUT ADMIN sistemare visualizzazione
 
 #AGGIUNTE
 - controlli sulle form
 - feed amici
+- ricerca utente
 - admin rimuovere post
 
 #DONE
@@ -25,6 +24,7 @@
 - COMMENTI strip tags
 - MENU visualizzazione come elenco puntato, i bottoni dello stesso colore del bg e separati da una linea chiara
 - MENU ADMIN width
+- MENU link su se stesso
 
 #ABORTED (motivo)
 - SIDEBAR Menu non blocca azioni nella pagina principale, sistemare (da fare con js)

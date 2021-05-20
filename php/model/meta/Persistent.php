@@ -8,6 +8,9 @@ class Persistent {
     private $tableName;
     private $tableType;
     // [columnName => Column]
+    /**
+     * @var $columns array
+     */
     private $columns;
 
     // [columnName => Column]

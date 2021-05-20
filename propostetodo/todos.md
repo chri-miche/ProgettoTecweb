@@ -12,8 +12,11 @@
 - LAYOUT link e bottoni diversi! (ok discorso rottura convenzioni esterne ma meglio non troppo) link = mat-button ; button = mat-raised-button
 - LAYOUT ADMIN sistemare visualizzazione
 
-#AGGIUNTE
-- controlli sulle form
+#AGGIUNTE (necessarie)
+- gestione degli errori e 404
+- controlli addizionali sulle form (javascript)
+
+#AGGIUNTE (opzionali)
 - feed amici
 - ricerca utente
 - admin rimuovere post

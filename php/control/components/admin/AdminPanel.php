@@ -4,7 +4,7 @@ require_once 'AdminTable.php';
 require_once 'AdminWelcomePage.php';
 require_once 'AdminForm.php';
 require_once 'ConfirmDelete.php';
-require_once 'utenti/UtentiAdmin.php';
+require_once 'utenti/UtenteTable.php';
 require_once 'utenti/UtenteForm.php';
 require_once 'LandingPage.php';
 require_once 'SuccessLandingPage.php';
@@ -40,7 +40,7 @@ class AdminPanel extends Component
 
         if ($manage === 'utente') {
             if ($operation === 'list') {
-                $this->component = new UtentiAdmin();
+                $this->component = new UtenteTable();
             } elseif ($operation === 'update') {
                 if (count($data) > 0) {
                     $dao = new UserDAO();

@@ -1,7 +1,7 @@
 <?php
 
 
-class UtentiRow extends Component
+class UtenteRow extends Component
 {
 
     private $userVO;
@@ -10,7 +10,12 @@ class UtentiRow extends Component
 
     public function __construct(UserVO $userVO)
     {
-        parent::__construct(file_get_contents(__ROOT__."/control/components/admin/utenti/utenterow.xhtml"));
+        parent::__construct(file_get_contents(__ROOT__
+            . DIRECTORY_SEPARATOR . "view"
+            . DIRECTORY_SEPARATOR . "modules"
+            . DIRECTORY_SEPARATOR . "admin"
+            . DIRECTORY_SEPARATOR . "utenti"
+            . DIRECTORY_SEPARATOR . "utenterow.xhtml"));
         $this->userVO = $userVO;
     }
 

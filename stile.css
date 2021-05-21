@@ -29,7 +29,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    font-family: Verdana, sans-serif;
+    font-family: helvetica neue, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     margin: 0;
     flex: 1 1 auto;
@@ -843,19 +843,6 @@ ul#comments li form textarea {
 
 #table-container table {
     width: 100%;
-}
-
-#admin-navigation {
-    width: 30%;
-}
-
-#admin-navigation ~ form {
-    min-width: 400px;
-    width: 35vw;
-}
-
-#admin-navigation ~ form fieldset input {
-    width: calc(100% - 28px); /*100% - border e padding*/
 }
 
 #success, #failure {

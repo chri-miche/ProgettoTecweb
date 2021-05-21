@@ -10,7 +10,12 @@ class UtenteForm extends Component
 
     public function __construct(UserVO $user)
     {
-        parent::__construct(file_get_contents(__ROOT__."/control/components/admin/utenti/utenteform.xhtml"));
+        parent::__construct(file_get_contents(__ROOT__
+            . DIRECTORY_SEPARATOR . "view"
+            . DIRECTORY_SEPARATOR . "modules"
+            . DIRECTORY_SEPARATOR . "admin"
+            . DIRECTORY_SEPARATOR . "utenti"
+            . DIRECTORY_SEPARATOR . "utenteform.xhtml"));
         $this->user = $user;
     }
 

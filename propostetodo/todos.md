@@ -1,11 +1,10 @@
 #TODO
 - CONTENUTO GENERALE migliorare la navigazione
-- CONTENUTO FOOTER scrivere testo non lorem ipsum
 - CONTENUTO ADMIN se la tabella è vuota mettere such empty (oppure togliere such empty e mettere un messaggio del tipo "Nessun risultato?")
 - LAYOUT unificare input ricerca e inserimento messaggio
 - LAYOUT UTENTE sistemare visualizzazione
-- LAYOUT link e bottoni diversi! (ok discorso rottura convenzioni esterne ma meglio non troppo) link = mat-button ; button = mat-raised-button
 - LAYOUT ADMIN sistemare visualizzazione
+- LAYOUT link e bottoni diversi! (ok discorso rottura convenzioni esterne ma meglio non troppo) link = mat-button ; button = mat-raised-button
 
 #TODO CONFIGURAZIONE (da fare alla fine)
 - PERMESSI FILE PHP e directory (non deve essere possibile navigare tra le directory https://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file)
@@ -29,6 +28,7 @@
 - MENU visualizzazione come elenco puntato, i bottoni dello stesso colore del bg e separati da una linea chiara
 - MENU ADMIN width
 - MENU link su se stesso
+- CONTENUTO FOOTER scrivere testo non lorem ipsum
 
 #ABORTED (motivo)
 - SIDEBAR Menu non blocca azioni nella pagina principale, sistemare (da fare con js)

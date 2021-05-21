@@ -1,0 +1,27 @@
+<div>
+    Conferma la rimozione del seguente record di utente?
+    <!-- TODO rimuovere tabella mettere altro-->
+    <table cellspacing="0">
+        <tbody>
+        <tr>
+            <th>
+                <span xml:lang="en" title="Codice identificativo">ID</span>
+            </th>
+            <th>Nome</th>
+            <th>Indirizzo email</th>
+            <th>Amministratore</th>
+            <th>Immagine</th>
+        </tr>
+        <tr>
+            <td>{id}</td>
+            <td>{nome}</td>
+            <td>{email}</td>
+            <td>{admin}</td>
+            <td><img class="profile-mini" src="{immagine}" alt="" aria-label="Immagine del profilo"/></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="admin.php?manage=utente&amp;operation=delete&amp;id={id}">Conferma</a>
+    <a href="admin.php?manage=utente">Annulla</a>
+</div>

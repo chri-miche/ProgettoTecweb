@@ -1,0 +1,36 @@
+<a href="admin.php?manage=utente">Torna alla tabella</a>
+<form action="admin.php?manage=utente&amp;operation=update" method="post">
+    <fieldset>
+        <legend>Chiavi</legend>
+        <div class="form-field" data-error="">
+            <label for="id">
+                <span xml:lang="en" title="Codice identificativo">ID</span>
+            </label>
+            <input
+                    id="id"
+                    name="id"
+                    alt="Codice identificativo"
+                    aria-label="Codice identificativo"
+                    placeholder="Progressivo automatico"
+                    readonly="readonly" value="{id}" />
+            <label for="email">Email</label>
+            <input id="email" name="email" alt="Indirizzo email" aria-label="Idirizzo email"
+                   readonly="readonly" value="{email}" />
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Campi dati</legend>
+        <div class="form-field" data-error="{nome_error}">
+            <label for="nome">Nome</label>
+            <input id="nome" name="nome" alt="Nome" aria-label="Nome completo" placeholder="Nome completo" required="required" value="{nome}" />
+        </div>
+        <div class="form-field" data-error="{is_admin_error}">
+            <label for="is_admin">Amministratore</label>
+            <select id="is_admin" name="is_admin" aria-label="Amministratore" required="required">
+                <option value="0" {selected_no} >No</option>
+                <option value="1" {selected_yes} >Sì</option>
+            </select>
+        </div>
+    </fieldset>
+    <button type="submit" name="submit">Conferma</button>
+</form>

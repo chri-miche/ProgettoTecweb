@@ -1,9 +1,6 @@
 #TODO
-- PERSISTENT (ADMIN) 0 = null
 - PERMESSI FILE PHP e directory (non deve essere possibile navigare tra le directory)
-- ADMIN commenti sulle colonne del db
 - CONFIG INI con info sulla connessione e sul db
-- CONTENUTO ADMIN bottone navigazione indietro
 - CONTENUTO GENERALE migliorare la navigazione
 - CONTENUTO FOOTER scrivere testo non lorem ipsum
 - CONTENUTO ADMIN se la tabella è vuota mettere such empty
@@ -22,6 +19,7 @@
 - admin rimuovere post
 
 #DONE
+- CONTENUTO ADMIN bottone navigazione indietro
 - LOGIN Cambiare Nome utente in Indirizzo email
 - NEWPOST strip tags
 - COMMENTI strip tags
@@ -31,6 +29,8 @@
 
 #ABORTED (motivo)
 - SIDEBAR Menu non blocca azioni nella pagina principale, sistemare (da fare con js)
+- PERSISTENT (ADMIN) 0 = null (in favore dell'utilizzo di dao e vo)
+- ADMIN commenti sulle colonne del db (in favore dell'utilizzo di dao e vo)
 
 #GIRO TEST FUNZIONALITÀ
 ##PUBBLICHE

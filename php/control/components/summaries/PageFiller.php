@@ -1,5 +1,5 @@
 <?php
-
+// TODO eliminare
     require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Component.php";
     abstract class PageFiller extends Component {
 
@@ -12,3 +12,4 @@
         }
 
     }
+    ?>

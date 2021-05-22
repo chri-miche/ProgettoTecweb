@@ -38,7 +38,7 @@ body {
 }
 
 .accent-color {
-    background: rgb(33,150,243);
+    background: rgb(33,150,243); /* #4D7B90 */
     color: white;
 }
 
@@ -310,6 +310,10 @@ a.tab-label[aria-selected=true]:hover,
 .card-content {
     background: white;
     border-radius: 0 0 10px 10px;
+}
+
+ul {
+    list-style: none;
 }
 
 /* #end content */
@@ -793,10 +797,6 @@ ul#comments li form textarea {
 #information-page {
     display: flex;
     align-self: stretch;
-}
-
-#information-side ul {
-    list-style: none;
 }
 
 #information-side li{

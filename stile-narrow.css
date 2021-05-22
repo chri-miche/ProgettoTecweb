@@ -123,6 +123,11 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
     display: none;
 }
 
+ul {
+    list-style: none;
+    padding: 0;
+}
+
 /* #begin sitebar */
 #sitebar {
     display: flex;
@@ -185,6 +190,10 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
 
 #actions fieldset {
     border: none;
+}
+
+#actions ul {
+    text-align: center;
 }
 
 #actions * {

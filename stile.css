@@ -535,18 +535,6 @@ fieldset {
     align-items: stretch;
 }
 
-/*
-legend {
-    position: absolute;
-    font-size: 0.5em;
-    transition: all 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-input:focus + legend {
-    position: initial;
-    font-size: initial;
-}
- */
-
 /* #end form*/
 
 /* #dropdown  */
@@ -557,9 +545,6 @@ input:focus + legend {
     width: 100vw;
     top: 0;
     z-index: 10;
-    /* animazione si perde con display none
-    right: -200px;
-    transition: right 400ms cubic-bezier(0.25, 0.8, 0.25, 1);*/
 }
 
 #dropdown-content:target {
@@ -572,11 +557,15 @@ input:focus + legend {
     width: 80%;
     margin: 0;
     border-radius: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: black;
+    opacity: 0.8;
     color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    transition: opacity 600ms ease-out;
+}
+
+#dropdown-content #close-dropdown:hover {
+    opacity: 0.6;
 }
 
 ul.menu {
@@ -728,6 +717,38 @@ ul#comments li form textarea {
 
 /* #begin user */
 
+.user-layout {
+    display: flex;
+}
+
+#user-posts {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+#user-details{
+    flex: 0 1 20%;
+    height: fit-content;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 10px;
+}
+
+#user-details .card-header {
+    height: fit-content;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#user-details .card-content {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
 .profile-big {
     width: 168px;
     height: 168px;
@@ -757,6 +778,15 @@ ul#comments li form textarea {
     align-items: center;
     border: none;
 }
+/*
+#friendships {
+    flex: 1 1 15%;
+}
+
+#friendships .card {
+
+    min-width: unset;
+}*/
 /* #end user*/
 
 /* #begin information page*/
@@ -875,10 +905,4 @@ ul#comments li form textarea {
 
 
 /* #end admin*/
-
-#user-details{
-    display: flex;
-    align-items: center;
-}
-
 

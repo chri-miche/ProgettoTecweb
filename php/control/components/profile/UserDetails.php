@@ -48,12 +48,16 @@
             foreach ($this->user->arrayDump() as $key => $value)
                 $resolvedData["{".$key."}"] = $value;
 
-            $resolvedData['{loggedActions}'] = '';
-
-            if($this->showButton && $this->user->getId() != (new SessionUser())->getUser()->getId())
-                $resolvedData['{loggedActions}'] = (new FollowButton($this->user,  $this->redirect));
-
-
             return $resolvedData;
+        }
+
+        public function build()
+        {
+            $html = parent::build();
+            $loggedActions = '';
+            if($this->showButton && $this->user->getId() != (new SessionUser())->getUser()->getId())
+                $loggedActions = (new FollowButton($this->user,  $this->redirect))->build();
+
+            return str_replace('<loggedActions />', $loggedActions, $html);
         }
     }

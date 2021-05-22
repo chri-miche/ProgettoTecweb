@@ -126,14 +126,6 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
     position: absolute;
 }
 
-.sidebar-shadow {
-    z-index: 0;
-    box-shadow:
-            1px 0 0 0 rgba(0,0,0,0.12),
-            1px 0 2px 2px rgba(0,0,0,0.08),
-            1px 0 5px 5px rgba(0,0,0,0.06);
-}
-
 /* #typography */
 
 p {

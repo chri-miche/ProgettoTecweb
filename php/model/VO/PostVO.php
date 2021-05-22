@@ -66,7 +66,7 @@
 
             foreach ($this->immagini as $immagine){
 
-                $result[ $counter == 0 ? 'immagine' : "immagine_$counter"] = $immagine;
+                $result[ $counter == 0 ? 'immagine' : "immagine_$counter"] = str_replace('\\', '/', $immagine);
                 $counter ++;
 
             }

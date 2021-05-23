@@ -2,9 +2,9 @@
 - CONTENUTO GENERALE migliorare la navigazione
 - CONTENUTO ADMIN se la tabella è vuota mettere such empty (oppure togliere such empty e mettere un messaggio del tipo "Nessun risultato?")
 - LAYOUT unificare input ricerca e inserimento messaggio
-- LAYOUT UTENTE sistemare visualizzazione
 - LAYOUT ADMIN sistemare visualizzazione
 - LAYOUT link e bottoni diversi! (ok discorso rottura convenzioni esterne ma meglio non troppo) link = mat-button ; button = mat-raised-button
+- LAYOUT icone foto resize carino
 
 #TODO CONFIGURAZIONE (da fare alla fine)
 - PERMESSI FILE PHP e directory (non deve essere possibile navigare tra le directory https://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file)
@@ -21,6 +21,7 @@
 - admin rimuovere utente
 
 #DONE
+- LAYOUT UTENTE sistemare visualizzazione
 - CONTENUTO ADMIN bottone navigazione indietro
 - LOGIN Cambiare Nome utente in Indirizzo email
 - NEWPOST strip tags

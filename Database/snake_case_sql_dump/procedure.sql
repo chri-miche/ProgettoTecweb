@@ -1506,7 +1506,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE PROCEDURE `update_conservazione`(IN icodice VARCHAR(2), IN inome VARCHAR(20),
 
-    IN iprob_estinzione INT, IN idescrizione TEXT)
+    IN iprob_estinzione decimal(6,5), IN idescrizione TEXT)
 BEGIN
 
         UPDATE conservazione c  SET c.codice = icodice, c.nome = inome, c.descrizione = idescrizione,

@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `conservazione`;
 CREATE TABLE `conservazione` (
   `codice` varchar(2) NOT NULL,
   `nome` varchar(20) NOT NULL,
-  `prob_estinzione` int(11) DEFAULT NULL,
+  `prob_estinzione` decimal(6, 5) DEFAULT NULL,
   `descrizione` text DEFAULT NULL,
   PRIMARY KEY (`codice`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

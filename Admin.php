@@ -16,7 +16,7 @@ if ($sessionUser->userIdentified() && $sessionUser->getAdmin()) {
 
     $page->addComponent(new SiteBar("admin"));
 
-    $manage = $_GET["manage"] ?? null;
+    $manage = $_GET["manage"] ?? "";
     $operation = $_GET["operation"] ?? "list";
     $keys = array();
 
@@ -30,6 +30,7 @@ if ($sessionUser->userIdentified() && $sessionUser->getAdmin()) {
 
     $page->addComponent(new BreadCrumb(array("Amministrazione" => "")));
 
+    unset($data['submit']);
     $page->addComponent(new AdminPanel($manage, $operation, $keys, $data));
 
     echo $page->build();

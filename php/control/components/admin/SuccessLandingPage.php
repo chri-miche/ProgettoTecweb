@@ -1,5 +1,6 @@
 <?php
 
+require_once "LandingPage.php";
 
 class SuccessLandingPage extends LandingPage
 {

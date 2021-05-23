@@ -14,7 +14,7 @@ class UtenteForm extends Component
             . DIRECTORY_SEPARATOR . "view"
             . DIRECTORY_SEPARATOR . "modules"
             . DIRECTORY_SEPARATOR . "admin"
-            . DIRECTORY_SEPARATOR . "utenti"
+            . DIRECTORY_SEPARATOR . "utente"
             . DIRECTORY_SEPARATOR . "utenteform.xhtml"));
         $this->user = $user;
     }

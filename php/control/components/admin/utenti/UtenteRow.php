@@ -14,7 +14,7 @@ class UtenteRow extends Component
             . DIRECTORY_SEPARATOR . "view"
             . DIRECTORY_SEPARATOR . "modules"
             . DIRECTORY_SEPARATOR . "admin"
-            . DIRECTORY_SEPARATOR . "utenti"
+            . DIRECTORY_SEPARATOR . "utente"
             . DIRECTORY_SEPARATOR . "utenterow.xhtml"));
         $this->userVO = $userVO;
     }

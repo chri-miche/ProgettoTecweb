@@ -12,7 +12,7 @@ class UtenteTable extends Component
             . DIRECTORY_SEPARATOR . "view"
             . DIRECTORY_SEPARATOR . "modules"
             . DIRECTORY_SEPARATOR . "admin"
-            . DIRECTORY_SEPARATOR . "utenti"
+            . DIRECTORY_SEPARATOR . "utente"
             . DIRECTORY_SEPARATOR . "utentetable.xhtml"));
         $this->users = (new UserDAO())->getAll();
     }
@@ -27,6 +27,6 @@ class UtenteTable extends Component
             $rows .= (new UtenteRow($user))->build();
         }
 
-        return str_replace('<tableContent />', $rows, $html);
+        return str_replace('<table-content />', $rows, $html);
     }
 }

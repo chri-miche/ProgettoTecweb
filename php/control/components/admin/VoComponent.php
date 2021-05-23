@@ -1,7 +1,7 @@
 <?php
 
 
-class SpecieConfirmDelete extends Component
+class VoComponent extends Component
 {
     /**
      * @var VO

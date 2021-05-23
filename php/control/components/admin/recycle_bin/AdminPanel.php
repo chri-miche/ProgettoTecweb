@@ -4,14 +4,14 @@ require_once 'AdminTable.php';
 require_once 'AdminWelcomePage.php';
 require_once 'AdminForm.php';
 require_once 'ConfirmDelete.php';
-require_once 'utenti/UtenteTable.php';
-require_once 'utenti/UtenteForm.php';
+require_once 'utente/UtenteTable.php';
+require_once 'utente/UtenteForm.php';
 require_once 'LandingPage.php';
 require_once 'SuccessLandingPage.php';
 require_once 'FailureLandingPage.php';
-require_once 'utenti/ConfirmDeleteUtente.php';
+require_once 'utente/ConfirmDeleteUtente.php';
 
-class AdminPanel extends Component
+class AdminPanell extends Component
 {
 
     private static $entities = array(
@@ -43,36 +43,7 @@ class AdminPanel extends Component
         $this->component = null;
 
         if ($manage === 'utente') {
-            if ($operation === 'list') {
-                $this->component = new UtenteTable();
-            } elseif ($operation === 'update') {
-                if (count($data) > 0) {
-                    $dao = new UserDAO();
-                    $vo = $dao->get($data['id']);
-                    $vo->setNome($data['nome']);
-                    $vo->setAdmin($data['is_admin']);
 
-                    if ($dao->save($vo)) {
-                        $this->component = new SuccessLandingPage($manage);
-                    } else {
-                        $this->component = new UtenteForm((new UserDAO())->get($keys['id']));
-                    }
-                } else {
-                    $this->component = new UtenteForm((new UserDAO())->get($keys['id']));
-                }
-
-            } elseif ($operation === 'confirm-delete') {
-                $this->component = new ConfirmDeleteUtente((new UserDAO())->get($keys['id']));
-            } elseif ($operation === 'delete') {
-
-                $dao = new UserDAO();
-                $vo = $dao->get($keys['id']);
-                if ($dao->delete($vo)) {
-                    $this->component = new SuccessLandingPage($manage);
-                } else {
-                    $this->component = new FailureLandingPage($manage);
-                }
-            }
 
         } else {
             if (isset($manage)) {

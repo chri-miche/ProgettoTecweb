@@ -11,7 +11,6 @@ class Menu extends Component
         parent::__construct('<ul class="menu primary-color">' . Menu::$placeholder . '</ul>');
 
         foreach ($voices as $voice) {
-
             $this->voices[] = new NavigationButton($voice[0], $voice[1], strpos($voice[1], $position) !== false);
         }
     }

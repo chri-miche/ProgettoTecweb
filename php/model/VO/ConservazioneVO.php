@@ -8,7 +8,7 @@
         /** @var string | null */
         private $nome;
         /** @var float = 0*/
-        private $probEstinzione;
+        private $prob_estinzione;
         /**@var string | null */
         private $descrizione;
 
@@ -16,15 +16,15 @@
          * ConservazioneVO constructor.
          * @param string|null $id
          * @param string|null $nome
-         * @param float $probEstinzione
+         * @param float $prob_estinzione
          * @param string|null $descrizione
          */
         public function __construct(?string $id = null, ?string $nome = null,
-                                    float $probEstinzione = 0, string $descrizione = null) {
+                                    float $prob_estinzione = 0, string $descrizione = null) {
 
             $this->id = $id;
             $this->nome = $nome;
-            $this->probEstinzione = $probEstinzione;
+            $this->prob_estinzione = $prob_estinzione;
             $this->descrizione = $descrizione;
 
         }
@@ -55,14 +55,14 @@
 
         /**
          * @return float */
-        public function getProbEstinzione(): float{
-            return $this->probEstinzione;
+        public function getprob_estinzione(): float{
+            return $this->prob_estinzione;
         }
 
         /**
-         * @param float $probEstinzione */
-        public function setProbEstinzione(float $probEstinzione): void{
-            $this->probEstinzione = $probEstinzione;
+         * @param float $prob_estinzione */
+        public function setprob_estinzione(float $prob_estinzione): void{
+            $this->prob_estinzione = $prob_estinzione;
         }
 
         /**

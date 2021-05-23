@@ -1,36 +1,34 @@
 <?php
 
 
-class SpecieForm extends Component
+class VoForm extends Component
 {
     /**
-     * @var SpecieVO
+     * @var VO
      */
     private $vo;
     /**
      * @var array
      */
     private $errors;
+    /**
+     * @var string
+     */
+    private $operation;
 
-    public function __construct(SpecieVO $vo, array $errors)
+    public function __construct(string $html, VO $vo, array $errors, string $operation)
     {
-        parent::__construct(file_get_contents(__ROOT__ .
-            DIRECTORY_SEPARATOR . 'view' .
-            DIRECTORY_SEPARATOR . 'admin' .
-            DIRECTORY_SEPARATOR . 'specie' .
-            DIRECTORY_SEPARATOR . 'specieform.xhtml'));
+        parent::__construct($html);
         $this->vo = $vo;
         $this->errors = $errors;
+        $this->operation = $operation;
     }
 
     public function resolveData()
     {
         $values = [];
-        if ($this->vo->getId() === null) {
-            $values['{operation}'] = 'create';
-        } else {
-            $values['{operation}'] = 'update';
-        }
+        $values['{operation}'] = $this->operation;
+        $values['{key_readonly}'] = $this->operation === 'update' ? 'readonly="readonly"' : '';
 
         foreach ($this->vo->arrayDump() as $key => $value) {
             $values['{' . $key . '}'] = $value;
@@ -44,3 +42,5 @@ class SpecieForm extends Component
         return $values;
     }
 }
+
+?>

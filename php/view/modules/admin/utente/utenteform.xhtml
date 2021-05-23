@@ -1,4 +1,3 @@
-<a href="admin.php?manage=utente">Torna alla tabella</a>
 <form action="admin.php?manage=utente&amp;operation=update" method="post">
     <fieldset>
         <legend>Chiavi</legend>
@@ -9,12 +8,11 @@
             <input
                     id="id"
                     name="id"
-                    alt="Codice identificativo"
                     aria-label="Codice identificativo"
                     placeholder="Progressivo automatico"
                     readonly="readonly" value="{id}" />
             <label for="email">Email</label>
-            <input id="email" name="email" alt="Indirizzo email" aria-label="Idirizzo email"
+            <input id="email" name="email"  aria-label="Idirizzo email"
                    readonly="readonly" value="{email}" />
         </div>
     </fieldset>
@@ -22,7 +20,7 @@
         <legend>Campi dati</legend>
         <div class="form-field" data-error="{nome_error}">
             <label for="nome">Nome</label>
-            <input id="nome" name="nome" alt="Nome" aria-label="Nome completo" placeholder="Nome completo" required="required" value="{nome}" />
+            <input id="nome" name="nome"  aria-label="Nome completo" placeholder="Nome completo" required="required" value="{nome}" />
         </div>
         <div class="form-field" data-error="{is_admin_error}">
             <label for="is_admin">Amministratore</label>
@@ -33,4 +31,5 @@
         </div>
     </fieldset>
     <button type="submit" name="submit">Conferma</button>
+    <a href="admin.php?manage=utente">Annulla</a>
 </form>

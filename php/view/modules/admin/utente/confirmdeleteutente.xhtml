@@ -1,0 +1,27 @@
+<div>
+    Conferma la rimozione dell'utente?
+    <img class="profile-big" src="res/{immagine}" alt="" aria-label="Immagine del profilo"/>
+    <ul>
+        <li>
+            <strong>
+                <abbr xml:lang="en" title="Codice identificativo">ID</abbr>:
+            </strong>
+            {id}
+        </li>
+        <li>
+            <strong>Nome:</strong>
+            {nome}
+        </li>
+        <li>
+            <strong>Email:</strong>
+            {email}
+        </li>
+        <li>
+            <strong>Admin:</strong>
+            {admin}
+        </li>
+    </ul>
+
+    <a href="admin.php?manage=utente&amp;operation=delete&amp;id={id}">Conferma</a>
+    <a href="admin.php?manage=utente">Annulla</a>
+</div>

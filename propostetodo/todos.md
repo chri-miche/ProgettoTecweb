@@ -19,6 +19,8 @@
 - ricerca utente
 - admin rimuovere post
 - admin rimuovere utente
+- citazioni uccelli su post
+- refactoring file
 
 #DONE
 - LAYOUT UTENTE sistemare visualizzazione

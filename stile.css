@@ -904,3 +904,11 @@ ul#comments li form textarea {
 
 /* #end admin*/
 
+/* Da revisionare */
+.inputError {
+    padding: 0.5em;
+    background-color: #f44336; /* Red */
+    color: white;
+
+    margin-bottom: 15px;
+}

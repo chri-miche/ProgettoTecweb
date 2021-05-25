@@ -348,10 +348,6 @@ img {
     text-align: center;
 }
 
-#login-page label {
-    display: none;
-}
-
 #login-page input {
     margin-top: 10px;
     margin-bottom: 10px;

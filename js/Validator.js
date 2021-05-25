@@ -15,7 +15,7 @@ function checkPasswordMatch(){
 
     let password = document.getElementById('password')
     let reInsert = document.getElementById('password2')
-    console.log('here we go')
+
     if(password.value !== reInsert.value){
 
         reInsert.insertAdjacentElement('beforebegin',

@@ -121,7 +121,7 @@ function passwordCheck(password){
         if(!document.getElementById('passwordError')){
             password.classList.add('invalid')
             password.insertAdjacentElement('beforebegin', makeErrorLabel('passwordError', 'password',
-                'La password deve contenere almeno un numero e essere [8-15] caratteri di lunghezza.'))
+                'La password deve contenere almeno un numero, una maiuscola e essere [8-15] caratteri di lunghezza.'))
         }
 
         validateInput(true)

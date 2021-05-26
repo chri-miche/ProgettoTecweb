@@ -1,110 +1,108 @@
 <?php
-
 require_once __DIR__ . "/../DAO.php";
 
 require_once __DIR__ . "/../ordine/OrdineDAO.php";
 require_once __DIR__ . "/../ordine/OrdineVO.php";
 
-require_once "FamigliaVO.php";
-class FamigliaDAO extends DAO{
+    class FamigliaDAO extends DAO{
 
-    /** * @inheritDoc  */
-    public function get($id) {
+        /** * @inheritDoc  */
+        public function get($id) {
 
-        $result = $this->performCall(array($id), 'get_famiglia');
+            $result = $this->performCall(array($id), 'get_famiglia');
 
-        /** Se fallisce la ricerca ritorniamo un elemento vuoto.*/
-        if(isset($result['failure'])) return new FamigliaVO();
+            /** Se fallisce la ricerca ritorniamo un elemento vuoto.*/
+            if(isset($result['failure'])) return new FamigliaVO();
 
-        $result['ordineVO'] = (new OrdineDAO())->get($result['ordine']); unset($result['ordine']);
+            $result['ordineVO'] = (new OrdineDAO())->get($result['ordine']); unset($result['ordine']);
 
-        return new FamigliaVO(...$result);
-    }
-
-    /** * @inheritDoc  */
-    public function getAll() {
-
-        $VOArray = array();
-
-        $result = $this->performMultiCAll(array(), 'get_all_famiglia');
-        if(isset($result['failure'])) return $VOArray;
-
-        foreach ($result as $element){
-                /** Creazione di sotto oggetti.*/
-                $element['ordineVO'] = new OrdineVO($element['ordine'], $element['nome_scientifico_ordine']);
-                unset($element['ordine'], $element['nome_scientifico_ordine']);
-
-                // Creazione dell oggetto finale.
-                $VOArray [] = new FamigliaVO(...$element);
+            return new FamigliaVO(...$result);
         }
 
-        return $VOArray;
-    }
+        /** * @inheritDoc  */
+        public function getAll() {
 
-    public function getAllFilterBy(?int $ordine = null) : array {
+            $VOArray = array();
 
-        if(is_null($ordine))
-            return $this->getAll();
+            $result = $this->performMultiCAll(array(), 'get_all_famiglia');
+            if(isset($result['failure'])) return $VOArray;
 
-        $VOArray = array();
-        $ordineVO = (new OrdineDAO())->get($ordine);
+            foreach ($result as $element){
+                    /** Creazione di sotto oggetti.*/
+                    $element['ordineVO'] = new OrdineVO($element['ordine'], $element['nome_scientifico_ordine']);
+                    unset($element['ordine'], $element['nome_scientifico_ordine']);
 
-        $result = $this->performMultiCAll(array($ordine), 'get_all_famiglia_filter_by_ordine');
-        if(isset($result['failure'])) return $VOArray;
-
-        foreach ($result as $element)
-            $VOArray [] = new FamigliaVO(...$element, ...[$ordineVO]);
-
-        return $VOArray;
-
-    }
-
-    /** @param FamigliaVO $element */
-    public function checkId(VO &$element) : bool {
-        return $this->idValid($element, 'famiglia_id');
-    }
-
-    /** * @inheritDoc
-     * @param FamigliaVO $element : Elemento conservazione da salvare. */
-    public function save(VO &$element) : bool{
-
-        /** Non è possibile salvare qualcosa che non ha un ordine.*/
-        if(is_null($element->getOrdineVO()->getId())) return false;
-
-        $parentDAO = new OrdineDAO();
-        $parentVO = $element->getOrdineVO();
-
-        echo 'checkid:'. $parentDAO->checkId($parentVO);
-
-        /** Se effettivamente esiste questo ordine a cui si fa rifermento.*/
-        if($parentDAO->checkId($parentVO)) {
-
-            /** Se esiste l id della conservazione, quella va semplicemente aggiornata.*/
-            if ($this->checkId($element)) {
-
-                $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_famiglia');
-                return isset($result['failure']);
-
-            } else {
-
-                $result = $this->performCall($element->smartDump(true), 'create_famiglia');
-
-                if(!isset($result['failure']))
-                    $element = new $element(...$result, ...$element->varDumps(true));
-                /* Ritorna vero se è stato costruito l oggetto falso altrimenti.*/
-                return !$element->getId() === null;
-
+                    // Creazione dell oggetto finale.
+                    $VOArray [] = new FamigliaVO(...$element);
             }
+
+            return $VOArray;
         }
 
-        /** Elemento ordine non valido, viene perciò eliminato.*/
-        $element->setOrdineVO(new OrdineVO());
-        return false;
+        public function getAllFilterBy(?int $ordine = null) : array {
 
-    }
+            if(is_null($ordine))
+                return $this->getAll();
 
-    /** * @inheritDoc  */
-    public function delete(VO &$element) : bool{
-        return $this->defaultDelete($element, 'delete_famiglia');
+            $VOArray = array();
+            $ordineVO = (new OrdineDAO())->get($ordine);
+
+            $result = $this->performMultiCAll(array($ordine), 'get_all_famiglia_filter_by_ordine');
+            if(isset($result['failure'])) return $VOArray;
+
+            foreach ($result as $element)
+                $VOArray [] = new FamigliaVO(...$element, ...[$ordineVO]);
+
+            return $VOArray;
+
+        }
+
+        /** @param FamigliaVO $element */
+        public function checkId(VO &$element) : bool {
+            return $this->idValid($element, 'famiglia_id');
+        }
+
+        /** * @inheritDoc
+         * @param FamigliaVO $element : Elemento famiglia da salvare. */
+        public function save(VO &$element) : bool{
+
+            /** Non è possibile salvare qualcosa che non ha un ordine.*/
+            if(is_null($element->getOrdineVO()->getId())) return false;
+
+            $parentDAO = new OrdineDAO();
+            $parentVO = $element->getOrdineVO();
+
+            // echo 'checkid:'. $parentDAO->checkId($parentVO);
+
+            /** Se effettivamente esiste questo ordine a cui si fa rifermento.*/
+            if($parentDAO->checkId($parentVO)) {
+
+                /** Se esiste l id della famiglia, quella va semplicemente aggiornata.*/
+                if ($this->checkId($element)) {
+
+                    $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_famiglia');
+                    return isset($result['failure']);
+
+                } else {
+
+                    $result = $this->performCall($element->smartDump(true), 'create_famiglia');
+
+                    if(!isset($result['failure']))
+                        $element = new $element(...$result, ...$element->varDumps(true));
+                    /* Ritorna vero se è stato costruito l oggetto falso altrimenti.*/
+                    return !$element->getId() === null;
+
+                }
+            }
+
+            /** Elemento ordine non valido, viene perciò eliminato.*/
+            $element->setOrdineVO(new OrdineVO());
+            return false;
+
+        }
+
+        /** * @inheritDoc  */
+        public function delete(VO &$element) : bool{
+            return $this->defaultDelete($element, 'delete_famiglia');
+        }
     }
-}

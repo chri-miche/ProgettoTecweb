@@ -1,5 +1,5 @@
 <?php
-require_once "./Application/databaseObjects/VO.php";
+require_once __DIR__ . "/../VO.php";
 class PostVO implements VO {
 
     /** @var int | null*/

@@ -12,12 +12,12 @@ class SpecieVO implements VO {
     /** @var int: Identificatroe dell uccello.*/
     private $id;
 
-    private $nomeScientifico;
-    private $nomeComune;
+    private $nome_scientifico;
+    private $nome_comune;
 
     /** Dati supplementari di uccelli.*/
-    private $pesoMedio;
-    private $altezzaMedia;
+    private $peso_medio;
+    private $altezza_media;
 
     /** Dati visivi e rappresentativi.*/
     private $descrizione;
@@ -25,31 +25,31 @@ class SpecieVO implements VO {
 
 
     /** Genere VO.*/
-    private $genereVO; // Esso contiene un conservazione DAO che a sua volta contiene un ordine DAO.
+    private $genereVO; // Esso contiene un famiglia DAO che a sua volta contiene un ordine DAO.
     /** Conservazione VO. */
     private $conservazioneVO;
 
     /**
      * SpecieVO constructor.
      * @param int|null $id
-     * @param string|null $nomeScientifico
-     * @param string|null $nomeComune
-     * @param int|null $pesoMedio
-     * @param int|null $altezzaMedia
+     * @param string|null $nome_scientifico
+     * @param string|null $nome_comune
+     * @param int|null $peso_medio
+     * @param int|null $altezza_media
      * @param string|null $descrizione
      * @param string|null $immagine
      * @param GenereVO|null $genereVO
      * @param ConservazioneVO|null $conservazioneVO
      */
-    public function __construct(int $id = null, string $nomeScientifico = null, string $nomeComune = null,
-                                int $pesoMedio = null, int $altezzaMedia = null, string $descrizione = '', string $immagine = '',
+    public function __construct(int $id = null, string $nome_scientifico = null, string $nome_comune = null,
+                                int $peso_medio = null, int $altezza_media = null, string $descrizione = '', string $immagine = '',
                                 GenereVO $genereVO = null, ConservazioneVO $conservazioneVO = null) {
 
         $this->id = $id;
-        $this->nomeScientifico = $nomeScientifico;
-        $this->nomeComune = $nomeComune;
-        $this->pesoMedio = $pesoMedio;
-        $this->altezzaMedia = $altezzaMedia;
+        $this->nome_scientifico = $nome_scientifico;
+        $this->nome_comune = $nome_comune;
+        $this->peso_medio = $peso_medio;
+        $this->altezza_media = $altezza_media;
         $this->descrizione = $descrizione;
         $this->immagine = $immagine;
 
@@ -98,49 +98,49 @@ class SpecieVO implements VO {
     /**
      * @return string|null */
     public function getNomeScientifico(): ?string{
-        return $this->nomeScientifico;
+        return $this->nome_scientifico;
     }
 
     /**
-     * @param string|null $nomeScientifico */
-    public function setNomeScientifico(?string $nomeScientifico): void{
-        $this->nomeScientifico = $nomeScientifico;
+     * @param string|null $nome_scientifico */
+    public function setNomeScientifico(?string $nome_scientifico): void{
+        $this->nome_scientifico = $nome_scientifico;
     }
 
     /**
      * @return mixed */
     public function getNomeComune(){
-        return $this->nomeComune;
+        return $this->nome_comune;
     }
 
     /**
-     * @param mixed $nomeComune */
-    public function setNomeComune($nomeComune): void{
-        $this->nomeComune = $nomeComune;
+     * @param mixed $nome_comune */
+    public function setNomeComune($nome_comune): void{
+        $this->nome_comune = $nome_comune;
     }
 
     /**
      * @return int|null */
     public function getPesoMedio(): ?int{
-        return $this->pesoMedio;
+        return $this->peso_medio;
     }
 
     /**
-     * @param int|null $pesoMedio */
-    public function setPesoMedio(?int $pesoMedio): void{
-        $this->pesoMedio = $pesoMedio;
+     * @param int|null $peso_medio */
+    public function setPesoMedio(?int $peso_medio): void{
+        $this->peso_medio = $peso_medio;
     }
 
     /**
      * @return int|null */
     public function getAltezzaMedia(): ?int{
-        return $this->altezzaMedia;
+        return $this->altezza_media;
     }
 
     /**
-     * @param int|null $altezzaMedia */
-    public function setAltezzaMedia(?int $altezzaMedia): void{
-        $this->altezzaMedia = $altezzaMedia;
+     * @param int|null $altezza_media */
+    public function setAltezzaMedia(?int $altezza_media): void{
+        $this->altezza_media = $altezza_media;
     }
 
     /**

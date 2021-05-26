@@ -1,8 +1,8 @@
 <?php
 
 require_once __DIR__ . "/../DAO.php";
+require_once __DIR__ ."/PostVO.php";
 
-require_once "PostVO.php";
 class PostDAO extends DAO {
 
     private function getLikesByID(int $id) : int{

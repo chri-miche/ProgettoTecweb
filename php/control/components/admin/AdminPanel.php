@@ -35,9 +35,9 @@ class AdminPanel extends Component
     private static $entities = array(
         "utente" => "Utenti",
         "ordine" => "Ordine",
-        "specie" => "Specie",
         "famiglia" => "Famiglie",
         "genere" => "Genere",
+        "specie" => "Specie",
         "conservazione" => "Conservazione",
     );
 
@@ -75,7 +75,6 @@ class AdminPanel extends Component
     {
         $this->component = null;
         if (!isset($manage) || $this->manage == '') {
-            echo $manage;
             $this->component = new AdminWelcomePage();
         } else {
             $errors = [];
@@ -86,15 +85,46 @@ class AdminPanel extends Component
                     return;
                 case "ordine":
                     $dao = new OrdineDAO();
+                    if (sizeof($data) > 0) {
+                        $vo = new OrdineVO(...$data);
+                    } elseif (sizeof($keys) > 0) {
+                        $vo = $dao->get($keys['id']);
+                    } else {
+                        $vo = new OrdineVO();
+                    }
                     break;
                 case "famiglia":
                     $dao = new FamigliaDAO();
-                    break;
-                case "specie":
-                    $dao = new SpecieDAO();
+                    if (sizeof($data) > 0) {
+                        $errors = $this->checkFamiglia($data);
+                        $vo = new FamigliaVO(...$data);
+                    } elseif (sizeof($keys) > 0) {
+                        $vo = $dao->get($keys['id']);
+                    } else {
+                        $vo = new FamigliaVO();
+                    }
                     break;
                 case "genere":
                     $dao = new GenereDAO();
+                    if (sizeof($data) > 0) {
+                        $errors = $this->checkGenere($data);
+                        $vo = new GenereVO(...$data);
+                    } elseif (sizeof($keys) > 0) {
+                        $vo = $dao->get($keys['id']);
+                    } else {
+                        $vo = new GenereVO();
+                    }
+                    break;
+                case "specie":
+                    $dao = new SpecieDAO();
+                    if (sizeof($data) > 0) {
+                        $errors = $this->checkSpecie($data);
+                        $vo = new SpecieVO(...$data);
+                    } elseif (sizeof($keys) > 0) {
+                        $vo = $dao->get($keys['id']);
+                    } else {
+                        $vo = new SpecieVO();
+                    }
                     break;
                 case "conservazione":
                     $dao = new ConservazioneDAO();
@@ -214,6 +244,62 @@ class AdminPanel extends Component
             $errors['prob_estinzione'] = "La probabilità di estinzione deve essere un numero compresto tra 0 e 1.";
         } else {
             $data['prob_estinzione'] = floatval($data['prob_estinzione']);
+        }
+
+        return $errors;
+    }
+
+    private function checkFamiglia(array &$data)
+    {
+        $errors = [];
+
+        $ordinevo = (new OrdineDAO())->get($data['ord_id']);
+        if ($ordinevo->getId() === null) {
+            $errors['o_id'] = "L'identificativo dell'ordine non è valido. Si prega di inserire un ordine nel catalogo.";
+        } else {
+            unset($data['ord_id']);
+            $data['ordineVO'] = $ordinevo;
+        }
+
+        return $errors;
+    }
+
+    private function checkGenere(array &$data)
+    {
+        $errors = [];
+
+        $famigliavo = (new FamigliaDAO())->get($data['f_id']);
+
+        unset($data['f_id']);
+        if ($famigliavo->getId() === null) {
+            $errors['f_id'] = "L'identificativo della famiglia non è presente nel catalogo.";
+        } else {
+            $data['famigliaVO'] = $famigliavo;
+        }
+
+        return $errors;
+    }
+
+    private function checkSpecie(array &$data)
+    {
+        $errors = [];
+
+        $generevo = (new GenereDAO())->get($data['g_id']);
+
+        unset($data['g_id']);
+        if ($generevo->getId() === null) {
+            $errors['g_id'] = "L'identificativo del genere non è valido. Si prega di scegliere un genere presente nel catalogo";
+        } else {
+            $data['genereVO'] = $generevo;
+        }
+
+        $conservazionevo = (new ConservazioneDAO())->get($data['c_id']);
+
+        unset($data['c_id']);
+        if ($conservazionevo->getId() === null) {
+            $errors['c_id'] = "Il codice di conservazione non è valido: selezionarne uno catalogato.";
+        } else {
+            $data['conservazioneVO'] = $conservazionevo;
         }
 
         return $errors;

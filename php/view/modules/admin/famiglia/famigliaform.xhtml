@@ -1,18 +1,13 @@
 <form action="Admin.php?manage=famiglia&amp;operation={operation}" method="post">
-    <fieldset>
-        <legend>Chiavi</legend>
-        <div class="form-field">
-            <label for="tag_id"><abbr title="Codice identificativo">ID</abbr> <span xml:lang="en">tag</span></label>
-            <input id="tag_id" name="tag_id"  aria-label="Etichetta"
-                   placeholder="Una nuova etichetta verrà creata automaticamente" readonly="readonly" />
-        </div>
-    </fieldset>
+    <p>
+        {id}
+    </p>
     <fieldset>
         <legend>Campi dati</legend>
-        <div class="form-field" data-error="{ord_id_error}">
+        <div class="form-field" data-error="{o_id_error}">
             <label for="ord_id">Ordine</label>
             <input id="ord_id" name="ord_id"  aria-label="Ordine"
-                   placeholder="Codice ordine" required="required" value="{ord_id}" />
+                   placeholder="Codice ordine" required="required" value="{o_id}" />
         </div>
         <div class="form-field" data-error="{nome_scientifico_error}">
             <label for="nome_scientifico">Nome scientifico</label>

@@ -8,17 +8,17 @@
         /**@var int*/
         private $id;
         /**@var string*/
-        private $nomeScientifico;
+        private $nome_scientifico;
         /**@var FamigliaVO*/
         private $famigliaVO;
 
         /*** GenereVO constructor.
          * @param int|null $id
-         * @param string|null $nomeScientifico
+         * @param string|null $nome_scientifico
          * @param FamigliaVO|null $famigliaVO */
-        public function __construct(int $id = null, string $nomeScientifico = null, FamigliaVO $famigliaVO = null) {
+        public function __construct(int $id = null, string $nome_scientifico = null, FamigliaVO $famigliaVO = null) {
 
-            $this->id = $id; $this->nomeScientifico = $nomeScientifico;
+            $this->id = $id; $this->nome_scientifico = $nome_scientifico;
             $this->famigliaVO = $famigliaVO ?? new FamigliaVO();
 
         }
@@ -44,14 +44,14 @@
         /**
          * @return string */
         public function getNomeScientifico(): ?string{
-            return $this->nomeScientifico;
+            return $this->nome_scientifico;
         }
 
         /**
-         * @param string $nomeScientifico
+         * @param string $nome_scientifico
          */
-        public function setNomeScientifico(string $nomeScientifico): void{
-            $this->nomeScientifico = $nomeScientifico;
+        public function setNomeScientifico(string $nome_scientifico): void{
+            $this->nome_scientifico = $nome_scientifico;
         }
 
         /**

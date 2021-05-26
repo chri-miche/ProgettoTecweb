@@ -22,6 +22,7 @@ class VoTable extends Component
     public function build()
     {
         $vos = $this->dao->getAll();
+
         $content = '';
         foreach ($vos as $vo) {
             $content .= (new VoComponent($this->rowHtml, $vo))->build();

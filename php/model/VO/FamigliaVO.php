@@ -7,12 +7,12 @@
 
         private $id;
 
-        private $nomeScientifico;
+        private $nome_scientifico;
         private $ordineVO;
 
-        public function __construct(int $id = null, string $nomeScientifico = null, OrdineVO $ordineVO = null) {
+        public function __construct(int $id = null, string $nome_scientifico = null, OrdineVO $ordineVO = null) {
 
-            $this->id = $id; $this->nomeScientifico = $nomeScientifico;
+            $this->id = $id; $this->nome_scientifico = $nome_scientifico;
             $this->ordineVO = $ordineVO ?? new OrdineVO();
 
         }
@@ -36,13 +36,13 @@
         /** Getter per il nome scientifico.
          * @return string */
         public function getNomeScientifico(): string{
-            return $this->nomeScientifico;
+            return $this->nome_scientifico;
         }
 
         /** Setter per il nome scientifico.
-         * @param string $nomeScientifico */
-        public function setNomeScientifico(string $nomeScientifico): void{
-            $this->nomeScientifico = $nomeScientifico;
+         * @param string $nome_scientifico */
+        public function setNomeScientifico(string $nome_scientifico): void{
+            $this->nome_scientifico = $nome_scientifico;
         }
 
         /** Getter per ordine della famiglia.

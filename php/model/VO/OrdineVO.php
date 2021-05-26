@@ -4,10 +4,10 @@
     class OrdineVO implements VO {
 
         private $id;
-        private $nomeScientifico;
+        private $nome_scientifico;
 
-        public function __construct(int $id = null, string $nomeScientifico = null) {
-            $this->id = $id; $this->nomeScientifico = $nomeScientifico;
+        public function __construct(int $id = null, string $nome_scientifico = null) {
+            $this->id = $id; $this->nome_scientifico = $nome_scientifico;
         }
 
         public function __get($name){ return $this->$name ?? null; }
@@ -37,13 +37,13 @@
         /** Getter
          * @return string|null */
         public function getNomeScientifico(): ?string{
-            return $this->nomeScientifico;
+            return $this->nome_scientifico;
         }
 
         /** Setter
-         * @param string|null $nomeScientifico */
-        public function setNomeScientifico(?string $nomeScientifico): void{
-            $this->nomeScientifico = $nomeScientifico;
+         * @param string|null $nome_scientifico */
+        public function setNomeScientifico(?string $nome_scientifico): void{
+            $this->nome_scientifico = $nome_scientifico;
         }
 
 

@@ -74,7 +74,7 @@
             $parentDAO = new OrdineDAO();
             $parentVO = $element->getOrdineVO();
 
-            echo 'checkid:'. $parentDAO->checkId($parentVO);
+            // echo 'checkid:'. $parentDAO->checkId($parentVO);
 
             /** Se effettivamente esiste questo ordine a cui si fa rifermento.*/
             if($parentDAO->checkId($parentVO)) {

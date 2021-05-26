@@ -106,7 +106,7 @@
 
                 } else {
 
-                    $result = $this->performCall($element->smartDump(true), 'create_famiglia');
+                    $result = $this->performCall($element->smartDump(true), 'create_genere');
 
                     /** Se la query non è stata un fallimento.*/
                     if(!isset($result['failure']))

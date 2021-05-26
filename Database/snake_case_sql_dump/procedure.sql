@@ -337,7 +337,7 @@ BEGIN
 
 
 
-        INSERT INTO tag() VALUE (NULL); /* Da togliere unicità su nome tag.*/
+        INSERT INTO tag(id) VALUE (NULL); /* Da togliere unicità su nome tag.*/
 
         INSERT INTO genere (tag_id, fam_id, nome_scientifico) VALUE (LAST_INSERT_ID(), famiglia, nome_genere);
 

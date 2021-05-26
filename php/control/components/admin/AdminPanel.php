@@ -102,7 +102,6 @@ class AdminPanel extends Component
                         // try operation
                         $errors = $this->checkConservazione($data);
                         $vo = new ConservazioneVO(...$data);
-                        echo $vo->getprob_estinzione();
                     } elseif (sizeof($keys) > 0) {
                         // update
                         $vo = $dao->get($keys['id']);
@@ -214,7 +213,6 @@ class AdminPanel extends Component
         ) {
             $errors['prob_estinzione'] = "La probabilità di estinzione deve essere un numero compresto tra 0 e 1.";
         } else {
-            echo "Floatval di " . $data['prob_estinzione'].  " === a " . floatval($data['prob_estinzione']);
             $data['prob_estinzione'] = floatval($data['prob_estinzione']);
         }
 

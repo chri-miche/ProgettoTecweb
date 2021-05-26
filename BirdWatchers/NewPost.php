@@ -29,7 +29,9 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
             ));
             $content->commitFromProto();
             $content = $content->getUniqueFromProto();
+
             $id = $content->get('id');
+
             if (!isset($id)) {
                 throw new Exception("Inserimento non a buon fine");
             }
@@ -40,23 +42,27 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
             $post->commitFromProto();
 
             if (isset($_FILES['immagini-post'])) {
-                $folders = array(DIRECTORY_SEPARATOR . 'res',
-                    DIRECTORY_SEPARATOR . 'res'. DIRECTORY_SEPARATOR . 'PostImages');
-                $uploads_dir = DIRECTORY_SEPARATOR . 'res' . DIRECTORY_SEPARATOR . 'PostImages'. DIRECTORY_SEPARATOR . 'User' . $_POST['user-id'];
+
+                $folders = array('/res', '/res/PostImages');
+                $uploads_dir = '/res/PostImages/User' . $_POST['user-id'];
+
                 foreach ($_FILES["immagini-post"]["error"] as $key => $error) {
                     if ($error == UPLOAD_ERR_OK) {
-                        $rootParent = dirname(__DIR__);
+
+                        $rootParent = __DIR__;
 
                         $tmp_name = $_FILES["immagini-post"]["tmp_name"][$key];
                         // basename() may prevent filesystem traversal attacks;
                         // further validation/sanitation of the filename may be appropriate
                         $name = basename($_FILES["immagini-post"]["name"][$key]);
 
-                        $proposedPath = "$uploads_dir" . DIRECTORY_SEPARATOR . "$name";
+                        $proposedPath = "$uploads_dir/$name";
 
+                        echo $proposedPath;
 
                         foreach ($folders as $folder) {
                             if (!is_dir($rootParent.$folder) && !mkdir($rootParent.$folder)) {
+                                echo 'Error creating folder';
                                 throw new Exception("Error creating folder $uploads_dir");
                             }
                         }
@@ -68,7 +74,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
                         $tentativi = 0;
                         while (file_exists($rootParent.$proposedPath)) {
                             $tentativi++;
-                            $proposedPath = "$uploads_dir" . DIRECTORY_SEPARATOR . ($tentativi === 0 ? '' : $tentativi) . "$name";
+                            $proposedPath = "$uploads_dir/" . ($tentativi === 0 ? '' : $tentativi) . "$name";
                         }
 
                         if(move_uploaded_file($tmp_name, $rootParent.$proposedPath)) {

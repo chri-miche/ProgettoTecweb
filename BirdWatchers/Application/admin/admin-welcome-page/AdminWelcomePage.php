@@ -7,7 +7,7 @@ class AdminWelcomePage extends Component
 
     public function __construct()
     {
-        parent::__construct(file_get_contents(__ROOT__ . DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "admin" . DIRECTORY_SEPARATOR . "AdminWelcomePage.xhtml"));
+        parent::__construct(file_get_contents("AdminWelcomePage.xhtml"));
     }
 
     public function build()

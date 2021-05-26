@@ -1,18 +1,13 @@
 <form action="Admin.php?manage=specie&amp;operation={operation}" method="post">
-    <fieldset>
-        <legend>Chiavi</legend>
-        <div class="form-field">
-            <label for="tag_id"><abbr title="Codice identificativo">ID</abbr> <span xml:lang="en">tag</span></label>
-            <input id="tag_id" name="tag_id"  aria-label="Etichetta"
-                   placeholder="Una nuova etichetta verrà creata automaticamente" readonly="readonly"/>
-        </div>
-    </fieldset>
+    <p>
+        {id}
+    </p>
     <fieldset>
         <legend>Campi dati</legend>
-        <div class="form-field" data-error="{gen_id_error}">
-            <label for="gen_id">Genere</label>
-            <input id="gen_id" name="gen_id"  aria-label="Genere"
-                   placeholder="Genere" required="required" value="{gen_id}" />
+        <div class="form-field" data-error="{g_id_error}">
+            <label for="g_id">Genere</label>
+            <input id="g_id" name="g_id"  aria-label="Genere"
+                   placeholder="Genere" required="required" value="{g_id}" />
         </div>
         <div class="form-field" data-error="{nome_scientifico_error}">
             <label for="nome_scientifico">Nome scientifico</label>
@@ -31,10 +26,10 @@
                    aria-label="percorso_immagine" placeholder="percorso_immagine" required="required" value="{percorso_immagine}" />
         </div>
         -->
-        <div class="form-field" data-error="{conservazione_id_error}">
-            <label for="conservazione_id">Conservazione</label>
-            <input id="conservazione_id" name="conservazione_id"  aria-label="Conservazione"
-                   placeholder="Conservazione" required="required" value="{conservazione_id}" />
+        <div class="form-field" data-error="{c_id_error}">
+            <label for="c_id">Conservazione</label>
+            <input id="c_id" name="c_id"  aria-label="Conservazione"
+                   placeholder="Conservazione" required="required" value="{c_id}" />
         </div>
         <div class="form-field" data-error="{peso_medio_error}">
             <label for="peso_medio">Peso medio</label>
@@ -46,7 +41,7 @@
             <input id="altezza_media" name="altezza_media"  aria-label="Altezza media"
                    placeholder="Altezza media" required="required" value="{altezza_media}" />
         </div>
-        <div class="form-field">
+        <div class="form-field" data-error="">
             <label for="descrizione">Descrizione</label>
             <input id="descrizione" name="descrizione"  aria-label="Descrizione"
                    placeholder="Descrizione" required="required" value="{descrizione}" />

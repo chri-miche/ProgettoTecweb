@@ -7,10 +7,10 @@
     require_once __ROOT__ . '\model\DAO\GenereDAO.php';
     require_once __ROOT__ . '\model\DAO\OrdineDAO.php';
     require_once __ROOT__ . '\model\DAO\SpecieDAO.php';
-    require_once __ROOT__.'\model\DAO\ConservazioneDAO.php';
+    require_once __ROOT__ . '\model\DAO\ConservazioneDAO.php';
 
-require_once __ROOT__.'\model\DAO\PostDAO.php';
-require_once __ROOT__.'\model\DAO\CommentoDAO.php';
+require_once __ROOT__ . '\model\DAO\PostDAO.php';
+require_once __ROOT__ . '\model\DAO\CommentoDAO.php';
 
 
     $cDAO = new ConservazioneDAO();

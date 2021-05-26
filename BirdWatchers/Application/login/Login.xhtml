@@ -1,0 +1,37 @@
+
+<div id="login-page">
+    <!-- Div of form. -->
+    <div id="form-container">
+
+        <img src="res/Images/babybeng.jpg" alt="" />
+        <h1>Accedi</h1>
+
+        <form action="../../Login.php" method="post" name="login">
+
+            <fieldset>
+                <legend> Credenziali   </legend>
+                <label for="email">E-Mail</label>
+                <input id="email"
+                       type="text"
+                       name="email"
+                       required="required"
+                       aria-label="email"
+                       placeholder="E-Mail"/>
+
+                <label for="password" xml:lang="en">Password</label>
+                <div id="password-login">
+                    <input id="password" type="password" name="password" required="required"
+                       aria-label="Password"
+                       xml:lang="en"
+                       placeholder="Password"/>
+                </div>
+            </fieldset>
+
+            <button name="submit" type="submit" xml:lang="en" >Log in</button>
+
+        </form>
+
+        <p> Non hai un <span xml:lang="en">account</span>? <a href='Register.php'>Registrati!</a> </p>
+
+    </div>
+</div>

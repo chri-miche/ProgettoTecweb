@@ -58,7 +58,7 @@ class SiteBar extends Component {
 
             if($this->user->getAdmin()) {
 
-                $actions[] = ['Pannello di amministrazione', 'adminPanel.php'];
+                $actions[] = ['Pannello di amministrazione', 'admin.php'];
 
             }
 

@@ -1,13 +1,13 @@
 <?php
 
 
-require_once __ROOT__ . DIRECTORY_SEPARATOR . "control" . DIRECTORY_SEPARATOR . "components" . DIRECTORY_SEPARATOR . "Component.php";
+require_once __DIR__ . "/../../Component.php";
 class AdminWelcomePage extends Component
 {
 
     public function __construct()
     {
-        parent::__construct(file_get_contents("AdminWelcomePage.xhtml"));
+        parent::__construct(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "AdminWelcomePage.xhtml"));
     }
 
     public function build()

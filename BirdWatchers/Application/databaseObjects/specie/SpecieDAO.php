@@ -32,7 +32,7 @@ class SpecieDAO extends DAO {
 
                 /** Creazione di un genere. Che a sua volta crea la conservazione e sua volta l ordine.*/
                 $element['genereVO'] = new GenereVO( $element['genere'], $element['nome_scientifico_genere'],
-                    new FamigliaVO($element['conservazione'], $element['nome_scientifico_famiglia'],
+                    new FamigliaVO($element['famiglia'], $element['nome_scientifico_famiglia'],
                         new OrdineVO($element['ordine'],  $element['nome_scientifico_ordine'])));
 
                 /** Creazione di stato estinzione.*/
@@ -43,7 +43,7 @@ class SpecieDAO extends DAO {
                 /** Scartiamo gli attributi non più necessari.*/
                 unset($element['genere'], $element['nome_scientifico_genere'],
                     $element['conservazione'],  $element['nome_scientifico_famiglia'],
-                    $element['ordine'], $element['nome_scientifico_ordine']);
+                    $element['ordine'], $element['nome_scientifico_ordine'], $element['famiglia']);
 
                 unset($element['conservazione'],$element['nome'],
                     $element['prob_estinzione'], $element['descrizione']);

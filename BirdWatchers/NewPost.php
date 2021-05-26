@@ -45,7 +45,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
                 $uploads_dir = DIRECTORY_SEPARATOR . 'res' . DIRECTORY_SEPARATOR . 'PostImages'. DIRECTORY_SEPARATOR . 'User' . $_POST['user-id'];
                 foreach ($_FILES["immagini-post"]["error"] as $key => $error) {
                     if ($error == UPLOAD_ERR_OK) {
-                        $rootParent = dirname(__ROOT__);
+                        $rootParent = dirname(__DIR__);
 
                         $tmp_name = $_FILES["immagini-post"]["tmp_name"][$key];
                         // basename() may prevent filesystem traversal attacks;

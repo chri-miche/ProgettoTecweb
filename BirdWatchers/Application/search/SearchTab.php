@@ -14,7 +14,7 @@ class SearchTab extends BasePage {
     private $keyword; private $entity;
 
     public function __construct($keyword, $entity, $currentPage = 0) {
-        parent::__construct(file_get_contents("SearchTab.xhtml"));
+        parent::__construct(file_get_contents(__DIR__ ."/SearchTab.xhtml"));
 
         $this->keyword = addslashes($keyword);
         $this->entity = $entity;
@@ -25,18 +25,18 @@ class SearchTab extends BasePage {
                 $giveVOArray = (new CommentoDAO())->search("%$this->keyword%");
                 /** @var CommentoVO $comment*/
 
-                $layout = file_get_contents("CommentCard.xhtml"); break;
+                $layout = file_get_contents(__DIR__ ."/CommentCard.xhtml"); break;
 
             case "specie":
 
                 $giveVOArray = (new SpecieDAO())->search("%$this->keyword%");
-                $layout = file_get_contents("SpecieCard.xhtml"); break;
+                $layout = file_get_contents(__DIR__ ."/SpecieCard.xhtml"); break;
 
             case "post":
             default:
 
                 $giveVOArray = (new PostDAO())->search("%$this->keyword%");
-                $layout = file_get_contents("PostCard.xhtml");
+                $layout = file_get_contents(__DIR__ ."/PostCard.xhtml");
 
         }
 

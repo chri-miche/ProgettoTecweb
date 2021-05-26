@@ -4,31 +4,16 @@ require_once "utenti/UtenteTable.php";
 require_once "utenti/UtenteRow.php";
 require_once "utenti/UtenteForm.php";
 require_once "utenti/ConfirmDeleteUtente.php";
-require_once "SuccessLandingPage.php";
-require_once "FailureLandingPage.php";
+require_once "landing-page" . DIRECTORY_SEPARATOR . "SuccessLandingPage.php";
+require_once "landing-page" . DIRECTORY_SEPARATOR . "FailureLandingPage.php";
 require_once "VoTable.php";
 require_once "VoForm.php";
 require_once "VoComponent.php";
-require_once __ROOT__
-    . DIRECTORY_SEPARATOR . "model"
-    . DIRECTORY_SEPARATOR . "DAO"
-    . DIRECTORY_SEPARATOR . "OrdineDAO.php";
-require_once __ROOT__
-    . DIRECTORY_SEPARATOR . "model"
-    . DIRECTORY_SEPARATOR . "DAO"
-    . DIRECTORY_SEPARATOR . "ConservazioneDAO.php";
-require_once __ROOT__
-    . DIRECTORY_SEPARATOR . "model"
-    . DIRECTORY_SEPARATOR . "DAO"
-    . DIRECTORY_SEPARATOR . "FamigliaDAO.php";
-require_once __ROOT__
-    . DIRECTORY_SEPARATOR . "model"
-    . DIRECTORY_SEPARATOR . "DAO"
-    . DIRECTORY_SEPARATOR . "GenereDAO.php";
-require_once __ROOT__
-    . DIRECTORY_SEPARATOR . "model"
-    . DIRECTORY_SEPARATOR . "DAO"
-    . DIRECTORY_SEPARATOR . "SpecieDAO.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "databaseObjects/ordine/OrdineDAO.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "databaseObjects/conservazione/ConservazioneDAO.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "databaseObjects/famiglia/FamigliaDAO.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "databaseObjects/genere/GenereDAO.php";
+require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "databaseObjects/specie/SpecieDAO.php";
 
 class AdminPanel extends Component
 {
@@ -56,11 +41,7 @@ class AdminPanel extends Component
 
     public function __construct(string $manage = "", string $operation = "list", array $keys = [], array $data = [])
     {
-        parent::__construct(file_get_contents(__ROOT__ .
-            DIRECTORY_SEPARATOR . 'view' .
-            DIRECTORY_SEPARATOR . 'modules' .
-            DIRECTORY_SEPARATOR . 'admin' .
-            DIRECTORY_SEPARATOR . 'AdminPanel.xhtml'));
+        parent::__construct(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "AdminPanel.xhtml"));
 
         $this->manage = $manage;
 
@@ -208,12 +189,9 @@ class AdminPanel extends Component
         $htmls = [];
         $ways = ['table', 'form', 'row', 'confirmdelete'];
         foreach ($ways as $way) {
-            $htmls[$way] = file_get_contents(__ROOT__ .
-                DIRECTORY_SEPARATOR . 'view' .
-                DIRECTORY_SEPARATOR . 'modules' .
-                DIRECTORY_SEPARATOR . 'admin' .
-                DIRECTORY_SEPARATOR . $table .
-                DIRECTORY_SEPARATOR . $table . $way . '.xhtml');
+            $htmls[$way] = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR .
+                $table . DIRECTORY_SEPARATOR .
+                $table . $way . '.xhtml');
         }
         return $htmls;
     }

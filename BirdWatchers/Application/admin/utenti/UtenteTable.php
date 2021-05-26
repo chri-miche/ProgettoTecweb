@@ -8,7 +8,7 @@ class UtenteTable extends Component
 
     public function __construct()
     {
-        parent::__construct(file_get_contents("utentetable.xhtml"));
+        parent::__construct(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "utentetable.xhtml"));
         $this->users = (new UserDAO())->getAll();
     }
 

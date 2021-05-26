@@ -10,7 +10,7 @@ class UtenteForm extends Component
 
     public function __construct(UserVO $user)
     {
-        parent::__construct(file_get_contents("utenteform.xhtml"));
+        parent::__construct(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "utenteform.xhtml"));
         $this->user = $user;
     }
 

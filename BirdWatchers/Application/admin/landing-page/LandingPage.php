@@ -8,7 +8,7 @@ class LandingPage extends Component {
 
     public function __construct($manage, $message, $result)
     {
-        parent::__construct(file_get_contents(__ROOT__.'/view/modules/admin/LandingPage.xhtml'));
+        parent::__construct(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'LandingPage.xhtml'));
         $this->manage = $manage;
         $this->message = $message;
         $this->result = $result;

@@ -10,7 +10,7 @@ class UtenteRow extends Component
 
     public function __construct(UserVO $userVO)
     {
-        parent::__construct(file_get_contents("utenterow.xhtml"));
+        parent::__construct(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "utenterow.xhtml"));
         $this->userVO = $userVO;
     }
 

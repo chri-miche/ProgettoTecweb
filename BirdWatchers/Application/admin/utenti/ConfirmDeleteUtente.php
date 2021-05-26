@@ -10,7 +10,7 @@ class ConfirmDeleteUtente extends Component
 
     public function __construct(UserVO $vo)
     {
-        parent::__construct(file_get_contents("confirmdeleteutente.xhtml"));
+        parent::__construct(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "confirmdeleteutente.xhtml"));
         $this->vo = $vo;
     }
 

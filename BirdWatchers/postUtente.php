@@ -22,7 +22,7 @@ $page->addComponent(new BreadCrumb(array('Utente' => 'UserPage.php?id='.$pageUse
 
 $page->addComponent(new Title("Post pubblicati",null, "I post che l'utente ha pubblicato sulla piattaforma."));
 
-$tagPreviewLayout = file_get_contents(__ROOT__. DIRECTORY_SEPARATOR . "view" . DIRECTORY_SEPARATOR . "modules" . DIRECTORY_SEPARATOR . "user" . DIRECTORY_SEPARATOR . "PostCard.xhtml");
+$tagPreviewLayout = file_get_contents(__DIR__. "/Application/feed/postCard/PostCard.xhtml");
 
 $postList = (new PostDAO())->getOfUtente($pageUser->getId());
 

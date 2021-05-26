@@ -1,1 +1,2 @@
-ErrorDocument 404 /error.php?code=404&name=missingPage&messagge=a
+ErrorDocument 404 /html/error404.xhtml
+ErrorDocument 403 /html/error403.xhtml

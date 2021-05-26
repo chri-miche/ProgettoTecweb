@@ -81,6 +81,7 @@ class AdminPanel extends Component
             $errors = [];
             switch ($manage) {
                 case "utente":
+                    // caso speciale
                     $this->doUserInit($operation, $data, $keys);
                     return;
                 case "ordine":
@@ -98,28 +99,15 @@ class AdminPanel extends Component
                 case "conservazione":
                     $dao = new ConservazioneDAO();
                     if (sizeof($data) > 0) {
-                        // crea da 0
+                        // try operation
                         $errors = $this->checkConservazione($data);
-                        if (sizeof($errors) == 0) {
-                            $vo = new ConservazioneVO(...$data);
-
-                            if (!$dao->save($vo)) {
-                                $this->component = new FailureLandingPage($manage);
-                            } else {
-                                $this->component = new SuccessLandingPage($manage);
-                            }
-                            return;
-                        } else {
-                            if ($operation === 'create') {
-                                $vo = new ConservazioneVO();
-                            } else {
-                                $vo = $dao->get($data['id']);
-                            }
-                        }
+                        $vo = new ConservazioneVO(...$data);
+                        echo $vo->getprob_estinzione();
                     } elseif (sizeof($keys) > 0) {
-                        // edit
+                        // update
                         $vo = $dao->get($keys['id']);
                     } else {
+                        // create
                         $vo = new ConservazioneVO();
                     }
                     break;
@@ -132,10 +120,9 @@ class AdminPanel extends Component
 
             switch ($operation) {
                 case "delete":
-                    try {
-                        $dao->delete($vo);
+                    if ($dao->delete($vo)) {
                         $this->component = new SuccessLandingPage($manage);
-                    } catch (Exception $exception) {
+                    } else {
                         $this->component = new FailureLandingPage($manage);
                     }
                     break;
@@ -144,7 +131,16 @@ class AdminPanel extends Component
                     break;
                 case "create":
                 case "update":
-                    $this->component = new VoForm($htmls['form'], $vo, $errors, $operation);
+                    if (sizeof($data) > 0 && sizeof($errors) == 0) {
+                        // operation successful
+                        if ($dao->save($vo)) {
+                            $this->component = new SuccessLandingPage($manage);
+                        } else {
+                            $this->component = new FailureLandingPage($manage);
+                        }
+                    } else {
+                        $this->component = new VoForm($htmls['form'], $vo, $errors, $operation);
+                    }
                     break;
                 case "list":
                 default:
@@ -218,6 +214,7 @@ class AdminPanel extends Component
         ) {
             $errors['prob_estinzione'] = "La probabilità di estinzione deve essere un numero compresto tra 0 e 1.";
         } else {
+            echo "Floatval di " . $data['prob_estinzione'].  " === a " . floatval($data['prob_estinzione']);
             $data['prob_estinzione'] = floatval($data['prob_estinzione']);
         }
 

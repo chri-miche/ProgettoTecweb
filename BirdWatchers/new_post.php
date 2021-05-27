@@ -98,7 +98,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
     });
 
     if ($result) {
-        header("Location: PostPage.php?id=$redirectID");
+        header("Location: post_page.php?id=$redirectID");
         exit;
     } else {
         $page->addComponent(new PostForm($sessionUser, $_POST));

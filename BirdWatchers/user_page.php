@@ -50,7 +50,7 @@ $page = new BasePage($basePage);
 $page->addComponent(new SiteBar('User'));
 $page->addComponent(new BreadCrumb(array('Utente' => '')));
 
-$page->addComponent(new Profile($_GET['id'] ?? -1, 'UserPage.php?id='));
+$page->addComponent(new Profile($_GET['id'] ?? -1, 'user_page.php?id='));
 
 echo $page;
 

@@ -46,7 +46,7 @@ define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
         }
 
         if(isset($transaction) && !$transaction)
-            header("Location: PostPage.php?id=".$postVO->getId());
+            header("Location: post_page.php?id=".$postVO->getId());
 
         $page->addComponent(new Post($postVO, $sessionUser));
 

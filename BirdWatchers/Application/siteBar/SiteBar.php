@@ -51,7 +51,7 @@ class SiteBar extends Component {
             $contentHTML = file_get_contents(__DIR__ . "/LoggedInActions.xhtml");
 
             $actions = [
-                ['Profilo', 'UserPage.php?id={userid}'],
+                ['Profilo', 'user_page.php?id={userid}'],
                 ['<span xml:lang="en">Logout</span>', 'logout.php'],
                 ['Nuovo post', 'newpost.php']
             ];

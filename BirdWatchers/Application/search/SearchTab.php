@@ -40,7 +40,7 @@ class SearchTab extends BasePage {
 
         }
 
-        $this->addComponent(new GenericBrowser($giveVOArray, $layout, "Search.php?",$currentPage));
+        $this->addComponent(new GenericBrowser($giveVOArray, $layout, "search.php?",$currentPage));
     }
 
     public function resolveData() {
@@ -49,7 +49,7 @@ class SearchTab extends BasePage {
             "{post}" => $this->entity === 'post' ? '" aria-selected="true" type="button' : '" aria-selected="false" type="submit',
             "{specie}" => $this->entity === 'specie' ? '"  aria-selected="true" type="button' : '" aria-selected="false" type="submit',
             "{commento}" => $this->entity === 'commento' ? '" aria-selected="true" type="button' : '" aria-selected="false" type="submit',
-            'action="Search.php?entity=' . $this->entity  . '"' => '',
+            'action="search.php?entity=' . $this->entity  . '"' => '',
             "{entity}" => $this->entity,
         );
     }

@@ -18,7 +18,7 @@ $pageUser = (new UserDAO())->get($id);
 
 $page->addComponent(new SiteBar('PostUtente'));
 
-$page->addComponent(new BreadCrumb(array('Utente' => 'UserPage.php?id='.$pageUser->getId(), 'I Post di: '. $pageUser->getNome()=>'')));
+$page->addComponent(new BreadCrumb(array('Utente' => 'user_page.php?id='.$pageUser->getId(), 'I Post di: '. $pageUser->getNome()=>'')));
 
 $page->addComponent(new Title("Post pubblicati",null, "I post che l'utente ha pubblicato sulla piattaforma."));
 
@@ -27,7 +27,7 @@ $tagPreviewLayout = file_get_contents(__DIR__. "/Application/feed/postCard/PostC
 $postList = (new PostDAO())->getOfUtente($pageUser->getId());
 
 $page->addComponent(new GenericBrowser($postList, $tagPreviewLayout,
-    'postUtente.php?usid='.$pageUser->getId()."&", $_GET['page'] ?? 0, 8));
+    'post_utente.php?usid='.$pageUser->getId()."&", $_GET['page'] ?? 0, 8));
 
 echo $page;
 

@@ -7,7 +7,7 @@
         public function get($id) {
 
             $result = $this->performCall(array($id), 'get_user');
-            return isset($result['failure']) ? new UserVO() : new UserVO(...$result);
+            return isset($result['failure']) ? new UserVO() : new UserVO(...array_values($result));
 
         }
 
@@ -19,7 +19,7 @@
             if(isset($result['failure'])) return $VOArray;
 
             foreach ($result as $element)
-                $VOArray [] = new UserVO(...$element);
+                $VOArray [] = new UserVO(...array_values($element));
 
             return $VOArray;
 
@@ -27,7 +27,7 @@
         public function getFromLogin(string $email, string $password) : UserVO{
 
             $result = $this->performCall(array($email, $password), 'get_user_from_login');
-            return isset($result['failure'])?  new UserVO() : new UserVO(...$result);
+            return isset($result['failure'])?  new UserVO() : new UserVO(...array_values($result));
 
         }
 
@@ -60,7 +60,7 @@
                     $result = $this->performCall($element->smartDump(true), 'create_user');
 
                     if(!isset($result['failure'])) /* Se non è stato un fallimento.*/
-                        $element = new $element(...$result, ...$element->varDumps(true));
+                        $element = new $element(...array_values($result), ...$element->varDumps(true));
 
                     return !is_null($element->getId());
                 }
@@ -111,7 +111,7 @@
 
             if(!isset($result['failure']))
                 foreach ($result as $element)
-                    $VOArray [] = new UserVO(...$element);
+                    $VOArray [] = new UserVO(...array_values($element));
 
             return $VOArray;
 

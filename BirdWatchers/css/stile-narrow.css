@@ -363,7 +363,7 @@ fieldset {
 
 #login-page {
     width: 100%;
-    background-image: url("/Progetto/ProgettoTecweb/res/Images/loginwallpaper.jpg");
+    background-image: url("/res/Images/loginwallpaper.jpg");
     display: flex;
     justify-content: center;
     align-items: center;

@@ -58,7 +58,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
 
                         $proposedPath = "$uploads_dir/$name";
 
-                        echo $proposedPath;
+                        // echo $proposedPath;
 
                         foreach ($folders as $folder) {
                             if (!is_dir($rootParent.$folder) && !mkdir($rootParent.$folder)) {

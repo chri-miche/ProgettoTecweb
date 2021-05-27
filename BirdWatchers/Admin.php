@@ -1,6 +1,10 @@
 <?php
 
+
+define('__IMGROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "res");
+
 require_once "standardLayoutIncludes.php";
+require_once "filters.php";
 require_once __DIR__ . DIRECTORY_SEPARATOR . "Application" . DIRECTORY_SEPARATOR . "admin" . DIRECTORY_SEPARATOR . "admin-welcome-page" . DIRECTORY_SEPARATOR . "AdminWelcomePage.php";
 require_once __DIR__ . DIRECTORY_SEPARATOR . "Application" . DIRECTORY_SEPARATOR . "admin" . DIRECTORY_SEPARATOR . "AdminPanel.php";
 require_once __DIR__ . DIRECTORY_SEPARATOR . "Application" . DIRECTORY_SEPARATOR . "SessionUser.php";
@@ -23,6 +27,10 @@ if ($sessionUser->userIdentified() && $sessionUser->getAdmin()) {
         if ($key != "manage" && $key != "operation") {
             $keys[$key] = $value;
         }
+    }
+
+    if (isset($_FILES['immagine'])) {
+        $data['file_immagine'] = $_FILES['immagine'];
     }
 
     $page->addComponent(new BreadCrumb(array("Amministrazione" => "")));

@@ -330,7 +330,7 @@ ul {
 #actions {
     padding-left: 1em;
     padding-right: 1em;
-    background-image: url('/Progetto/ProgettoTecweb/res/Images/banner.jpg');
+    background-image: url('/res/Images/banner.jpg');
     display: flex;
     align-items: center;
 }
@@ -479,7 +479,7 @@ a.breadcrumb-item:visited:hover {
 
 #login-page {
     width: 100%;
-    background-image: url("/Progetto/ProgettoTecweb/res/Images/loginwallpaper.jpg");
+    background-image: url("/res/Images/loginwallpaper.jpg");
     display: flex;
     justify-content: center;
     align-items: center;

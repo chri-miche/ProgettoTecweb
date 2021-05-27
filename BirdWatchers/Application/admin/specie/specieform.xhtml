@@ -1,4 +1,4 @@
-<form action="Admin.php?manage=specie&amp;operation={operation}" method="post">
+<form action="Admin.php?manage=specie&amp;operation={operation}" method="post" enctype="multipart/form-data">
     <p>
         {id}
     </p>
@@ -19,13 +19,16 @@
             <input id="nome_comune" name="nome_comune"  aria-label="Nome comune"
                    placeholder="Nome comune" value="{nome_comune}" />
         </div>
-        <!-- TODO
-        <div class="form-field" data-error="{percorso_immagine_error}">
-            <label for="percorso_immagine">Immagine</label>
-            <input id="percorso_immagine" name="percorso_immagine" alt="percorso_immagine"
-                   aria-label="percorso_immagine" placeholder="percorso_immagine" required="required" value="{percorso_immagine}" />
+
+        <div class="form-field" data-error="">
+            <label for="immagine">Immagine</label>
+            <input id="immagine"
+                   type="file"
+                   name="immagine"
+                   accept="image/x-png,image/gif,image/jpeg"
+                   aria-label="Immagine specie"
+                   alt="Immagine specie" />
         </div>
-        -->
         <div class="form-field" data-error="{c_id_error}">
             <label for="c_id">Conservazione</label>
             <input id="c_id" name="c_id"  aria-label="Conservazione"

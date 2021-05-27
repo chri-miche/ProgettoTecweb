@@ -8,6 +8,16 @@
     <td>{peso_medio}</td>
     <td>{altezza_media}</td>
     <td>{descrizione}</td>
-    <th class="action">Modifica</th>
-    <th class="action">Elimina</th>
+    <td class="action">
+        <a class="icon-button" href="admin.php?manage=specie&amp;operation=update&amp;id={id}" title="Modifica"
+           data-icon-name="edit">
+            <span>Modifica</span>
+        </a>
+    </td>
+    <td class="action">
+        <a class="icon-button" href="admin.php?manage=specie&amp;operation=confirm-delete&amp;id={id}" title="Elimina"
+           data-icon-name="delete">
+            <span>Elimina</span>
+        </a>
+    </td>
 </tr>

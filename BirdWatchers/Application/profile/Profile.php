@@ -45,7 +45,7 @@ class Profile extends Component {
         $postLayout = file_get_contents(__DIR__ . "/PostCard.xhtml");
         if(sizeof($postVOArray) > 0){
             $userPost .= (new PreviewsPage($postVOArray, $postLayout))->returnComponent();
-            $userPost .= "<a href='postUtente.php?usid=".$this->user->getId() ."'>Vedi tutti i post dell'utente.</a>";
+            $userPost .= "<a href='post_utente.php?usid=".$this->user->getId() ."'>Vedi tutti i post dell'utente.</a>";
         } else
             $userPost .= '<img src="\res\images\wow-such-empty.png" alt="Questo utente non ha ancora postato nulla" />';
 

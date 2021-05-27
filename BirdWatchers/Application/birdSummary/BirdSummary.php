@@ -22,7 +22,7 @@ class BirdSummary extends PageFiller {
 
     function build() {
         // Pagina statica quindi ci sono solo sostituzioni.
-        if(!($this->specieVO->getId())) header('Location: Catalogo.php');
+        if(!($this->specieVO->getId())) header('Location: catalogo.php');
         /** Swap variables in fields.*/
         return parent::build();
 

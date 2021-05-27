@@ -46,11 +46,15 @@
             if($this->user->userIdentified())
                 header($this->redirect);
 
-            if($this->invalid) /* Errore nelle credenziali. */
-                echo 'Email già registrata nel nostro sito.';
+            $html = $this->baseLayout();
+            if($this->invalid) {/* Errore nelle credenziali. */
+                $html = str_replace('{email_error}', 'Email già registrata nel nostro sito.', $html);
+            } else {
+                $html = str_replace('{email_error}', '', $html);
+            }
 
-
-            return $this->baseLayout();
+            return $html;
 
          }
     }
+?>

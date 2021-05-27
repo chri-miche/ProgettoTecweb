@@ -11,7 +11,7 @@ $basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
 $page = new BasePage($basePage);
 
 $page->addComponent(new SiteBar("uccello"));
-$page->addComponent(new BreadCrumb(array("Catalogo" => "Catalogo.php", "Uccello" => "")));
+$page->addComponent(new BreadCrumb(array("Catalogo" => "catalogo.php", "Uccello" => "")));
 
 isset($_GET['id']) ? $id = $_GET['id'] : $id = null;
 

@@ -33,7 +33,7 @@ body {
     line-height: 1.5;
     margin: 0;
     flex: 1 1 auto;
-    background: whitesmoke url('http://localhost/res/Images/6-opaco.jpg');
+    background: whitesmoke url('../res/Images/6-opaco.jpg');
 
 }
 
@@ -330,7 +330,7 @@ ul {
 #actions {
     padding-left: 1em;
     padding-right: 1em;
-    background-image: url('/res/Images/banner.jpg');
+    background-image: url('../res/Images/banner.jpg');
     display: flex;
     align-items: center;
 }
@@ -479,7 +479,7 @@ a.breadcrumb-item:visited:hover {
 
 #login-page {
     width: 100%;
-    background-image: url("/res/Images/loginwallpaper.jpg");
+    background-image: url("../res/Images/loginwallpaper.jpg");
     display: flex;
     justify-content: center;
     align-items: center;
@@ -625,7 +625,7 @@ th.action, td.action {
 /* #begin image slideshow */
 .image-slideshow, .image-slideshow:target ~ #image-0 {
     display: none;
-    background-image: url('http://localhost/res/Images/6-opaco.jpg');
+    background-image: url('../res/Images/6-opaco.jpg');
 }
 
 #image-0, .image-slideshow:target {

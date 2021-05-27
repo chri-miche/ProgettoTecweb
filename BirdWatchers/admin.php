@@ -40,7 +40,7 @@ if ($sessionUser->userIdentified() && $sessionUser->getAdmin()) {
 
     echo $page->build();
 } else {
-    header("Location: Login.php");
+    header("Location: login.php");
 }
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 require_once "standardLayoutIncludes.php";
-require_once __DIR__ . "/Application/catalogo/Catalogo.php";
+require_once __DIR__ . "/Application/catalogo/catalogo.php";
 
 require_once __DIR__ . "/Application/databaseObjects/specie/SpecieDAO.php";
 

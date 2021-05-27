@@ -7,14 +7,14 @@
         <img src="res/Images/kiwi.jpg" alt="" />
         <h1>Registrati</h1>
 
-        <form id='register' action="Register.php" method="post" name="register" onsubmit="return checkPasswordMatch()">
+        <form id='register' action="register.php" method="post" name="register" onsubmit="return checkPasswordMatch()">
 
             <div id="username_form_field" class="form-field" data-error="">
                 <label for="username">Nome utente</label>
                 <input type="text" id="username" name="username" placeholder="Nome utente" required="required" />
             </div>
 
-            <div id="email_form_field" class="form-field" data-error="">
+            <div id="email_form_field" class="form-field" data-error="{email_error}">
                 <label for="email">Indirizzo <span xml:lang="en">e-mail</span></label>
                 <input type="text" id="email" name="email" placeholder="Email" required="required" />
             </div>
@@ -33,7 +33,7 @@
 
         </form>
 
-        <p> Già registrato? <a href='Login.php'> Accedi! </a> </p>
+        <p> Già registrato? <a href='login.php'> Accedi! </a> </p>
 
     </div>
 </div>

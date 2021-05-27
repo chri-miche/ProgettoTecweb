@@ -99,6 +99,7 @@ class AdminPanel extends Component
                 case "specie":
                     $dao = new SpecieDAO();
                     if (sizeof($data) > 0) {
+                        $this->savePhoto($data);
                         $errors = $this->checkSpecie($data);
                         $vo = new SpecieVO(...$data);
                     } elseif (sizeof($keys) > 0) {
@@ -281,6 +282,42 @@ class AdminPanel extends Component
         }
 
         return $errors;
+    }
+
+    private function savePhoto(&$data) {
+
+        $tmp_name = $data['file_immagine']['tmp_name'];
+
+        $name = $data['file_immagine']['name'];
+
+        $pathArray = ['catalogo', sanitize_fs_entity($data['nome_scientifico'])];
+
+        $baseDir = "";
+
+        foreach ($pathArray as $item) {
+            $baseDir .= DIRECTORY_SEPARATOR . $item;
+            if (!is_dir(__IMGROOT__ . $baseDir) && !mkdir(__IMGROOT__ . $baseDir)) {
+                throw new Exception("Non sono riuscito a creare la cartella $baseDir. Per favore, riprovare.");
+            }
+        }
+        $proposedPath = $baseDir . DIRECTORY_SEPARATOR . $name;
+
+        $tentativi = 0;
+        while (file_exists(__IMGROOT__ . $proposedPath)) {
+            $tentativi++;
+            $proposedPath = $baseDir . DIRECTORY_SEPARATOR . $tentativi . $name;
+        }
+
+        echo $proposedPath;
+
+        if (move_uploaded_file($tmp_name, __IMGROOT__ . $proposedPath)) {
+            unset($data['file_immagine']);
+            $data['immagine'] = str_replace('\\', '/',"res" . $proposedPath);
+        } else {
+            throw new Exception("Non sono riuscito a creare il file $proposedPath.");
+        }
+
+
     }
 }
 ?>

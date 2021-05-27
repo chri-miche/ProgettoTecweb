@@ -1,10 +1,10 @@
 #TODO
 - CONTENUTO GENERALE migliorare la navigazione
-- CONTENUTO ADMIN se la tabella è vuota mettere such empty (oppure togliere such empty e mettere un messaggio del tipo "Nessun risultato?")
 - LAYOUT unificare input ricerca e inserimento messaggio
 - LAYOUT ADMIN sistemare visualizzazione
 - LAYOUT link e bottoni diversi! (ok discorso rottura convenzioni esterne ma meglio non troppo) link = mat-button ; button = mat-raised-button
 - LAYOUT icone foto resize carino
+- NEW POST togliere persistent mettere dao
 
 #TODO CONFIGURAZIONE (da fare alla fine)
 - PERMESSI FILE PHP e directory (non deve essere possibile navigare tra le directory https://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file)
@@ -23,6 +23,8 @@
 - refactoring file
 
 #DONE
+- ADMIN js
+- ADMIN inserire immagini uccelli
 - LAYOUT UTENTE sistemare visualizzazione
 - CONTENUTO ADMIN bottone navigazione indietro
 - LOGIN Cambiare Nome utente in Indirizzo email
@@ -37,6 +39,7 @@
 - SIDEBAR Menu non blocca azioni nella pagina principale, sistemare (da fare con js)
 - PERSISTENT (ADMIN) 0 = null (in favore dell'utilizzo di dao e vo)
 - ADMIN commenti sulle colonne del db (in favore dell'utilizzo di dao e vo)
+- CONTENUTO ADMIN se la tabella è vuota mettere such empty (tanto live non è mai il caso)
 
 #GIRO TEST FUNZIONALITÀ
 ##PUBBLICHE

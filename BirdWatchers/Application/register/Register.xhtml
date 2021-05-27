@@ -9,17 +9,25 @@
 
         <form id='register' action="Register.php" method="post" name="register" onsubmit="return checkPasswordMatch()">
 
-            <label for="username">Nome utente</label>
-            <input type="text" id="username" name="username" placeholder="Nome utente" required="required" />
+            <div id="username_form_field" class="form-field" data-error="">
+                <label for="username">Nome utente</label>
+                <input type="text" id="username" name="username" placeholder="Nome utente" required="required" />
+            </div>
 
-            <label for="email">Indirizzo <span xml:lang="en">e-mail</span></label>
-            <input type="text" id="email" name="email" placeholder="Email" required="required" />
+            <div id="email_form_field" class="form-field" data-error="">
+                <label for="email">Indirizzo <span xml:lang="en">e-mail</span></label>
+                <input type="text" id="email" name="email" placeholder="Email" required="required" />
+            </div>
 
-            <label for="password" xml:lang="en">Password</label>
-            <input type="password" id="password" name="password" xml:lang="en" placeholder="Password" required="required"/>
+            <div id="password_form_field" class="form-field" data-error="">
+                <label for="password" xml:lang="en">Password</label>
+                <input type="password" id="password" name="password" xml:lang="en" placeholder="Password" required="required"/>
+            </div>
 
-            <label for="password2">Ripeti <span xml:lang="en">password</span></label>
-            <input type="password" id="password2" name="password2" placeholder="Ripeti" required="required" />
+            <div id="password2_form_field" class="form-field" data-error="">
+                <label for="password2">Ripeti <span xml:lang="en">password</span></label>
+                <input type="password" id="password2" name="password2" placeholder="Ripeti" required="required" />
+            </div>
 
             <button id="submit" name="submit" type="submit" >Conferma</button>
 

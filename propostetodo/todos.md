@@ -1,5 +1,4 @@
 #TODO
-- ADMIN js
 - CONTENUTO GENERALE migliorare la navigazione
 - LAYOUT unificare input ricerca e inserimento messaggio
 - LAYOUT ADMIN sistemare visualizzazione
@@ -24,6 +23,7 @@
 - refactoring file
 
 #DONE
+- ADMIN js
 - ADMIN inserire immagini uccelli
 - LAYOUT UTENTE sistemare visualizzazione
 - CONTENUTO ADMIN bottone navigazione indietro

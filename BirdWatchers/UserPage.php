@@ -1,4 +1,7 @@
 <?php
+
+define('__IMGROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "res");
+
 /** Pagina del singolo uccello. */
 require_once __DIR__ . "/standardLayoutIncludes.php";
 require_once __DIR__ . "/Application/SessionUser.php";
@@ -19,22 +22,22 @@ if($sessionUser->userIdentified()) {
         $name = basename($_FILES["input-file"]["name"]);
         $tmp_name = $_FILES["input-file"]["tmp_name"];
 
-        $rootParent = dirname(__DIR__);
 
-        if ((!is_dir($rootParent . DIRECTORY_SEPARATOR . "res") && !mkdir($rootParent . DIRECTORY_SEPARATOR . "res") || !is_writable($rootParent . DIRECTORY_SEPARATOR . "res"))) {
+
+        if ((!is_dir(__IMGROOT__) && !mkdir(__IMGROOT__) || !is_writable(__IMGROOT__))) {
             throw new Exception("Error creating folder res");
         };
-        $proposedPath = DIRECTORY_SEPARATOR . "res" . DIRECTORY_SEPARATOR . "$name";
+        $proposedPath = DIRECTORY_SEPARATOR . $name;
 
         $tentativi = 0;
-        while (file_exists($rootParent . $proposedPath)) {
+        while (file_exists(__IMGROOT__ . $proposedPath)) {
             $tentativi++;
-            $proposedPath = DIRECTORY_SEPARATOR . "res" . DIRECTORY_SEPARATOR . ($tentativi === 0 ? '' : $tentativi) . "$name";
+            $proposedPath = DIRECTORY_SEPARATOR . $tentativi . $name;
         }
 
-        if (move_uploaded_file($tmp_name, $rootParent . $proposedPath)) {
+        if (move_uploaded_file($tmp_name, __IMGROOT__ . $proposedPath)) {
 
-            $userVO->setImmagine($name);
+            $userVO->setImmagine(str_replace('\\', '/',"res" . $proposedPath));
             $result = (new UserDAO())->save($userVO);
 
         } else {

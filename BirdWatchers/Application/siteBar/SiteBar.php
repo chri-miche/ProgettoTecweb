@@ -75,7 +75,7 @@ class SiteBar extends Component {
             $navigation = '<a href="index.php" xml:lang="en"> Home </a>';
         }
         if (strcasecmp($this->position, "catalogo") != 0) {
-            $navigation .= (new NavigationButton('Catalogo', 'Catalogo.php'))->build();
+            $navigation .= (new NavigationButton('Catalogo', 'catalogo.php'))->build();
         }
 
         $baseLayout = str_replace('<navigation />', $navigation, $baseLayout);

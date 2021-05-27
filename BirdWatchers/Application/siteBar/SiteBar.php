@@ -53,7 +53,7 @@ class SiteBar extends Component {
             $actions = [
                 ['Profilo', 'user_page.php?id={userid}'],
                 ['<span xml:lang="en">Logout</span>', 'logout.php'],
-                ['Nuovo post', 'newpost.php']
+                ['Nuovo post', 'new_post.php']
             ];
 
             if($this->user->getAdmin()) {

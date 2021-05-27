@@ -16,7 +16,7 @@ $page = new BasePage($basePage);
 $id = $_GET['usid'] ?? header('Location: index.php');
 $pageUser = (new UserDAO())->get($id);
 
-$page->addComponent(new SiteBar('PostUtente'));
+$page->addComponent(new SiteBar('post_utente'));
 
 $page->addComponent(new BreadCrumb(array('Utente' => 'user_page.php?id='.$pageUser->getId(), 'I Post di: '. $pageUser->getNome()=>'')));
 

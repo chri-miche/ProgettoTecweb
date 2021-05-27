@@ -14,7 +14,7 @@ define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
     $sessionUser = new SessionUser();
     $page = new BasePage($basePage);
 
-    $page->addComponent(new SiteBar("postpage"));
+    $page->addComponent(new SiteBar("post_page"));
     $page->addComponent(new BreadCrumb(array('Post' => '')));
 
     $postVO = (new PostDAO())->get($_GET['id']?? -1);

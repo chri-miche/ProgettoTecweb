@@ -12,7 +12,7 @@ require_once __DIR__ . "/Application/post/postForm/PostForm.php";
 $sessionUser = new SessionUser();
 $page = new BasePage(file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml"));
 
-$page->addComponent(new SiteBar("newpost"));
+$page->addComponent(new SiteBar("new_post"));
 
 $page->addComponent(new BreadCrumb(array('Post' => '')));
 

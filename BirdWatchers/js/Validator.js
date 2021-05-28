@@ -153,7 +153,7 @@ function passwordCheck(password){
         }
          */
 
-        formField.setAttribute('data-error', 'La password deve contenere almeno un numero, una maiuscola e essere [8-15] caratteri di lunghezza.')
+        formField.setAttribute('data-error', 'La password deve contenere almeno una maiuscola e essere [8-15] caratteri di lunghezza.')
 
 
         validateInput(true)

@@ -19,7 +19,7 @@ $page->addComponent(new SiteBar("post_page"));
 $page->addComponent(new BreadCrumb(array('Post' => '')));
 
 $postVO = (new PostDAO())->get($_GET['id']?? -1);
-print_r($postVO->arrayDump());
+
 /** Se il post è valido.*/
 if($postVO->getId()){
 

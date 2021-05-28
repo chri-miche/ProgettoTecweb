@@ -67,7 +67,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
                             $proposedPath = "$uploads_dir/" . ($tentativi === 0 ? '' : $tentativi) . "$name";
                         }
 
-                        if(move_uploaded_file($tmp_name, $rootParent.$proposedPath)) {
+                        if(move_uploaded_file($tmp_name, $rootParent."/$proposedPath")) {
                             $immagini[] = str_replace('\\', '/', $proposedPath);
                         } else {
                             throw new Exception("Non è stato possibile salvare le foto");

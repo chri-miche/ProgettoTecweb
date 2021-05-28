@@ -5,14 +5,14 @@
         private const HOST = 'localhost';
 
         // TODO valori di accesso al db sui server uni
-        // private const USER = 'cmichele';
-        // private const PASSWORD = 'keimai7Ieyipoh7W';
-        // private const DB_NAME = 'cmichele';
+        private const USER = 'cmichele';
+        private const PASSWORD = 'keimai7Ieyipoh7W';
+        private const DB_NAME = 'cmichele';
 
-        private const USER = 'root';
+/*        private const USER = 'root';
         private const PASSWORD = '';
         private const DB_NAME = 'webbirddb';
-
+*/
         static public function executeQuery($query){
 
             try {

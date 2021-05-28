@@ -3,8 +3,6 @@
     require_once __DIR__ . "/../databaseObjects/post/PostDAO.php";
     require_once __DIR__ . "/../databaseObjects/user/UserDAO.php";
 
-    require_once __DIR__ . "/../databaseObjects/meta/Persistent.php";
-
     require_once __DIR__ . "/postActions/PostActions.php";
     require_once __DIR__ . "/imageSlideShow/ImagesSlideshow.php";
     require_once __DIR__ . "/comments/Comments.php";

@@ -96,7 +96,7 @@ class PostVO implements VO {
         /** Togliamo gli array.*/
         unset($array['immagini']);
         unset($array['userVO']);
-
+        unset($array['likes']);
 
         $array = array_slice($array, 0, 1, true)
         + array('user_id'=> $this->userVO->getId()) + array_slice($array,1);

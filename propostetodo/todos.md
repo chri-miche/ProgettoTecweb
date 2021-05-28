@@ -4,7 +4,7 @@
 - LAYOUT ADMIN sistemare visualizzazione
 - LAYOUT link e bottoni diversi! (ok discorso rottura convenzioni esterne ma meglio non troppo) link = mat-button ; button = mat-raised-button
 - LAYOUT icone foto resize carino
-- NEW POST togliere persistent mettere dao
+- ADMIN link con gli id
 
 #TODO CONFIGURAZIONE (da fare alla fine)
 - PERMESSI FILE PHP e directory (non deve essere possibile navigare tra le directory https://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file)
@@ -23,6 +23,7 @@
 - refactoring file
 
 #DONE
+- NEW POST togliere persistent mettere dao
 - ADMIN js
 - ADMIN inserire immagini uccelli
 - LAYOUT UTENTE sistemare visualizzazione

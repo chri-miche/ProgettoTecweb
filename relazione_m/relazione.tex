@@ -41,13 +41,30 @@ Sono previsti tre tipi di utenza, in base al livello di autorità: \textbf{utent
 \subsection{Funzionalità per utenti}
 \paragraph{Accesso all'area riservata.} 
 Si effettua dalla pagina \texttt{/login.php}. Occorre inserire l'e-mail e la password scelte al momento della creazione dell'account. 
-\paragraph{Funzionalità di interazione con il post.} Un utente autenticato può lasciare un commento, lasciare un like o un dislike sul post che sta leggendo.
-\paragraph{Modifica del profilo personale.} TODO
-\paragraph{Aggiungere degli amici.} TODO
-\paragraph{Creazione di un Post.} TODO
+\paragraph{Funzionalità di interazione con il post.} Un utente autenticato può lasciare un commento, lasciare un like o un dislike sul post che sta leggendo. Il commento può essere formattato anche con tag <b> per ottenere delle parole in grassetto ed <em> per ottenerne in corsivo.
+\paragraph{Modifica del profilo personale.}
+Un utente può accedere al proprio profilo tramite il menù laterale, alla voce "Profilo". Dal proprio profilo è possibile modificare la propria immagine, premendo su "Scegli file" e poi su "Cambia immagine profilo".
+\paragraph{Aggiungere degli amici.} È possibile accedere alla pagina di un altro utente premendo sul link di un post. Qualora si avesse effettuato l'accesso, apparirà il bottone "Aggiungi ai seguiti", se si vuole seguire un utente. Se l'utente era già nella lista dei seguiti, allora il bottone riporterà la scritta "Rimuovi dai seguiti". 
+\paragraph{Creazione di un Post.} La funzionalità principale per l'utente autenticato è quella di creazione del post. Per creare un post occorre:
+\begin{itemize}
+\item inserire un titolo;
+\item inserire un numero qualsiasi di foto;
+\item inserire una descrizione.
+\end{itemize}
+Il titolo deve essere testo semplice, mentre la descrizione può contenere i tag <b> ed <em>, rispettivamente per grassetto e corsivo. Il numero di foto è variabile: bisogna però caricarle tutte insieme, non è possibile caricarne alcune per poi aggiungerne altre. È anche possibile non caricare neanche una foto, per porre domande semplici alla community.
 \subsection{Funzionalità di amministrazione}
-\paragraph{Gestione raw delle tabelle.} TODO
-
+\paragraph{Gestione raw delle tabelle.}
+Il pannello di amministrazione è accessibile solo ed esclusivamente agli utenti amministratori. Il pannello ha un elenco di voci, dalle quali è possibile visualizzare, inserire, modificare ed eliminare le seguenti entità:
+\begin{itemize}
+\item utente;
+\item ordine;
+\item famiglia;
+\item genere;
+\item ordine;
+\item specie;
+\item stato di conservazione.
+\end{itemize}
+Premendo su una voce si navigherà su un elenco di tutte le entità in banca dati. Ogni riga rappresenta le informazioni riguardo a quell'entità, inoltre avrà due bottoni, uno per effettuare una modifica, l'altro per effettuare l'eliminazione. Vicino al titolo è presente inoltre un bottone per la creazione di una nuova riga. Fa eccezione la tabella utenti: nella tabella utenti, un amministratore non può modificarne il nome utente, la password e nemmeno l'immagine. Un amministratore può anche eliminare un utente che tiene un comportamento negativo sul sito e non può creare utenze.
 \section{Navigazione}
 
 \section{Sviluppo}

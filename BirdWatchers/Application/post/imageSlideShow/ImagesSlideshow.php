@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__ ."/../../databaseObjects/DatabaseAccess.php";
+require_once __DIR__ ."/../../BasePage.php";
+
 class ImagesSlideshow extends BasePage {
     public function __construct($idPost) {
         parent::__construct("<component />");

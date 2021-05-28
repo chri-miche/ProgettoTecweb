@@ -1,58 +1,59 @@
 <?php
 
-define('__ROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "php");
 
-    require_once "filters.php";
-    require_once "standardLayoutIncludes.php";
-    require_once __DIR__ . "/Application/SessionUser.php ";
-    require_once __DIR__ . "/Application/post/Post.php";
+require_once "filters.php";
+require_once "standardLayoutIncludes.php";
 
-    require_once __DIR__ . "/Application/databaseObjects/post/PostDAO.php";
+require_once __DIR__ . "/Application/databaseObjects/post/PostDAO.php";
+require_once __DIR__ . "/Application/databaseObjects/user/UserDAO.php";
 
-    $basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
+require_once __DIR__. "/Application/post/Post.php";
+require_once __DIR__. "/Application/SessionUser.php";
 
-    $sessionUser = new SessionUser();
-    $page = new BasePage($basePage);
+$basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
 
-    $page->addComponent(new SiteBar("post_page"));
-    $page->addComponent(new BreadCrumb(array('Post' => '')));
+$sessionUser = new SessionUser();
+$page = new BasePage($basePage);
 
-    $postVO = (new PostDAO())->get($_GET['id']?? -1);
+$page->addComponent(new SiteBar("post_page"));
+$page->addComponent(new BreadCrumb(array('Post' => '')));
 
-    /** Se il post è valido.*/
-    if($postVO->getId()){
+$postVO = (new PostDAO())->get($_GET['id']?? -1);
+print_r($postVO->arrayDump());
+/** Se il post è valido.*/
+if($postVO->getId()){
 
-        if($sessionUser->userIdentified()){
-            if(isset($_GET['comment']) && $_GET['comment']) {
-                // $comment = strip_tags($_POST["commento"]);
-                // $comment = htmlentities($comment);
+    if($sessionUser->userIdentified()){
+        if(isset($_GET['comment']) && $_GET['comment']) {
+            // $comment = strip_tags($_POST["commento"]);
+            // $comment = htmlentities($comment);
 
-                $comment = sanitize_simple_markdown($_POST["commento"]);
+            $comment = sanitize_simple_markdown($_POST["commento"]);
 
-                $commentVO = new CommentoVO(null,false, $comment, null, $postVO, $sessionUser->getUser());
-                $transaction = (new CommentoDAO())->save($commentVO);
+            $commentVO = new CommentoVO(null,false, $comment, null, $postVO, $sessionUser->getUser());
+            $transaction = (new CommentoDAO())->save($commentVO);
 
-                echo $transaction;
+            echo $transaction;
 
-            } else if(isset($_GET['liked']) && $_GET['liked']){
+        } else if(isset($_GET['liked']) && $_GET['liked']){
 
-                $transaction = (new PostDAO())->like($sessionUser->getUser(), $postVO);
+            $transaction = (new PostDAO())->like($sessionUser->getUser(), $postVO);
 
-            } else if(isset($_GET['disliked']) && $_GET['disliked']) {
+        } else if(isset($_GET['disliked']) && $_GET['disliked']) {
 
-                $transaction = (new PostDAO())->dislike($sessionUser->getUser(), $postVO);
+            $transaction = (new PostDAO())->dislike($sessionUser->getUser(), $postVO);
 
-            }
         }
-
-        if(isset($transaction) && !$transaction)
-            header("Location: post_page.php?id=".$postVO->getId());
-
-        $page->addComponent(new Post($postVO, $sessionUser));
-
     }
 
-    echo $page;
+    if(isset($transaction) && !$transaction)
+        header("Location: post_page.php?id=".$postVO->getId());
+
+    $page->addComponent(new Post($postVO, $sessionUser));
+
+}
+
+echo $page;
 
 
 

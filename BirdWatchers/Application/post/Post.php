@@ -1,5 +1,5 @@
 <?php
-
+    require_once __DIR__ ."/../Component.php";
     require_once __DIR__ . "/../databaseObjects/post/PostDAO.php";
     require_once __DIR__ . "/../databaseObjects/user/UserDAO.php";
 

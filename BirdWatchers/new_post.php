@@ -1,6 +1,6 @@
 <?php
 
-
+define('__IMGROOT__', dirname(__FILE__) . DIRECTORY_SEPARATOR . "res");
 require_once __DIR__ . "/Application/SessionUser.php";
 
 require_once "standardLayoutIncludes.php";
@@ -33,7 +33,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
             if (isset($_FILES['immagini-post'])) {
 
                 $folders = array('/res', '/res/PostImages');
-                $uploads_dir = '/res/PostImages/User' . $_POST['user-id'];
+                $uploads_dir = 'res/PostImages/User' . $_POST['user-id'];
 
                 foreach ($_FILES["immagini-post"]["error"] as $key => $error) {
                     if ($error == UPLOAD_ERR_OK) {
@@ -47,7 +47,8 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
 
                         $proposedPath = "$uploads_dir/$name";
 
-                        // echo $proposedPath;
+                        echo is_dir($rootParent.$uploads_dir);
+                        echo $rootParent.$uploads_dir;
 
                         foreach ($folders as $folder) {
                             if (!is_dir($rootParent.$folder) && !mkdir($rootParent.$folder)) {
@@ -55,7 +56,7 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
                                 throw new Exception("Error creating folder $uploads_dir");
                             }
                         }
-                        if (!is_dir($rootParent.$uploads_dir) && !mkdir($rootParent.$uploads_dir)) {
+                        if (!is_dir($rootParent."/$uploads_dir") && !mkdir($rootParent."/$uploads_dir")) {
                             throw new Exception("Error creating folder $uploads_dir");
                         };
 

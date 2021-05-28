@@ -67,7 +67,7 @@ class AdminPanel extends Component
                 case "ordine":
                     $dao = new OrdineDAO();
                     if (sizeof($data) > 0) {
-                        $vo = new OrdineVO(...$data);
+                        $vo = new OrdineVO($data['id'], $data['nome_scientifico']);
                     } elseif (sizeof($keys) > 0) {
                         $vo = $dao->get($keys['id']);
                     } else {
@@ -78,7 +78,7 @@ class AdminPanel extends Component
                     $dao = new FamigliaDAO();
                     if (sizeof($data) > 0) {
                         $errors = $this->checkFamiglia($data);
-                        $vo = new FamigliaVO(...$data);
+                        $vo = new FamigliaVO($data['id'], $data['nome_scientifico'], $data['ordineVO']);
                     } elseif (sizeof($keys) > 0) {
                         $vo = $dao->get($keys['id']);
                     } else {
@@ -89,7 +89,7 @@ class AdminPanel extends Component
                     $dao = new GenereDAO();
                     if (sizeof($data) > 0) {
                         $errors = $this->checkGenere($data);
-                        $vo = new GenereVO(...$data);
+                        $vo = new GenereVO($data['id'], $data['nome_scientifico'], $data['famigliaVO']);
                     } elseif (sizeof($keys) > 0) {
                         $vo = $dao->get($keys['id']);
                     } else {
@@ -101,7 +101,15 @@ class AdminPanel extends Component
                     if (sizeof($data) > 0) {
                         $this->savePhoto($data);
                         $errors = $this->checkSpecie($data);
-                        $vo = new SpecieVO(...$data);
+                        $vo = new SpecieVO($data['id '],
+                            $data['nome_scientifico'],
+                            $data['nome_comune'],
+                            $data['peso_medio'],
+                            $data['altezza_media'],
+                            $data['descrizione'],
+                            $data['immagine'],
+                            $data['genereVO'],
+                            $data['conservazioneVO']);
                     } elseif (sizeof($keys) > 0) {
                         $vo = $dao->get($keys['id']);
                     } else {
@@ -113,7 +121,10 @@ class AdminPanel extends Component
                     if (sizeof($data) > 0) {
                         // try operation
                         $errors = $this->checkConservazione($data);
-                        $vo = new ConservazioneVO(...$data);
+                        $vo = new ConservazioneVO($data['id'],
+                            $data['nome'],
+                            $data['prob_estinzione'],
+                            $data['descrizione']);
                     } elseif (sizeof($keys) > 0) {
                         // update
                         $vo = $dao->get($keys['id']);

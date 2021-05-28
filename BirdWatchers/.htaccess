@@ -1,2 +1,2 @@
-ErrorDocument 404 /html/error404.xhtml
+ErrorDocument 404 /cmichele/html/error404.xhtml
 ErrorDocument 403 /html/error403.xhtml

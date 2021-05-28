@@ -4,7 +4,11 @@
 - LAYOUT ADMIN sistemare visualizzazione
 - LAYOUT link e bottoni diversi! (ok discorso rottura convenzioni esterne ma meglio non troppo) link = mat-button ; button = mat-raised-button
 - LAYOUT icone foto resize carino
-- ADMIN link con gli id
+- LAYOUT card avvistamento e nome vanno in overflow
+- LAYOUT icone foto come background (data-background-image="{path}")
+- ARIA aria-current="page" nel breadcrumb tassello pagina corrente
+- ARIA aria-label="breadcrumb"
+- ARIA aria-required
 
 #TODO CONFIGURAZIONE (da fare alla fine)
 - PERMESSI FILE PHP e directory (non deve essere possibile navigare tra le directory https://stackoverflow.com/questions/409496/prevent-direct-access-to-a-php-include-file)

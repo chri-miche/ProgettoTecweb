@@ -12,14 +12,16 @@
 
 \begin{titlepage}
 \begin{center}
-Indirizzo del sito: tecweb2021:8080/cmichele/ \\
-Gli account utente usano una e-mail per effettuare l'accesso. Fanno eccezione le seguenti coppie: \\
-user / user
-admin / admin
-\vfill
+Indirizzo del sito: http://tecweb2021.studenti.math.unipd.it/cmichele \\
 \textbf{Autori} \\
-christian.micheletti@studenti.unipd.it \\
-jacopo.fichera@studenti.unipd.it
+christian.micheletti@studenti.unipd.it (referente) \\
+jacopo.fichera@studenti.unipd.it \\
+\textbf{Repository pubblica} \\
+https://github.com/MicheGit/ProgettoTecweb
+\vfill
+Gli account utente usano una e-mail per effettuare l'accesso. Fanno eccezione le seguenti coppie: \\
+user / user \\
+admin / admin
 \end{center}
 \end{titlepage}
 
@@ -29,6 +31,11 @@ jacopo.fichera@studenti.unipd.it
 
 \newpage
 
+\begin{abstract}
+BirdWatchers è un sito dedicato a esperti e dilettanti, in generale, agli appassionati del birdwatching. Lo scopo di questo sito è quello di raccogliere e catalogare avvistamenti di uccelli da parte degli utenti e dar loro uno spazio dove discuterne. 
+\end{abstract}
+
+\newpage
 \section{Analisi}
 \subsection{Utenza}
 Sono previsti tre tipi di utenza, in base al livello di autorità: \textbf{utente non autenticato}, \textbf{utente autenticato} e \textbf{amministratore}. Le funzionalità sono associate alla classe di utenza a cui sono rivolte, e un livello di autorità ha accesso anche alle funzionalità dei livelli minori. In altre parole, le funzionalità pubbliche sono disponibili per ogni classe di utenza, le funzionalità dell'utente standard sono disponibili sia per questi ultimi sia per gli amministratori e le funzionalità amministrative sono esclusive degli amministratori.
@@ -53,7 +60,7 @@ Un utente può accedere al proprio profilo tramite il menù laterale, alla voce 
 \end{itemize}
 Il titolo deve essere testo semplice, mentre la descrizione può contenere i tag <b> ed <em>, rispettivamente per grassetto e corsivo. Il numero di foto è variabile: bisogna però caricarle tutte insieme, non è possibile caricarne alcune per poi aggiungerne altre. È anche possibile non caricare neanche una foto, per porre domande semplici alla community.
 \subsection{Funzionalità di amministrazione}
-\paragraph{Gestione raw delle tabelle.}
+\paragraph{Gestione delle tabelle.}
 Il pannello di amministrazione è accessibile solo ed esclusivamente agli utenti amministratori. Il pannello ha un elenco di voci, dalle quali è possibile visualizzare, inserire, modificare ed eliminare le seguenti entità:
 \begin{itemize}
 \item utente;
@@ -64,14 +71,97 @@ Il pannello di amministrazione è accessibile solo ed esclusivamente agli utenti
 \item specie;
 \item stato di conservazione.
 \end{itemize}
-Premendo su una voce si navigherà su un elenco di tutte le entità in banca dati. Ogni riga rappresenta le informazioni riguardo a quell'entità, inoltre avrà due bottoni, uno per effettuare una modifica, l'altro per effettuare l'eliminazione. Vicino al titolo è presente inoltre un bottone per la creazione di una nuova riga. Fa eccezione la tabella utenti: nella tabella utenti, un amministratore non può modificarne il nome utente, la password e nemmeno l'immagine. Un amministratore può anche eliminare un utente che tiene un comportamento negativo sul sito e non può creare utenze.
-\section{Navigazione}
+Premendo su una voce si navigherà su un elenco di tutte le entità in banca dati. Ogni riga rappresenta le informazioni riguardo a quell'entità, inoltre avrà due bottoni, uno per effettuare una modifica, l'altro per effettuare l'eliminazione. Vicino al titolo è presente inoltre un bottone per la creazione di una nuova riga. Fa eccezione la tabella utenti: nella tabella utenti, un amministratore non può modificarne il nome utente, la password e nemmeno l'immagine. Un amministratore può anche eliminare un utente che tiene un comportamento negativo sul sito, ma non può creare nuove utenze.
+\section{Progettazione}
+Come strategia di progettazione abbiamo seguito la \textit{responsive web design}, definendo dal principio solo i componenti necessari alle singole pagine. Abbiamo quindi sviluppato un piccolo framework orientato agli oggetti: i componenti presentano diversi livelli di genericità, in modo da favorirne il riuso, prerogativa cruciale per un sito web quasi totalmente dinamico.
+È stato scelto XHTML per via della sua rigida aderenza agli standard web, che assicura la compatibilità con la stragrande maggioranza dei browser.
+\subsection{Struttura delle pagine}
+Il sito non presenta una profondità elevata. La struttura del sito può essere riassunta seguendo le sue funzionalità. In ogni pagina è presente l'intestazione di navigazione, che è composta da:
+\begin{itemize}
+\item Logo. Il logo è un link al contenuto della pagina, per aiutare l'utenza che naviga con la tastiera;
+\item Link alla \textit{home};
+\item Link al \textit{catalogo};
+\item Barra di ricerca;
+\item Menù laterale;
+\item \textit{Breadcrumb} che indica la posizione attuale.
+\end{itemize}
+\paragraph{Footer}
+Inoltre, ogni pagina ha un footer, che rimanda alla pagina della politica sulla privacy del sito e un link al logo, per tornare in cima alla pagina.
+\subsection{Navigazione}
+Qui vengono riportate le pagine raggiungibili con la navigazione principale. Home e catalogo sono le uniche due pagine raggiungibili dagli ospiti\footnote{Utenti non autenticati.}, perciò non fanno parte del menù laterale.
+\begin{itemize}
+\item \textbf{Pagina principale} anche detta \textit{feed}, da cui si vedono i post più popolari;
+\item \textbf{Catalogo}, da cui si può navigare tra gli uccelli descritti sul sito; 
+\item \textbf{Barra di ricerca}, da cui si può cercare per termine contenuto in un titolo o in una descrizione di un avvistamento;
+\item \textbf{Azioni non autenticate}: qualora non si fosse autenticati, al posto del menù principale appariranno due link:
+	\begin{itemize}
+	\item \textbf{Login} che consentirà di fare l'accesso con delle credenziali già esistenti;
+	\item \textbf{Registrati} che consentirà di creare un nuovo account.
+	\end{itemize}
+	Ad accesso effettuato, apparirà un solo bottone con il nome dell'utente, che premuto, mostrerà il menù e le azioni possibili;
+\item \textbf{Profilo}, da cui si può raggiungere il proprio profilo;
+\item \textbf{Nuovo avvistamento}, da cui si raggiunge la form di inserimento di un avvistamento;
+\item \textbf{Pannello di amministrazione}, da cui si raggiunge il pannello di amministrazione.
+\end{itemize}
+Le seguenti pagine sono raggiungibili direttamente dalle pagine principali:
+\begin{itemize}
+\item \textbf{Avvistamento}, il dettaglio di un avvistamento. Da questa pagina gli utenti del sito possono lasciare un commento o mettere "mi piace" o "non mi piace". Questa pagina è raggiungibile dal \textit{feed} o dalla pagina di un utente;
+\item \textbf{Profilo di un altro utente}. Da qui un utente autenticato può aggiungere l'utente agli utenti seguiti. Questa pagina è raggiungibile sia dal \textit{feed} che dal dettaglio di un avvistamento;
+\item \textbf{Pagina di un uccello}, il dettaglio di una specie di uccelli. È raggiungibile dal catalogo.
+\end{itemize}
 
-\section{Sviluppo}
+\subsection{Accessibilità}
+Il livello di accessibilità è conforme al WCAG 2.0
+\subsubsection*{Struttura, presentazione e contenuto}
+La struttura del sito è definita dal file BaseLayout.xhtml, il quale definisce le componenti comuni ad ogni pagina. La struttura dei file dei singoli componenti è ragionato per essere indipendente da uno qualsiasi che lo contenga. Le regole di CSS seguono questo paradigma. L'intero sito è stato sviluppato in php: il javascript fornisce solo funzionalità addizionali, o alternative a quelle già implementate in php. \\
+Elementi speciali, come i messaggi di errore nelle form, sono gestiti a livello di CSS, senza che si rendessero necessarie modifiche invasive alle pagine.
+\subsection*{ARIA}
+Sono stati usati gli attributi ARIA per migliorare la semantica delle pagine.
+% TODO
+\section{Realizzazione}
+Il carico di lavoro è stato ripartito in questa maniera:
+\begin{itemize}
+\item Jacopo Fichera
+\begin{enumerate}
+	\item Creazione database: tabelle, procedure, view;
+	\item Creazione del framework di lavoro;
+	\item Html e classi di alcuni componenti, tra cui sezione Catalogo, Login, Registrazione, Pagina utente;
+	\item Pagine statiche, reindirizzamento in caso di errore e relativi fogli di stile;
+	\item Stesura della relazione;
+	\item Alcune funzioni javascript.
+\end{enumerate}
+\item Christian Micheletti
+\begin{enumerate}
+	\item Design preliminare e fogli di markup; 
+	\item Html e classi di alcuni componenti, tra cui Feed, Pannello di amministrazione;
+	\item Fogli di stile e design del sito;
+	\item Accessibilità;
+	\item Stesura della relazione;
+	\item Alcune funzioni javascript.
+\end{enumerate}
+\end{itemize}
+I componenti non nominati sono stati gestiti da entrambi i componenti del gruppo. \\
+Ci siamo coordinati creando di principio delle pagine XHTML di mockup, per individuare le necessità del sito. Successivamente, le pagine sono state suddivise in quelli che poi sono diventati i singoli componenti, per poi essere generalizzati e parametrizzati. In base a queste esigenze sono stati creati database e framework di lavoro. \\
+Successivamente, quando le pagine erano state parametrizzate, è stato definito il design del sito incluso delle convenzioni interne, alla fine sono stati effettuati i test di accessibilità.
+
 \subsection{Database}
-\subsection{Backend}
+% TODO Jacopo
 Il backend è stato sviluppato interamente in php 7.0.2. Non sono stati usati framework esterni, ma è stato implementato un framework liberamente ispirato alle tecnologie più recenti. 
-\subsubsection{Il framework Component}
+
+\section{Presentazione}
+Il design del sito è fluido: si fa un uso estensivo delle dimensioni in punti percentuali relativi alla dimensione della finestra. Le uniche componenti a dimensione fissa sono gli strumenti di navigazione e i menù. Vi è anche un punto di rottura, che separa le visualizzazioni smartphone e desktop. 
+Il menù con le azioni principali è posizionato in alto a destra, di modo da poter essere usato con facilità da un utente mobile. Per ridurre lo spazio occupato dagli elementi nell'intestazione principale, nella visualizzazione mobile sia i pulsanti \textit{Home} e \textit{Catalogo}, sia la barra di ricerca, vengono accorpati nel menù. Questo "cambio" non richiede anche due layout di pagina diversi, poiché è stato implementato con regole di CSS pure. 
+\paragraph{Il font} È stato scelto un font senza grazie, per non stancare troppo gli occhi del lettore. Il layout di stampa, invece, utilizza il font di default dei browser, che è con grazie, le quali aiutano la lettura su carta.
+\paragraph{Le card} È stato utilizzato un layout carded minimale. Le card hanno dimensione variabile, ma una larghezza fissa minima di 300px. Ogni card rappresenta una risorsa riportata parzialmente\footnote{Per esempio, degli avvistamenti vengono riportate solo un frammento di descrizione e un'immagine.}, alla quale è possibile accedere.
+% TODO le form?
+\paragraph{Bottoni e link} Siccome il sito è interamente dinamico, per semplificare l'esperienza utente i layout di bottoni e link è unificato. Siccome ogni link (a parte uno, verso la pagina della politica sulla privacy) porta a compiere un'azione si è pensato fuorviante tenere due rappresentazioni per una stessa classe di interazione.
+\paragraph{Gli input} Gli input si colorano quando vengono attivati, per facilitare l'utilizzo da tastiera senza rinunciare al design minimale. Inoltre, se il dato inserito in un input viene considerato sbagliato (email non valida, per esempio) l'input si colora di rosso e appare una scritta sottostante con una spiegazione breve dell'errore.
+\paragraph{I menù} Ci sono due menù: uno principale, disponibile agli utenti autenticati e quello del pannello di amministrazione. L'apertura del menù principale rende opaca la pagina sottostante nella visualizzazione desktop, e la copre totalmente nella visualizzazione mobile. Da desktop si deve cliccare sulla pagina retrostante della pagina per chiudere il menù, così si previene la confusione di poter effettuare delle operazioni o navigare con il menù aperto. Per lo stesso motivo da mobile il menù copre l'intera visualizzazione.
+\paragraph{Le icone} Avendo a disposizione poco spazio nella versione mobile, si sono adottate le icone del pacchetto material-icons, per le azioni più comuni, come ad esempio la "X" per chiudere, la freccia in alto al posto di "Torna in alto". Esse sono definite solamente con CSS e XHTML puri, come font speciale: in caso di mancato caricamento è mostrato un testo alternativo e sono considerabili abbreviazioni. 
+\section{Comportamento}
+La quasi interezza del sito è composta da pagine PHP dinamiche. Il comportamento di queste segue lo schema già presentato.
+\subsubsection{Il framework}
+%TODO Jacopo -- questa parte non è controllata, era una vecchia bozza: da qui fino aaaaaa....
 Il framework è organizzato secondo il paradigma ad oggetti. La classe principale è la classe astratta Component. Ogni componente erediterà le funzionalità di questa classe. La public interface di ogni component si può riassumere come segue:
 \begin{itemize}
 \item un costruttore che prende una stringa che corrisponde al contenuto da mostrare, con dei placeholder per i dati da sostituire;
@@ -81,20 +171,38 @@ Il framework è organizzato secondo il paradigma ad oggetti. La classe principal
 \item un metodo \texttt{notBuilt} che indica di ricostruire la pagina alla prossima \texttt{returnComponent()};
 \item un metodo \texttt{resolveData} che restituisce un array associativo contenente i dati da sostituire nei placeholder. Deve essere sovrascritto nelle implementazioni delle classi figlie.
 \end{itemize}
-\subsubsection{Test}
-\subsection{Interfaccia}
-\subsubsection{Test}
-\subsubsection{Registrazione}
-\begin{center}
-\begin{tabular}{|c|c|c|r|}
-\hline
-\textbf{Nome utente} & \textbf{Password} & \textbf{e-mail} & \textbf{Risultato} \\
-\hline
-Alfonso Cuaron & alcua & alfie@cuar.it & \textbf{Successo} \\
-John Wick & wick & john@wick.gun & \textbf{Successo} \\
-\hline
-\end{tabular}
-\end{center}
+% ......qui! Comunque dopo vanno le descrizioni dei componenti. Sì anche secondo me è una follia
+\subsubsection{I componenti}
+Per brevità verranno elencati solo i componenti principali, e non anche i componenti subordinati.
+\paragraph{AdminPanel} Rappresenta il pannello di amministrazione. Consente di effettuare operazioni CRUD su diverse tabelle. È presente un menù laterale a sinistra, nel quale sono elencate le voci possibili. Premendo su una voce il componente carica l'elenco di tutte le entry nel database su quella tabella. Da qui è possibile:
+\begin{itemize}
+\item Inserire una nuova entry;
+\item Modificare una entry;
+\item Eliminare una entry.
+\end{itemize}
+Inserimento e modifica porteranno alla form specifica per il componente, mentre invece l'eliminazione porterà ad una pagina di riepilogo per poter essere confermata.
+\paragraph{PostPage}
+La pagina di un avvistamento è una semplice pagina con dei placeholder valorizzati. Sono presenti uno slideshow in CSS puro delle immagini caricate e una form di inserimento di commenti.
+\paragraph{Feed}
+La pagina principale contiene il \textit{feed}, che è composto dagli avvistamenti inseriti dagli utenti. Il feed è ordinabile per tre categorie, l'ordinamento avviene mediante una GET passando come parametro il nome del campo da utilizzare per l'ordinamento.
+\paragraph{Card}
+La singola Card è un semplice componente con dei placeholder, pensato per essere messo in grandi quantità all'interno di una pagina.
+\paragraph{UserPage}
+La pagina dell'utente mostra le informazioni pubbliche dell'utente, la sua foto profilo e i suoi avvistamenti.
+\paragraph{NewPost}
+Il componente di inserimento di un avvistamento consiste in una semplice form per inserire i dati, i quali sono controllati da alcune funzioni di filtro.
+\subsubsection{Altro}
+Sono anche presenti dei file PHP di supporto, come il file standardLayoutIncludes.php e il file filters.php. Il primo contiene un elenco di import comune a tutte le pagine, ovvero per i componenti dell'intestazione, della \textit{breadcrumb} e della pagina di standard layout. Il secondo, invece, contiene alcune funzioni utili per filtrare le stringhe da inserire nel database. 
+\subsection{Javascript}
+Ci sono due file javascript: 
+\paragraph{script.js} Questo file viene eseguito alla fine del caricamento di ogni pagina e fa due cose:
+\begin{itemize}
+\item Cerca delle table all'interno della pagina, e se ne trova aggiunge ad essa un bottone che potrà essere usato per ordinare le voci della tabella in base al valore di quella colonna;
+\item Controlla se nella pagina c'è un elemento input di password, e se lo trova aggiunge ad esso un bottone che consente di visualizzare e nascondere la password inserita.
+\end{itemize}
+\paragraph{Validator.js} Questo file viene caricato nell'header della pagina e fornisce una serie di funzioni per la validazione di diverse form.
 
+\section{Test di accessibilità}
+%TODO miche AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 \end{document}

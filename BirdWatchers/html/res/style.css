@@ -29,6 +29,10 @@ h2 {
     height: 400px;
     min-width: 400px;
 
+    background-image: url("/html/res/tenor.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+
     order: 2;
 }
 .errorMessage{

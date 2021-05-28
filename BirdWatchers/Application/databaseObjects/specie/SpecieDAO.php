@@ -17,7 +17,7 @@ class SpecieDAO extends DAO {
         $result['genereVO'] = (new GenereDAO())->get($result['genere']); unset($result['genere']);
         $result['conservazioneVO'] = (new ConservazioneDAO())->get($result['conservazione']); unset($result['conservazione']);
 
-        return new SpecieVO(...$result);
+        return new SpecieVO(...array_values($result));
     }
 
     public function getAll() {
@@ -48,7 +48,7 @@ class SpecieDAO extends DAO {
                 unset($element['conservazione'],$element['nome'],
                     $element['prob_estinzione'], $element['descrizione']);
 
-                $VOArray [] = new SpecieVO(...$element);
+                $VOArray [] = new SpecieVO(...array_values($element));
         }
         return $VOArray;
     }
@@ -70,7 +70,7 @@ class SpecieDAO extends DAO {
                 $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
                 unset($specie['c_codice']);
 
-                $VOArray [] = new SpecieVO(...$specie, ...[$genereVO], ...[$conservazioneVO]);
+                $VOArray [] = new SpecieVO(...array_values($specie), $genereVO, $conservazioneVO);
 
             }
 
@@ -92,7 +92,7 @@ class SpecieDAO extends DAO {
                 unset($specie['c_codice']);
 
 
-                $VOArray [] = new SpecieVO(...$specie, ...[$genereVO], ...[$conservazioneVO]);
+                $VOArray [] = new SpecieVO(...array_values($specie), $genereVO, $conservazioneVO);
 
             }
 
@@ -116,7 +116,7 @@ class SpecieDAO extends DAO {
                 unset($specie['g_id'], $specie['g_nomeScientifico'], $specie['f_id'], $specie['f_nomeScientifico']);
                 unset($specie['c_codice']);
 
-                $VOArray [] = new SpecieVO(...$specie, ...[$genereVO], ...[$conservazioneVO]);
+                $VOArray [] = new SpecieVO(...array_values($specie), $genereVO, $conservazioneVO);
             }
 
         } else {
@@ -153,7 +153,7 @@ class SpecieDAO extends DAO {
 
             unset($element['conservazione'],$element['nome'], $element['prob_estinzione'], $element['descrizione']);
 
-            $VOArray [] = new SpecieVO(...$element);
+            $VOArray [] = new SpecieVO(...array_values($element));
 
         }
 
@@ -190,7 +190,7 @@ class SpecieDAO extends DAO {
                 $result = $this->performCall($element->smartDump(true), 'create_specie');
 
                 if(!isset($result['failure']))
-                    $element = new $element(... $result, ...$element->varDumps(true));
+                    $element = new $element(...array_values($result), ...$element->varDumps(true));
 
                 return !$element->getId() === null;
 

@@ -8,7 +8,7 @@ class TagDAO extends DAO {
     public function get($id) {
 
         $result = $this->performCall(array($id), 'get_tag');
-        return isset($result['failure']) ? new TagVO() : new TagVO(...$result);
+        return isset($result['failure']) ? new TagVO() : new TagVO(...array_values($result));
 
     }
 
@@ -23,7 +23,7 @@ class TagDAO extends DAO {
         if( isset($result['failure'])) return $VOArray;
 
 
-        foreach ($result as $element)  $VOArray [] = new TagVO(...$element);
+        foreach ($result as $element)  $VOArray [] = new TagVO(...array_values($element));
 
         return $VOArray;
     }
@@ -47,7 +47,7 @@ class TagDAO extends DAO {
             $result = $this->performCall($element->smartDump(true), 'create_tag');
 
             if(!isset($result['failure']))
-                $element = new $element( ...$result, ...$element->varDumps(true));
+                $element = new $element( ...array_values($result), ...$element->varDumps(true));
 
             return !$element->id === null;
         }

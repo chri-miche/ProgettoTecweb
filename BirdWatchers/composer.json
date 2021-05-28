@@ -1,0 +1,15 @@
+{
+  "name": "vendor_name/user",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Jacopo",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "php": "<=7.1"
+  }
+}

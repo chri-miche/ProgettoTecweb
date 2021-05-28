@@ -319,7 +319,7 @@ class AdminPanel extends Component
             $proposedPath = $baseDir . DIRECTORY_SEPARATOR . $tentativi . $name;
         }
 
-        echo $proposedPath;
+        // echo $proposedPath;
 
         if (move_uploaded_file($tmp_name, __IMGROOT__ . $proposedPath)) {
             unset($data['file_immagine']);

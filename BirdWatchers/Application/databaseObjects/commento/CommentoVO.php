@@ -23,7 +23,7 @@ class CommentoVO implements VO {
     /**
      * CommentoVO constructor.
      * @param int|null $id
-     * @param bool $isArchived
+     * @param bool $is_archived
      * @param string $content
      * @param string|null $date
      * @param PostVO|null $postVO

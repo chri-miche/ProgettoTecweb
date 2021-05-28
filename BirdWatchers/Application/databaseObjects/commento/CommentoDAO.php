@@ -18,7 +18,7 @@ class CommentoDAO extends DAO {
         $result['postVO'] = (new PostDAO())->get($result['post']); unset($result['post']);
         $result['author'] = (new UserDAO())->get($result['user_id']); unset($result['user_id']);
 
-        return new CommentoVO(...$result);
+        return new CommentoVO(...array_values($result));
     }
 
     /**
@@ -40,7 +40,7 @@ class CommentoDAO extends DAO {
                 $result['author'] = (new UserDAO())->get($result['user_id']);
                 unset($result['user_id']);
 
-                $VOArray [] = new CommentoVO(...$element);
+                $VOArray [] = new CommentoVO(...array_values($element));
             }
 
         return $VOArray;
@@ -61,7 +61,7 @@ class CommentoDAO extends DAO {
         if(!isset($result['failure'])) /** Evito più ritorni del dovuto. */
             foreach ($result as $element) {
                 $authorVO = (new UserDAO())->get($element['user_id']); unset($element['user_id']);
-                $VOArray [] = new CommentoVO(...$element, ...[$parentVO],...[$authorVO]);
+                $VOArray [] = new CommentoVO(...array_values($element), ...[$parentVO, $authorVO]);
             }
 
         return $VOArray;
@@ -83,7 +83,7 @@ class CommentoDAO extends DAO {
             $comment['author'] = (new UserDAO())->get($comment['user_id']);
             unset($comment['user_id']);
 
-            $VOArray [] = new CommentoVO(...$comment);
+            $VOArray [] = new CommentoVO(...array_values($comment));
 
         }
 
@@ -116,7 +116,7 @@ class CommentoDAO extends DAO {
             } else {
 
                 $result = $this->performCall($element->smartDump(true), 'create_commento');
-                if(!isset($result['failure'])) $element = new $element(...$result, ...$element->varDumps(true));
+                if(!isset($result['failure'])) $element = new $element(...array_values($result), ...$element->varDumps(true));
                 /* Ritorna vero se è stato costruito l oggetto falso altrimenti.*/
                 return !$element->getId() === null;
             }

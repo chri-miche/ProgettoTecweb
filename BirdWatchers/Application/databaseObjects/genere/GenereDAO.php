@@ -16,7 +16,7 @@ require_once __DIR__ . "/../famiglia/FamigliaVO.php";
 
             $result['famigliaVO'] = (new FamigliaDAO())->get($result['famiglia']); unset($result['famiglia']);
 
-            return new GenereVO(...$result);
+            return new GenereVO(...array_values($result));
 
         }
 
@@ -37,7 +37,7 @@ require_once __DIR__ . "/../famiglia/FamigliaVO.php";
                 unset($element['famiglia'],  $element['nome_scientifico_famiglia'],
                     $element['ordine'], $element['nome_scientifico_ordine']);
 
-                $VOArray [] = new GenereVO(...$element);
+                $VOArray [] = new GenereVO(...array_values($element));
 
             }
 
@@ -58,7 +58,7 @@ require_once __DIR__ . "/../famiglia/FamigliaVO.php";
                 if(isset($result['failure'])) return $VOArray;
 
                 foreach ($result as $element)
-                    $VOArray []= new GenereVO(...$element, ...[$famigliaVO]);
+                    $VOArray []= new GenereVO(...array_values($element), ...[$famigliaVO]);
 
             } else if(isset($ordine)){
 
@@ -73,7 +73,7 @@ require_once __DIR__ . "/../famiglia/FamigliaVO.php";
                     $famigliaVO = new FamigliaVO($element['f_id'], $element['f_nome_scientifico'], $ordineVO);
                     unset($element['f_id'], $element['f_nome_scientifico']);
 
-                    $VOArray []= new GenereVO(...$element, ...[$famigliaVO]);
+                    $VOArray []= new GenereVO(...array_values($element), ...[$famigliaVO]);
                 }
             } else
                 $VOArray = $this->getAll();
@@ -109,7 +109,7 @@ require_once __DIR__ . "/../famiglia/FamigliaVO.php";
 
                     /** Se la query non è stata un fallimento.*/
                     if(!isset($result['failure']))
-                        $element = new $element( ...$result, ...$element->varDumps(true));
+                        $element = new $element( ...array_values($result), ...$element->varDumps(true));
 
                     return !$element->getId() === null;
 

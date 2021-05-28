@@ -17,7 +17,7 @@ class ConservazioneDAO extends DAO {
     public function get($id) : ConservazioneVO {
 
         $result = $this->performCall(array($id), 'get_conservazione');
-        return isset($result['failure']) ? new ConservazioneVO() : new ConservazioneVO(...$result);
+        return isset($result['failure']) ? new ConservazioneVO() : new ConservazioneVO(...array_values($result));
 
     }
 
@@ -30,7 +30,7 @@ class ConservazioneDAO extends DAO {
         $result = $this->performMultiCAll(array(), 'get_all_conservazione');
         if(isset($result['failure'])) return $VOArray;
 
-        foreach ($result as $element)  $VOArray [] = new ConservazioneVO(...$element);
+        foreach ($result as $element)  $VOArray [] = new ConservazioneVO(...array_values($element));
 
         return $VOArray;
 

@@ -9,7 +9,7 @@ class OrdineDAO extends DAO {
     public function get($id) {
 
         $result = $this->performCall(array($id),'get_ordine');
-        return isset($result['failure']) ? new OrdineVO() : new OrdineVO(...$result);
+        return isset($result['failure']) ? new OrdineVO() : new OrdineVO(...array_values($result));
 
     }
 
@@ -22,7 +22,7 @@ class OrdineDAO extends DAO {
         if( isset($result['failure'])) return $VOArray;
 
 
-        foreach ($result as $element)  $VOArray [] = new OrdineVO(...$element);
+        foreach ($result as $element)  $VOArray [] = new OrdineVO(...array_values($element));
 
         return $VOArray;
 
@@ -46,7 +46,7 @@ class OrdineDAO extends DAO {
             $result = $this->performCall($element->smartDump(true), 'create_ordine');
 
             if(!isset($result['failure']))
-                $element = new $element( ...$result, ...$element->varDumps(true));
+                $element = new $element( ...array_values($result), ...$element->varDumps(true));
 
             return !$element->id === null;
 

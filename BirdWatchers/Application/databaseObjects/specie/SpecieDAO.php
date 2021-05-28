@@ -70,7 +70,7 @@ class SpecieDAO extends DAO {
                 $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
                 unset($specie['c_codice']);
 
-                $VOArray [] = new SpecieVO(...array_values($specie), $genereVO, $conservazioneVO);
+                $VOArray [] = new SpecieVO(...array_values($specie), ...[$genereVO, $conservazioneVO]);
 
             }
 
@@ -92,7 +92,7 @@ class SpecieDAO extends DAO {
                 unset($specie['c_codice']);
 
 
-                $VOArray [] = new SpecieVO(...array_values($specie), $genereVO, $conservazioneVO);
+                $VOArray [] = new SpecieVO(...array_values($specie), ...[$genereVO, $conservazioneVO]);
 
             }
 
@@ -116,7 +116,7 @@ class SpecieDAO extends DAO {
                 unset($specie['g_id'], $specie['g_nomeScientifico'], $specie['f_id'], $specie['f_nomeScientifico']);
                 unset($specie['c_codice']);
 
-                $VOArray [] = new SpecieVO(...array_values($specie), $genereVO, $conservazioneVO);
+                $VOArray [] = new SpecieVO(...array_values($specie), ...[$genereVO, $conservazioneVO]);
             }
 
         } else {

@@ -32,8 +32,8 @@ if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($
             $immagini = [];
             if (isset($_FILES['immagini-post'])) {
 
-                $folders = array('/res', '/res/PostImages');
-                $uploads_dir = '/res/PostImages/User' . $_POST['user-id'];
+                $folders = array('res', 'res/PostImages');
+                $uploads_dir = 'res/PostImages/User' . $_POST['user-id'];
 
                 foreach ($_FILES["immagini-post"]["error"] as $key => $error) {
                     if ($error == UPLOAD_ERR_OK) {

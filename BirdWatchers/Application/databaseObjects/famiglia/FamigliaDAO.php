@@ -16,7 +16,7 @@ require_once __DIR__ . "/../ordine/OrdineVO.php";
 
             $result['ordineVO'] = (new OrdineDAO())->get($result['ordine']); unset($result['ordine']);
 
-            return new FamigliaVO(...$result);
+            return new FamigliaVO(...array_values($result));
         }
 
         /** * @inheritDoc  */
@@ -33,7 +33,7 @@ require_once __DIR__ . "/../ordine/OrdineVO.php";
                     unset($element['ordine'], $element['nome_scientifico_ordine']);
 
                     // Creazione dell oggetto finale.
-                    $VOArray [] = new FamigliaVO(...$element);
+                    $VOArray [] = new FamigliaVO(...array_values($element));
             }
 
             return $VOArray;
@@ -51,7 +51,7 @@ require_once __DIR__ . "/../ordine/OrdineVO.php";
             if(isset($result['failure'])) return $VOArray;
 
             foreach ($result as $element)
-                $VOArray [] = new FamigliaVO(...$element, ...[$ordineVO]);
+                $VOArray [] = new FamigliaVO(...array_values($element), ...[$ordineVO]);
 
             return $VOArray;
 
@@ -88,7 +88,7 @@ require_once __DIR__ . "/../ordine/OrdineVO.php";
                     $result = $this->performCall($element->smartDump(true), 'create_famiglia');
 
                     if(!isset($result['failure']))
-                        $element = new $element(...$result, ...$element->varDumps(true));
+                        $element = new $element(...array_values($result), ...$element->varDumps(true));
                     /* Ritorna vero se è stato costruito l oggetto falso altrimenti.*/
                     return !$element->getId() === null;
 

@@ -24,7 +24,7 @@ class PostDAO extends DAO {
 
         unset($data['user_id']);
 
-        $builtVO = new PostVO(...$data);
+        $builtVO = new PostVO(...array_values($data));
 
         $builtVO->setImmagini($this->getImmagini($builtVO->getId()));
 
@@ -182,7 +182,7 @@ class PostDAO extends DAO {
 
             if(!isset($result['failure'])) {
 
-                $element = new $element(...$result, ...$element->varDumps(true));
+                $element = new $element(...array_values($result), ...$element->varDumps(true));
 
                 foreach ($element->getImmagini() as $immagine)
                     $this->saveImmagine($immagine, $element->getId());

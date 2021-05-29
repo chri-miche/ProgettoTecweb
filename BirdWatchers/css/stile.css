@@ -256,6 +256,10 @@ a.tab-label[aria-selected=true]:hover,
     width: calc(100% - 2em);
 }
 
+.card > img {
+    width: 100%;
+}
+
 .card dt a:hover {
     background: rgba(33,150,243, 0.2);
 }
@@ -341,7 +345,7 @@ ul {
 
 #title {
     width: 100%;
-    background: rgba(30,33,41, 1);
+    background: rgba(30,33,41);
     text-align: center;
     color: white;
 }

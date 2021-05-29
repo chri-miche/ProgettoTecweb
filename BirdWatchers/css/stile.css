@@ -297,7 +297,7 @@ a.tab-label[aria-selected=true]:hover,
 }
 
 
-.card img {
+.img-overflow-container img {
     width: 100%;
     border-radius: 10px 10px 0 0;
 }
@@ -767,7 +767,9 @@ ul#comments li form textarea {
 }
 
 .profile-big img {
-    width: 168px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
 
 #profile-form {

@@ -1546,7 +1546,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE PROCEDURE `update_genere`(IN id INT, IN famiglia INT, IN nome VARCHAR(40))
+CREATE PROCEDURE `update_genere`(IN id INT, IN nome VARCHAR(40), IN famiglia INT)
 BEGIN UPDATE genere g SET g.nome_scientifico = nome, g.fam_id = famiglia WHERE g.tag_id = id;END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

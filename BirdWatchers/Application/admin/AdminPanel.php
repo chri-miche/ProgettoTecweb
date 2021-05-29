@@ -78,7 +78,9 @@ class AdminPanel extends Component
                     $dao = new FamigliaDAO();
                     if (sizeof($data) > 0) {
                         $errors = $this->checkFamiglia($data);
-                        $vo = new FamigliaVO(empty($data['id']) ? null : $data['id'], $data['nome_scientifico'], $data['ordineVO']);
+                        $vo = new FamigliaVO(empty($data['id']) ? null : $data['id'],
+                            $data['nome_scientifico'],
+                            $data['ordineVO']);
                     } elseif (sizeof($keys) > 0) {
                         $vo = $dao->get($keys['id']);
                     } else {
@@ -89,7 +91,11 @@ class AdminPanel extends Component
                     $dao = new GenereDAO();
                     if (sizeof($data) > 0) {
                         $errors = $this->checkGenere($data);
-                        $vo = new GenereVO(empty($data['id']) ? null : $data['id'], $data['nome_scientifico'], $data['famigliaVO']);
+                        $vo = new GenereVO(
+                            empty($data['id']) ? null : $data['id'],
+                            $data['nome_scientifico'],
+                            $data['famigliaVO']
+                        );
                     } elseif (sizeof($keys) > 0) {
                         $vo = $dao->get($keys['id']);
                     } else {
@@ -299,36 +305,44 @@ class AdminPanel extends Component
 
         $tmp_name = $data['file_immagine']['tmp_name'];
 
-        $name = $data['file_immagine']['name'];
+        if (empty($tmp_name)) {
 
-        $pathArray = ['catalogo', sanitize_fs_entity($data['nome_scientifico'])];
+            if (empty($data['id'])) {
+                $data['immagine'] = '';
+            } else {
+                $vo = (new SpecieDAO())->get($data['id']);
+                $data['immagine'] = $vo->getImmagine();
+            }
+        } else {
+            $name = $data['file_immagine']['name'];
 
-        $baseDir = "";
+            $pathArray = ['catalogo', sanitize_fs_entity($data['nome_scientifico'])];
 
-        foreach ($pathArray as $item) {
-            $baseDir .= DIRECTORY_SEPARATOR . $item;
-            if (!is_dir(__IMGROOT__ . $baseDir) && !mkdir(__IMGROOT__ . $baseDir)) {
-                throw new Exception("Non sono riuscito a creare la cartella $baseDir. Per favore, riprovare.");
+            $baseDir = "";
+
+            foreach ($pathArray as $item) {
+                $baseDir .= DIRECTORY_SEPARATOR . $item;
+                if (!is_dir(__IMGROOT__ . $baseDir) && !mkdir(__IMGROOT__ . $baseDir)) {
+                    throw new Exception("Non sono riuscito a creare la cartella $baseDir. Per favore, riprovare.");
+                }
+            }
+            $proposedPath = $baseDir . DIRECTORY_SEPARATOR . $name;
+
+            $tentativi = 0;
+            while (file_exists(__IMGROOT__ . $proposedPath)) {
+                $tentativi++;
+                $proposedPath = $baseDir . DIRECTORY_SEPARATOR . $tentativi . $name;
+            }
+
+            // echo $proposedPath;
+
+            if (move_uploaded_file($tmp_name, __IMGROOT__ . $proposedPath)) {
+                unset($data['file_immagine']);
+                $data['immagine'] = str_replace('\\', '/',"res" . $proposedPath);
+            } else {
+                throw new Exception("Non sono riuscito a creare il file $proposedPath.");
             }
         }
-        $proposedPath = $baseDir . DIRECTORY_SEPARATOR . $name;
-
-        $tentativi = 0;
-        while (file_exists(__IMGROOT__ . $proposedPath)) {
-            $tentativi++;
-            $proposedPath = $baseDir . DIRECTORY_SEPARATOR . $tentativi . $name;
-        }
-
-        // echo $proposedPath;
-
-        if (move_uploaded_file($tmp_name, __IMGROOT__ . $proposedPath)) {
-            unset($data['file_immagine']);
-            $data['immagine'] = str_replace('\\', '/',"res" . $proposedPath);
-        } else {
-            throw new Exception("Non sono riuscito a creare il file $proposedPath.");
-        }
-
-
     }
 }
 ?>

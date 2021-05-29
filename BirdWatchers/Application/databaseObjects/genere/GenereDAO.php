@@ -99,7 +99,7 @@ require_once __DIR__ . "/../famiglia/FamigliaVO.php";
 
                 if($this->checkId($element)){
 
-                    $result = $this->performCall($element->smartDump(), 'update_genere');
+                    $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_genere');
                     return !isset($result['failure']);
 
                 } else {

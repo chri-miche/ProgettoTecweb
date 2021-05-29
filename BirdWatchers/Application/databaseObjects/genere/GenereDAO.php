@@ -15,7 +15,6 @@ require_once __DIR__ . "/../famiglia/FamigliaVO.php";
             if(isset($result['failure'])) return new GenereVO();
 
             $result['famigliaVO'] = (new FamigliaDAO())->get($result['famiglia']); unset($result['famiglia']);
-            print_r($result);
             return new GenereVO(...array_values($result));
 
         }

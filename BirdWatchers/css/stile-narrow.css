@@ -599,10 +599,7 @@ ul#comments li form textarea {
 }
 
 #information-page  {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    align-self: stretch;
+    /*TODO*/
 }
 
 #information-page img {

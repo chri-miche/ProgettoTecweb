@@ -54,7 +54,7 @@
                 foreach ($varDumps as $param){
 
                     if(is_bool($param)) $query .= (int) $param . ',';
-                    else if(is_string($param)) $query .= "'$param',";
+                    else if(is_string($param)) $query .= "'". str_replace('\'', '\\\'', $param) ."',";
                     else if(is_null($param)) $query .= "null,";
                     else $query .= "$param,";
                 }

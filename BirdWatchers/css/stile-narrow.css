@@ -326,12 +326,11 @@ a.tab-label[aria-selected=true]:hover,
     border-radius: 10px 10px 0 0;
 }
 
-.card-header {
+.card dt {
     padding: 10px;
-    height: 105px;
 }
 
-.card-content {
+.card dd {
     background: white;
     border-radius: 0 0 10px 10px;
 }

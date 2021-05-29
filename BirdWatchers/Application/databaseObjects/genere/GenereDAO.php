@@ -101,7 +101,7 @@ require_once __DIR__ . "/../famiglia/FamigliaVO.php";
                 if($this->checkId($element)){
 
                     $result = $this->performCall($element->smartDump(), 'update_genere');
-                    return isset($result['failure']);
+                    return !isset($result['failure']);
 
                 } else {
 
@@ -111,7 +111,7 @@ require_once __DIR__ . "/../famiglia/FamigliaVO.php";
                     if(!isset($result['failure']))
                         $element = new $element( ...array_values($result), ...$element->varDumps(true));
 
-                    return !$element->getId() === null;
+                    return !is_null($element->getId());
 
                 }
             }

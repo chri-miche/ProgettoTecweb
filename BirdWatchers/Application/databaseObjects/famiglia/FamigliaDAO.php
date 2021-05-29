@@ -81,7 +81,7 @@ require_once __DIR__ . "/../ordine/OrdineVO.php";
                 if ($this->checkId($element)) {
 
                     $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_famiglia');
-                    return isset($result['failure']);
+                    return !isset($result['failure']);
 
                 } else {
 
@@ -90,7 +90,7 @@ require_once __DIR__ . "/../ordine/OrdineVO.php";
                     if(!isset($result['failure']))
                         $element = new $element(...array_values($result), ...$element->varDumps(true));
                     /* Ritorna vero se è stato costruito l oggetto falso altrimenti.*/
-                    return !$element->getId() === null;
+                    return !is_null($element->getId());
 
                 }
             }

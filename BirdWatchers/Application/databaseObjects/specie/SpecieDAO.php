@@ -183,7 +183,7 @@ class SpecieDAO extends DAO {
             if ($this->checkId($element)) {
 
                 $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_specie');
-                return isset($result['failure']);
+                return !isset($result['failure']);
 
             } else {
 
@@ -192,7 +192,7 @@ class SpecieDAO extends DAO {
                 if(!isset($result['failure']))
                     $element = new $element(...array_values($result), ...$element->varDumps(true));
 
-                return !$element->getId() === null;
+                return !is_null($element->getId());
 
             }
         }

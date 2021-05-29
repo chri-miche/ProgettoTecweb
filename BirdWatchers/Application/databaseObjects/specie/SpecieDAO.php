@@ -104,7 +104,7 @@ class SpecieDAO extends DAO {
             if(isset($result['failure'])) return $VOArray;
 
             foreach ($result as $specie){
-                print_r($result);
+    
                 $famigliaVO = new FamigliaVO($specie['f_id'], $specie['f_nome_scientifico'], $ordineVO);
                 unset($specie['o_id'], $specie['o_nome_scientifico']);
 

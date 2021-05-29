@@ -29,7 +29,7 @@ class SpecieDAO extends DAO {
 
 
         foreach ($result as $element){
-                print_r($element);
+
                 /** Creazione di un genere. Che a sua volta crea la conservazione e sua volta l ordine.*/
                 $element['genereVO'] = new GenereVO( $element['genere'], $element['nome_scientifico_genere'],
                     new FamigliaVO($element['famiglia'], $element['nome_scientifico_famiglia'],
@@ -47,7 +47,6 @@ class SpecieDAO extends DAO {
 
                 unset($element['conservazione'],$element['nome'],
                     $element['prob_estinzione'], $element['c_descrizione']);
-                print_r($element);
                 $VOArray [] = new SpecieVO(...array_values($element));
         }
         return $VOArray;
@@ -104,7 +103,7 @@ class SpecieDAO extends DAO {
             if(isset($result['failure'])) return $VOArray;
 
             foreach ($result as $specie){
-    
+
                 $famigliaVO = new FamigliaVO($specie['f_id'], $specie['f_nome_scientifico'], $ordineVO);
                 unset($specie['o_id'], $specie['o_nome_scientifico']);
 

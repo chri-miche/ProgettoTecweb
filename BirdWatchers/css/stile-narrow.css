@@ -74,14 +74,10 @@ button, .button, a {
     background: white;
     color: black;
     text-decoration: none;
-    border-style: none;
     border-radius: 0.4em;
     padding: 0.5em 1em;
     font: inherit; /* altrimenti non vede il font dato*/
-    box-shadow:
-            0 3px 1px -2px rgba(0,0,0,.2),
-            0 2px 2px 0 rgba(0,0,0,.14),
-            0 1px 5px 0 rgba(0,0,0,.12);
+    border: 1px solid rgba(0,0,0,.12);
     cursor: pointer;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-block;
@@ -92,18 +88,13 @@ button, .button, a {
 button:active, .button:active, a:active, a:visited {
     background: #D3EAFD;
     color: black;
-    box-shadow:
-            0 3px 1px -2px rgba(0,0,0,.2),
-            0 2px 2px 0 rgba(0,0,0,.14),
-            0 1px 5px 0 rgba(0,0,0,.12);
+    border: 1px solid rgba(0,0,0,.12);
+
 }
 
 button:hover, .button:hover, a:hover {
     background: #d0d0d0;
-    box-shadow:
-            0 3px 1px 0 rgba(0,0,0,.2),
-            0 2px 2px 0 rgba(0,0,0,.14),
-            0 1px 5px 0 rgba(0,0,0,.12);
+    border: 1px solid rgba(0,0,0,.12);
 }
 
 button.disabled, .button.disabled, a[aria-selected=true], button[aria-selected=true]
@@ -260,6 +251,7 @@ a.tab-label, a.tab-label:active, .tab-label button, .tab-label button:active {
     background: transparent;
     border-radius: 0;
     box-shadow: none;
+    border-style: none;
 }
 
 a.tab-label:hover, .tab-label button:hover {
@@ -410,6 +402,7 @@ fieldset {
 .image-slideshow img {
     max-height: 500px;
     display: inline-block;
+    overflow: hidden;
 }
 
 
@@ -467,7 +460,9 @@ ul#comments li {
 
 .profile-mini img {
     display: inline-block;
-    width: 40px;
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
 }
 
 .profile-mini {
@@ -503,8 +498,8 @@ ul#comments li {
 
 
 ul#comments li {
-    border-left: 3px solid rgba(33,150,243);
     padding-left: 1em;
+    border-bottom: 1px solid rgba(0,0,0,.12);
 }
 
 ul#comments li form fieldset {
@@ -539,11 +534,42 @@ ul#comments li form textarea {
     display: block;
 }
 
+#user-details .content {
+    position: relative;
+}
+
+#user-details .content h1 {
+    margin: 0;
+}
+
+#user-details .content form {
+    width: fit-content;
+    position: absolute;
+    background: transparent;
+    top: -2em;
+    right: 0;
+}
+
+#user-details .content form .icon-button {
+    width: 2em;
+    height: 2em;
+    font-size: 2em;
+    line-height: 2em;
+}
+
 .profile-big img {
     height: 300px;
     display: block;
     width: 100vw;
     object-fit: cover;
+}
+
+#user-details h1 {
+    text-align: center;
+    /* border-bottom: 4px solid #6BB7F4; /* 0.5 */
+    /* background: #B5D8F4; /* 0.3 */
+    background: white;
+    border-bottom: 1px solid rgba(0,0,0,.12);
 }
 
 #profile-form {
@@ -561,7 +587,11 @@ ul#comments li form textarea {
     display: none;
 }
 
-#profile-form 
+#profile-form input:not(:valid) + button {
+    display: none;
+}
+
+
 
 #information-page  {
     display: flex;

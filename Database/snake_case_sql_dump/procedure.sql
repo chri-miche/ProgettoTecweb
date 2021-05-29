@@ -601,7 +601,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `getLikes` */;
+/*!50003 DROP PROCEDURE IF EXISTS `get_likes` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -977,7 +977,7 @@ BEGIN
 
                     o.tag_id as ordine, o.nome_scientifico as nome_scientifico_ordine,
 
-                    c.codice as conservazione, c.nome, c.prob_estinzione, c.descrizione
+                    c.codice as conservazione, c.nome, c.prob_estinzione, c.descrizione as c_descrizione
 
             FROM specie s
 
@@ -1086,7 +1086,7 @@ DELIMITER ;;
 CREATE PROCEDURE `get_genere`(IN id INT)
 BEGIN
 
-        SELECT g.nome_scientifico, g.tag_id as id, g.fam_id as famiglia FROM genere g WHERE g.tag_id = id LIMIT 1; END ;;
+        SELECT g.tag_id as id, g.nome_scientifico, g.fam_id as famiglia FROM genere g WHERE g.tag_id = id LIMIT 1; END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -1527,7 +1527,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE PROCEDURE `update_famiglia`(IN id int, IN ordine INT, IN nome_scientifico VARCHAR(40))
+CREATE PROCEDURE `update_famiglia`(IN id int, IN nome_scientifico VARCHAR(40), IN ordine INT)
 BEGIN
 
         UPDATE famiglia f SET f.nome_scientifico = nome_scientifico, f.ord_id = ordine WHERE f.tag_id = id; END ;;
@@ -1620,7 +1620,7 @@ BEGIN
 
                     s.peso_medio = in_peso_medio, s.altezza_media = in_altezza_media, s.descrizione = in_descrizione,
 
-                    s.percorso_immagine = in_percorso_immagine, s.gen_id = gen_id, s.conservazione_id = conservazione
+                    s.percorso_immagine = in_percorso_immagine, s.gen_id = genere, s.conservazione_id = conservazione
 
             WHERE s.tag_id = id;END ;;
 DELIMITER ;

@@ -32,9 +32,7 @@ body {
     font-family: helvetica neue, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     margin: 0;
-    flex: 1 1 auto;
-    background: whitesmoke url('../res/Images/6-opaco.jpg');
-
+    background: whitesmoke;
 }
 
 .accent-color {
@@ -231,8 +229,8 @@ a.tab-label[aria-selected=true]:hover,
 #content {
     flex: 1 1 auto;
     background: white;
+    margin: 0 1em 0 1em;
 }
-
 
 #feed {
     margin: 0 2em;
@@ -729,16 +727,16 @@ ul#comments li form textarea {
 }
 
 #user-details{
-    flex: 0 1 20%;
     height: fit-content;
     min-width: 300px;
     display: flex;
     flex-direction: column;
     position: sticky;
-    top: 10px;
+    top: 0; /* per position sticy */
 }
 
 #user-details .card-header {
+    padding: 1em;
     height: fit-content;
     display: table-cell;
     vertical-align: middle;
@@ -746,6 +744,7 @@ ul#comments li form textarea {
 }
 
 #user-details .card-content {
+    padding: 1em;
     display: table-cell;
     vertical-align: middle;
     text-align: center;

@@ -254,7 +254,7 @@ CREATE TABLE `utente` (
   `email` varchar(40) NOT NULL,
   `password` varchar(14) NOT NULL,
   `is_admin` tinyint(1) NOT NULL DEFAULT 0,
-  `immagine_profilo` varchar(40) NOT NULL DEFAULT 'imgs/default.png',
+  `immagine_profilo` varchar(255) NOT NULL DEFAULT 'imgs/default.png',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;

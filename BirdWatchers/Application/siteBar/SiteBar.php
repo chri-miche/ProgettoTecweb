@@ -51,6 +51,8 @@ class SiteBar extends Component {
             $contentHTML = file_get_contents(__DIR__ . "/LoggedInActions.xhtml");
 
             $actions = [
+                ['<span xml:lang="en">Home</span>', 'index.php'],
+                ['Catalogo', 'catalogo.php'],
                 ['Profilo', 'user_page.php?id={userid}'],
                 ['<span xml:lang="en">Logout</span>', 'logout.php'],
                 ['Nuovo post', 'new_post.php']
@@ -69,16 +71,7 @@ class SiteBar extends Component {
         }
 
         $baseLayout = str_replace('<loggedActions />', $contentHTML, $baseLayout);
-        $navigation = '';
 
-        if (strcasecmp($this->position, "home") != 0) {
-            $navigation = '<a href="index.php" xml:lang="en"> Home </a>';
-        }
-        if (strcasecmp($this->position, "catalogo") != 0) {
-            $navigation .= (new NavigationButton('Catalogo', 'catalogo.php'))->build();
-        }
-
-        $baseLayout = str_replace('<navigation />', $navigation, $baseLayout);
         return $baseLayout;
 
     }

@@ -9,18 +9,16 @@
         <span>Menu</span>
     </a>
     <div id="actions">
+
         <a href="#content" id="logo">
             <img src="res/Images/logo.png" alt="Vai al contenuto" />
         </a>
 
-        <navigation />
-
-        <form id="search-form" action="search.php" method="post" name="search">
+        <form class="single-input-form" action="search.php" method="post" name="search">
             <fieldset>
-                <input id="search-input" placeholder="Scrivi qualcosa..." name="search" alt="Effettua una ricerca" aria-label="Cerca nel sito" value="{value}" />
+                <input placeholder="Scrivi qualcosa..." name="search" alt="Effettua una ricerca" aria-label="Cerca nel sito" value="{value}" />
             </fieldset>
-            <button id="search-button"
-                    class="icon-button"
+            <button class="icon-button"
                     type="submit"
                     name="submit"
                     title="Avvia ricerca"
@@ -29,14 +27,19 @@
             </button>
         </form>
 
-        <loggedActions />
+        <div>
 
-        <a href="#sitebar"
-           class="icon-button mobile-actions"
-           title="Chiudi"
-           data-icon-name="close">
-            <span>Chiudi</span>
-        </a>
+            <loggedActions />
+
+            <a href="#sitebar"
+               class="icon-button mobile-actions"
+               title="Chiudi"
+               data-icon-name="close">
+                <span>Chiudi</span>
+            </a>
+        </div>
+
+
 
     </div>
 </div>

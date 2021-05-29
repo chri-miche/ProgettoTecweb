@@ -7,7 +7,7 @@ $basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
 
 $page = new BasePage($basePage);
 
-$page->addComponent(new SiteBar("home"));
+$page->addComponent(new SiteBar("index"));
 
 // if(!$page->addComponent(new SearchBar())) echo 'Oops something went wrong';
 $page->addComponent(new BreadCrumb(array()));

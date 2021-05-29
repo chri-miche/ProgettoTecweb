@@ -56,7 +56,8 @@ input, textarea {
     border-style: none;
     background-color: transparent;
     outline: none;
-    padding: 0.75em;
+    padding: 0 0 0.75em;
+    width: 100%;
     border-bottom: 3px solid #2196F3;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -68,6 +69,8 @@ input:focus, textarea:focus {
 form {
     text-align: center;
     background: white;
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 0;
 }
 
 button, .button, a {
@@ -149,6 +152,7 @@ ul {
 }
 
 #actions {
+    text-align: center;
     position: fixed;
     display: none;
     background: #1e2129;
@@ -200,10 +204,14 @@ ul {
     background: rgba(33, 150, 243, 0.3);
 }
 
-#search-form {
+.single-input-form {
     margin: 0;
     display: flex;
     align-items: center;
+}
+
+.single-input-form fieldset {
+    border-style: none;
 }
 /* #end sitebar */
 
@@ -286,18 +294,6 @@ a.tab-label[aria-selected=true]:hover,
             0 1px 5px 0 rgba(0,0,0,.12);
 }
 
-.card dt a {
-    color: inherit;
-    background: transparent;
-    box-shadow: none;
-    padding: 0.5em;
-    width: calc(100% - 2em);
-}
-
-.card dt a:hover {
-    background: rgba(33,150,243, 0.2);
-}
-
 .card-footer {
     display: flex;
     justify-content: space-between;
@@ -346,8 +342,8 @@ img {
 /* #end login*/
 
 fieldset {
-    border-color: rgb(30,33,41);
-    border-radius: 0.5em;
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 0.25em;
     margin: 0.5em;
 }
 
@@ -372,6 +368,18 @@ fieldset {
     justify-content: center;
     text-align: center;
     align-items: stretch;
+}
+
+#login-page form {
+    border-style: none;
+}
+
+#password-login {
+    display: flex;
+}
+
+#password-login button {
+    flex: 1 0 auto;
 }
 
 #footer {
@@ -428,7 +436,6 @@ fieldset {
 }
 
 .subtitle {
-    opacity: 0.8;
     font-size: 0.75em;
 }
 
@@ -564,6 +571,10 @@ ul#comments li form textarea {
     object-fit: cover;
 }
 
+.single-button-form {
+    border-style: none;
+}
+
 #user-details h1 {
     text-align: center;
     /* border-bottom: 4px solid #6BB7F4; /* 0.5 */
@@ -615,12 +626,6 @@ ul#comments li form textarea {
     text-align: center;
 }
 
-#information-side ul, #admin-navigation ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: 1;
-}
-
 .preview {
     display: flex;
     flex-wrap: wrap;
@@ -637,48 +642,6 @@ ul#comments li form textarea {
 }
 /* #end user*/
 
-/* */
-
-#admin-navigation ul > * {
-    display: inline-block;
-
-}
-
-#admin-navigation ul {
-    white-space: nowrap;
-    margin-bottom: 0;
-    background: #2196F3;
-}
-
-#admin-navigation ul a {
-    border-radius: 0;
-    margin: 0;
-    box-shadow: none;
-}
-
-#admin-navigation {
-    overflow-x: scroll;
-}
-
-#admin-content {
-    width: 95vw;
-    margin: 2.5vw;
-}
-#table-container {
-    overflow-x: scroll;
-}
-#admin-content table {
-    width: 100%;
-}
-#admin-content tbody {
-    text-align: center;
-}
-#admin-content a {
-    font-size: initial;
-    font-weight: initial;
-    float: right;
-}
-
 /* #begin table */
 
 tr:nth-child(even) {
@@ -693,20 +656,6 @@ th.action, td.action {
     width: 100px;
 }
 /* #end table*/
-
-#admin-navigation ~ form {
-    width: 400px;
-    align-self: center;
-}
-
-#admin-navigation ~ form fieldset > input {
-    width: calc(100% - 28px); /*100% - border e padding*/
-}
-
-#admin-content h1 {
-    margin-left: 1em;
-    margin-right: 1em;
-}
 
 #success, #failure {
     padding-left: 2em;

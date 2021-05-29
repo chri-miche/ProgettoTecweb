@@ -452,7 +452,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE PROCEDURE `create_user`(IN usernome VARCHAR(25), IN useremail VARCHAR(40), IN userpassword VARCHAR(14),
 
-    IN immagine VARCHAR(40), IN useradmin BOOL)
+    IN immagine VARCHAR(255), IN useradmin BOOL)
 BEGIN
 
         INSERT INTO utente(nome, email, password, immagine_profilo, is_admin) VALUE
@@ -1640,7 +1640,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE PROCEDURE `update_user`(IN in_id INT, IN in_nome VARCHAR(25), IN in_email VARCHAR(40),
 
-    IN in_password VARCHAR(14), IN in_immagine VARCHAR(40), IN in_admin BOOL)
+    IN in_password VARCHAR(14), IN in_immagine VARCHAR(255), IN in_admin BOOL)
 BEGIN
 
         UPDATE utente u SET u.nome = in_nome, u.email = in_email, u.password = in_password,

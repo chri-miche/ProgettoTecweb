@@ -85,10 +85,10 @@ class SpecieDAO extends DAO {
 
             foreach ($result as $specie) {
 
-                $genereVO = new GenereVO($specie['g_id'], $specie['g_nomeScientifico'], $famigliaVO);
+                $genereVO = new GenereVO($specie['g_id'], $specie['g_nome_scientifico'], $famigliaVO);
                 $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
 
-                unset($specie['g_id'], $specie['g_nomeScientifico']);
+                unset($specie['g_id'], $specie['g_nome_scientifico']);
                 unset($specie['c_codice']);
 
 

@@ -104,16 +104,16 @@ class SpecieDAO extends DAO {
             if(isset($result['failure'])) return $VOArray;
 
             foreach ($result as $specie){
+                print_r($result);
+                $famigliaVO = new FamigliaVO($specie['f_id'], $specie['f_nome_scientifico'], $ordineVO);
+                unset($specie['o_id'], $specie['o_nome_scientifico']);
 
-                $famigliaVO = new FamigliaVO($specie['f_id'], $specie['f_nomeScientifico'], $ordineVO);
-                unset($specie['o_id'], $specie['o_nomeScientifico']);
-
-                $genereVO = new GenereVO($specie['g_id'], $specie['g_nomeScientifico'], $famigliaVO);
+                $genereVO = new GenereVO($specie['g_id'], $specie['g_nome_scientifico'], $famigliaVO);
 
                 $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
 
 
-                unset($specie['g_id'], $specie['g_nomeScientifico'], $specie['f_id'], $specie['f_nomeScientifico']);
+                unset($specie['g_id'], $specie['g_nome_scientifico'], $specie['f_id'], $specie['f_nome_scientifico']);
                 unset($specie['c_codice']);
 
                 $VOArray [] = new SpecieVO(...array_values($specie), ...[$genereVO, $conservazioneVO]);

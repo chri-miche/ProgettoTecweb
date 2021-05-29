@@ -134,23 +134,23 @@ class SpecieDAO extends DAO {
 
         $result = $this->performMultiCAll(array($text), 'search_all_specie');
         if(isset($result['failure'])) return $VOArray;
-
+     
         foreach ($result as $element){
 
             /** Creazione di un genere. Che a sua volta crea la conservazione e sua volta l ordine.*/
             $element['genereVO'] = new GenereVO( $element['genere'], $element['nome_scientifico_genere'],
-                new FamigliaVO($element['conservazione'], $element['nome_scientifico_famiglia'],
+                new FamigliaVO($element['famiglia'], $element['nome_scientifico_famiglia'],
                     new OrdineVO($element['ordine'],  $element['nome_scientifico_ordine'])));
 
             /** Creazione di stato estinzione.*/
             $element['conservazioneVO'] = new
-                ConservazioneVO($element['conservazione'], $element['nome'], $element['prob_estinzione'], $element['descrizione']);
+                ConservazioneVO($element['conservazione'], $element['nome'], $element['prob_estinzione'], $element['c_descrizione']);
 
             /** Scartiamo gli attributi non più necessari.*/
-            unset($element['genere'], $element['nome_scientifico_genere'], $element['conservazione'],
+            unset($element['genere'], $element['nome_scientifico_genere'], $element['conservazione'], $element['famiglia'],
                 $element['nome_scientifico_famiglia'],  $element['ordine'], $element['nome_scientifico_ordine']);
 
-            unset($element['conservazione'],$element['nome'], $element['prob_estinzione'], $element['descrizione']);
+            unset($element['conservazione'],$element['nome'], $element['prob_estinzione'], $element['c_descrizione']);
 
             $VOArray [] = new SpecieVO(...array_values($element));
 

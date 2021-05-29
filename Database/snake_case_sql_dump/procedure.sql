@@ -1449,7 +1449,7 @@ BEGIN
 
                     o.tag_id as ordine, o.nome_scientifico as nome_scientifico_ordine,
 
-                    c.codice as conservazione, c.nome, c.prob_estinzione, c.descrizione
+                    c.codice as conservazione, c.nome, c.prob_estinzione, c.descrizione as c_descrizione
 
             FROM specie s
 

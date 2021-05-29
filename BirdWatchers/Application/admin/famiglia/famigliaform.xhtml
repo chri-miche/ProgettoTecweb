@@ -1,7 +1,12 @@
 <form action="admin.php?manage=famiglia&amp;operation={operation}" method="post">
-    <p>
-        {id}
-    </p>
+    <fieldset>
+        <legend>Chiavi</legend>
+        <div class="form-field" data-error="">
+            <label for="id"><abbr title="Codice identificativo">ID</abbr> <span xml:lang="en">tag</span></label>
+            <input id="id" name="id"  aria-label="Etichetta" type="number"
+                   placeholder="Una nuova etichetta verrà creata automaticamente" readonly="readonly" value="{id}" />
+        </div>
+    </fieldset>
     <fieldset>
         <legend>Campi dati</legend>
         <div class="form-field" data-error="{o_id_error}">

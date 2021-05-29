@@ -67,7 +67,7 @@ class AdminPanel extends Component
                 case "ordine":
                     $dao = new OrdineDAO();
                     if (sizeof($data) > 0) {
-                        $vo = new OrdineVO($data['id'], $data['nome_scientifico']);
+                        $vo = new OrdineVO(empty($data['id']) ? null : $data['id'], $data['nome_scientifico']);
                     } elseif (sizeof($keys) > 0) {
                         $vo = $dao->get($keys['id']);
                     } else {
@@ -78,7 +78,7 @@ class AdminPanel extends Component
                     $dao = new FamigliaDAO();
                     if (sizeof($data) > 0) {
                         $errors = $this->checkFamiglia($data);
-                        $vo = new FamigliaVO($data['id'], $data['nome_scientifico'], $data['ordineVO']);
+                        $vo = new FamigliaVO(empty($data['id']) ? null : $data['id'], $data['nome_scientifico'], $data['ordineVO']);
                     } elseif (sizeof($keys) > 0) {
                         $vo = $dao->get($keys['id']);
                     } else {
@@ -89,7 +89,7 @@ class AdminPanel extends Component
                     $dao = new GenereDAO();
                     if (sizeof($data) > 0) {
                         $errors = $this->checkGenere($data);
-                        $vo = new GenereVO($data['id'], $data['nome_scientifico'], $data['famigliaVO']);
+                        $vo = new GenereVO(empty($data['id']) ? null : $data['id'], $data['nome_scientifico'], $data['famigliaVO']);
                     } elseif (sizeof($keys) > 0) {
                         $vo = $dao->get($keys['id']);
                     } else {
@@ -101,7 +101,7 @@ class AdminPanel extends Component
                     if (sizeof($data) > 0) {
                         $this->savePhoto($data);
                         $errors = $this->checkSpecie($data);
-                        $vo = new SpecieVO($data['id '],
+                        $vo = new SpecieVO(empty($data['id']) ? null : $data['id'],
                             $data['nome_scientifico'],
                             $data['nome_comune'],
                             $data['peso_medio'],
@@ -244,11 +244,11 @@ class AdminPanel extends Component
         $errors = [];
 
         $ordinevo = (new OrdineDAO())->get($data['ord_id']);
+        $data['ordineVO'] = $ordinevo;
         if ($ordinevo->getId() === null) {
             $errors['o_id'] = "L'identificativo dell'ordine non è valido. Si prega di inserire un ordine nel catalogo.";
         } else {
             unset($data['ord_id']);
-            $data['ordineVO'] = $ordinevo;
         }
 
         return $errors;

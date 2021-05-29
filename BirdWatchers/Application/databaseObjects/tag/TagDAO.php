@@ -40,7 +40,7 @@ class TagDAO extends DAO {
         if($this->checkId($element)){
 
             $result = $this->performNoOutputModifyCall($element->smartDump(),'update_tag');
-            return isset($result['failure']);
+            return !isset($result['failure']);
 
         } else {
 
@@ -49,7 +49,7 @@ class TagDAO extends DAO {
             if(!isset($result['failure']))
                 $element = new $element( ...array_values($result), ...$element->varDumps(true));
 
-            return !$element->id === null;
+            return !is_null($element->getId());
         }
     }
 

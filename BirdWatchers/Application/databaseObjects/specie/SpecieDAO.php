@@ -29,6 +29,7 @@ class SpecieDAO extends DAO {
 
 
         foreach ($result as $element){
+
                 /** Creazione di un genere. Che a sua volta crea la conservazione e sua volta l ordine.*/
                 $element['genereVO'] = new GenereVO( $element['genere'], $element['nome_scientifico_genere'],
                     new FamigliaVO($element['famiglia'], $element['nome_scientifico_famiglia'],
@@ -37,7 +38,7 @@ class SpecieDAO extends DAO {
                 /** Creazione di stato estinzione.*/
                 $element['conservazioneVO'] = new ConservazioneVO(
                     $element['conservazione'], $element['nome'],
-                    $element['prob_estinzione'], $element['descrizione']);
+                    $element['prob_estinzione'], $element['c_descrizione']);
 
                 /** Scartiamo gli attributi non più necessari.*/
                 unset($element['genere'], $element['nome_scientifico_genere'],
@@ -45,8 +46,7 @@ class SpecieDAO extends DAO {
                     $element['ordine'], $element['nome_scientifico_ordine'], $element['famiglia']);
 
                 unset($element['conservazione'],$element['nome'],
-                    $element['prob_estinzione']);
-
+                    $element['prob_estinzione'], $element['c_descrizione']);
                 $VOArray [] = new SpecieVO(...array_values($element));
         }
         return $VOArray;
@@ -84,10 +84,10 @@ class SpecieDAO extends DAO {
 
             foreach ($result as $specie) {
 
-                $genereVO = new GenereVO($specie['g_id'], $specie['g_nomeScientifico'], $famigliaVO);
+                $genereVO = new GenereVO($specie['g_id'], $specie['g_nome_scientifico'], $famigliaVO);
                 $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
 
-                unset($specie['g_id'], $specie['g_nomeScientifico']);
+                unset($specie['g_id'], $specie['g_nome_scientifico']);
                 unset($specie['c_codice']);
 
 
@@ -104,15 +104,15 @@ class SpecieDAO extends DAO {
 
             foreach ($result as $specie){
 
-                $famigliaVO = new FamigliaVO($specie['f_id'], $specie['f_nomeScientifico'], $ordineVO);
-                unset($specie['o_id'], $specie['o_nomeScientifico']);
+                $famigliaVO = new FamigliaVO($specie['f_id'], $specie['f_nome_scientifico'], $ordineVO);
+                unset($specie['o_id'], $specie['o_nome_scientifico']);
 
-                $genereVO = new GenereVO($specie['g_id'], $specie['g_nomeScientifico'], $famigliaVO);
+                $genereVO = new GenereVO($specie['g_id'], $specie['g_nome_scientifico'], $famigliaVO);
 
                 $conservazioneVO = (new ConservazioneDAO())->get($specie['c_codice']);
 
 
-                unset($specie['g_id'], $specie['g_nomeScientifico'], $specie['f_id'], $specie['f_nomeScientifico']);
+                unset($specie['g_id'], $specie['g_nome_scientifico'], $specie['f_id'], $specie['f_nome_scientifico']);
                 unset($specie['c_codice']);
 
                 $VOArray [] = new SpecieVO(...array_values($specie), ...[$genereVO, $conservazioneVO]);
@@ -182,7 +182,7 @@ class SpecieDAO extends DAO {
             if ($this->checkId($element)) {
 
                 $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_specie');
-                return isset($result['failure']);
+                return !isset($result['failure']);
 
             } else {
 
@@ -191,7 +191,7 @@ class SpecieDAO extends DAO {
                 if(!isset($result['failure']))
                     $element = new $element(...array_values($result), ...$element->varDumps(true));
 
-                return !$element->getId() === null;
+                return !is_null($element->getId());
 
             }
         }

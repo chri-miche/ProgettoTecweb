@@ -44,7 +44,6 @@ class BirdSummary extends PageFiller {
 
         $swapData['{refGenere}'] = $this->catalogoReference ."?oSelected%5B%5D=1&fSelected%5B%5D=1&gSelected%5B%5D=1&gValue="
             . $this->specieVO->getGenereVO()->getId();
-
         return $swapData;
 
     }

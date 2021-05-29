@@ -169,7 +169,7 @@ class Catalogo extends Component {
            $resolvedHTML .= $this->makeFullSelect($this->ordineVOArray, $this->ordineSelection,!empty($this->famigliaVOArray) || !empty($this->genereVOArray), "oValue" , "oSelected[]", "Ordine:");
 
         if($this->fSelected)
-            $resolvedHTML .= $this->makeFullSelect($this->famigliaVOArray, $this->famigliaSelection, !empty($this->genereVOArray), "fValue","fSelected[]", "Famiglia:");
+            $resolvedHTML .= $this->makeFullSelect($this->famigliaVOArray, $this->famigliaSelection, !empty($this->genereVOArray), "f_value","fSelected[]", "Famiglia:");
 
         if($this->gSelected)
             $resolvedHTML .= $this->makeFullSelect($this->genereVOArray, $this->genereSelection, false, "gValue", "gSelected[]", "Genere:");

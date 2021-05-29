@@ -111,14 +111,14 @@ class CommentoDAO extends DAO {
             if ($this->checkId($element)) {
 
                 $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_commento');
-                return isset($result['failure']);
+                return !isset($result['failure']);
 
             } else {
 
                 $result = $this->performCall($element->smartDump(true), 'create_commento');
                 if(!isset($result['failure'])) $element = new $element(...array_values($result), ...$element->varDumps(true));
                 /* Ritorna vero se è stato costruito l oggetto falso altrimenti.*/
-                return !$element->getId() === null;
+                return !is_null($element->getId());
             }
         }
         /** Elemento padre non valido, viene perciò eliminato.*/

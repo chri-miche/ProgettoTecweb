@@ -5,7 +5,7 @@ body {
 }
 
 img {
-    max-width: 15cm;
+    max-width: 10cm;
     object-fit: cover;
 }
 
@@ -30,6 +30,13 @@ a[href^="#"]::first-letter {
     text-transform: lowercase;
 }
 
+abbr {
+    text-decoration: none;
+}
+
+abbr:before {
+    content: attr(title) ": ";
+}
 
 #logo {
     display: none;
@@ -101,7 +108,7 @@ td.action, th.action {
     display: none;
 }
 
-form {
+#user-posts > img {
     display: none;
 }
 
@@ -123,4 +130,20 @@ form {
 
 #tablist {
     display: none;
+}
+
+.ordinatore {
+    display: none;
+}
+
+tr {
+    border-bottom: 1px solid black;
+}
+
+td {
+    text-align: center;
+}
+
+.form-field {
+    margin: 0.25cm;
 }

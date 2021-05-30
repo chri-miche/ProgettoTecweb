@@ -662,6 +662,15 @@ ul#comments li form textarea {
     line-height: 2em;
 }
 
+#user-posts {
+    width: 100%;
+}
+
+#user-posts img {
+    margin: 0 auto;
+    display: block;
+}
+
 .profile-big img {
     height: 300px;
     display: block;

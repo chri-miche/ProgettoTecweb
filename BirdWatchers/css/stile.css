@@ -418,15 +418,14 @@ ul {
     display: flex;
     align-items: center;
     text-decoration: none;
-    /* se scommentato, scommenta anche RIGA:444 background: rgb(33,150,243);*/
-    background: transparent;
+    background: rgb(26, 150, 253);
     color: white;
     min-width: 200px;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 a.breadcrumb-item {
-    box-shadow: none;
+    border-style: none;
     border-radius: 0;
     margin: 0;
 }
@@ -452,8 +451,7 @@ a.breadcrumb-item:visited:hover {
     transform: scale(.7) rotate(45deg); /* scala la dimensione di sqrt(2)*/
     /*così si crea un rombo con assi lunghi 40px*/
     right: -20px; /*deve essere uguale metà height della breadcrumb, così si posiziona a cavallo tra due crumbs*/
-    /* RIGA:444 background: rgb(33,150,243);*/
-    background: transparent;
+    background: rgb(26, 150, 253);
     position: absolute;
     display: inline-block;
     border-top: 1px solid white;
@@ -478,6 +476,7 @@ a.breadcrumb-item:visited:hover {
 
 #home-crumb {
     min-width: 115px;
+    z-index: 1;
 }
 
 /* #end breadcrumb */
@@ -796,6 +795,12 @@ ul#comments li {
 
 #user-posts {
     border-left: 1px solid rgba(0,0,0,.12);
+    width: 100%;
+}
+
+#user-posts img {
+    margin: auto;
+    display: block;
 }
 
 #user-details{

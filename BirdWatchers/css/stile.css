@@ -182,6 +182,7 @@ a.tab-label[aria-selected=true]:hover,
     border-bottom: 3px solid rgb(102, 185, 253);
 }
 
+
 #tablist {
     width: 100%;
     background: rgb(179, 220, 253);

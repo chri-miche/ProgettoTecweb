@@ -7,7 +7,7 @@ require_once __DIR__ . "/Application/search/SearchTab.php";
 $basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
 $page = new BasePage($basePage);
 
-$keyword = $_POST["search"] ?? "";
+$keyword = $_GET["search"] ?? "";
 $entity = $_GET["entity"] ?? "post";
 
 

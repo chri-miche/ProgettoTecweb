@@ -3,20 +3,23 @@
          role="tablist">
         <form class="tab-label"
               action="search.php?entity=post"
-              method="post">
+              method="get">
             <input type="hidden" name="search" value="{keyword}"/>
+            <input type="hidden" name="entity" value="post"/>
             <button aria-controls="panel-post"
                     data-attributes="{post}"
                     role="tab" xml:lang="en">Posts</button>
         </form>
-        <form class="tab-label" action="search.php?entity=specie" method="post">
+        <form class="tab-label" action="search.php?entity=specie" method="get">
             <input type="hidden" name="search" value="{keyword}"/>
+            <input type="hidden" name="entity" value="specie"/>
             <button aria-controls="panel-specie"
                     data-attributes="{specie}"
                     role="tab">Specie</button>
         </form>
-        <form class="tab-label" action="search.php?entity=commento" method="post">
+        <form class="tab-label" action="search.php?entity=commento" method="get">
             <input type="hidden" name="search" value="{keyword}"/>
+            <input type="hidden" name="entity" value="commento"/>
             <button aria-controls="panel-commento"
                     data-attributes="{commento}"
                     role="tab">Commenti</button>

@@ -18,7 +18,7 @@
          * @param bool $admin Se l utente è un amministratore
          * @param string $immagine se l utente ha immagine*/
         public function __construct(?int $id = null, ?string $nome = null, ?string $email = null,
-                        ?string $password = null, string $immagine = 'immagine.jpg', bool $admin = false) {
+                        ?string $password = null, string $immagine = 'res/Images/userdefault.png', bool $admin = false) {
 
             $this->id = $id;
             $this->admin = $admin;

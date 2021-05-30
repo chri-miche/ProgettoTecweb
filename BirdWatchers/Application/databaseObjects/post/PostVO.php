@@ -42,7 +42,7 @@ class PostVO implements VO {
         $this->date = $date;
         $this->title = $title;
 
-        $this->likes = 0;
+        $this->likes = $likes;
         $this->userVO = is_null($userVO)? new UserVO() : $userVO;
 
         $this->immagini = $immagini;

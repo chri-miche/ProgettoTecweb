@@ -33,7 +33,7 @@ if($postVO->getId()){
             $commentVO = new CommentoVO(null,false, $comment, null, $postVO, $sessionUser->getUser());
             $transaction = (new CommentoDAO())->save($commentVO);
 
-            echo $transaction;
+            // echo $transaction;
 
         } else if(isset($_GET['liked']) && $_GET['liked']){
 

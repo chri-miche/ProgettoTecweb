@@ -10,7 +10,7 @@ body {
     font-family: helvetica neue, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     margin: 0;
-    background: whitesmoke;
+    background: url('../res/Images/6-opaco.jpg') whitesmoke;
 }
 
 @font-face {
@@ -69,8 +69,7 @@ input:focus, textarea:focus {
 form {
     text-align: center;
     background: white;
-    border: 1px solid rgba(0,0,0,.12);
-    border-radius: 0;
+    max-width: 300px;
 }
 
 button, .button, a {
@@ -208,18 +207,20 @@ ul {
     margin: 0;
     display: flex;
     align-items: center;
+    border-style: none;
 }
 
 .single-input-form fieldset {
     border-style: none;
 }
+
 /* #end sitebar */
 
 #content {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    background: white;
 }
 
 #breadcrumb > *::before {
@@ -375,12 +376,6 @@ img {
 
 /* #end login*/
 
-fieldset {
-    border: 1px solid rgba(0,0,0,.12);
-    border-radius: 0.25em;
-    margin: 0.5em;
-}
-
 #login-page {
     width: 100%;
     background-image: url("../res/Images/loginwallpaper.jpg");
@@ -423,11 +418,74 @@ fieldset {
     bottom: 0;
 }
 
+/* #end login */
+
+/* #begin form */
+.form-card {
+    border-style: none;
+    margin: 0.5em auto;
+}
+
+.form-card h1 {
+    margin: 0;
+}
+
+.form-card .card-header {
+    padding: 0.5em;
+    margin: 0;
+    border-top: 1px solid #1e2129;
+    border-left: 1px solid #1e2129;
+    border-right: 1px solid #1e2129;
+}
+
+.form-card fieldset {
+    border-style: none;
+    border-radius: 0;
+    border-top: 1px solid rgba(0,0,0,.12);
+    margin: 0;
+}
+
+.form-card form {
+    border-left: 1px solid rgba(0,0,0,.12);
+    border-right: 1px solid rgba(0,0,0,.12);
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    border-radius: 0 0 10px 10px;
+}
+
+.form-card .card-footer {
+    border-style: none;
+    border-top: 1px solid rgba(0,0,0,.12);
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    margin: 0;
+}
+
+.form-card div.card-footer {
+    display: block;
+}
+
+.form-card button.card-footer {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.form-card .form-field {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
+
+fieldset {
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 0.25em;
+    margin: 0.5em;
+}
+/* #end form */
+
 /* #begin image slideshow */
 .image-slideshow, .image-slideshow:target ~ #image-0 {
     max-width: 100vw;
     display: none;
-    background-image: url('../res/Images/6-opaco.jpg');
+    /*background-image: url('../res/Images/6-opaco.jpg');*/
 }
 
 #image-0, .image-slideshow:target {
@@ -650,7 +708,9 @@ ul#comments li form textarea {
 }
 
 #information-page  {
-    /*TODO*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #information-page img {
@@ -659,7 +719,7 @@ ul#comments li form textarea {
 
 #information-side {
     padding: 1em;
-    align-self: stretch;
+    background-color: white;
 }
 
 #information-content {

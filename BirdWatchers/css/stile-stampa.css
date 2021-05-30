@@ -5,7 +5,8 @@ body {
 }
 
 img {
-    max-width: 540px;
+    max-width: 15cm;
+    object-fit: cover;
 }
 
 a {
@@ -103,7 +104,6 @@ td.action, th.action {
 form {
     display: none;
 }
-
 
 #information-content ul {
     list-style: inside;

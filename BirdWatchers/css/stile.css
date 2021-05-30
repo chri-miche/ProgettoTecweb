@@ -26,7 +26,7 @@ body {
     font-family: helvetica neue, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     margin: 0;
-    background: whitesmoke;
+    background: url('../res/Images/6-opaco.jpg') whitesmoke;
 }
 
 .accent-color {
@@ -51,12 +51,6 @@ input, textarea {
 
 input:focus, textarea:focus {
     background: rgba(33, 150, 243, 0.3);
-}
-
-form {
-    background: white;
-    border: 1px solid rgba(0,0,0,.12);
-    border-radius: 0;
 }
 
 #container {
@@ -553,7 +547,61 @@ a.breadcrumb-item:visited:hover {
 }
 /* #end login*/
 
-/* #form */
+/* #begin form */
+
+/* #begin form */
+.form-card {
+    border-style: none;
+    margin: 0.5em auto;
+}
+
+.form-card h1 {
+    margin: 0;
+}
+
+.form-card .card-header {
+    padding: 0.5em;
+    margin: 0;
+    border-top: 1px solid #1e2129;
+    border-left: 1px solid #1e2129;
+    border-right: 1px solid #1e2129;
+}
+
+.form-card fieldset {
+    border-style: none;
+    border-radius: 0;
+    border-top: 1px solid rgba(0,0,0,.12);
+    margin: 0;
+}
+
+.form-card form {
+    border-left: 1px solid rgba(0,0,0,.12);
+    border-right: 1px solid rgba(0,0,0,.12);
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    border-radius: 0 0 10px 10px;
+}
+
+.form-card .card-footer {
+    border-style: none;
+    border-top: 1px solid rgba(0,0,0,.12);
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    margin: 0;
+}
+
+.form-card div.card-footer {
+    display: block;
+}
+
+.form-card button.card-footer {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.form-card .form-field {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+}
 
 fieldset {
     border: 1px solid rgba(0,0,0,.12);
@@ -832,7 +880,6 @@ ul#comments li {
     display: flex;
     align-self: stretch;
 }
-
 
 #information-side {
     float: right;

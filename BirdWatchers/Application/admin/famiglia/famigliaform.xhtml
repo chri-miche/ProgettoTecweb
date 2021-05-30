@@ -1,26 +1,34 @@
-
-<form action="admin.php?manage=famiglia&amp;operation={operation}" method="post">
-    <fieldset>
-        <legend>Chiavi</legend>
-        <div class="form-field" data-error="">
-            <label for="id"><abbr title="Codice identificativo">ID</abbr> <span xml:lang="en">tag</span></label>
-            <input id="id" name="id"  aria-label="Etichetta" type="number" title="Una nuova etichetta verrà creata automaticamente"
-                   placeholder="Una nuova etichetta verrà creata automaticamente" readonly="readonly" value="{id}" />
+<div class="card form-card">
+    <div class="card-header primary-color">
+        <h1>
+            Famiglia
+        </h1>
+    </div>
+    <form action="admin.php?manage=famiglia&amp;operation={operation}" method="post">
+        <fieldset>
+            <legend>Chiavi</legend>
+            <div class="form-field" data-error="">
+                <label for="id"><abbr title="Codice identificativo">ID</abbr> <span xml:lang="en">tag</span></label>
+                <input id="id" name="id"  aria-label="Etichetta" type="number" title="Una nuova etichetta verrà creata automaticamente"
+                       placeholder="Una nuova etichetta verrà creata automaticamente" readonly="readonly" value="{id}" />
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Campi dati</legend>
+            <div class="form-field" data-error="{o_id_error}">
+                <label for="ord_id">Ordine</label>
+                <input id="ord_id" name="ord_id"  aria-label="Ordine"
+                       placeholder="Codice ordine" required="required" value="{o_id}" />
+            </div>
+            <div class="form-field" data-error="{nome_scientifico_error}">
+                <label for="nome_scientifico">Nome scientifico</label>
+                <input id="nome_scientifico" name="nome_scientifico"  aria-label="Nome scientifico"
+                       placeholder="Nome scientifico" required="required" value="{nome_scientifico}" />
+            </div>
+        </fieldset>
+        <div class="card-footer">
+            <button type="submit" name="submit">Conferma</button>
+            <a href="admin.php?manage=famiglia">Annulla</a>
         </div>
-    </fieldset>
-    <fieldset>
-        <legend>Campi dati</legend>
-        <div class="form-field" data-error="{o_id_error}">
-            <label for="ord_id">Ordine</label>
-            <input id="ord_id" name="ord_id"  aria-label="Ordine"
-                   placeholder="Codice ordine" required="required" value="{o_id}" />
-        </div>
-        <div class="form-field" data-error="{nome_scientifico_error}">
-            <label for="nome_scientifico">Nome scientifico</label>
-            <input id="nome_scientifico" name="nome_scientifico"  aria-label="Nome scientifico"
-                   placeholder="Nome scientifico" required="required" value="{nome_scientifico}" />
-        </div>
-    </fieldset>
-    <button type="submit" name="submit">Conferma</button>
-    <a href="admin.php?manage=famiglia">Annulla</a>
-</form>
+    </form>
+</div>

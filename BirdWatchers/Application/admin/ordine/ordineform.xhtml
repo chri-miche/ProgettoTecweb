@@ -1,15 +1,25 @@
-<form action="admin.php?manage=ordine&amp;operation={operation}" method="post">
-    <p>
-        {id}
-    </p>
-    <fieldset>
-        <legend>Campi dati</legend>
-        <div class="form-field" data-error="{nome_scientifico_error}">
-            <label for="nome_scientifico">Nome scientifico</label>
-            <input id="nome_scientifico" name="nome_scientifico"  aria-label="Nome scientifico"
-                   placeholder="Nome scientifico" required="required" value="{nome_scientifico}" />
+<div class="card form-card">
+    <div class="card-header primary-color">
+        <h1>
+            Ordine
+        </h1>
+    </div>
+    <form action="admin.php?manage=ordine&amp;operation={operation}" method="post">
+        <p>
+            {id}
+        </p>
+        <fieldset>
+            <legend>Campi dati</legend>
+            <div class="form-field" data-error="{nome_scientifico_error}">
+                <label for="nome_scientifico">Nome scientifico</label>
+                <input id="nome_scientifico" name="nome_scientifico"  aria-label="Nome scientifico"
+                       placeholder="Nome scientifico" required="required" value="{nome_scientifico}" />
+            </div>
+        </fieldset>
+
+        <div class="card-footer">
+            <button type="submit" name="submit">Conferma</button>
+            <a href="admin.php?manage=ordine">Annulla</a>
         </div>
-    </fieldset>
-    <button type="submit" name="submit">Conferma</button>
-    <a href="admin.php?manage=ordine">Annulla</a>
-</form>
+    </form>
+</div>

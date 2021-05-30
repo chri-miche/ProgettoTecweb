@@ -1,35 +1,41 @@
 <div id="content">
-    <h1>Nuovo post</h1>
-    <form method="post" action="new_post.php" enctype="multipart/form-data">
-        <fieldset>
-            <input id="titolo-post"
-                   type="text"
-                   name="titolo-post"
-                   required="required"
-                   aria-label="Titolo"
-                   alt="Titolo"
-                   placeholder="Titolo..."/>
-            <legend>Titolo</legend>
-        </fieldset>
-        <fieldset>
-            <legend>Immagini</legend>
-            <input id="immagini-post"
-                   type="file"
-                   multiple="multiple"
-                   name="immagini-post[]"
-                   accept="image/x-png,image/gif,image/jpeg"
-                   aria-label="Foto dell'avvistamento"
-                   alt="Foto dell'avvistamento"/>
-        </fieldset>
-        <fieldset>
-            <legend>Descrizione</legend>
-            <textarea id="descrizione-post"
-                      name="descrizione-post"
-                      required="required"
-                      aria-label="Descrizione"
-                      placeholder="Descrizione..."></textarea>
-            <input type="hidden" name="user-id" value="{UserID}" />
-        </fieldset>
-        <button type="submit" name="submit">Pubblica</button>
-    </form>
+    <div class="card form-card">
+        <div class="card-header primary-color">
+            <h1>Segnala un avvistamento</h1>
+        </div>
+            <form method="post" action="new_post.php" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Titolo</legend>
+                    <input id="titolo-post"
+                           type="text"
+                           name="titolo-post"
+                           required="required"
+                           aria-label="Titolo"
+                           alt="Titolo"
+                           placeholder="Titolo..."/>
+                </fieldset>
+                <fieldset>
+                    <legend>Immagini</legend>
+                    <input id="immagini-post"
+                           type="file"
+                           multiple="multiple"
+                           name="immagini-post[]"
+                           accept="image/x-png,image/gif,image/jpeg"
+                           aria-label="Foto dell'avvistamento"
+                           alt="Foto dell'avvistamento"/>
+                </fieldset>
+                <fieldset>
+                    <legend>Descrizione</legend>
+                    <textarea id="descrizione-post"
+                              name="descrizione-post"
+                              required="required"
+                              aria-label="Descrizione"
+                              placeholder="Descrizione..."></textarea>
+                    <input type="hidden" name="user-id" value="{UserID}" />
+                </fieldset>
+                <button class="card-footer" type="submit" name="submit">Pubblica</button>
+            </form>
+    </div>
+
+
 </div>

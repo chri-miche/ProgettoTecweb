@@ -24,7 +24,7 @@ $postVO = (new PostDAO())->get($_GET['id']?? -1);
 if($postVO->getId()){
 
     if($sessionUser->userIdentified()){
-        if(isset($_GET['comment']) && $_GET['comment']) {
+        if(isset($_GET['comment']) && $_GET['comment'] && isset($_POST["commento"]) && !empty($_POST["commento"])) {
             // $comment = strip_tags($_POST["commento"]);
             // $comment = htmlentities($comment);
 

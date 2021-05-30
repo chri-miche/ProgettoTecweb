@@ -216,7 +216,17 @@ class AdminPanel extends Component
 
     public function build()
     {
-        $HTML = str_replace("<menu />", (new Menu($this->manage != '' ? $this->manage : 'welcome', $this->voices))->build(), $this->baseLayout());
+        $menu = '';
+        foreach ($this->voices as $voice) {
+            if (empty($this->manage) || !strpos($voice[1], $this->manage)) {
+                $menu .= '<a href="' . $voice[1] . '">' . $voice[0] . "</a>";
+            } else {
+                $menu .= '<a class="disabled">' . $voice[0] . "</a>";
+            }
+
+        }
+        // $HTML = str_replace("<menu />", (new Menu($this->manage != '' ? $this->manage : 'welcome', $this->voices))->build(), $this->baseLayout());
+        $HTML = str_replace("<menu />", $menu, $this->baseLayout());
         $HTML = str_replace("<content />", $this->component->build(), $HTML);
         $HTML = str_replace("{table}", $this->manage, $HTML);
         return $HTML;

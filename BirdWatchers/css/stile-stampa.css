@@ -120,3 +120,7 @@ form {
 #comments {
     list-style: none;
 }
+
+#tablist {
+    display: none;
+}

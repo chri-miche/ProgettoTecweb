@@ -8,17 +8,11 @@ Il foglio di stile è strutturato come segue:
     - contesto sitebar
     - contesto adminPanel
 
-Box shadow:
-    quelle che ho usato fin'ora seguono questo schema (fonte luce leggermente spostata verso alto a sinistra)
-
-    -1px 0 0 0 rgba(0,0,0,0.12) // ombra di sinistra, definita e lieve
-    0 -1px 0 0 rgba(0,0,0,0.12) // ombra in alto, definita e lieve
-    1px 0 1px 0 rgba(0,0,0,0.2) // ombra a destra, sfocata e strong
-    0 1px 1px 0 rgba(0,0,0,0.2) // ombra sotto, sfocata e strong
-
-    alcuni "speciali" hanno in aggiunta delle ombre più o meno traslate / sfocate
-
-    altri usati sono quelli del material design
+    colori: primary - blue navy (30,33,41)
+    accent-1:   (0, 139, 253)
+    accent-0.3: (179, 220, 253)
+    accent-0.6: (102, 185, 253)
+    accent-0.9: (26, 150, 253)
 */
 
 body {
@@ -36,7 +30,7 @@ body {
 }
 
 .accent-color {
-    background: rgb(33,150,243); /* #4D7B90 */
+    background: rgb(26, 150, 253); /* #4D7B90 */
     color: white;
 }
 
@@ -51,7 +45,7 @@ input, textarea {
     outline: none;
     padding: 0.75em 0 0.75em 0;
     width: 100%;
-    border-bottom: 3px solid rgb(33, 150, 243);
+    border-bottom: 3px solid rgb(102, 185, 253);
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -98,13 +92,13 @@ button:hover, .button:hover, a:hover {
 
 button.disabled, .button.disabled, a[aria-selected=true], button[aria-selected=true],
 button.disabled:hover, .button.disabled:hover, a[aria-selected=true]:hover, button[aria-selected=true]:hover,
-button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, button[aria-selected=true]:active
+button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, button[aria-selected=true]:active,
+a.disabled
 {
     background: inherit;
     color: inherit;
     cursor: default;
     position: relative;
-    z-index: 1; /* disabilitati sovrastano gli abilitati*/
     box-shadow: none;
 }
 
@@ -125,6 +119,7 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
 /* #typography */
 
 p {
+    text-align: justify;
     margin-left: 40px;
 }
 
@@ -190,7 +185,32 @@ a.tab-label[aria-selected=true]:hover,
 {
     color: inherit;
     background: transparent;
-    border-bottom: 3px solid rgb(33,150,243);
+    border-bottom: 3px solid rgb(102, 185, 253);
+}
+
+#tablist {
+    width: 100%;
+    background: rgb(179, 220, 253);
+}
+
+#tablist a {
+    background: rgb(179, 220, 253);
+    border-style: none;
+    border-bottom: 3px solid rgb(179, 220, 253);
+    border-radius: 0;
+    transition: background-color 400ms ease-out, border-bottom-color 400ms ease-out;
+}
+
+#tablist a:hover {
+    background: rgb(102, 185, 253);
+    border-bottom: 3px solid rgb(102, 185, 253);
+}
+
+#tablist a.disabled, #tablist a.disabled:hover {
+    cursor: default;
+    background: rgb(179, 220, 253);
+    border-style: none;
+    border-bottom: 3px solid rgb(102, 185, 253);
 }
 
 /* #end tabs */
@@ -248,6 +268,7 @@ a.tab-label[aria-selected=true]:hover,
     width: 20vw;
     border-radius: 10px;
     margin: 10px;
+    background-color: white;
     overflow: hidden;
     border: 1px solid rgba(0,0,0,.12);
 }
@@ -350,6 +371,10 @@ ul {
     color: white;
 }
 
+#title h1 {
+    margin-top: 0;
+}
+
 .dropdown-hover {
     position: relative; /* altrimenti la width dell'absolute figlio non funziona */
 }
@@ -399,7 +424,8 @@ ul {
     display: flex;
     align-items: center;
     text-decoration: none;
-    background: rgb(33,150,243);
+    /* se scommentato, scommenta anche RIGA:444 background: rgb(33,150,243);*/
+    background: transparent;
     color: white;
     min-width: 200px;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -432,7 +458,8 @@ a.breadcrumb-item:visited:hover {
     transform: scale(.7) rotate(45deg); /* scala la dimensione di sqrt(2)*/
     /*così si crea un rombo con assi lunghi 40px*/
     right: -20px; /*deve essere uguale metà height della breadcrumb, così si posiziona a cavallo tra due crumbs*/
-    background: rgb(33,150,243);
+    /* RIGA:444 background: rgb(33,150,243);*/
+    background: transparent;
     position: absolute;
     display: inline-block;
     border-top: 1px solid white;
@@ -597,20 +624,28 @@ ul.menu a:hover, ul.menu a.disabled {
     color: black;
 }
 
-ul.menu a.disabled {
-    cursor: default;
-}
-
 /* #end dropdown */
 
 /* #begin table */
 
+#table-container {
+    width: 100%;
+    background: white;
+    overflow-x: scroll;
+}
+
+#table-container table {
+    width: 100%;
+}
+
 tr:nth-child(even) {
-    background: rgba(33,150,243, 0.3);
+    background: rgb(179, 220, 253);
 }
 th, td {
     padding: 0.5em;
     text-align: center;
+    max-width: 200px;
+    max-height: 1.5em;
 }
 
 th.action, td.action {
@@ -804,6 +839,12 @@ ul#comments li {
     padding: 1em;
 }
 
+#information-side form {
+    position: sticky;
+    top: 0.5em;
+    border-style: none;
+}
+
 #information-content {
     flex-grow: 1;
     display: flex;
@@ -829,17 +870,25 @@ ul#comments li {
 /* #end information*/
 
 /* #begin admin */
+#admin-content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#admin-content h1 {
+    display: inline;
+    margin-left: 2em;
+}
+
+#admin-content > a {
+    margin-right: 2em;
+    font-size: 1.2em;
+}
 
 /* #end admin */
-
-#table-container {
-    background: white;
-    overflow-x: scroll;
-}
-
-#table-container table {
-    width: 100%;
-}
 
 #success, #failure {
     padding-left: 2em;

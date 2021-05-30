@@ -222,10 +222,21 @@ ul {
 
 }
 
-#breadcrumb {
-    display: none;
+#breadcrumb > *::before {
+    content: ">";
+    margin-left: 0.75em;
+    margin-right: 0.75em;
 }
 
+#breadcrumb #home-crumb::before, #breadcrumb #home-label::before {
+    content: none;
+}
+
+.breadcrumb-item {
+    border-radius: 0;
+    margin: 0;
+    padding: 0.25em;
+}
 
 /* #tabs*/
 
@@ -241,9 +252,9 @@ ul {
 
 .tab-content {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     background: white;
-    max-width: 300px;
 }
 
 form.tab-label {
@@ -263,7 +274,7 @@ a.tab-label, a.tab-label:active, .tab-label button, .tab-label button:active {
 }
 
 a.tab-label:hover, .tab-label button:hover {
-    background: rgb(33,150,243);
+    background: rgb(102, 185, 253);
     color: white;
 }
 
@@ -274,7 +285,32 @@ a.tab-label[aria-selected=true]:hover,
 {
     color: inherit;
     background: transparent;
-    border-bottom: 3px solid rgb(33,150,243);
+    border-bottom: 3px solid rgb(102, 185, 253);
+}
+
+#tablist {
+    width: 100%;
+    background: rgb(179, 220, 253);
+}
+
+#tablist a {
+    background: rgb(179, 220, 253);
+    border-style: none;
+    border-bottom: 3px solid rgb(179, 220, 253);
+    border-radius: 0;
+    transition: background-color 400ms ease-out, border-bottom-color 400ms ease-out;
+}
+
+#tablist a:hover {
+    background: rgb(102, 185, 253);
+    border-bottom: 3px solid rgb(102, 185, 253);
+}
+
+#tablist a.disabled, #tablist a.disabled:hover {
+    cursor: default;
+    background: rgb(179, 220, 253);
+    border-style: none;
+    border-bottom: 3px solid rgb(102, 185, 253);
 }
 
 /* #end tabs */
@@ -288,10 +324,8 @@ a.tab-label[aria-selected=true]:hover,
     overflow: hidden;
     border-radius: 10px;
     margin: 10px;
-    box-shadow:
-            0 3px 1px 0 rgba(0,0,0,.2),
-            0 2px 2px 0 rgba(0,0,0,.14),
-            0 1px 5px 0 rgba(0,0,0,.12);
+    background-color: white;
+    border: 1px solid rgba(0,0,0,.12);
 }
 
 .card-footer {
@@ -431,6 +465,12 @@ fieldset {
 
 
 /* #typography */
+p {
+    text-align: justify;
+    margin-left: 2em;
+    margin-right: 1em;
+}
+
 .title {
     padding-left: 1em;
 }
@@ -439,7 +479,7 @@ fieldset {
     font-size: 0.75em;
 }
 
-p.text-truncate {
+.text-truncate {
     text-overflow: ellipsis;
     overflow: hidden;
     height: 2em;
@@ -644,12 +684,24 @@ ul#comments li form textarea {
 
 /* #begin table */
 
+#table-container {
+    width: 100%;
+    background: white;
+    overflow-x: scroll;
+}
+
+#table-container table {
+    width: 100%;
+}
+
 tr:nth-child(even) {
-    background: rgba(33,150,243, 0.3);
+    background: rgb(179, 220, 253);
 }
 th, td {
     padding: 0.5em;
     text-align: center;
+    max-width: 200px;
+    max-height: 1.5em;
 }
 
 th.action, td.action {
@@ -657,6 +709,29 @@ th.action, td.action {
 }
 /* #end table*/
 
+/* #begin admin */
+#admin-content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#admin-content h1 {
+    display: inline;
+    margin-left: 2em;
+}
+
+#admin-content > a {
+    margin-right: 2em;
+    font-size: 1.2em;
+}
+
+
+/* #end admin */
+
+/* #begin actions */
 #success, #failure {
     padding-left: 2em;
 }
@@ -686,3 +761,5 @@ th.action, td.action {
 .form-field:not([data-error=""]) input {
     background: rgba(100, 0, 0, 0.2);
 }
+
+/*#end actions*/

@@ -110,8 +110,8 @@
             $result = $this->performMultiCAll(array($element->getId()), 'get_all_friends');
 
             if(!isset($result['failure']))
-                foreach ($result as $element)
-                    $VOArray [] = new UserVO(...array_values($element));
+                foreach ($result as $el)
+                    $VOArray [] = new UserVO(...array_values($el));
 
             return $VOArray;
 

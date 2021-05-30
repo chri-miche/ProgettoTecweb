@@ -16,16 +16,14 @@
 
             parent::__construct( $HTML ?? (
                 count($elements) > 0 ? file_get_contents(__DIR__ . "/Browser.xhtml")
+                    // TODO: Fare display più carino
                     : '<img src="\res\images\wow-such-empty.png" alt="Questa ricerca non ha prodotto risultati" />'));
 
             $this->nextPageReference = $nextPageReference .'page=';
 
             $this->currentPage = $currentPage;
             $this->numberPages = count($elements) / $elementsPerPage;
-
-
             $newElementsList = array_slice($elements, $elementsPerPage * $currentPage, $elementsPerPage);
-
             $this->previewPage = new PreviewsPage($newElementsList, $previewLayout, $browsePageHTML);
 
         }

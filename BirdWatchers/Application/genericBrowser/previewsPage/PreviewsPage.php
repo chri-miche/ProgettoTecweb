@@ -36,6 +36,7 @@
 
             foreach ($this->previews as $preview)
                 $resolvedData['{previews}'] .= $preview->returnComponent();
+
             return $resolvedData;
         }
     }

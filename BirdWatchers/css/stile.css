@@ -827,6 +827,15 @@ ul#comments li {
     text-align: center;
 }
 
+#user-details ol{
+    list-style-type:none;
+    padding: 0em;
+}
+
+#user-details a {
+    width: 60%;
+}
+
 .profile-big {
     width: 168px;
     height: 168px;

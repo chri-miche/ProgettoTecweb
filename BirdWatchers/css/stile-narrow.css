@@ -690,6 +690,27 @@ ul#comments li form textarea {
     border-bottom: 1px solid rgba(0,0,0,.12);
 }
 
+#user-details h2 {
+    text-align: center;
+    /* border-bottom: 4px solid #6BB7F4; /* 0.5 */
+    /* background: #B5D8F4; /* 0.3 */
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    margin-bottom: 0em;
+    margin-top: 0em;
+}
+#user-details ol {
+   display: none;
+}
+
+#user-details h3{
+    text-align: center;
+}
+
+#user-details a{
+    text-align: center;
+    width: 100%;
+}
+
 #profile-form {
     background: transparent;
     width: 100%;

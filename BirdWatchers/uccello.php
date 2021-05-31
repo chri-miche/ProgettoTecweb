@@ -6,18 +6,27 @@ require_once __DIR__ . "/Application/login/Login.php";
 
 require_once __DIR__ . "/Application/birdSummary/BirdSummary.php";
 
-$basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
+require_once __DIR__."/Application/databaseObjects/specie/SpecieDAO.php";
 
-$page = new BasePage($basePage);
+try {
+    $basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
 
-$page->addComponent(new SiteBar("uccello"));
-$page->addComponent(new BreadCrumb(array("Catalogo" => "catalogo.php", "Uccello" => "")));
+    $page = new BasePage($basePage);
 
-isset($_GET['id']) ? $id = $_GET['id'] : $id = null;
+    $page->addComponent(new SiteBar("uccello"));
+    $page->addComponent(new BreadCrumb(array("Catalogo" => "catalogo.php", "Uccello" => "")));
 
-$page->addComponent(new BirdSummary($id));
+    isset($_GET['id']) ? $id = $_GET['id'] : $id = null;
 
+    try {
+        $specie = (new SpecieDAO())->get($id);
+        $page->addComponent(new BirdSummary((new SpecieDAO())->get($id)));
+    } catch (Throwable $exception){
+        $page->addComponent(new BirdError(null, 'Qualcosa con il reperimento della specie selezionata
+        è andato storto, prego ritentare o contattare un amministratore del sistema.',
+            'Oops qualcosa non è andato come doveva', 'catalogo.php', '500'));
+    }
 
-echo $page;
-
+    echo $page;
+} catch (Throwable $exception){header('Location: html/error500.xhtml');}
 ?>

@@ -7,6 +7,7 @@
 \graphicspath{ {img/} }
 
 \usepackage{multirow}
+\usepackage{hyperref}
 
 \begin{document}
 
@@ -44,7 +45,8 @@
     Il sito web realizzato si rivolge a tutti coloro sono appassionati o intendono avvicinarsi al Birdwatching.
     Essendo un'attività diffusa principalmente tra persone oltre la mezza età, infatti in diversi censimenti
     in suolo statiunitense gli appassionati appartenenti ad una fascia di età minore dei 44 anni è sempre stata sotto il 39\%
-    con un lieve incremento negli ultimi anni, ci permette di  considerare che il traffico sulla pagina sarà ampiamente
+    con un lieve incremento negli ultimi anni\footnote{Studi e dati riportati nelle fonti.},
+    ci permette di  considerare che il traffico sulla pagina sarà ampiamente
     influenzato da persone con possibilmente poca dimestichezza tecnologica, favorendo la scelta di la sviluppare
     un'interfaccia e un set di funzionalità più intuitivo e semplice possibile.
     Gli utenti si troveranno sulla piattaforma per condividere la loro esperienza e conoscere altre persone che
@@ -162,9 +164,9 @@
     La struttura del sito è definita dal file BaseLayout.xhtml, il quale definisce le componenti comuni ad ogni pagina. La struttura dei file dei singoli componenti è ragionato per essere indipendente da uno qualsiasi che lo contenga. Le regole di CSS sono ragionate per rispettare questo paradigma. L'intero sito è stato sviluppato in php: il javascript fornisce solo funzionalità addizionali, o alternative a quelle già implementate in php. \\
     Come già accenato, si fa largo uso degli attributi WAI ARIA. 
     I messaggi di errore nelle form sono indicati come contenuto dell'attributo \texttt{data-error}, successivamente tramite i selettori di attributo di CSS vengono mostrati a schermo.
+
     \newpage
     \subsection{Database}
-% TODO Jacopo
     Il funzionamento della piattaforma si basa sull'uso di un database realizzato dall'unione dei due disgiunti schemi \emph{ER}
     come rappresentati nelle figure \ref{fig:database1} \ref{fig:database2} (A fini pratici è stato deciso di mantenere unico il database).
     \subsubsection{Schema Utente}
@@ -190,7 +192,7 @@
     dall'agregazione di ogni altra entità dello schema.
     Ogni specie viene classificata in: \emph{Genere, Famiglia, Ordine}.
     \paragraph{Conservazione.} Fascia di rischio di estinzione alla quale è è soggetta una determinata
-    specie; conferme ai dati della Lista Rossa della IUCN.
+    specie; conferme ai dati della Lista Rossa della IUCN.\footnote{Maggiori informazioni nei link nelle fonti.}
 
     \begin{figure}[htbp]
         \caption{Schema Catalogo.}
@@ -249,23 +251,69 @@
 
 
     \section{Comportamento}
-    La quasi interezza del sito è composta da pagine PHP dinamiche. Il comportamento di queste segue lo schema già presentato.
+    La quasi interezza del sito è composta da pagine PHP dinamiche.
+    Il comportamento di queste segue lo schema già presentato.
 
-    \subsubsection{Il framework}
-%TODO Jacopo -- questa parte non è controllata, era una vecchia bozza: da qui fino aaaaaa....
-    Il framework è organizzato secondo il paradigma ad oggetti. La classe principale è la classe astratta Component. Ogni componente erediterà le funzionalità di questa classe. La public interface di ogni component si può riassumere come segue:
-    \begin{itemize}
-        \item un costruttore che prende una stringa che corrisponde al contenuto da mostrare, con dei placeholder per i dati da sostituire;
-        \item un metodo \texttt{build} che sostituisce i placeholder, costruendo la pagina e restituendola;
-        \item un metodo \texttt{returnComponent} che costruisce la pagina se non era ancora stata costruita;
-        \item un metodo di conversione automatica in stringa, che corrisponde ad una chiamata \texttt{returnComponent()};
-        \item un metodo \texttt{notBuilt} che indica di ricostruire la pagina alla prossima \texttt{returnComponent()};
-        \item un metodo \texttt{resolveData} che restituisce un array associativo contenente i dati da sostituire nei placeholder. Deve essere sovrascritto nelle implementazioni delle classi figlie.
-    \end{itemize}
-% ......qui! Comunque dopo vanno le descrizioni dei componenti. Sì anche secondo me è una follia
+    \subsection{Il Framework}
 
-    \subsubsection{I componenti}
-    Per brevità verranno elencati solo i componenti principali, e non anche i componenti subordinati.
+    Il PHP, essendo multi paradigma, si presta alla programmazione ad oggetti che supporta è perciò stato deciso di
+    sfruttare i principi di incapsulamento ed ereditarietà per la realizzazione di un framework per l'interfaccia a
+    componenti modulari che possono essere aggiunti ad un layout di base, sono due i vantaggi principali che ne conseguono.
+    Il primo è il disaccoppiando tra l'interfaccia di ogni componente, template HTML fornito,  dall'implementazione della logica e il reperimento dei dati.
+    Il secondo si ha per via del principio di sostituzione di Liskov, infatti essendo ogni \emph{Componente} discendente
+    dell'omonima classe astratta, la composizione della pagina finale è realizzabile mediante un'agregazione a piacere di un numero variabile di componenti.
+
+    Individuiamo quattro principali elementi radice della struttura del progetto: \emph{BasePage, Component, VO, DAO}.
+
+    \subsubsection{Component}
+    La classe astratta Component fornisce la funzionalità di composizione di una componente dato in ingresso un
+    layout di base passato in costruzione. In particolare, le public interface di ogni component è riassumbile come segue:
+    \paragraph{\texttt{Constructor(String)}} Costruttore che prende in input una stringa corrispondete al contenuto da mostrare con dei placeholder per i dati da sostituire.
+    \paragraph{\texttt{build():String}} Fa la sostituzione dei placeholder costruendo la componente riempita con i dati dinamici e altre eventuali proprietà.
+    \paragraph{\texttt{returnComponent():String}} Ritorna la componente costruita salvata, in caso non fosse ancora stata fatta chiama il metodo \emph{build()}.
+    \paragraph{\texttt{notBuilt()}} Notifica alla componente di ricostruire la pagina alla prossima \texttt{returnComponent()};
+    \paragraph{\texttt{resolveData():Array<String,Any>}} Restituisce un array associativo contente i dati da sostituire nei placeholder.
+
+    \subsubsection{BasePage}
+    La BasePage è una particolare componente utilizzata come contenitore di altre componenti, ed è quindi l'elemento usato
+    nella costruzione sulle pagine del layout generale, espone infatti un metodo aggiuntivo:
+    \paragraph{\texttt{addComponent(Component)}} Aggiunge alla coda delle componenti una componente,
+    ne consegue che alla stampa l'ordine di visualizzazione degli elementi riflette quello di aggiunta.
+
+    \begin{figure}[htbp]
+        \label{fig:fs}
+        \hspace*{-2cm}
+        \includegraphics[scale=0.6]{Component.png}
+
+        \caption{Component e BasePage.}
+    \end{figure}
+
+    \subsubsection{VO}
+    Interfaccia che definisce i contratti di un oggetto rappresentabile virtualmente come istanza di un oggetto remoto, nel nostro caso un elemento istanziato da istanziare nel database.
+    Ad esso è sempre associato un corrispettivo DAO che gestisce la comunicazione con il database. Interfaccia pubblica:
+    \paragraph{\texttt{arrayDump():Array<String, Any>}} Crea una copia dei valori del VO in un array associativo, i relativi VO contenuti vengono a lora volta dumpati durante la procedura in modo opportuno.
+    \paragraph{\texttt{smartDump(Boolean):Array<String, Any>}} Restituisce i valori dell'ogetto come rappresentazione accurata di un record del database, prende in input se non considerare la chiave primaria o meno della tabella.
+    \paragraph{\texttt{varDumps(Boolean):Array<String, Any>}} Restituisce un array di tutti i valori dell'oggetto, prende in input se non considerare la chiave primaria .
+
+
+    \subsubsection{DAO}
+    Il DAO come già anticipato si occupa del reperimento e memorizzazione di un corrispettivo tipo di VO nel database. L'interfaccia pubblica:
+    \paragraph{\texttt{abstract getAll():Array<VO>}} Ottiene tutti i record rappresentabili dal VO del quale è specializzato costruendoli.
+    \paragraph{\texttt{abstract get(Any):VO}} Restituisce il record dalla chiave dello stesso valore dell'input, se non trova un match ritorna un VO vuoto.
+    \paragraph{\texttt{abstract delete(VO):Boolean}} Elimina un oggetto dal database, ritorna l'esito dell'operazione.
+    \paragraph{\texttt{createAction(Array,String, String):String}} Prepara un'azione da eseguire creando il testo di query e ritornandolo, prende in input i dati di query, il nome della procedura o l'espressione dell'esecuzione e il tipo di chiamata.
+    \paragraph{\texttt{abstract save(VO):Boolean}} Salva un elemento sul database, ritorna l'esito dell'operazione.
+    \paragraph{\texttt{abstract checkId(VO):Boolean}} Ritorna vero se l'id dell'oggetto virtuale è memorizzato nel database, falso altrimenti.
+
+    \begin{figure}[htbp]
+        \label{fig:Dao}
+        \includegraphics[scale=0.6]{DAO.png}
+
+        \caption{DAO e VO.}
+    \end{figure}
+
+    \subsubsection{Le varie Componenti}
+    Per brevità verranno elencati solo i componenti principali.
 
     \paragraph{AdminPanel} Rappresenta il pannello di amministrazione. Consente di effettuare operazioni CRUD su diverse tabelle. È presente un menù laterale a sinistra, nel quale sono elencate le voci possibili. Premendo su una voce il componente carica l'elenco di tutte le entry nel database su quella tabella. Da qui è possibile:
     \begin{itemize}
@@ -279,16 +327,24 @@
     La pagina di un avvistamento è una semplice pagina con dei placeholder valorizzati. Sono presenti uno slideshow in CSS puro delle immagini caricate e una form di inserimento di commenti.
 
     \paragraph{Feed}
-    La pagina principale contiene il \textit{feed}, che è composto dagli avvistamenti inseriti dagli utenti. Il feed è ordinabile per tre categorie, l'ordinamento avviene mediante una GET passando come parametro il nome del campo da utilizzare per l'ordinamento.
+    La pagina principale contiene il \textit{feed}, che è composto dagli avvistamenti inseriti dagli utenti.
+    Il feed è ordinabile per tre categorie, quattro se si è autenticati,  l'ordinamento avviene mediante una GET passando
+    come parametro il nome del campo da utilizzare per l'ordinamento.
+
+    I filtri sono: \emph{Popolari, Recenti, Discussi, Amici}.
 
     \paragraph{Card}
     La singola Card è un semplice componente con dei placeholder, pensato per essere messo in grandi quantità all'interno di una pagina.
 
-    \paragraph{UserPage}
-    La pagina dell'utente mostra le informazioni pubbliche dell'utente, la sua foto profilo e i suoi avvistamenti.
+    \paragraph{Profile}
+    Componente che rappresenta il profilo utente mostrandone le informazioni, la sua foto profilo, la lista dei suoi amici e i suoi avvistamenti.
 
     \paragraph{NewPost}
-    Il componente di inserimento di un avvistamento consiste in una semplice form per inserire i dati, i quali sono controllati da alcune funzioni di filtro.
+    Il componente di inserimento di un avvistamento consiste in una semplice form per inserire i dati, controllati da alcune funzioni di filtro .
+
+    \paragraph{GenericBrowser}
+    Browser per Card, costruito partendo da un array di oggetti, che
+    fornisce un supporto alla navigazione per tanti elementi.
 
     \subsubsection{Altro}
     Sono anche presenti dei file PHP di supporto, come il file standardLayoutIncludes.php e il file filters.php. Il primo contiene un elenco di import comune a tutte le pagine, ovvero per i componenti dell'intestazione, della \textit{breadcrumb} e della pagina di standard layout. Il secondo, invece, contiene alcune funzioni utili per filtrare le stringhe da inserire nel database.
@@ -326,10 +382,15 @@
     \end{tabular}
 \end{center}
     \section{Fonti}
-    https://chirpbirding.com/blog/111/what-is-the-average-age-of-birdwatchers/
-    https://www.americasstateparks.org/birding-a-popular-past-time/
-    https://it.wikipedia.org/wiki/Lista_rossa_IUCN
-
+    Per le statistiche sulla diffusione del BirdWatching negli U.S.A:
+    \begin{itemize}
+        \item  \href{https://chirpbirding.com/blog/111/what-is-the-average-age-of-birdwatchers/}{\emph{What is the average age of birdwatchers?}}, John White, 9 Ottobre 2019
+        \item  \href{https://www.americasstateparks.org/birding-a-popular-past-time/}{\emph{Birding a popular past time}}, America's State Parks
+    \end{itemize}
+    Lista rossa e IUCN per il pericolo di estinzione:
+    \begin{itemize}
+        \item \href{http://www.iucn.it/liste-rosse-cosa-sono.php}{\emph{Cosa sono le Liste Rosse}}, IUCN
+    \end{itemize}
     Le immagini caricate sul sito, sia di uccelli, che dei profili degli utenti, sono immagini a licenza libera, prelevate da questi due siti:
     \begin{itemize}
         \item https://wikipedia.org 

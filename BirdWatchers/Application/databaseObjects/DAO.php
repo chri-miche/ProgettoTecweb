@@ -65,26 +65,6 @@
             return $query .');';
         }
 
-        /** Aggiorna un elemento dato in input nella tabella del db.
-         *  @param $element : L'elemento da aggiornare. (viene aggiornato comunque)
-         *  @param array $params: I diversi parametri da modificare.
-         *  @return VO: Nuovo oggetto modificato. */
-        public function update(VO &$element, array $params){
-
-            $newData = [];
-
-            foreach($element->varDumps() as $key => $value){
-                // Se abbiamo quella chiave in params copio quella.
-                if(in_array($key, array_keys($params))) $newData[$key] = $params[$key];
-                // Altrimenti ricopio i vecchi dati.
-                else $newData[$key] = $value;
-            }
-
-            $element = new $element($newData);
-            return $element;
-
-        }
-
         protected function idValid(VO &$element, string $name): bool{
 
             if(is_null($element->getId())) return false;

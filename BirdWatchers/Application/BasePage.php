@@ -6,8 +6,6 @@
         private const COMPONENT_EXPR = '/<component \/>/';
         private const COMPONENT_TAG = '<component />';
 
-        private $header;
-
         // Lists of components added to the BasePage.
         private $components;
 
@@ -17,11 +15,8 @@
             $this->components = array();
         }
 
-        public function setHeader(Header $head){ $this->header = $head;}
-
         public function addComponent(Component $component){
             $this->components[] = $component; $this->notBuilt();
-            return true;
         }
 
         public function build(){
@@ -44,7 +39,6 @@
         private static function cleanTags($HTML){
 
             $HTML = str_replace(self::COMPONENT_TAG, " ", $HTML);
-            $HTML = str_replace('<header />',"", $HTML);
             return $HTML;
 
         }

@@ -161,24 +161,46 @@
     \subsubsection*{Struttura, presentazione e contenuto}
     La struttura del sito è definita dal file BaseLayout.xhtml, il quale definisce le componenti comuni ad ogni pagina. La struttura dei file dei singoli componenti è ragionato per essere indipendente da uno qualsiasi che lo contenga. Le regole di CSS seguono questo paradigma. L'intero sito è stato sviluppato in php: il javascript fornisce solo funzionalità addizionali, o alternative a quelle già implementate in php. \\
     Elementi speciali, come i messaggi di errore nelle form, sono gestiti a livello di CSS, senza che si rendessero necessarie modifiche invasive alle pagine.
+
+    \newpage
     \subsection{Database}
 % TODO Jacopo
-    Il funzionamento della piattaforma si basa sul database rappresentato in Figura \ref{fig:database}.
-    Alla base dalla struttura troviamo le tabelle Tag, Utente e Contenuto.
-    \paragraph{Tag.} La tabella Tag memorizza ogni tipo di oggetto visualizzabile come entità che non sia un utente,
-                    quindi per tutti i contenuti correlati alle specie del catalogo, divise in: \emph{Specie, Genere, Famiglia, Ordine}.
-    \paragraph{Utente.} Rappresenta una persona iscritta al sito ed è in stretta correlazione con i Contenuti da lui pubblicati.
-                        Ogni utente inoltre può essere riferito o riferire altri utenti dalla tabella \emph{seguito}
-                        che rappresenta la sottoscrizione di un utente alle attività di pubblicazione dell'altro.
-    \paragraph{Contenuto.} Contiene ogni contenuto rappresentabile creato da un \emph{Utente}, distinto in
-                            Post e Commento, un Commento riferisce necessariamente ad un Post.
+    Il funzionamento della piattaforma si basa sull'uso di un database realizzato dall'unione dei due disgiunti schemi \emph{ER}
+    come rappresentati nelle figure \ref{fig:database1} \ref{fig:database2} (A fini pratici è stato deciso di mantenere unico il database).
+    \subsubsection{Schema Utente}
+    Gestisce i dati relativi agli Utenti e Contenuti da loro creati, infatti sono le due tabelle di maggior rilievo.
+    \paragraph{Utente}Rappresenta una persona iscritta al sito ed è in stretta correlazione con i Contenuti da lui pubblicati.
+    Ogni utente può essere riferito o riferire altri utenti dalla tabella \emph{seguito}
+    che rappresenta la sottoscrizione di un utente alle attività di pubblicazione dell'altro.
+    \paragraph{Contenuto.} Contiene i contenuto creati dagli \emph{Utenti}, distinto in
+    Post e Commento. Un Commento riferisce necessariamente ad un Post.
+
     \begin{figure}[htbp]
-        \caption{Struttura del database.}
-        \label{fig:database}
+        \caption{Schema Utente.}
+        \label{fig:database1}
         \hspace*{-2cm}
-        \includegraphics[scale= 0.5]{webBirdDB@localhost.png}
+        \includegraphics[scale= 0.5]{webBirdDB@localhostUser.png}
     \end{figure}
 
+
+    \subsubsection{Schema Specie}
+    Memorizza ogni informazione relativa ad una specie e ne gestisce le informazioni per la creazione del
+    catalogo reperibile sulla piattaforma.
+    \paragraph{Specie.} La Specie è la tabella  più ricca in informazioni dello schema in quanto viene definita
+    dall'agregazione di ogni altra entità dello schema.
+    Ogni specie viene classificata in: \emph{Genere, Famiglia, Ordine}.
+    \paragraph{Conservazione.} Fascia di rischio di estinzione alla quale è è soggetta una determinata
+    specie; conferme ai dati della Lista Rossa della IUCN.
+
+    \begin{figure}[htbp]
+        \caption{Schema Catalogo.}
+        \label{fig:database2}
+        \hspace*{-2cm}
+        \includegraphics[scale= 0.5]{webBirdDB@localhostBirds.png}
+    \end{figure}
+
+
+    \newpage
 
     \section{Realizzazione}
     Il carico di lavoro è stato ripartito in questa maniera:
@@ -304,4 +326,5 @@
     \section{Fonti}
     https://chirpbirding.com/blog/111/what-is-the-average-age-of-birdwatchers/
     https://www.americasstateparks.org/birding-a-popular-past-time/
+    https://it.wikipedia.org/wiki/Lista_rossa_IUCN
 \end{document}

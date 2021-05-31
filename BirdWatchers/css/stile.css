@@ -52,6 +52,7 @@ input, textarea {
 
 input:focus, textarea:focus {
     background: rgb(179, 220, 253);
+    color: black;
 }
 
 #container {

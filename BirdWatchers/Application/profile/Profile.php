@@ -47,7 +47,7 @@ class Profile extends Component {
             $userPost .= (new PreviewsPage($postVOArray, $postLayout))->returnComponent();
             $userPost .= "<a href='post_utente.php?usid=".$this->user->getId() ."'>Vedi tutti i post dell'utente.</a>";
         } else
-            $userPost .= '<img src="\res\images\data-not-found.webp" title="Nessun post trovato" alt="Questo utente non ha ancora postato nulla" />';
+            $userPost .= '<img src="res\Images\data-not-found.webp" title="Nessun post trovato" alt="Questo utente non ha ancora postato nulla" />';
 
         return str_replace('<userPosts />', $userPost, $html);
     }

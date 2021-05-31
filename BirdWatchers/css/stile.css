@@ -51,7 +51,7 @@ input, textarea {
 }
 
 input:focus, textarea:focus {
-    background: rgba(33, 150, 243, 0.3);
+    background: rgb(179, 220, 253);
 }
 
 #container {
@@ -860,7 +860,7 @@ ul#comments li {
 
 #user-details ol{
     list-style-type:none;
-    padding: 0em;
+    padding: 0;
 }
 
 #user-details a {

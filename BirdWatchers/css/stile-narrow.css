@@ -63,7 +63,7 @@ input, textarea {
 }
 
 input:focus, textarea:focus {
-    background: rgba(33, 150, 243, 0.3);
+    background: rgb(179, 220, 253);
 }
 
 form {
@@ -88,7 +88,7 @@ button, .button, a {
 }
 
 button:active, .button:active, a:active, a:visited {
-    background: #D3EAFD;
+    background: rgb(179, 220, 253);
     color: black;
     border: 1px solid rgba(0,0,0,.12);
 
@@ -147,7 +147,7 @@ ul {
 
 #sitebar > a:visited {
     background: transparent;
-    color: #D3EAFD;
+    color: rgb(179, 220, 253);
 }
 
 #actions {
@@ -196,11 +196,11 @@ ul {
 }
 
 #actions a:hover, #actions button:hover {
-    background: rgba(33, 150, 243, 0.3);
+    background: rgb(179, 220, 253);
 }
 
 #actions input:focus {
-    background: rgba(33, 150, 243, 0.3);
+    background: rgb(179, 220, 253);
 }
 
 #logged-out-actions {
@@ -418,6 +418,17 @@ img {
     position: relative;
     padding: 1em;
     bottom: 0;
+}
+
+#footer p a {
+    padding: initial;
+    border-style: initial;
+    border-radius: initial;
+    background: initial;
+}
+
+#footer p a img {
+    display: initial;
 }
 
 /* #end login */

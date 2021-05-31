@@ -26,6 +26,6 @@ if(!$userVO->getId()) header('Location: index.php');
 $userList = $userDao->getFriends($userVO);
 
 $pageNumber = $_GET['page'] ?? 0;
-$page->addComponent(new GenericBrowser($userList,$userPreviewLayout, "user_friends.php?id=$id&", $pageNumber, 2));
+$page->addComponent(new GenericBrowser($userList,$userPreviewLayout, "user_friends.php?id=$id&", $pageNumber, 8));
 
 echo $page;

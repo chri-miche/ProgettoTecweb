@@ -34,23 +34,6 @@ CREATE TABLE `approvazione` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `citazione`
---
-
-DROP TABLE IF EXISTS `citazione`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `citazione` (
-  `tag_id` int(10) unsigned NOT NULL,
-  `post_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`tag_id`,`post_id`),
-  KEY `post_id` (`post_id`),
-  CONSTRAINT `citazione_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `citazione_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`content_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `commento`
 --
 

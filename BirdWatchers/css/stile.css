@@ -939,6 +939,7 @@ ul#comments li {
     padding: 1em;
     border-right: 1px solid rgba(0,0,0,.12);
     flex: 1 0 auto;
+    max-width: 40%;
 }
 
 #information-side form {

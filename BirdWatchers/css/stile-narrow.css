@@ -203,6 +203,10 @@ ul {
     background: rgba(33, 150, 243, 0.3);
 }
 
+#logged-out-actions {
+    display: table-caption;
+}
+
 .single-input-form {
     margin: 0;
     display: flex;

@@ -1,4 +1,4 @@
-<div id="sitebar">
+<div id="sitebar" role="banner">
     <a href="#content" class="mobile-actions">
         <img src="res/Images/logo.png" alt="Vai al contenuto" title="Vai al contenuto" />
     </a>
@@ -19,9 +19,10 @@
         </div>
 
 
-        <form class="single-input-form" action="search.php" method="get">
+        <form class="single-input-form" role="search" action="search.php" method="get">
             <fieldset>
-                <input placeholder="Scrivi qualcosa..." name="search" alt="Effettua una ricerca" aria-label="Cerca nel sito" value="{value}" />
+                <input placeholder="Scrivi qualcosa..." value="{value}" name="search"
+                       aria-label="Cerca nel sito" />
             </fieldset>
             <fieldset>
                 <button class="icon-button"
@@ -34,7 +35,7 @@
             </fieldset>
         </form>
 
-        <div>
+        <div role="navigation">
 
             <loggedActions />
 

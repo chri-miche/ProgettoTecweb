@@ -1,4 +1,4 @@
-<div id="content">
+<div id="content" role="main">
     <div id="tablist"
          role="tablist">
         <form class="tab-label"
@@ -6,21 +6,21 @@
               method="get">
             <input type="hidden" name="search" value="{keyword}"/>
             <input type="hidden" name="entity" value="post"/>
-            <button aria-controls="panel-post"
+            <button
                     data-attributes="{post}"
-                    role="tab" xml:lang="en">Posts</button>
+                    role="tab" xml:lang="en" lang="en">Posts</button>
         </form>
         <form class="tab-label" action="search.php?entity=specie" method="get">
             <input type="hidden" name="search" value="{keyword}"/>
             <input type="hidden" name="entity" value="specie"/>
-            <button aria-controls="panel-specie"
+            <button
                     data-attributes="{specie}"
                     role="tab">Specie</button>
         </form>
         <form class="tab-label" action="search.php?entity=commento" method="get">
             <input type="hidden" name="search" value="{keyword}"/>
             <input type="hidden" name="entity" value="commento"/>
-            <button aria-controls="panel-commento"
+            <button
                     data-attributes="{commento}"
                     role="tab">Commenti</button>
         </form>

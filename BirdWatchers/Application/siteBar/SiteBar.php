@@ -53,7 +53,7 @@ class SiteBar extends Component {
             $actions = [
                 ['Catalogo', 'catalogo.php'],
                 ['Profilo', 'user_page.php?id={userid}'],
-                ['<span xml:lang="en">Logout</span>', 'logout.php'],
+                ['<span xml:lang="en" lang="en">Logout</span>', 'logout.php'],
                 ['Nuovo post', 'new_post.php']
             ];
 
@@ -74,7 +74,7 @@ class SiteBar extends Component {
         $homeButton = '';
 
         if (strcasecmp($this->position, "index") != 0) {
-            $homeButton = '<a href="index.php" xml:lang="en"> Home </a>';
+            $homeButton = '<a href="index.php" xml:lang="en" lang="en"> Home </a>';
         }
         $baseLayout = str_replace('<home-button />', $homeButton, $baseLayout);
         return $baseLayout;

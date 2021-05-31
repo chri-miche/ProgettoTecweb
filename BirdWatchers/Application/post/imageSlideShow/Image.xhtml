@@ -1,7 +1,9 @@
-<div id="image-{index}" class="image-slideshow">
+<div id="image-{index}" class="image-slideshow"
+    role="group" aria-roledescription="slide" aria-label="Slide numero {index}">
     <a href="#image-{previous}"
        class="icon-button"
        title="Precedente"
+       aria-controls="slideshow-items"
        data-icon-name="keyboard_arrow_left">
         <span>Precedente</span>
     </a>
@@ -11,6 +13,7 @@
     <a href="#image-{next}"
        class="icon-button"
        title="Prossima"
+       aria-controls="slideshow-items"
        data-icon-name="keyboard_arrow_right">
         <span>Prossima</span>
     </a>

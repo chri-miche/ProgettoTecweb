@@ -1,13 +1,13 @@
 
-<div id="content">
+<div id="content" role="main">
 
     <div id="title">
         <h1> {nome_scientifico} </h1>
         <h2> {nome_comune} </h2>
     </div>
 
-    <div id="information-page" >
-        <div id="information-content">
+    <div id="information-page">
+        <div id="information-content" role="contentinfo">
             <ul>
                 <li data-mark="Ordine">: <a href="{refOrdine}"> {g_f_o_nome_scientifico} </a></li>
                 <li data-mark="Famiglia">: <a href="{refFamiglia}"> {g_f_nome_scientifico}</a></li>
@@ -19,7 +19,7 @@
             </p>
         </div>
 
-        <div class="card">
+        <div class="card" role="complementary">
 
             <div class="img-overflow-container bird-card">
                 <img src="{immagine}" alt="" />

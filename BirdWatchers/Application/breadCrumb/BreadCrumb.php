@@ -20,15 +20,28 @@ class BreadCrumb extends Component {
 
         foreach ($this->previous as $key => $value) {
 
-            $span = "<span> " . $key . "</span>";
+            $last = '';
+            if (empty($value)) {
+                $last = 'aria-current="page"';
+            }
+
+            $span = "<span $last> " . $key . "</span>";
 
             // non metto il link sull'home perché c'è già nella sitebar
-            if ($value !== '') { $span = " <a class='breadcrumb-item' href='" . $value . "'>". $span . "</a>"; }
+            if ($value !== '') {
+                $span = " <a class='breadcrumb-item' href='" . $value . "'>". $span . "</a>";
+            }
 
             $ret .= $span;
 
         }
 
-        return str_replace("<breadCrumb />", $ret, $this->baseLayout());
+        $html = $this->baseLayout();
+
+        if (empty($ret)) {
+            $html = str_replace('id="home-crumb"', 'id="home-crumb" aria-current="page"', $html);
+        }
+
+        return str_replace("<breadCrumb />", $ret, $html);
     }
 }

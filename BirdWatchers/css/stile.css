@@ -9,11 +9,11 @@ Il foglio di stile è strutturato come segue:
     - contesto adminPanel
 
     colori: primary - blue navy (30,33,41)
-    primary-0.7: (73,73,83)
-    accent-1:   (0, 139, 253)
-    accent-0.3: (179, 220, 253)
-    accent-0.6: (102, 185, 253)
-    accent-0.9: (26, 150, 253)
+    primary-0.7 (accent): (73,76,83)
+    bright-1:   (0, 139, 253) // non usato perché poco contrasto con nero
+    bright-0.9: (26, 150, 253) // non usati perché poco contrasto con nero
+    bright-0.3: (179, 220, 253)
+    bright-0.6: (102, 185, 253)
 */
 
 body {
@@ -31,7 +31,7 @@ body {
 }
 
 .accent-color {
-    background: rgb(73,73,83);
+    background: rgb(73,76,83);
     color: white;
 }
 
@@ -78,7 +78,7 @@ button, .button, a {
 }
 
 button:active, .button:active, a:active, a:visited {
-    background: rgba(179, 220, 253);
+    background: rgb(179, 220, 253);
     color: black;
 }
 
@@ -684,7 +684,7 @@ ul.menu {
 }
 
 ul.menu li {
-    border-bottom: solid 1px rgba(179, 220, 253);
+    border-bottom: solid 1px rgb(179, 220, 253);
 }
 
 ul.menu a {
@@ -699,7 +699,7 @@ ul.menu a {
 }
 
 ul.menu a:hover, ul.menu a.disabled {
-    background: rgba(179, 220, 253);
+    background: rgb(179, 220, 253);
     color: black;
 }
 

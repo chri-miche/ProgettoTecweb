@@ -66,13 +66,13 @@
 
     \section{Progettazione}
     Come strategia di progettazione abbiamo seguito la \textit{responsive web design}, definendo dal principio solo i componenti necessari alle singole pagine. Abbiamo quindi sviluppato un piccolo framework orientato agli oggetti: i componenti presentano diversi livelli di genericità, in modo da favorirne il riuso, prerogativa cruciale per un sito web quasi totalmente dinamico.
-    È stato scelto XHTML per via della sua rigida aderenza agli standard web, che assicura la compatibilità con la stragrande maggioranza dei browser.
+    È stato scelto XHTML per via della sua rigida aderenza agli standard web, che assicura la compatibilità con la stragrande maggioranza dei browser, tuttavia in corso d'opera abbiamo deciso di cambiare in HTML5. Invece di utilizzare i tag peculiari di HTML5, per assicurare la compatibilità con i vecchi browser senza ledere all'accessibilità, adoperiamo un utilizzo esteso delle WAI ARIA. Inoltre usare HTML5 ci consente di poter usare gli attributi \texttt{data-*}, sui quali si basa la logica CSS dei messaggi di errore sulle singole form.
     \subsection{Attori}
     Sono previsti tre tipi di utenza, in base al livello di autorità: \textbf{utente non autenticato}, \textbf{utente autenticato} e \textbf{amministratore}. Le funzionalità sono associate alla classe di utenza a cui sono rivolte, e un livello di autorità ha accesso anche alle funzionalità dei livelli minori. In altre parole, le funzionalità pubbliche sono disponibili per ogni classe di utenza, le funzionalità dell'utente standard sono disponibili sia per questi ultimi sia per gli amministratori e le funzionalità amministrative sono esclusive degli amministratori.
 
     \subsubsection{Funzionalità pubbliche}
 
-    \paragraph{Accesso pubblico.} Una sezione dell'applicativo e alcune funzionalità sono di accesso pubblico. L'accesso pubblico è attivo per default, quando ci si collega alla pagina \texttt{/home.php}. La pagina principale è composta da una sezione di ricerca e navigazione, una fascia dove si riportano le informazioni sulla propria posizione e il \textbf{feed}. Il feed è composto da tre modalità di ricerca: tra i più recenti, i più popolari e i più dibattuti.
+    \paragraph{Accesso pubblico.} Una sezione dell'applicativo e alcune funzionalità sono di accesso pubblico. L'accesso pubblico è attivo per default, quando ci si collega alla pagina \texttt{/index.php}. La pagina principale è composta da una sezione di ricerca e navigazione, una fascia dove si riportano le informazioni sulla propria posizione e il \textbf{feed}. Il feed è composto da tre modalità di ricerca: tra i più recenti, i più popolari e i più dibattuti.
 
     \paragraph{Registrazione di un nuovo account.} Si effettua alla pagina \texttt{/register.php}. Occorre inserire il proprio nome utente, l'indirizzo e-mail e una password.
 
@@ -157,11 +157,11 @@
     \end{itemize}
 
     \subsection{Accessibilità}
-    Il livello di accessibilità è conforme al WCAG 2.0
+    Il livello di accessibilità è conforme al WCAG 2.0.
     \subsubsection*{Struttura, presentazione e contenuto}
-    La struttura del sito è definita dal file BaseLayout.xhtml, il quale definisce le componenti comuni ad ogni pagina. La struttura dei file dei singoli componenti è ragionato per essere indipendente da uno qualsiasi che lo contenga. Le regole di CSS seguono questo paradigma. L'intero sito è stato sviluppato in php: il javascript fornisce solo funzionalità addizionali, o alternative a quelle già implementate in php. \\
-    Elementi speciali, come i messaggi di errore nelle form, sono gestiti a livello di CSS, senza che si rendessero necessarie modifiche invasive alle pagine.
-
+    La struttura del sito è definita dal file BaseLayout.xhtml, il quale definisce le componenti comuni ad ogni pagina. La struttura dei file dei singoli componenti è ragionato per essere indipendente da uno qualsiasi che lo contenga. Le regole di CSS sono ragionate per rispettare questo paradigma. L'intero sito è stato sviluppato in php: il javascript fornisce solo funzionalità addizionali, o alternative a quelle già implementate in php. \\
+    Come già accenato, si fa largo uso degli attributi WAI ARIA. 
+    I messaggi di errore nelle form sono indicati come contenuto dell'attributo \texttt{data-error}, successivamente tramite i selettori di attributo di CSS vengono mostrati a schermo.
     \newpage
     \subsection{Database}
 % TODO Jacopo
@@ -308,10 +308,12 @@
     \section{Test di accessibilità}
     Per effettuare i test di accessibilità sono stati usati gli strumenti offerti dall'estensione Web developer toolbar\footnote{https://chrispederick.com/work/web-developer/}:
     \begin{itemize}
-        \item HTML: https://validator.w3.org/check
+        \item HTML: https://validator.w3.org/nu/
         \item CSS: http://jigsaw.w3.org/css-validator/
     \end{itemize}
 
+    La validazione HTML riporta alcuni warning, ma sono perlopiù di "utilizzo improprio" dell'attributo \texttt{aria-label}; tali presunti utilizzi impropri sono stati controllati a mano e verificati conformi all'informazione.
+    \\ 
     I test sui colori sono stati effettuati con il sito Contrast Checker\footnote{https://webaim.org/resources/contrastchecker/}. Questi test rispettano gli standard WCAG AAA.
     \begin{center}
     \begin{tabular}{c|c|c}
@@ -327,4 +329,11 @@
     https://chirpbirding.com/blog/111/what-is-the-average-age-of-birdwatchers/
     https://www.americasstateparks.org/birding-a-popular-past-time/
     https://it.wikipedia.org/wiki/Lista_rossa_IUCN
+
+    Le immagini caricate sul sito, sia di uccelli, che dei profili degli utenti, sono immagini a licenza libera, prelevate da questi due siti:
+    \begin{itemize}
+        \item https://wikipedia.org 
+        \item https://www.pexels.com/it-it/license/    
+    \end{itemize}
+
 \end{document}

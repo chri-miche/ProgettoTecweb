@@ -1371,37 +1371,6 @@ END ;;
         
         
         
-        
-        
-        
-        
-        
-        DELIMITER ;;
-CREATE PROCEDURE `get_post_tag_all`(IN in_id INT)
-BEGIN
-
-SELECT t.id, t.label
-FROM tag t
-         INNER JOIN (
-    SELECT c.tag_id
-    FROM citazione c
-    WHERE c.post_id = in_id
-) c ON c.tag_id = in_id;
-END ;;
-        DELIMITER ;
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         DELIMITER ;;
 CREATE PROCEDURE `get_specie`(IN in_id INT)
 BEGIN

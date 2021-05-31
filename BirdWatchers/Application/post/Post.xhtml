@@ -1,9 +1,14 @@
-<div id="content">
+<div id="content" role="main">
     <div id="post-title">
         <h1>{title} </h1>
         <h2 class="subtitle">Avvistamento di <a href="user_page.php?id={u_id}">{u_nome}</a> in data {date}</h2>
     </div>
-    <images />
+    <div id="slideshow-items"
+         role="region"
+         aria-roledescription="carousel"
+         aria-label="Immagini del post">
+        <images />
+    </div>
     <p id="post-content">
         {content}
     </p>

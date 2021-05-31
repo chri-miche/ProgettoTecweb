@@ -1,7 +1,9 @@
 <div id="user-actions">
-    <a id="dropdown-button" href="#dropdown-content">{username}</a>
+    <a id="dropdown-button" href="#dropdown-content"
+        aria-controls="dropdown-content">{username}</a>
     <div id="dropdown-content">
         <a href="#dropdown-button"
+           aria-controls="dropdown-content"
            id="close-dropdown">
             <span>
             Chiudi menù
@@ -14,7 +16,7 @@
                 <a href="user_page.php?id={userid}"> Profilo </a>
             </li>
             <li>
-                <a href="logout.php" xml:lang="en"> Logout </a>
+                <a href="logout.php" xml:lang="en" lang="en"> Logout </a>
             </li>
             <li>
                 <a href="new_post.php">Scrivi un post</a>

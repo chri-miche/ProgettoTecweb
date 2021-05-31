@@ -219,9 +219,10 @@ class AdminPanel extends Component
         $menu = '';
         foreach ($this->voices as $voice) {
             if (empty($this->manage) || !strpos($voice[1], $this->manage)) {
-                $menu .= '<a href="' . $voice[1] . '">' . $voice[0] . "</a>";
+                $menu .= '<a href="' . $voice[1] . '" role="tab">' . $voice[0] . "</a>";
             } else {
-                $menu .= '<a class="disabled">' . $voice[0] . "</a>";
+                $menu .= '<a class="disabled" role="tab"
+                             aria-controls="admin-content">' . $voice[0] . "</a>";
             }
 
         }

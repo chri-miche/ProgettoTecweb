@@ -10,37 +10,39 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . "Application" . DIRECTORY_SEPARATOR
 require_once __DIR__ . DIRECTORY_SEPARATOR . "Application" . DIRECTORY_SEPARATOR . "SessionUser.php";
 
 $sessionUser = new SessionUser();
+try {
+    if ($sessionUser->userIdentified() && $sessionUser->getAdmin()) {
 
-if ($sessionUser->userIdentified() && $sessionUser->getAdmin()) {
-    $basePage = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "Application" . DIRECTORY_SEPARATOR . "BaseLayout.xhtml");
-    $page = new BasePage($basePage);
+        $basePage = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "Application" . DIRECTORY_SEPARATOR . "BaseLayout.xhtml");
+        $page = new BasePage($basePage);
 
-    $page->addComponent(new SiteBar("admin"));
+        $page->addComponent(new SiteBar("admin"));
+        $page->addComponent(new BreadCrumb(array("Amministrazione" => "")));
+        try {
 
-    $manage = $_GET["manage"] ?? "";
-    $operation = $_GET["operation"] ?? "list";
-    $keys = array();
+            $manage = $_GET["manage"] ?? "";
+            $operation = $_GET["operation"] ?? "list";
 
-    $data = count($_POST) > 0 ? $_POST : array();
+            $keys = array();
 
-    foreach ($_GET as $key => $value) {
-        if ($key != "manage" && $key != "operation") {
-            $keys[$key] = $value;
+            $data = count($_POST) > 0 ? $_POST : array();
+
+            foreach ($_GET as $key => $value) {
+                if ($key != "manage" && $key != "operation") {
+                    $keys[$key] = $value;
+                }
+            }
+
+            if (isset($_FILES['immagine']))
+                $data['file_immagine'] = $_FILES['immagine'];
+
+            unset($data['submit']);
+            $page->addComponent(new AdminPanel($manage, $operation, $keys, $data));
+        }catch (Throwable $error){
+            $page->addComponent(new BirdError(null, 'Qualcosa non è andato a buon fine nell\'operazione.
+            Ritentare o contattare un amministratore per eventuali chiarimenti.', 'Attenzione, c\' è stato un errore!', 'index.php', '500'));
         }
-    }
-
-    if (isset($_FILES['immagine'])) {
-        $data['file_immagine'] = $_FILES['immagine'];
-    }
-
-    $page->addComponent(new BreadCrumb(array("Amministrazione" => "")));
-
-    unset($data['submit']);
-    $page->addComponent(new AdminPanel($manage, $operation, $keys, $data));
-
-    echo $page->build();
-} else {
-    header("Location: login.php");
-}
-
+        echo $page->build();
+    } else { header("Location: login.php");}
+}catch(Throwable $error) { header('Location: html/error500.xhtml');}
 ?>

@@ -1,0 +1,150 @@
+body{
+
+    background-color: white;
+}
+
+#title h1{
+    color: black;
+}
+
+/*====================================
+UPLOADING FORM
+====================================*/
+
+#selectors {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.upload-form{
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin-bottom: 1em;
+    width: 48%;
+    color: black;
+}
+
+.upload-form input {
+    background-color: DodgerBlue;
+    color: black;
+    border: none;
+    border-radius: 2px;
+    font-size: 17px;
+    margin-right: 1em;
+    margin-top: 0.5em;
+    padding: .5em;
+}
+
+.upload-form input:hover {
+    background-color: #1b81e5;
+    cursor: pointer;
+}
+
+.db-sel {
+    background-color: #dddddd;
+    font-size: 18px;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-bottom: 0.4em;
+    width: 90%;
+}
+
+.dat-description {
+    margin-right: 1em;
+}
+
+input[type=file]::-webkit-file-upload-button {
+    border: 1px solid #fff;
+    color: black;
+    padding: .5em;
+    margin-right: 1em;
+    border-radius: 5px;
+    background-color: DodgerBlue;
+}
+
+input[type=file]::-webkit-file-upload-button:hover {
+    background-color: #1b81e5;
+}
+
+.menu-label {
+    font-size: 20px;
+}
+
+/*==================================
+SETTINGS MENU
+====================================*/
+
+#settings {
+    display: inline;
+    float: left;
+    color: black;
+    border: 1px solid #ccc;
+    padding: 0.5em;
+    height: auto;
+    background: #f1f1f1;
+    width: 90%;
+}
+
+
+/*==================================
+GRAPHICS MENU
+====================================*/
+
+#content{
+    display: grid;
+    grid-template-columns: 20% auto;
+    color:black;
+}
+
+.no_display{
+    display: none;
+}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+    background: #f1f1f1;
+}
+
+
+/*==================================
+VALIDATOR LOGOS
+==================================*/
+
+#validator{
+    display: flex;
+    margin-top: 1em;
+}

@@ -166,15 +166,21 @@
 % TODO
     \subsection{Database}
 % TODO Jacopo
-    Il funzionamento della piattaforma si basa sul database rappresentato in figura.
+    Il funzionamento della piattaforma si basa sul database rappresentato in Figura \ref{fig:database}.
     Alla base dalla struttura troviamo le tabelle Tag, Utente e Contenuto.
-    \paragraph{Tag} La tabella Tag viene sfruttata per rappresentare un qualsiasi elemento che rappresenta un oggetto nel sito,
-                    quindi per tutti i contenuti correlati alle specie del catalogo, divise in: \emph{Genere, Famiglia, Ordine}.
-    \paragraph{Utente} Rappresenta uno user iscritto al sito che è in stretta correlazione con i Contenuti da lui pubblicati.
-                        Inoltre ogni utente può essere riferito o riferire altri utenti dalla tabella \emph{seguito}
-                        che rappresenta la sottoscrizione di un utente alle attività dell'altro.
-    \paragraph{Contenuto} Rappresenta il contenuto rappresentabile creato da un \emph{Utente} e si distingue in
+    \paragraph{Tag.} La tabella Tag memorizza ogni tipo di oggetto visualizzabile come entità che non sia un utente,
+                    quindi per tutti i contenuti correlati alle specie del catalogo, divise in: \emph{Specie, Genere, Famiglia, Ordine}.
+    \paragraph{Utente.} Rappresenta una persona iscritta al sito ed è in stretta correlazione con i Contenuti da lui pubblicati.
+                        Ogni utente inoltre può essere riferito o riferire altri utenti dalla tabella \emph{seguito}
+                        che rappresenta la sottoscrizione di un utente alle attività di pubblicazione dell'altro.
+    \paragraph{Contenuto.} Contiene ogni contenuto rappresentabile creato da un \emph{Utente}, distinto in
                             Post e Commento, un Commento riferisce necessariamente ad un Post.
+    \begin{figure}[htbp]
+        \caption{Struttura del database.}
+        \label{fig:database}
+        \hspace*{-2cm}
+        \includegraphics[scale= 0.5]{webBirdDB@localhost.png}
+    \end{figure}
 
 
     \section{Realizzazione}

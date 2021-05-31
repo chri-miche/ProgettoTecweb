@@ -8,22 +8,18 @@ class BirdSummary extends PageFiller {
     private $specieVO;
     private $catalogoReference;
 
-    public function __construct($id, string $catalogoReference = 'catalogo.php', string $HTML = null){
+    public function __construct(SpecieVO $specie, string $catalogoReference = 'catalogo.php', string $HTML = null){
 
         parent::__construct(file_get_contents(__DIR__ . "/BirdSummary.xhtml"));
 
-        $this->specieVO = (new SpecieDAO())->get($id);
-
+        $this->specieVO = $specie;
         /** Porta alla pagina del catalogo.*/
         $this->catalogoReference = $catalogoReference;
-
-
     }
 
     function build() {
-        // Pagina statica quindi ci sono solo sostituzioni.
+
         if(!($this->specieVO->getId())) header('Location: catalogo.php');
-        /** Swap variables in fields.*/
         return parent::build();
 
     }

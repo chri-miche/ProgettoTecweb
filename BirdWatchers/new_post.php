@@ -18,94 +18,99 @@ require_once __DIR__ .
     DIRECTORY_SEPARATOR . "post" .
     DIRECTORY_SEPARATOR . "PostDAO.php";
 
-$sessionUser = new SessionUser();
-$page = new BasePage(file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml"));
+try {
+    $sessionUser = new SessionUser();
+    $page = new BasePage(file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml"));
 
-$page->addComponent(new SiteBar("new_post"));
+    $page->addComponent(new SiteBar("new_post"));
+    $page->addComponent(new BreadCrumb(array('Post' => '')));
+    try {
+        if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($_POST['user-id'])) {
+            $redirectID = '';
+            $result = DatabaseAccess::transaction(function () use (&$redirectID) {
+                try {
+                    $immagini = [];
+                    if (isset($_FILES['immagini-post'])) {
 
-$page->addComponent(new BreadCrumb(array('Post' => '')));
+                        $folders = array('/res', '/res/PostImages');
+                        $uploads_dir = 'res/PostImages/User' . $_POST['user-id'];
 
-if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($_POST['user-id'])) {
-    $redirectID = '';
-    $result = DatabaseAccess::transaction(function () use (&$redirectID) {
-        try {
-            $immagini = [];
-            if (isset($_FILES['immagini-post'])) {
+                        foreach ($_FILES["immagini-post"]["error"] as $key => $error) {
+                            if ($error == UPLOAD_ERR_OK) {
 
-                $folders = array('/res', '/res/PostImages');
-                $uploads_dir = 'res/PostImages/User' . $_POST['user-id'];
+                                $rootParent = __DIR__;
 
-                foreach ($_FILES["immagini-post"]["error"] as $key => $error) {
-                    if ($error == UPLOAD_ERR_OK) {
+                                $tmp_name = $_FILES["immagini-post"]["tmp_name"][$key];
+                                // basename() may prevent filesystem traversal attacks;
+                                // further validation/sanitation of the filename may be appropriate
+                                $name = basename($_FILES["immagini-post"]["name"][$key]);
 
-                        $rootParent = __DIR__;
+                                $proposedPath = "$uploads_dir/$name";
 
-                        $tmp_name = $_FILES["immagini-post"]["tmp_name"][$key];
-                        // basename() may prevent filesystem traversal attacks;
-                        // further validation/sanitation of the filename may be appropriate
-                        $name = basename($_FILES["immagini-post"]["name"][$key]);
+                                echo is_dir($rootParent . $uploads_dir);
+                                echo $rootParent . $uploads_dir;
 
-                        $proposedPath = "$uploads_dir/$name";
+                                foreach ($folders as $folder) {
+                                    if (!is_dir($rootParent . $folder) && !mkdir($rootParent . $folder)) {
+                                        echo 'Error creating folder';
+                                        throw new Exception("Error creating folder $uploads_dir");
+                                    }
+                                }
+                                if (!is_dir($rootParent . "/$uploads_dir") && !mkdir($rootParent . "/$uploads_dir")) {
+                                    throw new Exception("Error creating folder $uploads_dir");
+                                };
 
-                        echo is_dir($rootParent.$uploads_dir);
-                        echo $rootParent.$uploads_dir;
 
-                        foreach ($folders as $folder) {
-                            if (!is_dir($rootParent.$folder) && !mkdir($rootParent.$folder)) {
-                                echo 'Error creating folder';
-                                throw new Exception("Error creating folder $uploads_dir");
+                                $tentativi = 0;
+                                while (file_exists($rootParent . $proposedPath)) {
+                                    $tentativi++;
+                                    $proposedPath = "$uploads_dir/" . ($tentativi === 0 ? '' : $tentativi) . "$name";
+                                }
+
+                                if (move_uploaded_file($tmp_name, $rootParent . "/$proposedPath")) {
+                                    $immagini[] = str_replace('\\', '/', $proposedPath);
+                                } else {
+                                    throw new Exception("Non è stato possibile salvare le foto");
+                                }
                             }
                         }
-                        if (!is_dir($rootParent."/$uploads_dir") && !mkdir($rootParent."/$uploads_dir")) {
-                            throw new Exception("Error creating folder $uploads_dir");
-                        };
-
-
-                        $tentativi = 0;
-                        while (file_exists($rootParent.$proposedPath)) {
-                            $tentativi++;
-                            $proposedPath = "$uploads_dir/" . ($tentativi === 0 ? '' : $tentativi) . "$name";
-                        }
-
-                        if(move_uploaded_file($tmp_name, $rootParent."/$proposedPath")) {
-                            $immagini[] = str_replace('\\', '/', $proposedPath);
-                        } else {
-                            throw new Exception("Non è stato possibile salvare le foto");
-                        }
                     }
+                    $postVO = new PostVO(
+                        null,
+                        false,
+                        sanitize_simple_markdown($_POST['descrizione-post']),
+                        date('Y-m-d'),
+                        sanitize_simple_text($_POST['titolo-post']),
+                        0,
+                        (new UserDAO())->get($_POST['user-id']),
+                        $immagini
+                    );
+                    if ((new PostDAO())->save($postVO)) {
+                        $redirectID = $postVO->getId();
+                    } else {
+                        throw new Exception('Il salvataggio del post ha riscontrato un errore.');
+                    }
+                } catch (Exception $exception) {
+                    echo "$exception occurred<br />";
+                    return false;
                 }
-            }
-            $postVO = new PostVO(
-                null,
-                false,
-                sanitize_simple_markdown($_POST['descrizione-post']),
-                date('Y-m-d'),
-                sanitize_simple_text($_POST['titolo-post']),
-                0,
-                (new UserDAO())->get($_POST['user-id']),
-                $immagini
-            );
-            if ((new PostDAO())->save($postVO)) {
-                $redirectID = $postVO->getId();
+                return true;
+            });
+
+            if ($result) {
+                header("Location: post_page.php?id=$redirectID");
+                exit;
             } else {
-                throw new Exception('Il salvataggio del post ha riscontrato un errore.');
+                $page->addComponent(new PostForm($sessionUser, $_POST));
             }
-        } catch (Exception $exception) {
-            echo "$exception occurred<br />";
-            return false;
+        } else {
+            $page->addComponent(new PostForm($sessionUser));
         }
-        return true;
-    });
-
-    if ($result) {
-        header("Location: post_page.php?id=$redirectID");
-        exit;
-    } else {
-        $page->addComponent(new PostForm($sessionUser, $_POST));
+    } catch (Throwable $error){
+        $page->addComponent(new BirdError(null, 'Qualcosa non è andato a buon fine nell\'operazione.
+            Ritentare o contattare un amministratore per eventuali chiarimenti.', 'Attenzione, c\' è stato un errore!', 'index.php', '500'));
     }
-} else {
-    $page->addComponent(new PostForm($sessionUser));
-}
 
-echo $page;
+    echo $page;
+} catch (Throwable $error) {header('Location: html/error500.xhtml');}
 ?>

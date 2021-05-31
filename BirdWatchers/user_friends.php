@@ -10,22 +10,31 @@ $sessionUser = new SessionUser();
 $id = $_GET['id'] ?? header('Location: index.php');
 $pageUser = (new UserDAO())->get($id);
 
-$basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
-$page = new BasePage($basePage);
+try {
+    $basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
+    $page = new BasePage($basePage);
 
-$page->addComponent(new SiteBar('user_friends'));
-$page->addComponent(new BreadCrumb(array('Utente' => "user_page.php?id=$id", 'Amici' => '')));
+    $page->addComponent(new SiteBar('user_friends'));
+    $page->addComponent(new BreadCrumb(array('Utente' => "user_page.php?id=$id", 'Amici' => '')));
 
-$userPreviewLayout = file_get_contents(__DIR__. "/Application/profile/UserCard.xhtml");
-$userDao = new UserDAO();
+    try {
 
-$userVO = $userDao->get($id);
+        $userPreviewLayout = file_get_contents(__DIR__ . "/Application/profile/UserCard.xhtml");
+        $userDao = new UserDAO();
 
-if(!$userVO->getId()) header('Location: index.php');
+        $userVO = $userDao->get($id);
 
-$userList = $userDao->getFriends($userVO);
+        if (!$userVO->getId()) header('Location: index.php');
 
-$pageNumber = $_GET['page'] ?? 0;
-$page->addComponent(new GenericBrowser($userList,$userPreviewLayout, "user_friends.php?id=$id&", $pageNumber, 8));
+        $userList = $userDao->getFriends($userVO);
 
-echo $page;
+        $pageNumber = $_GET['page'] ?? 0;
+        $page->addComponent(new GenericBrowser($userList, $userPreviewLayout, "user_friends.php?id=$id&", $pageNumber, 8));
+    } catch (Throwable $exception) {
+        $page->addComponent(new BirdError(null, 'Nel reperire la lista dei seguiti si è verificato un errore.',
+            'Qualcosa è andato storto', 'index.php', '500'));
+    }
+
+    echo $page;
+/* Se proprio tutto si rompe. */
+} catch (Throwable $exception){ header('Location: html/error500.xhtml');}

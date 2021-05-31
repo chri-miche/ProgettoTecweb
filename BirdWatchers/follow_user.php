@@ -1,6 +1,4 @@
 <?php
-
-
 require_once __DIR__ . "/Application/SessionUser.php";
 require_once __DIR__ . "/Application/databaseObjects/user/UserDAO.php";
 
@@ -22,5 +20,4 @@ $userDAO->follow($currentUserVO, $friendVO);
 
 $previous = $_POST['previousPath'];
 header("Location: $previous$friendId");
-
 ?>

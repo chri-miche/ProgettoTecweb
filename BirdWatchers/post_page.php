@@ -10,51 +10,44 @@ require_once __DIR__ . "/Application/databaseObjects/user/UserDAO.php";
 require_once __DIR__. "/Application/post/Post.php";
 require_once __DIR__. "/Application/SessionUser.php";
 
-$basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
+try  {
 
-$sessionUser = new SessionUser();
-$page = new BasePage($basePage);
+    $basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
 
-$page->addComponent(new SiteBar("post_page"));
-$page->addComponent(new BreadCrumb(array('Post' => '')));
+    $sessionUser = new SessionUser();
+    $page = new BasePage($basePage);
 
-$postVO = (new PostDAO())->get($_GET['id']?? -1);
+    $page->addComponent(new SiteBar("post_page"));
+    $page->addComponent(new BreadCrumb(array('Post' => '')));
+    try {
+        $postVO = (new PostDAO())->get($_GET['id'] ?? -1);
 
-/** Se il post è valido.*/
-if($postVO->getId()){
+        /** Se il post è valido.*/
+        if ($postVO->getId()) {
 
-    if($sessionUser->userIdentified()){
-        if(isset($_GET['comment']) && $_GET['comment'] && isset($_POST["commento"]) && !empty($_POST["commento"])) {
-            // $comment = strip_tags($_POST["commento"]);
-            // $comment = htmlentities($comment);
+            if ($sessionUser->userIdentified()) {
+                if (isset($_GET['comment']) && $_GET['comment'] && isset($_POST["commento"]) && !empty($_POST["commento"])) {
+                    $comment = sanitize_simple_markdown($_POST["commento"]);
 
-            $comment = sanitize_simple_markdown($_POST["commento"]);
+                    $commentVO = new CommentoVO(null, false, $comment, null, $postVO, $sessionUser->getUser());
+                    $transaction = (new CommentoDAO())->save($commentVO);
 
-            $commentVO = new CommentoVO(null,false, $comment, null, $postVO, $sessionUser->getUser());
-            $transaction = (new CommentoDAO())->save($commentVO);
+                } else if (isset($_GET['liked']) && $_GET['liked']) {
+                    $transaction = (new PostDAO())->like($sessionUser->getUser(), $postVO);
+                } else if (isset($_GET['disliked']) && $_GET['disliked']) {
+                    $transaction = (new PostDAO())->dislike($sessionUser->getUser(), $postVO);
+                }
+            }
 
-            // echo $transaction;
+            if (isset($transaction) && !$transaction)
+                header("Location: post_page.php?id=" . $postVO->getId());
 
-        } else if(isset($_GET['liked']) && $_GET['liked']){
-
-            $transaction = (new PostDAO())->like($sessionUser->getUser(), $postVO);
-
-        } else if(isset($_GET['disliked']) && $_GET['disliked']) {
-
-            $transaction = (new PostDAO())->dislike($sessionUser->getUser(), $postVO);
-
+            $page->addComponent(new Post($postVO, $sessionUser));
         }
-    }
-
-    if(isset($transaction) && !$transaction)
-        header("Location: post_page.php?id=".$postVO->getId());
-
-    $page->addComponent(new Post($postVO, $sessionUser));
-
-}
-
-echo $page;
-
-
+    } catch (Throwable $error){
+        $page->addComponent(new BirdError(null, 'Qualcosa non è andato a buon fine nell\'operazione.
+            Ritentare o contattare un amministratore per eventuali chiarimenti.', 'Attenzione, c\' è stato un errore!', 'index.php', '500'));
+    } echo $page;
+} catch (Throwable $error) {header('Location: html/error500.xhtml');}
 
 ?>

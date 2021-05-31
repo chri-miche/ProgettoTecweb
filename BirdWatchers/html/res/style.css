@@ -43,6 +43,7 @@ h2 {
     flex-direction: column;
 }
 
+
 button, .button, a{
     align-self: flex-end;
 
@@ -93,12 +94,9 @@ button.disabled:active, .button.disabled:active, a[aria-selected=true]:active, b
 }
 
 p {
-    text-align: right;
     width: 55%;
 
+    text-align: right;
     align-self: flex-end;
 }
 
-@media  {
-    
-}

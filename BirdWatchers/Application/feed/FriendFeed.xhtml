@@ -1,0 +1,25 @@
+<div id="content">
+    <div id="tablist"
+         role="tablist">
+        <a
+                role="tab"
+                aria-controls="panel-popularity"
+                href="index.php?feed=popularity" aria-selected="false">Popolari</a>
+        <a
+                role="tab"
+                aria-controls="panel-time"
+                href="index.php?feed=time" aria-selected="false">Recenti</a>
+        <a
+                role="tab"
+                aria-controls="panel-controversial"
+                href="index.php?feed=controversial" aria-selected="false">Discussi</a>
+        <a
+                role="tab"
+                aria-controls="panel-friends"
+                href="index.php?feed=friends" aria-selected="false">Amici</a>
+    </div>
+    <div id="panel-{feed}" class="tab-content">
+        <component />
+    </div>
+
+</div>

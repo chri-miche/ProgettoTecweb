@@ -19,11 +19,15 @@ try {
 
         if (isset($_POST['submit-profile-pic']) && isset($_GET['id']) && $_GET['id'] == $userVO->getId()) {
 
+            if ($_FILES["input-file"]["error"] !== 0) {
+                throw new Error("L'immagine è troppo grande: si prega di inserire un'immagine più piccola");
+            }
+
             $name = basename($_FILES["input-file"]["name"]);
             $tmp_name = $_FILES["input-file"]["tmp_name"];
 
             if ((!is_dir(__IMGROOT__) && !mkdir(__IMGROOT__) || !is_writable(__IMGROOT__))) {
-                throw new Exception("Error creating folder res");
+                throw new Error("Error creating folder res");
             };
 
             $proposedPath = DIRECTORY_SEPARATOR . $name;
@@ -40,7 +44,7 @@ try {
                 $result = (new UserDAO())->save($userVO);
 
             } else {
-                throw new Exception("Non è stato possibile salvare la foto");
+                throw new Error("Non è stato possibile salvare la foto");
             }
         }
     }

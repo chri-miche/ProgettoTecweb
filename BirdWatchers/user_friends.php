@@ -13,8 +13,8 @@ $pageUser = (new UserDAO())->get($id);
 $basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
 $page = new BasePage($basePage);
 
-$page->addComponent(new SiteBar('User'));
-$page->addComponent(new BreadCrumb(array('Utente' => '')));
+$page->addComponent(new SiteBar('user_friends'));
+$page->addComponent(new BreadCrumb(array('Utente' => "user_page.php?id=$id", 'Amici' => '')));
 
 $userPreviewLayout = file_get_contents(__DIR__. "/Application/profile/UserCard.xhtml");
 $userDao = new UserDAO();

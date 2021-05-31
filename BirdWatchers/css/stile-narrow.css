@@ -203,6 +203,10 @@ ul {
     background: rgba(33, 150, 243, 0.3);
 }
 
+#logged-out-actions {
+    display: table-caption;
+}
+
 .single-input-form {
     margin: 0;
     display: flex;
@@ -544,6 +548,7 @@ p {
     margin-left: 0;
     margin-right: 1em;
     white-space: nowrap;
+    display: block;
 }
 
 abbr.icon:after {

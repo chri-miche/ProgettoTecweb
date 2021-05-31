@@ -132,6 +132,7 @@ p {
     height: 2em;
     margin-left: 0;
     margin-right: 1em;
+    display: block;
 }
 /* #end typography */
 
@@ -257,8 +258,6 @@ a.tab-label[aria-selected=true]:hover,
 
     background: white;
     margin: 0 1em 0 1em;
-    border-left: 1px solid rgba(0,0,0,.12);
-    border-right: 1px solid rgba(0,0,0,.12);
 
 }
 
@@ -369,6 +368,11 @@ ul {
     max-width: 100%;
     max-height: 100%;
     display: block;
+}
+
+#logo-home {
+    display: flex;
+    align-items: center;
 }
 
 #title {

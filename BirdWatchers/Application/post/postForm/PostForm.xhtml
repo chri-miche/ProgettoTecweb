@@ -10,7 +10,6 @@
                            type="text"
                            name="titolo-post"
                            required="required"
-                           aria-label="Titolo"
                            alt="Titolo"
                            placeholder="Titolo..."/>
                 </fieldset>
@@ -21,7 +20,6 @@
                            multiple="multiple"
                            name="immagini-post[]"
                            accept="image/x-png,image/gif,image/jpeg"
-                           aria-label="Foto dell'avvistamento"
                            alt="Foto dell'avvistamento"/>
                 </fieldset>
                 <fieldset>
@@ -29,11 +27,13 @@
                     <textarea id="descrizione-post"
                               name="descrizione-post"
                               required="required"
-                              aria-label="Descrizione"
+                              cols="45" rows="2"
                               placeholder="Descrizione..."></textarea>
                     <input type="hidden" name="user-id" value="{UserID}" />
                 </fieldset>
-                <button class="card-footer" type="submit" name="submit">Pubblica</button>
+                <fieldset class="card-footer">
+                    <button type="submit" name="submit">Pubblica</button>
+                </fieldset>
             </form>
     </div>
 

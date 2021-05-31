@@ -9,7 +9,7 @@
             <legend>Chiavi</legend>
             <div class="form-field" data-error="">
                 <label for="id"><abbr title="Codice identificativo">ID</abbr> <span xml:lang="en">tag</span></label>
-                <input id="id" name="id"  aria-label="Etichetta" type="number" title="Una nuova etichetta verrà creata automaticamente"
+                <input id="id" name="id"   type="number" title="Una nuova etichetta verrà creata automaticamente"
                        placeholder="Una nuova etichetta verrà creata automaticamente" readonly="readonly" value="{id}" />
             </div>
         </fieldset>
@@ -58,13 +58,14 @@
             <div class="form-field" data-error="">
                 <label for="descrizione">Descrizione</label>
                 <textarea id="descrizione" name="descrizione"
+                          cols="45" rows="2"
                           placeholder="Descrizione" required="required">{descrizione}</textarea>
             </div>
         </fieldset>
 
-        <div class="card-footer">
+        <fieldset class="card-footer-actions">
             <button type="submit" name="submit">Conferma</button>
             <a href="admin.php?manage=specie">Annulla</a>
-        </div>
+        </fieldset>
     </form>
 </div>

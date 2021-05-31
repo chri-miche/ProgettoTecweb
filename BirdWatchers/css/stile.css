@@ -9,6 +9,7 @@ Il foglio di stile è strutturato come segue:
     - contesto adminPanel
 
     colori: primary - blue navy (30,33,41)
+    primary-0.7: (73,73,83)
     accent-1:   (0, 139, 253)
     accent-0.3: (179, 220, 253)
     accent-0.6: (102, 185, 253)
@@ -30,7 +31,7 @@ body {
 }
 
 .accent-color {
-    background: rgb(26, 150, 253); /* #4D7B90 */
+    background: rgb(73,73,83);
     color: white;
 }
 
@@ -76,7 +77,7 @@ button, .button, a {
 }
 
 button:active, .button:active, a:active, a:visited {
-    background: #D3EAFD;
+    background: rgba(179, 220, 253);
     color: black;
 }
 
@@ -143,11 +144,6 @@ p {
     align-items: center;
 }
 
-#tab-header {
-    background: rgba(33,150,243, 0.3);
-    align-self: stretch;
-}
-
 .tab-content {
     display: flex;
     flex-wrap: wrap;
@@ -189,7 +185,7 @@ a.tab-label[aria-selected=true]:hover,
     background: rgb(179, 220, 253);
 }
 
-#tablist a {
+#tablist a, #tablist button {
     background: rgb(179, 220, 253);
     border-style: none;
     border-bottom: 3px solid rgb(179, 220, 253);
@@ -197,12 +193,13 @@ a.tab-label[aria-selected=true]:hover,
     transition: background-color 400ms ease-out, border-bottom-color 400ms ease-out;
 }
 
-#tablist a:hover {
+#tablist a:hover, #tablist button:hover {
     background: rgb(102, 185, 253);
     border-bottom: 3px solid rgb(102, 185, 253);
 }
 
-#tablist a.disabled, #tablist a.disabled:hover {
+#tablist a.disabled, #tablist a.disabled:hover,
+#tablist button.disabled, #tablist button.disabled:hover {
     cursor: default;
     background: rgb(179, 220, 253);
     border-style: none;
@@ -214,29 +211,26 @@ a.tab-label[aria-selected=true]:hover,
 /* #begin search */
 .single-input-form {
     margin: 0;
-    background: transparent;
     border-style: none;
     display: flex;
-}
-
-.single-input-form > fieldset {
-    border-radius: 0.5em 0 0 0.5em;
-    margin: 0;
-    border-left: 1px solid rgba(0,0,0,.12);
-    border-top: 1px solid rgba(0,0,0,.12);
-    border-bottom: 1px solid rgba(0,0,0,.12);
-    border-right: none;
+    border-radius: 0.5em;
     background: white;
 }
 
-.single-input-form input, .single-input-form textarea {
-    padding-left: 0.75em;
+.single-input-form fieldset {
+    border-style: none;
+    margin: 0;
+}
+
+.single-input-form fieldset:nth-child(2) {
+    padding: 0;
+    border-right: rgba(0,0,0,.12);
 }
 
 .single-input-form button {
     border-radius: 0 0.5em 0.5em 0;
     margin: 0;
-    border: 1px solid rgba(0,0,0,.12);
+    height: 100%;
     transition: background 400ms ease-out;
 }
 
@@ -279,11 +273,15 @@ a.tab-label[aria-selected=true]:hover,
     border: 1px solid rgba(0,0,0,.12);
 }
 
-.card dt h2 a {
-    color: inherit;
+.card-header {
     box-shadow: none;
     padding: 0.5em;
-    width: calc(100% - 2em);
+}
+
+.card-body {
+    padding-left: 0.5em;
+    background: white;
+    border-radius: 0 0 10px 10px;
 }
 
 .card > img {
@@ -323,14 +321,6 @@ a.tab-label[aria-selected=true]:hover,
     border-radius: 10px 10px 0 0;
 }
 
-.card dt {
-	padding: 10px;
-}
-
-.card dd {
-    background: white;
-    border-radius: 0 0 10px 10px;
-}
 
 ul {
     list-style: none;
@@ -435,7 +425,7 @@ ul {
     display: flex;
     align-items: center;
     text-decoration: none;
-    background: rgb(26, 150, 253);
+    background: rgb(73, 76, 83);
     color: white;
     min-width: 200px;
     transition: background 400ms cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -468,7 +458,7 @@ a.breadcrumb-item:visited:hover {
     transform: scale(.7) rotate(45deg); /* scala la dimensione di sqrt(2)*/
     /*così si crea un rombo con assi lunghi 40px*/
     right: -20px; /*deve essere uguale metà height della breadcrumb, così si posiziona a cavallo tra due crumbs*/
-    background: rgb(26, 150, 253);
+    background: rgb(73, 76, 83);
     position: absolute;
     display: inline-block;
     border-top: 1px solid white;
@@ -503,6 +493,13 @@ a.breadcrumb-item:visited:hover {
     position: relative;
     padding: 1em;
     bottom: 0;
+}
+
+#footer p a {
+    padding: initial;
+    border-style: initial;
+    border-radius: initial;
+    background: initial;
 }
 /* #end footer */
 
@@ -561,6 +558,11 @@ a.breadcrumb-item:visited:hover {
 #form-container a {
     display: inline;
 }
+
+#form-container fieldset {
+    border-style: none;
+    border-top: 1px solid rgba(0,0,0,.12);
+}
 /* #end login*/
 
 /* #begin form */
@@ -605,13 +607,25 @@ a.breadcrumb-item:visited:hover {
     margin: 0;
 }
 
-.form-card div.card-footer {
-    display: block;
+.form-card fieldset.card-footer {
+    padding: 0;
 }
 
-.form-card button.card-footer {
-    display: table-cell;
-    vertical-align: middle;
+.form-card fieldset.card-footer-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.form-card .card-footer button {
+    border-style: none;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.form-card div.card-footer {
+    display: block;
 }
 
 .form-card .form-field {
@@ -669,7 +683,7 @@ ul.menu {
 }
 
 ul.menu li {
-    border-bottom: solid 1px #D3EAFD;
+    border-bottom: solid 1px rgba(179, 220, 253);
 }
 
 ul.menu a {
@@ -684,7 +698,7 @@ ul.menu a {
 }
 
 ul.menu a:hover, ul.menu a.disabled {
-    background: #D3EAFD;
+    background: rgba(179, 220, 253);
     color: black;
 }
 
@@ -872,6 +886,14 @@ ul#comments li {
     border-style: none;
 }
 
+.single-button-form fieldset {
+    border-style: none;
+}
+
+#friends-title {
+    border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
 .profile-big img {
     object-fit: cover;
     width: 100%;
@@ -913,8 +935,9 @@ ul#comments li {
 }
 
 #information-side {
-    float: right;
     padding: 1em;
+    border-right: 1px solid rgba(0,0,0,.12);
+    flex: 1 0 auto;
 }
 
 #information-side form {
@@ -924,10 +947,10 @@ ul#comments li {
 }
 
 #information-content {
-    flex-grow: 1;
     display: flex;
     align-items: center;
     flex-direction: column;
+    flex: 1 1 auto;
 }
 .preview {
     display: flex;
@@ -935,6 +958,11 @@ ul#comments li {
     background: white;
     justify-content: center;
     margin-right: 2em;
+}
+
+#information-page .card .card-body {
+    padding: 0.5em;
+
 }
 
 #information-content ul {

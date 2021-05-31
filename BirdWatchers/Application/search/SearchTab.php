@@ -46,9 +46,9 @@ class SearchTab extends BasePage {
     public function resolveData() {
         return array(
             "{keyword}" => $this->keyword,
-            "{post}" => $this->entity === 'post' ? '" aria-selected="true" type="button' : '" aria-selected="false" type="submit',
-            "{specie}" => $this->entity === 'specie' ? '"  aria-selected="true" type="button' : '" aria-selected="false" type="submit',
-            "{commento}" => $this->entity === 'commento' ? '" aria-selected="true" type="button' : '" aria-selected="false" type="submit',
+            "{post}" => $this->entity === 'post' ? '" class="disabled" aria-selected="true" type="button' : '" aria-selected="false" type="submit',
+            "{specie}" => $this->entity === 'specie' ? '" class="disabled" aria-selected="true" type="button' : '" aria-selected="false" type="submit',
+            "{commento}" => $this->entity === 'commento' ? '" class="disabled"  aria-selected="true" type="button' : '" aria-selected="false" type="submit',
             'action="search.php?entity=' . $this->entity  . '"' => '',
             "{entity}" => $this->entity,
         );

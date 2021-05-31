@@ -36,13 +36,13 @@ class BirdSummary extends PageFiller {
             if(!is_array($value))  $swapData['{'.$key .'}'] = $value;
 
        /** Link al catalogo.*/
-        $swapData['{refOrdine}'] = $this->catalogoReference ."?oSelected%5B%5D=1&&oValue=".
+        $swapData['{refOrdine}'] = $this->catalogoReference ."?oSelected%5B%5D=1&amp;oValue=".
             $this->specieVO->getGenereVO()->getFamigliaVO()->getOrdineVO()->getId();
         // Oddio eretico
-        $swapData['{refFamiglia}'] = $this->catalogoReference."?oSelected%5B%5D=1&fSelected%5B%5D=1&fValue=".
+        $swapData['{refFamiglia}'] = $this->catalogoReference."?oSelected%5B%5D=1&amp;fSelected%5B%5D=1&amp;fValue=".
             $this->specieVO->getGenereVO()->getFamigliaVO()->getId();
 
-        $swapData['{refGenere}'] = $this->catalogoReference ."?oSelected%5B%5D=1&fSelected%5B%5D=1&gSelected%5B%5D=1&gValue="
+        $swapData['{refGenere}'] = $this->catalogoReference ."?oSelected%5B%5D=1&amp;fSelected%5B%5D=1&amp;gSelected%5B%5D=1&amp;gValue="
             . $this->specieVO->getGenereVO()->getId();
         return $swapData;
 

@@ -9,7 +9,7 @@
             <legend>Chiavi</legend>
             <div class="form-field" data-error="">
                 <label for="id"><abbr title="Codice identificativo">ID</abbr> <span xml:lang="en">tag</span></label>
-                <input id="id" name="id"  aria-label="Etichetta" type="number" title="Una nuova etichetta verrà creata automaticamente"
+                <input id="id" name="id"   type="number" title="Una nuova etichetta verrà creata automaticamente"
                        placeholder="Una nuova etichetta verrà creata automaticamente" readonly="readonly" value="{id}" />
             </div>
         </fieldset>
@@ -17,19 +17,19 @@
             <legend>Campi dati</legend>
             <div class="form-field" data-error="{f_id_error}">
                 <label for="f_id">Famiglia</label>
-                <input id="f_id" name="f_id"  aria-label="Famiglia"
+                <input id="f_id" name="f_id"
                        placeholder="Codice famiglia" required="required" value="{f_id}" />
             </div>
             <div class="form-field" data-error="{nome_scientifico_error}">
                 <label for="nome_scientifico">Nome scientifico</label>
-                <input id="nome_scientifico" name="nome_scientifico"  aria-label="Nome scientifico"
+                <input id="nome_scientifico" name="nome_scientifico"
                        placeholder="Nome scientifico" required="required" value="{nome_scientifico}" />
             </div>
         </fieldset>
 
-        <div class="card-footer">
+        <fieldset class="card-footer-actions">
             <button type="submit" name="submit">Conferma</button>
             <a href="admin.php?manage=genere">Annulla</a>
-        </div>
+        </fieldset>
     </form>
 </div>

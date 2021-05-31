@@ -2,12 +2,13 @@
 <!-- Follow a user. It gets the input values as hidden from php. -->
 <form class="single-button-form" action="follow_user.php" method="post" >
     <!-- Hidden inputs -->
-    <input type="hidden" value="{redirect}" name="previousPath" />
-    <input type="hidden" value="{usid}" name="usid" />
-    <input type="hidden" value="{add}" name="add" />
-    <!-- Confirm form -->
-    <button type="submit" class="icon-button" data-icon-name="{icon}" title="{text}">
-        <span>{text}</span>
-    </button>
-
+    <fieldset>
+        <input type="hidden" value="{redirect}" name="previousPath" />
+        <input type="hidden" value="{usid}" name="usid" />
+        <input type="hidden" value="{add}" name="add" />
+        <!-- Confirm form -->
+        <button type="submit" class="icon-button" data-icon-name="{icon}" title="{text}">
+            <span>{text}</span>
+        </button>
+    </fieldset>
 </form>

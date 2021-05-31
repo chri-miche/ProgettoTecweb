@@ -73,7 +73,7 @@ class SiteBar extends Component {
 
         $homeButton = '';
 
-        if (strcasecmp($this->position, "home") != 0) {
+        if (strcasecmp($this->position, "index") != 0) {
             $homeButton = '<a href="index.php" xml:lang="en"> Home </a>';
         }
         $baseLayout = str_replace('<home-button />', $homeButton, $baseLayout);

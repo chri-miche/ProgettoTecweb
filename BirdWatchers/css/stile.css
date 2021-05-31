@@ -1031,3 +1031,34 @@ ul#comments li {
     background: rgba(100, 0, 0, 0.2);
     border-bottom: 3px solid darkred;
 }
+
+/* To validate */
+#error {
+
+    display: flex;
+    flex-direction: row;
+    min-height: 200px;
+    margin: 0 ;
+
+    background: #E0E6E8;
+}
+#error .error-image {
+    flex: 0 0 40%;
+    background-image: url("../html/res/flamingo.gif");
+
+    min-height: 550px;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+#error .error-message {
+    flex: 0 2 auto;
+
+    padding-top: 2em;
+
+    display: flex;
+    flex-direction: column;
+}
+

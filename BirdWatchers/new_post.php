@@ -28,7 +28,6 @@ try {
         if (isset($_POST['titolo-post']) && isset($_POST['descrizione-post']) && isset($_POST['user-id'])) {
             $redirectID = '';
             $result = DatabaseAccess::transaction(function () use (&$redirectID) {
-                try {
                     $immagini = [];
                     if (isset($_FILES['immagini-post'])) {
 
@@ -44,6 +43,9 @@ try {
                                 // basename() may prevent filesystem traversal attacks;
                                 // further validation/sanitation of the filename may be appropriate
                                 $name = basename($_FILES["immagini-post"]["name"][$key]);
+
+                                if(!preg_match("/\.(gif|png|jpg)$/", $name))
+                                    throw new Exception('Il file dato non è un\'immagine.');
 
                                 $proposedPath = "$uploads_dir/$name";
 
@@ -90,10 +92,7 @@ try {
                     } else {
                         throw new Exception('Il salvataggio del post ha riscontrato un errore.');
                     }
-                } catch (Exception $exception) {
-                    echo "$exception occurred<br />";
-                    return false;
-                }
+
                 return true;
             });
 
@@ -107,8 +106,10 @@ try {
             $page->addComponent(new PostForm($sessionUser));
         }
     } catch (Throwable $error){
+        $errorMessage = $error->getMessage();
         $page->addComponent(new BirdError(null, 'Qualcosa non è andato a buon fine nell\'operazione.
-            Ritentare o contattare un amministratore per eventuali chiarimenti.', 'Attenzione, c\' è stato un errore!', 'index.php', '500'));
+            Ritentare o contattare un amministratore per eventuali chiarimenti. In particolare il sistema notifica che: '.$errorMessage,
+            'Attenzione, c\' è stato un errore!', 'new_post.php', '500', 'Torna alla creazione di un Post'));
     }
 
     echo $page;

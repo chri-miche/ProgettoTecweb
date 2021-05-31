@@ -1,4 +1,4 @@
-<div>
+<div id="information-content">
     Sei sicuro di voler eliminare questo stato di conservazione?
     <ul>
         <li><strong>Codice:</strong> {id}</li>
@@ -6,6 +6,8 @@
         <li><strong>Probabilità di estinzione:</strong> {prob_estinzione}</li>
         <li><strong>Descrizione:</strong> {descrizione}</li>
     </ul>
-    <a href="admin.php?manage=conservazione&amp;operation=delete&amp;id={id}">Conferma</a>
-    <a href="admin.php?manage=conservazione">Annulla</a>
+    <div>
+        <a href="admin.php?manage=conservazione&amp;operation=delete&amp;id={id}">Conferma</a>
+        <a href="admin.php?manage=conservazione">Annulla</a>
+    </div>
 </div>

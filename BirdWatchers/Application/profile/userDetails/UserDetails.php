@@ -81,11 +81,11 @@ class UserDetails extends Component
         $friendsList = $userDao->getFriends($this->user);
         $friendsListLength = count($friendsList);
 
-        $html = '<h2 class="primary-color card-header"> Amici </h2>';
+        $html = '<h3 id="friends-title"> Amici </h3>';
 
         /** Empty friend list display. */
         if($friendsListLength === 0)
-            return $html . '<h3> L\' utente non ha ancora amici. </h3>';
+            return $html . '<h4> L\' utente non ha ancora amici. </h4>';
 
         $html .= '<ol class="friends">';
 

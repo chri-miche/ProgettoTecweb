@@ -4,11 +4,11 @@
         <img src="{immagine}" alt=""/>
     </div>
     <!-- prima cosa, immagine con altezza % (nostretch) -->
-    <dt class="card-header primary-color">
+    <div class="card-header primary-color">
         <h3>{title}</h3>
         <span class="subtitle">Avvistamento di <a href="user_page.php?id={u_id}">{u_nome}</a></span>
-    </dt>
-    <dd class="card-content">
+    </div>
+    <div class="card-body">
         <p class="text-truncate">{content}</p>
         <div class="card-footer">
             <abbr class="icon" data-icon-name="thumb_up" title="Numero di mi piace">{likes}</abbr>
@@ -16,5 +16,5 @@
         </div>
         <!-- link messo qui e non sopra sul titolo perché altrimenti può dare fastidio all'altro link
         (mai mettere due link troppo vicini) --> 
-    </dd>
+    </div>
 </div>

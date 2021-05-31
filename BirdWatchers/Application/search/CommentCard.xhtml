@@ -4,14 +4,14 @@
         <img src="{a_immagine}" alt=""/>
     </div>
     <!-- prima cosa, immagine con altezza % (nostretch) -->
-    <dt class="card-header primary-color">
+    <div class="card-header primary-color">
         <h3>Commento di {a_nome} sul post "{p_title}"</h3>
-    </dt>
+    </div>
 
-    <dd class="card-content">
+    <div class="card-body">
         <cite class="text-truncate">{content}</cite>
         <a href="post_page.php?id={p_id}"> Leggi altro </a>
         <!-- link messo qui e non sopra sul titolo perché altrimenti può dare fastidio all'altro link
         (mai mettere due link troppo vicini) -->
-    </dd>
+    </div>
 </div>

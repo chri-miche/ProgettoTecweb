@@ -9,7 +9,7 @@
             <legend>Chiavi</legend>
             <div class="form-field" data-error="{id_error}">
                 <label for="id">Codice</label>
-                <input id="id" name="id" aria-label="Codice"
+                <input id="id" name="id"
                        placeholder="Codice" required="required" {key_readonly} value="{id}"/>
             </div>
         </fieldset>
@@ -17,24 +17,24 @@
             <legend>Campi dati</legend>
             <div class="form-field" data-error="{nome_error}">
                 <label for="nome">Nome</label>
-                <input id="nome" name="nome"  aria-label="Nome"
+                <input id="nome" name="nome"
                        placeholder="Nome" required="required" value="{nome}" />
             </div>
             <div id="prob_estinzione_form_field" class="form-field" data-error="{prob_estinzione_error}">
                 <label for="prob_estinzione">Probabilità di estinzione</label>
                 <input id="prob_estinzione" name="prob_estinzione" type="number" step="0.01" required="required"
-                       aria-label="Probabilità di estinzione" placeholder="Probabilità di estinzione"
+                        placeholder="Probabilità di estinzione"
                        value="{prob_estinzione}" />
             </div>
             <div class="form-field" data-error="">
                 <label for="descrizione">Descrizione</label>
-                <input id="descrizione" name="descrizione"  aria-label="Descrizione"
+                <input id="descrizione" name="descrizione"
                        placeholder="Descrizione" value="{descrizione}" />
             </div>
         </fieldset>
-        <div class="card-footer">
+        <fieldset class="card-footer">
             <button type="submit" name="submit">Conferma</button>
             <a href="admin.php?manage=conservazione">Annulla</a>
-        </div>
+        </fieldset>
     </form>
 </div>

@@ -1,8 +1,11 @@
 <li>
-    <form class="single-input-form" method="post" action="post_page.php?id={content_id}&comment=1">
+    <form class="single-input-form" method="post" action="post_page.php?id={content_id}&amp;comment=1">
         <fieldset>
-            <textarea id="commento" name="commento" maxlength="250" placeholder="Scrivi un commento"></textarea>
+            <textarea id="commento" name="commento" required="required"
+                      cols="200" rows="2" placeholder="Scrivi un commento..."></textarea>
         </fieldset>
-        <button type="submit">Pubblica</button>
+        <fieldset>
+            <button type="submit">Pubblica</button>
+        </fieldset>
     </form>
 </li>

@@ -287,8 +287,23 @@
 
 
     \section{Test di accessibilità}
-%TODO miche AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    Per effettuare i test di accessibilità sono stati usati gli strumenti offerti dall'estensione Web developer toolbar\footnote{https://chrispederick.com/work/web-developer/}:
+    \begin{itemize}
+        \item HTML: https://validator.w3.org/check
+        \item CSS: http://jigsaw.w3.org/css-validator/
+    \end{itemize}
 
+    I test sui colori sono stati effettuati con il sito Contrast Checker\footnote{https://webaim.org/resources/contrastchecker/}. Questi test rispettano gli standard WCAG AAA.
+    \begin{center}
+    \begin{tabular}{c|c|c}
+    Sfondo & Testo & Rapporto \\
+    \hline
+    rgba(30,33,41) & rgba(255,255,255) & 16.09:1 \\
+    rgba(73,76,83) & rgba(255,255,255) & 8.59:1 \\
+    rgba(179, 220, 253) & rgba(0,0,0) & 14.57:1 \\
+    rgba(102, 185, 253) & rgba(0,0,0) & 9.92:1 
+    \end{tabular}
+\end{center}
     \section{Fonti}
     https://chirpbirding.com/blog/111/what-is-the-average-age-of-birdwatchers/
     https://www.americasstateparks.org/birding-a-popular-past-time/

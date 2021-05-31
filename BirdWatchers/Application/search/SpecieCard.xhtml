@@ -1,13 +1,15 @@
 <div class="card">
     <!-- fixed height card -->
-    <img src="{immagine}" alt=""/>
+    <div class="img-overflow-container">
+        <img src="{immagine}" alt=""/>
+    </div>
     <!-- prima cosa, immagine con altezza % (nostretch) -->
-    <dt class="card-header primary-color">
+    <div class="card-header primary-color">
         <h3>{nome_scientifico}</h3>
-    </dt>
-    <dd class="card-content">
+    </div>
+    <div class="card-body">
         <p class="text-truncate">{descrizione}</p>
         <a href="uccello.php?id={id}"> Leggi altro </a>
 
-    </dd>
+    </div>
 </div>

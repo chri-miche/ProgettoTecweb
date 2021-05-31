@@ -19,24 +19,26 @@
             </p>
         </div>
 
-        <div id="information-side" class="card">
+        <div class="card">
 
             <div class="img-overflow-container bird-card">
-                <img src="{immagine}" />
+                <img src="{immagine}" alt="" />
+            </div>
+
+            <div class="card-body">
+                <h3> Informazioni generali:</h3>
+                <p>Nome scientifico: {nome_scientifico}</p>
+                <p>Peso medio: {peso_medio}  kg</p>
+                <p>Altezza media: {altezza_media} cm</p>
+
+                <h3> Stato conservazione</h3>
+                <p>Stato: {c_nome} - {c_id}    </p>
+                <p>Probabilità di estinzione: {c_prob_estinzione}</p>
+                <p>{c_descrizione}</p>
             </div>
 
 
-            <h3> Informazioni generali:</h3>
-            <p>Nome scientifico: {nome_scientifico}</p>
-            <p>Peso medio: {peso_medio}  kg</p>
-            <p>Altezza media: {altezza_media} cm</p>
-
-            <h3> Stato conservazione</h3>
-            <p>Stato: {c_nome} - {c_id}    </p>
-            <p>Probabilità di estinzione: {c_prob_estinzione}</p>
-            <p>{c_descrizione}</p>
-
-            <img src='res/Images/statoConservazione/{c_id}.png' />
+            <img src='res/Images/statoConservazione/{c_id}.png' alt="Stato di conservazione: {c_nome}" />
 
         </div>
     </div>

@@ -548,6 +548,7 @@ p {
     margin-left: 0;
     margin-right: 1em;
     white-space: nowrap;
+    display: block;
 }
 
 abbr.icon:after {

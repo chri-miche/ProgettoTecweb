@@ -40,6 +40,7 @@ body {
     font-family: 'Material Icons', Verdana, sans-serif;
     font-size: 1.5em;
     content: attr(data-icon-name);
+    color: white;
 }
 
 .accent-color {
@@ -147,7 +148,7 @@ ul {
 
 #sitebar > a:visited {
     background: transparent;
-    color: rgb(179, 220, 253);
+    color: white;
 }
 
 #actions {
@@ -195,13 +196,17 @@ ul {
     box-shadow: none;
 }
 
-#actions a:hover, #actions button:hover {
-    background: rgb(179, 220, 253);
+#actions a:hover, #actions button:hover, #actions input:focus,
+#actions a:visited:hover {
+    background: #d0d0d0;
+    color: black;
 }
 
-#actions input:focus {
-    background: rgb(179, 220, 253);
+#actions a:hover span, #actions a:hover::after {
+    background: transparent;
+    color: inherit;
 }
+
 
 #logged-out-actions {
     display: table-caption;

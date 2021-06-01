@@ -1,8 +1,8 @@
 <?php
 
 require_once "standardLayoutIncludes.php";
-require_once __DIR__ . "/Application/catalogo/Catalogo.php";
 
+require_once __DIR__ . "/Application/catalogo/Catalogo.php";
 require_once __DIR__ . "/Application/databaseObjects/specie/SpecieDAO.php";
 
 try {
@@ -20,9 +20,7 @@ try {
         $ordineDAO = new OrdineDAO();
 
 
-        /** Selected ovvero che abbiamo deciso di filtrare per quel valroe. */
-        /* _GET contiene 1 se è selezionato 0 altrimenti.*/
-
+        /** Selected ovvero che abbiamo deciso di filtrare per quel valore. */
         $oSelected = $_GET['oSelected'] ?? array();
         $oSelected = !(count($oSelected) > 1 || count($oSelected) == 0);
 
@@ -99,4 +97,3 @@ try {
     echo $page;
 } catch (Throwable $error){header('Location: html/error500.xhtml');}
 
-?>

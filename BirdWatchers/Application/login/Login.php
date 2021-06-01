@@ -5,15 +5,12 @@ require_once __DIR__ . "/../SessionUser.php";
 
 class Login extends Component {
 
-    private $redirect;
     /* The current session user if exists.*/
     private $user; private $loggedNow;
 
-    public function __construct(string $email = null, string $password = null,
-                                string $redirect = 'Location: index.php',string $HTML = null) {
+    public function __construct(string $email = null, string $password = null, string $HTML = null) {
 
         parent::__construct ($HTML ?? (file_get_contents(__DIR__ . "/Login.xhtml")));
-        $this->redirect = $redirect;
 
         $this->user = new SessionUser();
         $this->loggedNow = false;
@@ -38,7 +35,8 @@ class Login extends Component {
 
     public function build() {
 
-        if($this->user->userIdentified())  header($this->redirect);
+        if($this->user->userIdentified())
+            throw new Exception('User already authenticated');
 
         if(!$this->user->userIdentified() && !$this->loggedNow)
             return $this->baseLayout();

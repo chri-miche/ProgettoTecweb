@@ -6,7 +6,6 @@ require_once __DIR__. "/Application/genericBrowser/GenericBrowser.php";
 
 $sessionUser = new SessionUser();
 
-
 $id = $_GET['id'] ?? header('Location: index.php');
 $pageUser = (new UserDAO())->get($id);
 
@@ -27,14 +26,13 @@ try {
         if (!$userVO->getId()) header('Location: index.php');
 
         $userList = $userDao->getFriends($userVO);
-
         $pageNumber = $_GET['page'] ?? 0;
         $page->addComponent(new GenericBrowser($userList, $userPreviewLayout, "user_friends.php?id=$id&", $pageNumber, 8));
     } catch (Throwable $exception) {
         $page->addComponent(new BirdError(null, 'Nel reperire la lista dei seguiti si è verificato un errore.',
-            'Qualcosa è andato storto', 'index.php', '500'));
+            'Qualcosa è andato storto', "user_page.php?id=$id", '500', 'Torna al profilo'));
     }
 
     echo $page;
-/* Se proprio tutto si rompe. */
+
 } catch (Throwable $exception){ header('Location: html/error500.xhtml');}

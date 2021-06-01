@@ -45,4 +45,3 @@ try {
         echo $page->build();
     } else { header("Location: login.php");}
 }catch(Throwable $error) { header('Location: html/error500.xhtml');}
-?>

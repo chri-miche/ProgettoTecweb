@@ -25,12 +25,12 @@ try {
 
                 $name = basename($_FILES["input-file"]["name"]);
                 if(!preg_match("/\.(gif|png|jpg)$/", $name))
-                    throw new Exception('Given file was not image');
+                    throw new Exception('Il file dato non è un\'immagine');
 
                 $tmp_name = $_FILES["input-file"]["tmp_name"];
 
                 if ((!is_dir(__IMGROOT__) && !mkdir(__IMGROOT__) || !is_writable(__IMGROOT__))) {
-                    throw new Exception("Error creating folder res");
+                    throw new Exception("Errore nella creazione del percorso");
                 };
 
                 $proposedPath = DIRECTORY_SEPARATOR . $name;
@@ -54,11 +54,12 @@ try {
         $page->addComponent(new Profile($_GET['id'] ?? -1, 'user_page.php?id='));
     } catch (Throwable $err) {
         $errorMessage = $err->getMessage();
-        $page->addComponent(new BirdError(null, "Nel caricare l immagine si è verificato un errore. In particolare si è verificato: $errorMessage",
-            'Siamo molto imbarazzati ma qualcosa è andato storto', 'index.php', '500'));
+
+        $userReference = $_GET['id'] ?? -1;
+        $page->addComponent(new BirdError(null, "Nel visualizzare il profilo si è verificato un errore. In particolare si è verificato: $errorMessage",
+            'Siamo molto imbarazzati ma qualcosa è andato storto', "user_page.php?id=$userReference", '500', "Torna al profilo."));
     }
 
     echo $page;
 
 } catch (Throwable $exception){header('Location: html/error500.xhtml');}
-?>

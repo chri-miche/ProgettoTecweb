@@ -25,8 +25,5 @@ try {
     }
 
     echo $page->build();
-} catch (Throwable $error){
+} catch (Throwable $error){header('Location: html/error500.xhtml');}
 
-}
-
-?>

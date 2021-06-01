@@ -24,9 +24,9 @@ try  {
 
         /** Se il post è valido.*/
         if ($postVO->getId()) {
-
             if ($sessionUser->userIdentified()) {
                 if (isset($_GET['comment']) && $_GET['comment'] && isset($_POST["commento"]) && !empty($_POST["commento"])) {
+
                     $comment = sanitize_simple_markdown($_POST["commento"]);
 
                     $commentVO = new CommentoVO(null, false, $comment, null, $postVO, $sessionUser->getUser());
@@ -49,5 +49,3 @@ try  {
             Ritentare o contattare un amministratore per eventuali chiarimenti.', 'Attenzione, c\' è stato un errore!', 'index.php', '500'));
     } echo $page;
 } catch (Throwable $error) {header('Location: html/error500.xhtml');}
-
-?>

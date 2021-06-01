@@ -3,7 +3,6 @@
 require_once "standardLayoutIncludes.php";
 
 require_once __DIR__ . "/Application/genericBrowser/GenericBrowser.php";
-require_once __DIR__ . "/Application/title/Title.php";
 
 require_once __DIR__ . "/Application/databaseObjects/user/UserDAO.php";
 require_once __DIR__ . "/Application/databaseObjects/post/PostDAO.php";
@@ -17,11 +16,9 @@ try {
 
     // Base layout of any page, should almost always work.
     $page->addComponent(new SiteBar('post_utente'));
-    $page->addComponent(new BreadCrumb(array('Utente' => 'user_page.php?id=' . $pageUser->getId(), 'I Post di: ' . $pageUser->getNome() => '')));
+    $page->addComponent(new BreadCrumb(array("Utente $pageUser->nome" => 'user_page.php?id=' . $pageUser->getId(), 'Post' => '')));
 
     try {
-        $page->addComponent(new Title("Post pubblicati", null, "I post che l'utente ha pubblicato sulla piattaforma."));
-
         $tagPreviewLayout = file_get_contents(__DIR__ . "/Application/feed/postCard/PostCard.xhtml");
         $postList = (new PostDAO())->getOfUtente($pageUser->getId());
 

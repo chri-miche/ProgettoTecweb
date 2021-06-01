@@ -14,7 +14,7 @@ try {
     $page = new BasePage($basePage);
 
     $page->addComponent(new SiteBar('user_friends'));
-    $page->addComponent(new BreadCrumb(array('Utente' => "user_page.php?id=$id", "Amici di $pageUser->nome" => '')));
+    $page->addComponent(new BreadCrumb(array("Utente  $pageUser->nome" => "user_page.php?id=$id", "Amici" => '')));
 
     try {
 

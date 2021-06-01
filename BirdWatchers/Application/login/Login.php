@@ -33,7 +33,7 @@ class Login extends Component {
         }
 
         if($this->user->userIdentified())
-            throw new Exception('User just authenticated');
+            throw new Exception('User already authenticated');
 
 
     }

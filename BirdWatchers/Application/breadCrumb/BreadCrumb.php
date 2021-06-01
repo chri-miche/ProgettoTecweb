@@ -29,7 +29,7 @@ class BreadCrumb extends Component {
 
             // non metto il link sull'home perché c'è già nella sitebar
             if ($value !== '') {
-                $span = " <a class='breadcrumb-item' href='" . $value . "'>". $span . "</a>";
+                $span = ' <a class="breadcrumb-item" href="' . $value . '">'. $span . '</a>';
             }
 
             $ret .= $span;

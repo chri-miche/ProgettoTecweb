@@ -51,7 +51,6 @@ class SiteBar extends Component {
             $contentHTML = file_get_contents(__DIR__ . "/LoggedInActions.xhtml");
 
             $actions = [
-                ['Catalogo', 'catalogo.php'],
                 ['Profilo', 'user_page.php?id={userid}'],
                 ['<span xml:lang="en" lang="en">Logout</span>', 'logout.php'],
                 ['Nuovo post', 'new_post.php']
@@ -76,6 +75,11 @@ class SiteBar extends Component {
         if (strcasecmp($this->position, "index") != 0) {
             $homeButton = '<a href="index.php" xml:lang="en" lang="en"> Home </a>';
         }
+
+        if (strcasecmp($this->position, "catalogo") != 0) {
+            $homeButton .= '<a href="catalogo.php"> Catalogo </a>';
+        }
+
         $baseLayout = str_replace('<home-button />', $homeButton, $baseLayout);
         return $baseLayout;
 

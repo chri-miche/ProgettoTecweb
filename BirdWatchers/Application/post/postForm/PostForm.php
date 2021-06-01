@@ -2,6 +2,7 @@
 
 
 class PostForm extends Component {
+
     private $data;
 
     public function __construct(SessionUser &$sessionUser, $defaults = array()) {

@@ -7,10 +7,10 @@ require_once "standardLayoutIncludes.php";
 require_once __DIR__ . "/Application/databaseObjects/post/PostDAO.php";
 require_once __DIR__ . "/Application/databaseObjects/user/UserDAO.php";
 
-require_once __DIR__. "/Application/post/Post.php";
-require_once __DIR__. "/Application/SessionUser.php";
+require_once __DIR__ . "/Application/post/Post.php";
+require_once __DIR__ . "/Application/SessionUser.php";
 
-try  {
+try {
 
     $basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
 
@@ -44,8 +44,11 @@ try  {
 
             $page->addComponent(new Post($postVO, $sessionUser));
         }
-    } catch (Throwable $error){
+    } catch (Throwable $error) {
         $page->addComponent(new BirdError(null, 'Qualcosa non è andato a buon fine nell\'operazione.
             Ritentare o contattare un amministratore per eventuali chiarimenti.', 'Attenzione, c\' è stato un errore!', 'index.php', '500'));
-    } echo $page;
-} catch (Throwable $error) {header('Location: html/error500.xhtml');}
+    }
+    echo $page;
+} catch (Throwable $error) {
+    header('Location: html/error500.xhtml');
+}

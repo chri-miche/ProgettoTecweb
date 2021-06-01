@@ -1,60 +1,46 @@
 <?php
 
-    require_once __DIR__ . "/../Component.php";
-    require_once __DIR__ . "/../SessionUser.php";
+require_once __DIR__ . "/../Component.php";
+require_once __DIR__ . "/../SessionUser.php";
 
-    class Register extends Component {
+class Register extends Component {
 
-        private $user; private $invalid;
-        private $redirect;
+    private $user;
+    private $invalid;
 
-        /** Credentials must be null to make the page update.
-         * @param null|string $username : Username of the new user.
-         * @param null|string $password : Password of he new user.
-         * @param null|string $email : Email of the new user.
-         * @param string $redirect : Page which to redirect to if already autenticated.
-         * @param string|null $HTML : Page layout. */
-        public function __construct(?string $username = null, ?string $password = null, ?string $email = null,
-            string $redirect = 'Location: index.php', string $HTML = null) {
 
-            parent::__construct($HTML ?? file_get_contents(__DIR__ . "/Register.xhtml"));
+    /** Credentials must be null to make the page update.
+     * @param null|string $username : Username of the new user.
+     * @param null|string $password : Password of he new user.
+     * @param null|string $email : Email of the new user.
+     * @param string|null $HTML : Page layout.
+     */
+    public function __construct(?string $username = null, ?string $password = null, ?string $email = null, string $HTML = null) {
 
-            $this->invalid = false;
+        parent::__construct($HTML ?? file_get_contents(__DIR__ . "/Register.xhtml"));
 
-            $this->redirect = $redirect;
-            $this->user = new SessionUser();
+        $this->invalid = false;
+        $this->user = new SessionUser();
 
-            if(!is_null($username) && !is_null($password) && !is_null($email)){ /** Checks if user exists.*/
+        if ($this->user->userIdentified())
+            throw new Exception('User già autenticato');
 
-                $userDAO = new UserDAO();
-                $newUser = new UserVO(null, $username, $email, $password);
+        if (!is_null($username) && !is_null($password) && !is_null($email)) {
+            /** Checks if user exists.*/
 
-                if($userDAO->save($newUser)) {
-                    /** Save fa side effect su user e quindi ottiene il suo id nuovo.*/
-                    /** Assegna un nuovo utente. {@see SessionUser} */
-                    $this->user->setUserVO($newUser);
-                } else {
-                    /** Show credenziali non validi.*/
-                    $this->invalid = true;
-                }
+            $userDAO = new UserDAO();
+            $newUser = new UserVO(null, $username, $email, $password);
 
-            }
+            if ($userDAO->save($newUser)) $this->user->setUserVO($newUser);
+            else $this->invalid = true;
         }
-
-        public function build() {
-
-            if($this->user->userIdentified())
-                header($this->redirect);
-
-            $html = $this->baseLayout();
-            if($this->invalid) {/* Errore nelle credenziali. */
-                $html = str_replace('{email_error}', 'Email già registrata nel nostro sito.', $html);
-            } else {
-                $html = str_replace('{email_error}', '', $html);
-            }
-
-            return $html;
-
-         }
     }
-?>
+
+    public function build() {
+        return str_replace('{email_error}', $this->invalid ? 'Email già registrata nel nostro sito' : '', $this->baseLayout());
+    }
+
+    public function registered() {
+        return $this->user->userIdentified();
+    }
+}

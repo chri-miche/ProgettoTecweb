@@ -5,18 +5,19 @@ require_once __DIR__ . "/../post/PostVO.php";
 
 class CommentoVO implements VO {
 
-    /** @var int | null*/
+    /** @var int | null */
     private $id;
     /** @var boolean */
     private $isArchived;
     /** @var string */
     private $content;
-    /** @var string| null*/
+    /** @var string| null */
     private $date;
     /** Referenced post.
-     *  @var  PostVO | null*/
+     * @var  PostVO | null
+     */
     private $postVO;
-    /** @var UserVO $author*/
+    /** @var UserVO $author */
     private $author;
 
 
@@ -42,7 +43,9 @@ class CommentoVO implements VO {
 
     }
 
-    public function __get($name){ return $this->$name ?? null; }
+    public function __get($name) {
+        return $this->$name ?? null;
+    }
 
     public function arrayDump(): array {
 
@@ -53,7 +56,7 @@ class CommentoVO implements VO {
         unset($result['author']);
 
 
-        /** @var $counter: Contatore di elementi immagine in modo da impostare un default.*/
+        /** @var $counter : Contatore di elementi immagine in modo da impostare un default. */
 
         foreach ($this->postVO->arrayDump() as $key => $value)
             $result["p_$key"] = $value;
@@ -68,7 +71,7 @@ class CommentoVO implements VO {
     public function varDumps(bool $id = false): array {
 
         $array = get_object_vars($this);
-        if($id) unset($array['id']);
+        if ($id) unset($array['id']);
 
         return array_values($array);
     }
@@ -77,7 +80,7 @@ class CommentoVO implements VO {
 
         $return = get_object_vars($this);
 
-        if($id) unset($return['id']);
+        if ($id) unset($return['id']);
 
         $return['postVO'] = $this->postVO->getId();
         $return['author'] = $this->author->getId();
@@ -87,61 +90,71 @@ class CommentoVO implements VO {
     }
 
     /**
-     * @return int|null */
-    public function getId(): ?int{
+     * @return int|null
+     */
+    public function getId(): ?int {
         return $this->id;
     }
 
     /**
-     * @return bool */
-    public function isArchived(): bool{
+     * @return bool
+     */
+    public function isArchived(): bool {
         return $this->isArchived;
     }
 
     /**
-     * @param bool $isArchived */
-    public function setIsArchived(bool $isArchived): void{
+     * @param bool $isArchived
+     */
+    public function setIsArchived(bool $isArchived): void {
         $this->isArchived = $isArchived;
     }
 
     /**
-     * @return string */
-    public function getContent(): string{
+     * @return string
+     */
+    public function getContent(): string {
         return $this->content;
     }
 
     /**
-     * @param string $content */
-    public function setContent(string $content): void{
+     * @param string $content
+     */
+    public function setContent(string $content): void {
         $this->content = $content;
     }
 
     /**
-     * @return DateTime */
-    public function getDate(): ?string{
+     * @return DateTime
+     */
+    public function getDate(): ?string {
         return $this->date;
     }
 
     /**
-     * @param DateTime $date */
-    public function setDate(?string $date): void{
+     * @param DateTime $date
+     */
+    public function setDate(?string $date): void {
         $this->date = $date;
     }
 
     /**
-     * @return PostVO|null */
+     * @return PostVO|null
+     */
     public function getPostVO(): ?PostVO {
         return $this->postVO;
     }
 
     /**
-     * @param PostVO|null $postVO */
+     * @param PostVO|null $postVO
+     */
     public function setPostVO(?PostVO $postVO): void {
         $this->postVO = $postVO;
     }
 
     /**
-     * @return UserVO */
+     * @return UserVO
+     */
     public function getAuthor(): UserVO {
         return $this->author;
     }

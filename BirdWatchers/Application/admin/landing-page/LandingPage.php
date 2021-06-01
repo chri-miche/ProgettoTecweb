@@ -6,16 +6,12 @@ class LandingPage extends Component {
     private $message;
     private $result;
 
-    public function __construct($manage, $message, $result)
-    {
+    public function __construct($manage, $message, $result) {
         parent::__construct(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'LandingPage.xhtml'));
-        $this->manage = $manage;
-        $this->message = $message;
-        $this->result = $result;
+        $this->manage = $manage; $this->message = $message; $this->result = $result;
     }
 
-    public function resolveData()
-    {
+    public function resolveData() {
         return array(
             "{message}" => $this->message,
             "{result}" => $this->result,
@@ -23,4 +19,5 @@ class LandingPage extends Component {
         );
     }
 }
+
 ?>

@@ -2,8 +2,8 @@
 require_once __DIR__ . "/../databaseObjects/DatabaseAccess.php";
 require_once __DIR__ . "/postCard/PostCard.php";
 
-require_once __DIR__. "/../databaseObjects/user/UserDAO.php";
-require_once __DIR__. "/../databaseObjects/post/PostDAO.php";
+require_once __DIR__ . "/../databaseObjects/user/UserDAO.php";
+require_once __DIR__ . "/../databaseObjects/post/PostDAO.php";
 
 class Feed extends Component {
 
@@ -13,31 +13,29 @@ class Feed extends Component {
     // criteria can be popularity time controviersial
     public function __construct(string $criteria, SessionUser $user) {
         // construct parent
-        parent::__construct(file_get_contents($user->userIdentified() ? __DIR__ ."/FriendFeed.xhtml" : __DIR__ . "/Feed.xhtml"));
+        parent::__construct(file_get_contents($user->userIdentified() ? __DIR__ . "/FriendFeed.xhtml" : __DIR__ . "/Feed.xhtml"));
         $results = array();
 
         $this->basePage = new BasePage($this->baseLayout());
 
-        if($criteria == 'friends'){
+        if ($criteria == 'friends') {
             $currentUserVO = $user->getUser();
             $friendList = (new UserDAO())->getFriends($currentUserVO);
 
             $postDAO = new PostDAO();
-            foreach($friendList as $friend)
+            foreach ($friendList as $friend)
                 $results = array_merge($results, $postDAO->getOfUtente($friend->id, 10, 0));
 
-
-            /** Sbagliato approccio: prendo 20 post dai più recenti e li shufflo.*/
-            /* Ordino per data:*/
-            usort($results, function ($first, $second){
-                if($first->date == $second->date) return 0;
-                return ($first->date > $second->date)? -1 : 1;});
+            usort($results, function ($first, $second) {
+                if ($first->date == $second->date) return 0;
+                return ($first->date > $second->date) ? -1 : 1;
+            });
 
             $results = array_slice($results, 0, 15);
             shuffle($results);
 
             /* Prendo fino a max 20 di results.*/
-            foreach ($results as $result){
+            foreach ($results as $result) {
                 $this->basePage->addComponent(new PostCard($result->getId()));
             }
 
@@ -73,7 +71,7 @@ class Feed extends Component {
 
         $HTML = $this->basePage->build();
         $HTML = str_replace('{feed}', $this->criteria, $HTML);
-        $HTML = str_replace('href="index.php?feed=' . $this->criteria . '" aria-selected="false"', 'href="#panel-'. $this->criteria . '" aria-selected="true" aria-controls="panel-' . $this->criteria . '" class="disabled"', $HTML);
+        $HTML = str_replace('href="index.php?feed=' . $this->criteria . '" aria-selected="false"', 'href="#panel-' . $this->criteria . '" aria-selected="true" aria-controls="panel-' . $this->criteria . '" class="disabled"', $HTML);
         return $HTML;
     }
 }

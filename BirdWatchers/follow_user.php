@@ -9,7 +9,7 @@ $currentUserVO = (new SessionUser())->getUser();
 /** User to add to friend list.*/
 $friendId = $_POST['usid'] ?? null;
 
-if(is_null($friendId))
+if (is_null($friendId))
     header("Location: index.php");
 
 $friendVO = $userDAO->get($friendId);

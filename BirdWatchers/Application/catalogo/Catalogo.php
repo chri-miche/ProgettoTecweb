@@ -6,11 +6,11 @@ require_once __DIR__ . "/../genericBrowser/GenericBrowser.php";
 
 class Catalogo extends Component {
 
-    /**@var OrdineVO[] $ordineVoArray*/
+    /**@var OrdineVO[] $ordineVoArray */
     private $ordineVOArray;
-    /**@var FamigliaVO[] $famigliaVOArray*/
+    /**@var FamigliaVO[] $famigliaVOArray */
     private $famigliaVOArray;
-    /**@var GenereVO[] $genereVOArray*/
+    /**@var GenereVO[] $genereVOArray */
     private $genereVOArray;
 
     private $oSelected;
@@ -21,7 +21,6 @@ class Catalogo extends Component {
 
     private $gSelected;
     private $genereSelection;
-
 
 
     /** id della voce selezionata. */
@@ -46,9 +45,9 @@ class Catalogo extends Component {
      * @param string|null $HTML
      */
     public function __construct(array $specieVOArray, string $selfReference = 'catalogo.php', int $page = 0, int $elemPerPage = 10,
-            array $ordineVOArray = array(), array $famigliaVOArray = array(), array $genereVOArray = array(),
-            bool $oSelected = false, bool $fSelected = false, bool $gSelected = false,
-            ?int $ordineSelection = null,?int $famigliaSelection = null,?int $genereSelection = null, string $HTML = null ) {
+                                array $ordineVOArray = array(), array $famigliaVOArray = array(), array $genereVOArray = array(),
+                                bool $oSelected = false, bool $fSelected = false, bool $gSelected = false,
+                                ?int $ordineSelection = null, ?int $famigliaSelection = null, ?int $genereSelection = null, string $HTML = null) {
 
         parent::__construct($HTML ?? file_get_contents(__DIR__ . "/Catalogo.xhtml"));
 
@@ -87,35 +86,35 @@ class Catalogo extends Component {
     }
 
 
-    private function resolveButtons(){
+    private function resolveButtons() {
 
         $baseHTML = '';
 
         /** Pulsante per filtrare per ordine è da mostrare se non è selezionato un ordine corrente e se non sono abilitati gli altri due.*/
         // Se ordine non è quindi stato selezionato e non abbiamo conservazione o genere.
-        if(!$this->oSelected && !($this->fSelected || $this->gSelected)) {
+        if (!$this->oSelected && !($this->fSelected || $this->gSelected)) {
             $baseHTML .= "<button type='submit' name='oSelected[]' value='1'> Ordine </button>";
         } else if ($this->oSelected) /* Se quindi abbiamo già scelto la voce, dobbiamo mantenerla*/ {
             $baseHTML .= "<button class='selected-button' disabled='disabled'> Ordine </button>";
             $baseHTML .= "<input type='hidden' name='oSelected[]' value='1' />";
-        } else{
+        } else {
             $baseHTML .= "<button class='disabled' disabled='disabled'> Ordine </button>";
         }
 
         /** Pulsante per filtrare per conservazione, da mostrare se non è stato scelto un gnere o se non abbiamo giò scelto lo stesso.*/
-        if(!$this->fSelected && !$this->gSelected) {
+        if (!$this->fSelected && !$this->gSelected) {
             $baseHTML .= "<button type='submit' name='fSelected[]' value='1'> Famiglia </button>";
-        } else if($this->fSelected) {
+        } else if ($this->fSelected) {
             $baseHTML .= "<button class='selected-button' disabled='disabled'> Famiglia </button>";
             $baseHTML .= "<input type='hidden' name='fSelected[]' value='1'/>";
-        } else{
+        } else {
             $baseHTML .= "<button class='disabled' disabled='disabled'> Famiglia </button>";
 
         }
 
-        if(!$this->gSelected) {
+        if (!$this->gSelected) {
             $baseHTML .= "<button type='submit' name='gSelected[]' value='1'> Genere </button>";
-        }  else if($this->gSelected) {
+        } else if ($this->gSelected) {
             $baseHTML .= "<button class='selected-button' disabled='disabled'> Genere </button>";
             $baseHTML .= "<input type='hidden' name='gSelected[]' value='1'/>";
         }
@@ -126,22 +125,22 @@ class Catalogo extends Component {
 
     }
 
-    private function makeSelect(int $id, string $nome, string $label) : string {
+    private function makeSelect(int $id, string $nome, string $label): string {
         return "<label for='$id'> $label </label><select name='$nome' id='$id'>";
     }
 
     private function makeOption(int $id, bool $selected, bool $disabled, string $name): string {
 
         $baseOption = "<option value='$id' {selected}> $name </option>";
-        return str_replace("{selected}", $selected ? "selected='selected'": "",$baseOption);
+        return str_replace("{selected}", $selected ? "selected='selected'" : "", $baseOption);
 
     }
 
-    private function makeFullSelect(array $inArrayVO, ?int $currentSelection, bool $disabled, string $varName, string $selectVar, string $label): string{
+    private function makeFullSelect(array $inArrayVO, ?int $currentSelection, bool $disabled, string $varName, string $selectVar, string $label): string {
 
         $resolvedHTML = '';
         $resolvedHTML .= "<button type='submit' value='1' name='$selectVar'> - </button>";
-        if(!empty($inArrayVO) && !is_null($inArrayVO[0]->getId())) {
+        if (!empty($inArrayVO) && !is_null($inArrayVO[0]->getId())) {
 
             $firstVO = $inArrayVO[0];
             $resolvedHTML .= $this->makeSelect($firstVO->getId(), $varName, $label);
@@ -159,22 +158,22 @@ class Catalogo extends Component {
 
     }
 
-    private function resolveNavigation(){
+    private function resolveNavigation() {
 
         $resolvedHTML = '';
 
         $resolvedHTML .= "<fieldset><legend> Selezione voci di filtro </legend>";
 
-        if($this->oSelected)
-           $resolvedHTML .= $this->makeFullSelect($this->ordineVOArray, $this->ordineSelection,!empty($this->famigliaVOArray) || !empty($this->genereVOArray), "oValue" , "oSelected[]", "Ordine:");
+        if ($this->oSelected)
+            $resolvedHTML .= $this->makeFullSelect($this->ordineVOArray, $this->ordineSelection, !empty($this->famigliaVOArray) || !empty($this->genereVOArray), "oValue", "oSelected[]", "Ordine:");
 
-        if($this->fSelected)
-            $resolvedHTML .= $this->makeFullSelect($this->famigliaVOArray, $this->famigliaSelection, !empty($this->genereVOArray), "f_value","fSelected[]", "Famiglia:");
+        if ($this->fSelected)
+            $resolvedHTML .= $this->makeFullSelect($this->famigliaVOArray, $this->famigliaSelection, !empty($this->genereVOArray), "f_value", "fSelected[]", "Famiglia:");
 
-        if($this->gSelected)
+        if ($this->gSelected)
             $resolvedHTML .= $this->makeFullSelect($this->genereVOArray, $this->genereSelection, false, "gValue", "gSelected[]", "Genere:");
 
-        if($resolvedHTML != "<fieldset><legend> Selezione voci di filtro </legend>") {
+        if ($resolvedHTML != "<fieldset><legend> Selezione voci di filtro </legend>") {
             $resolvedHTML .= "<button type='submit'> Cerca </button></fieldset>";
             return $resolvedHTML;
         }

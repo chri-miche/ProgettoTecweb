@@ -1,23 +1,20 @@
 <?php
 
 
-class UtenteForm extends Component
-{
+class UtenteForm extends Component {
     /**
      * @var UserVO
      */
     private $user;
 
-    public function __construct(UserVO $user)
-    {
+    public function __construct(UserVO $user) {
         parent::__construct(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "utenteform.xhtml"));
         $this->user = $user;
     }
 
-    public function resolveData()
-    {
+    public function resolveData() {
         $data = [];
-        foreach($this->user->arrayDump() as $key => $value) {
+        foreach ($this->user->arrayDump() as $key => $value) {
             $data['{' . $key . '}'] = $value;
         }
         $data['{nome_error}'] = "";
@@ -28,4 +25,5 @@ class UtenteForm extends Component
     }
 
 }
+
 ?>

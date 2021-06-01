@@ -9,7 +9,7 @@ class SpecieVO implements VO {
 
     /** Dati di uccello.*/
 
-    /** @var int: Identificatroe dell uccello.*/
+    /** @var int: Identificatroe dell uccello. */
     private $id;
 
     private $nome_scientifico;
@@ -60,22 +60,24 @@ class SpecieVO implements VO {
 
     }
 
-    public function __get($name){ return $this->$name ?? null; }
+    public function __get($name) {
+        return $this->$name ?? null;
+    }
 
-    public function varDumps(bool $id = false) : array {
+    public function varDumps(bool $id = false): array {
 
         $array = get_object_vars($this);
-        if($id) unset($array['id']);
+        if ($id) unset($array['id']);
 
         return array_values($array);
 
     }
 
-    public function smartDump(bool $id = false): array{
+    public function smartDump(bool $id = false): array {
 
         $return = get_object_vars($this);
 
-        if($id) unset($return['id']);
+        if ($id) unset($return['id']);
 
         $return['genereVO'] = $this->genereVO->getId();
         $return['conservazioneVO'] = $this->conservazioneVO->getId();
@@ -84,110 +86,128 @@ class SpecieVO implements VO {
     }
 
     /**
-     * @return int */
-    public function getId(): ?int{
+     * @return int
+     */
+    public function getId(): ?int {
         return $this->id;
     }
 
     /**
-     * @param int $id */
-    public function setId(int $id): void{
+     * @param int $id
+     */
+    public function setId(int $id): void {
         $this->id = $id;
     }
 
     /**
-     * @return string|null */
-    public function getNomeScientifico(): ?string{
+     * @return string|null
+     */
+    public function getNomeScientifico(): ?string {
         return $this->nome_scientifico;
     }
 
     /**
-     * @param string|null $nome_scientifico */
-    public function setNomeScientifico(?string $nome_scientifico): void{
+     * @param string|null $nome_scientifico
+     */
+    public function setNomeScientifico(?string $nome_scientifico): void {
         $this->nome_scientifico = $nome_scientifico;
     }
 
     /**
-     * @return mixed */
-    public function getNomeComune(){
+     * @return mixed
+     */
+    public function getNomeComune() {
         return $this->nome_comune;
     }
 
     /**
-     * @param mixed $nome_comune */
-    public function setNomeComune($nome_comune): void{
+     * @param mixed $nome_comune
+     */
+    public function setNomeComune($nome_comune): void {
         $this->nome_comune = $nome_comune;
     }
 
     /**
-     * @return int|null */
-    public function getPesoMedio(): ?int{
+     * @return int|null
+     */
+    public function getPesoMedio(): ?int {
         return $this->peso_medio;
     }
 
     /**
-     * @param int|null $peso_medio */
-    public function setPesoMedio(?int $peso_medio): void{
+     * @param int|null $peso_medio
+     */
+    public function setPesoMedio(?int $peso_medio): void {
         $this->peso_medio = $peso_medio;
     }
 
     /**
-     * @return int|null */
-    public function getAltezzaMedia(): ?int{
+     * @return int|null
+     */
+    public function getAltezzaMedia(): ?int {
         return $this->altezza_media;
     }
 
     /**
-     * @param int|null $altezza_media */
-    public function setAltezzaMedia(?int $altezza_media): void{
+     * @param int|null $altezza_media
+     */
+    public function setAltezzaMedia(?int $altezza_media): void {
         $this->altezza_media = $altezza_media;
     }
 
     /**
-     * @return string|null */
-    public function getDescrizione(): ?string{
+     * @return string|null
+     */
+    public function getDescrizione(): ?string {
         return $this->descrizione;
     }
 
     /**
-     * @param string|null $descrizione */
-    public function setDescrizione(?string $descrizione): void{
+     * @param string|null $descrizione
+     */
+    public function setDescrizione(?string $descrizione): void {
         $this->descrizione = $descrizione;
     }
 
     /**
-     * @return string|null */
-    public function getImmagine(): ?string{
+     * @return string|null
+     */
+    public function getImmagine(): ?string {
         return $this->immagine;
     }
 
     /**
-     * @param string|null $immagine */
-    public function setImmagine(?string $immagine): void{
+     * @param string|null $immagine
+     */
+    public function setImmagine(?string $immagine): void {
         $this->immagine = $immagine;
     }
 
     /**
-     * @return ConservazioneVO */
-    public function getConservazioneVO(): ConservazioneVO{
+     * @return ConservazioneVO
+     */
+    public function getConservazioneVO(): ConservazioneVO {
         return $this->conservazioneVO;
     }
 
     /**
-     * @param ConservazioneVO $conservazioneVO */
-    public function setConservazioneVO(ConservazioneVO $conservazioneVO): void{
+     * @param ConservazioneVO $conservazioneVO
+     */
+    public function setConservazioneVO(ConservazioneVO $conservazioneVO): void {
         $this->conservazioneVO = $conservazioneVO;
     }
 
     /**
-     * @return GenereVO */
-    public function getGenereVO(): GenereVO{
+     * @return GenereVO
+     */
+    public function getGenereVO(): GenereVO {
         return $this->genereVO;
     }
 
     /**
-     * @param GenereVO $genereVO */
-    public function setGenereVO(GenereVO $genereVO): void{
+     * @param GenereVO $genereVO
+     */
+    public function setGenereVO(GenereVO $genereVO): void {
         $this->genereVO = $genereVO;
     }
 

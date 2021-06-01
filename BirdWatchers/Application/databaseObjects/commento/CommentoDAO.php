@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../post/PostDAO.php';
 
 require_once "CommentoVO.php";
+
 class CommentoDAO extends DAO {
 
     /**
@@ -13,10 +14,12 @@ class CommentoDAO extends DAO {
         $result = $this->performCall(array($id), 'get_commento');
 
         /** Se fallisce la ricerca ritorniamo un elemento vuoto.*/
-        if(isset($result['failure'])) return new CommentoVO();
+        if (isset($result['failure'])) return new CommentoVO();
 
-        $result['postVO'] = (new PostDAO())->get($result['post']); unset($result['post']);
-        $result['author'] = (new UserDAO())->get($result['user_id']); unset($result['user_id']);
+        $result['postVO'] = (new PostDAO())->get($result['post']);
+        unset($result['post']);
+        $result['author'] = (new UserDAO())->get($result['user_id']);
+        unset($result['user_id']);
 
         return new CommentoVO(...array_values($result));
     }
@@ -30,8 +33,8 @@ class CommentoDAO extends DAO {
         $VOArray = array();
         $result = $this->performMultiCAll(array(), 'get_all_commento');
 
-        if(!isset($result['failure']))
-            foreach ($result as $element){
+        if (!isset($result['failure']))
+            foreach ($result as $element) {
 
                 $postVO = (new PostDAO())->get($element['post']);
                 unset($element['post']);
@@ -46,21 +49,22 @@ class CommentoDAO extends DAO {
         return $VOArray;
     }
 
-    public function getAllOfPost(int $postId){
+    public function getAllOfPost(int $postId) {
 
         $VOArray = array();
         $parentDAO = new PostDAO();
 
-        /**@var PostVO $parentVO*/
-        $parentVO =$parentDAO->get($postId);
-        if(!$parentVO->getId()) return $VOArray;
+        /**@var PostVO $parentVO */
+        $parentVO = $parentDAO->get($postId);
+        if (!$parentVO->getId()) return $VOArray;
 
         /** PRE: Abbiamo un post ben formato esistente. */
         $result = $this->performMultiCAll(array($postId), 'get_all_commento_from_post');
 
-        if(!isset($result['failure'])) /** Evito più ritorni del dovuto. */
+        if (!isset($result['failure'])) /** Evito più ritorni del dovuto. */
             foreach ($result as $element) {
-                $authorVO = (new UserDAO())->get($element['user_id']); unset($element['user_id']);
+                $authorVO = (new UserDAO())->get($element['user_id']);
+                unset($element['user_id']);
                 $VOArray [] = new CommentoVO(...array_values($element), ...[$parentVO, $authorVO]);
             }
 
@@ -90,22 +94,23 @@ class CommentoDAO extends DAO {
         return $VOArray;
     }
 
-    public function checkId(VO &$element) : bool {
+    public function checkId(VO &$element): bool {
         return $this->idValid($element, 'commento_id');
     }
 
     /**
      * @inheritDoc
-     * @var CommentoVO $element */
+     * @var CommentoVO $element
+     */
     public function save(VO &$element): bool {
 
-        if(is_null($element->getPostVO()->getId())) return false;
+        if (is_null($element->getPostVO()->getId())) return false;
 
         $parentDAO = new PostDAO();
         $parentVO = $element->getPostVO();
 
         /** Se effettivamente esiste a cui si fa rifermento.*/
-        if($parentDAO->checkId($parentVO)) {
+        if ($parentDAO->checkId($parentVO)) {
 
             /** Se esiste l id del oggetto corrente, quello va semplicemente aggiornata.*/
             if ($this->checkId($element)) {
@@ -116,7 +121,7 @@ class CommentoDAO extends DAO {
             } else {
 
                 $result = $this->performCall($element->smartDump(true), 'create_commento');
-                if(!isset($result['failure'])) $element = new $element(...array_values($result), ...$element->varDumps(true));
+                if (!isset($result['failure'])) $element = new $element(...array_values($result), ...$element->varDumps(true));
                 /* Ritorna vero se è stato costruito l oggetto falso altrimenti.*/
                 return !is_null($element->getId());
             }
@@ -127,8 +132,9 @@ class CommentoDAO extends DAO {
     }
 
     /**
-     * @inheritDoc */
-    public function delete(VO &$element) : bool {
+     * @inheritDoc
+     */
+    public function delete(VO &$element): bool {
         return $this->defaultDelete($element, 'delete_content');
     }
 

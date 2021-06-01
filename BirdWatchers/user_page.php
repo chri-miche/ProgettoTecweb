@@ -24,7 +24,7 @@ try {
             if (isset($_POST['submit-profile-pic']) && isset($_GET['id']) && $_GET['id'] == $userVO->getId()) {
 
                 $name = basename($_FILES["input-file"]["name"]);
-                if(!preg_match("/\.(gif|png|jpg)$/", $name))
+                if (!preg_match("/\.(gif|png|jpg)$/", $name))
                     throw new Exception('Il file dato non è un\'immagine');
 
                 $tmp_name = $_FILES["input-file"]["tmp_name"];
@@ -53,13 +53,19 @@ try {
 
         $page->addComponent(new Profile($_GET['id'] ?? -1, 'user_page.php?id='));
     } catch (Throwable $err) {
+
         $errorMessage = $err->getMessage();
+        if($errorMessage == 'User does not exist')
+            header('Location: index.php');
 
         $userReference = $_GET['id'] ?? -1;
+       
         $page->addComponent(new BirdError(null, "Nel visualizzare il profilo si è verificato un errore. In particolare si è verificato: $errorMessage",
             'Siamo molto imbarazzati ma qualcosa è andato storto', "user_page.php?id=$userReference", '500', "Torna al profilo."));
     }
 
     echo $page;
 
-} catch (Throwable $exception){header('Location: html/error500.xhtml');}
+} catch (Throwable $exception) {
+    header('Location: html/error500.xhtml');
+}

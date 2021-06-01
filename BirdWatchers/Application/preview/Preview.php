@@ -3,7 +3,7 @@
 require_once __DIR__ . "/../databaseObjects/VO.php";
 require_once __DIR__ . "/../Component.php";
 
-// Preview diventa generale, la sua struttura dipende dai dati mandati e dal template.
+/** Preview generica, il fill è relativo alle chiavi del oggetto virtuale dato in costruzione.*/
 class Preview extends Component {
 
     private $data;
@@ -19,7 +19,7 @@ class Preview extends Component {
         $resolvedData = [];
 
         foreach ($this->data->arrayDump() as $key => $value)
-            $resolvedData['{'. $key . '}'] = $value;
+            $resolvedData['{' . $key . '}'] = $value;
 
         return $resolvedData;
     }

@@ -8,37 +8,34 @@ class BirdSummary extends PageFiller {
     private $specieVO;
     private $catalogoReference;
 
-    public function __construct(SpecieVO $specie, string $catalogoReference = 'catalogo.php', string $HTML = null){
-
-        parent::__construct(file_get_contents(__DIR__ . "/BirdSummary.xhtml"));
+    public function __construct(SpecieVO $specie, string $catalogoReference = 'catalogo.php', string $HTML = null) {
+        parent::__construct(file_get_contents($HTML ?? __DIR__ . "/BirdSummary.xhtml"));
 
         $this->specieVO = $specie;
-        /** Porta alla pagina del catalogo.*/
+        if (!($this->specieVO->getId())) throw new Error('Uccello non esistente!');
+
         $this->catalogoReference = $catalogoReference;
     }
 
     function build() {
-
-        if(!($this->specieVO->getId())) header('Location: catalogo.php');
         return parent::build();
-
     }
 
-    public function resolveData(){
+    public function resolveData() {
 
         $swapData = [];
 
         foreach ($this->specieVO->arrayDump() as $key => $value)
-            if(!is_array($value))  $swapData['{'.$key .'}'] = $value;
+            if (!is_array($value)) $swapData['{' . $key . '}'] = $value;
 
-       /** Link al catalogo.*/
-        $swapData['{refOrdine}'] = $this->catalogoReference ."?oSelected%5B%5D=1&amp;oValue=".
+        /** Link al catalogo.*/
+        $swapData['{refOrdine}'] = $this->catalogoReference . "?oSelected%5B%5D=1&amp;oValue=" .
             $this->specieVO->getGenereVO()->getFamigliaVO()->getOrdineVO()->getId();
         // Oddio eretico
-        $swapData['{refFamiglia}'] = $this->catalogoReference."?oSelected%5B%5D=1&amp;fSelected%5B%5D=1&amp;fValue=".
+        $swapData['{refFamiglia}'] = $this->catalogoReference . "?oSelected%5B%5D=1&amp;fSelected%5B%5D=1&amp;fValue=" .
             $this->specieVO->getGenereVO()->getFamigliaVO()->getId();
 
-        $swapData['{refGenere}'] = $this->catalogoReference ."?oSelected%5B%5D=1&amp;fSelected%5B%5D=1&amp;gSelected%5B%5D=1&amp;gValue="
+        $swapData['{refGenere}'] = $this->catalogoReference . "?oSelected%5B%5D=1&amp;fSelected%5B%5D=1&amp;gSelected%5B%5D=1&amp;gValue="
             . $this->specieVO->getGenereVO()->getId();
         return $swapData;
 

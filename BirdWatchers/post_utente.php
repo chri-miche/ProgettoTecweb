@@ -27,11 +27,13 @@ try {
 
         $page->addComponent(new GenericBrowser($postList, $tagPreviewLayout, 'post_utente.php?usid=' .
             $pageUser->getId() . "&", $_GET['page'] ?? 0, 8));
-    }catch (Throwable $error){
+    } catch (Throwable $error) {
         $page->addComponent(new BirdError(null, 'Qualcosa non è andato a buon fine nell operazione.
             Ritentare o contattare un amministratore per eventuali chiarimenti.', 'Attenzione, c\' è stato un errore!', 'index.php', '500'));
     }
     echo $page;
-} catch (Throwable $error) {header('Location: html/error500.xhtml');}
+} catch (Throwable $error) {
+    header('Location: html/error500.xhtml');
+}
 
 

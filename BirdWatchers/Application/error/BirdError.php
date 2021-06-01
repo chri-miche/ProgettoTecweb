@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../Component.php";
+
 class BirdError extends Component {
 
     private $data;
@@ -9,10 +10,10 @@ class BirdError extends Component {
 
         parent::__construct($HTML ?? file_get_contents(__DIR__ . "/error.xhtml"));
         $this->data = array('{title}' => $title, '{description}' => $message, '{code}' => $code,
-            '{redirect}'=> $redirect, '{redirect-text}' => $redirectText);
+            '{redirect}' => $redirect, '{redirect-text}' => $redirectText);
     }
 
-    public function resolveData(){
+    public function resolveData() {
         return $this->data;
     }
 }

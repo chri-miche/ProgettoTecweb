@@ -1,7 +1,8 @@
 <?php
 
 require_once __DIR__ . "/../../Component.php";
-class FollowButton extends Component{
+
+class FollowButton extends Component {
 
     private $canOperate;
 
@@ -10,11 +11,12 @@ class FollowButton extends Component{
 
     private $redirect;
 
-    public function __construct(UserVO $followed, string $redirect, string $HTML = null){
+    public function __construct(UserVO $followed, string $redirect, string $HTML = null) {
 
         parent::__construct($HTML ?? file_get_contents(__DIR__ . "/FollowButton.xhtml"));
 
-        $this->followedVO = $followed; $this->redirect = $redirect;
+        $this->followedVO = $followed;
+        $this->redirect = $redirect;
 
         $currentUser = new SessionUser();
         $this->followerVO = $currentUser->getUser();
@@ -24,15 +26,13 @@ class FollowButton extends Component{
     }
 
     public function build() {
-
         /** If the user is not authenticated or the same as the one displayed we don't show anything.*/
-        if(!$this->canOperate)  return '';
+        if (!$this->canOperate) return '';
         return parent::build();
-
     }
 
 
-    public function resolveData(){
+    public function resolveData() {
 
         $resolvedData = [];
 

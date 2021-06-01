@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/../../databaseObjects/commento/CommentoDAO.php";
+
 class Comments extends BasePage {
 
     public function __construct(PostVO $post, SessionUser &$user) {
@@ -10,21 +11,22 @@ class Comments extends BasePage {
 
         foreach ($commentVOArray as $commentVO)
             $this->addComponent(new
-            Class($commentVO->arraydump(), file_get_contents(__DIR__ . "/Comment.xhtml")) extends Component {
+            class($commentVO->arraydump(), file_get_contents(__DIR__ . "/Comment.xhtml")) extends Component {
 
                 private $commentData;
 
                 public function __construct(array $data, string $HTML) {
-                    parent::__construct($HTML); $this->commentData = $data;
+                    parent::__construct($HTML);
+                    $this->commentData = $data;
                 }
 
                 public function resolveData() {
                     $resolvedData = [];
-                    foreach ($this->commentData as $key =>$value)
-                        $resolvedData["{".$key."}"] = $value;
+                    foreach ($this->commentData as $key => $value)
+                        $resolvedData["{" . $key . "}"] = $value;
                     return $resolvedData;
                 }
-        });
+            });
 
         $data = array();
 
@@ -36,7 +38,8 @@ class Comments extends BasePage {
             private $data;
 
             public function __construct(array $data, string $HTML) {
-                parent::__construct($HTML); $this->data = $data;
+                parent::__construct($HTML);
+                $this->data = $data;
             }
 
             public function resolveData() {

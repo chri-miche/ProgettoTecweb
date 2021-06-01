@@ -4,8 +4,8 @@ require_once "standardLayoutIncludes.php";
 require_once __DIR__ . "/Application/feed/Feed.php";
 
 /** To know if we have to display friends tab.*/
-require_once __DIR__. "/Application/SessionUser.php";
-require_once __DIR__. "/Application/error/BirdError.php";
+require_once __DIR__ . "/Application/SessionUser.php";
+require_once __DIR__ . "/Application/error/BirdError.php";
 
 try {
     $basePage = file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml");
@@ -28,4 +28,6 @@ try {
     la preghiamo di ritentare l operazione o di contattare un amministratore.', 'Oops something went wrong!', 'index.php', '0'));
     }
     echo $page;
-}catch (Throwable $error) { header('Location: html/error500.xhtml'); }
+} catch (Throwable $error) {
+    header('Location: html/error500.xhtml');
+}

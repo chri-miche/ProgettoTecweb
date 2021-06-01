@@ -238,14 +238,38 @@ ul {
     margin-right: 0.75em;
 }
 
+#breadcrumb > *:first-child {
+    padding-left: 0.5em;
+}
+
+#breadcrumb > *:first-child::before {
+    display: none;
+}
+
 #breadcrumb #home-crumb::before, #breadcrumb #home-label::before {
     content: none;
 }
 
-.breadcrumb-item {
+a.breadcrumb-item {
     border-radius: 0;
     margin: 0;
     padding: 0.25em;
+    border-style: none;
+}
+
+a.breadcrumb-item:hover {
+    box-shadow: none;
+    border-radius: 0;
+}
+
+a.breadcrumb-item:visited {
+    background: inherit;
+    color: inherit;
+}
+
+a.breadcrumb-item:visited:hover {
+    background: white;
+    color: black;
 }
 
 /* #tabs*/

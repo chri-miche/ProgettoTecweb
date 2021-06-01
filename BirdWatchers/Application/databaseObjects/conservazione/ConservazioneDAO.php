@@ -7,14 +7,16 @@ class ConservazioneDAO extends DAO {
     static private $defaultDAO;
 
 
-    public function __construct(){
-        if(!isset(ConservazioneDAO::$defaultDAO))
-            ConservazioneDAO::$defaultDAO = $this->get('RM'); /** Rischio minimo.*/
+    public function __construct() {
+        if (!isset(ConservazioneDAO::$defaultDAO))
+            ConservazioneDAO::$defaultDAO = $this->get('RM');
+        /** Rischio minimo.*/
     }
 
     /**
-     * @inheritDoc */
-    public function get($id) : ConservazioneVO {
+     * @inheritDoc
+     */
+    public function get($id): ConservazioneVO {
 
         $result = $this->performCall(array($id), 'get_conservazione');
         return isset($result['failure']) ? new ConservazioneVO() : new ConservazioneVO(...array_values($result));
@@ -22,27 +24,29 @@ class ConservazioneDAO extends DAO {
     }
 
     /**
-     * @inheritDoc */
-    public function getAll() : array {
+     * @inheritDoc
+     */
+    public function getAll(): array {
 
         $VOArray = array();
 
         $result = $this->performMultiCAll(array(), 'get_all_conservazione');
-        if(isset($result['failure'])) return $VOArray;
+        if (isset($result['failure'])) return $VOArray;
 
-        foreach ($result as $element)  $VOArray [] = new ConservazioneVO(...array_values($element));
+        foreach ($result as $element) $VOArray [] = new ConservazioneVO(...array_values($element));
 
         return $VOArray;
 
     }
 
     /** Potremmo rendere parte di qeusto alla radice. @
-     * @param ConservazioneVO $element */
-    public function checkId(VO &$element) : bool {
+     * @param ConservazioneVO $element
+     */
+    public function checkId(VO &$element): bool {
 
-        if(is_null($element->getId())) return false;
+        if (is_null($element->getId())) return false;
         /** Ritorna vero se id esiste. Falso se id non esiste. (non va eleminato in quanto conservazione non ha
-         un id auto incrementato ma definito da utente.*/
+         * un id auto incrementato ma definito da utente.*/
         $result = DatabaseAccess::executeSingleQuery("CALL check_conservazione_id('$element->id');");
         return isset($result['idexists']) && $result['idexists'];
 
@@ -50,10 +54,11 @@ class ConservazioneDAO extends DAO {
 
     /**
      * @inheritDoc *
-     * @param ConservazioneVO $element */
-    public function save(VO &$element) : bool {
+     * @param ConservazioneVO $element
+     */
+    public function save(VO &$element): bool {
 
-        if($this->checkId($element)){
+        if ($this->checkId($element)) {
 
             $result = $this->performNoOutputModifyCall($element->smartDump(), 'update_conservazione');
             return !isset($result['failure']);
@@ -67,19 +72,22 @@ class ConservazioneDAO extends DAO {
     }
 
     /**
-     * @inheritDoc */
-    public function delete(VO &$element) : bool {
+     * @inheritDoc
+     */
+    public function delete(VO &$element): bool {
 
         $deleted = false;
 
-        if(!is_null($element->id) && $element->id != ConservazioneDAO::$defaultDAO->getId())
+        if (!is_null($element->id) && $element->id != ConservazioneDAO::$defaultDAO->getId())
             $deleted = $this->performNoOutputModifyCall(array($element->id), 'delete_conservazione');
 
         /** L oggetto corrente viene svuotato.*/
-        if($deleted) $element = new $element();
+        if ($deleted) $element = new $element();
 
         return $deleted;
     }
 
-    public static function getDefault(){ return clone ConservazioneDAO::$defaultDAO; }
+    public static function getDefault() {
+        return clone ConservazioneDAO::$defaultDAO;
+    }
 }

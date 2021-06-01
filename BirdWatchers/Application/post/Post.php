@@ -12,7 +12,6 @@
         /** @var $user SessionUser Current user */
         private $user;
 
-
         private $post;
         private $creatorVO;
 

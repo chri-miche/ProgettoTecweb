@@ -38,10 +38,14 @@ try {
 
             unset($data['submit']);
             $page->addComponent(new AdminPanel($manage, $operation, $keys, $data));
-        }catch (Throwable $error){
+        } catch (Throwable $error) {
             $page->addComponent(new BirdError(null, 'Qualcosa non è andato a buon fine nell\'operazione.
             Ritentare o contattare un amministratore per eventuali chiarimenti.', 'Attenzione, c\' è stato un errore!', 'index.php', '500'));
         }
         echo $page->build();
-    } else { header("Location: login.php");}
-}catch(Throwable $error) { header('Location: html/error500.xhtml');}
+    } else {
+        header("Location: login.php");
+    }
+} catch (Throwable $error) {
+    header('Location: html/error500.xhtml');
+}

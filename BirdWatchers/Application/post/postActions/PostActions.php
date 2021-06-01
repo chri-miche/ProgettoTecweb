@@ -22,14 +22,14 @@ class PostActions extends Component {
 
         /** User liked or hasn't liked the post.*/
 
-        if(is_null($this->userLiked)) {
+        if (is_null($this->userLiked)) {
 
             $resolvedData['{hasLiked}'] = 'canLike';
             $resolvedData['{hasDisliked}'] = 'canDislike';
 
         } else {
 
-            if($this->userLiked){
+            if ($this->userLiked) {
 
                 $resolvedData['{hasLiked}'] = 'liked';
                 $resolvedData['{hasDisliked}'] = 'canDislike';

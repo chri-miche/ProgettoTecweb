@@ -7,7 +7,7 @@ class ConservazioneVO implements VO {
     private $id;
     /** @var string | null */
     private $nome;
-    /** @var float = 0*/
+    /** @var float = 0 */
     private $prob_estinzione;
     /**@var string | null */
     private $descrizione;
@@ -30,74 +30,83 @@ class ConservazioneVO implements VO {
     }
 
     /**
-     * @return string|null */
-    public function getId(): ?string{
+     * @return string|null
+     */
+    public function getId(): ?string {
         return $this->id;
     }
 
     /**
-     * @param string|null $id */
-    public function setId(?string $id): void{
+     * @param string|null $id
+     */
+    public function setId(?string $id): void {
         $this->id = $id;
     }
 
     /**
-     * @return string|null */
-    public function getNome(): ?string{
+     * @return string|null
+     */
+    public function getNome(): ?string {
         return $this->nome;
     }
 
     /**
-     * @param string|null $nome */
-    public function setNome(?string $nome): void{
+     * @param string|null $nome
+     */
+    public function setNome(?string $nome): void {
         $this->nome = $nome;
     }
 
     /**
-     * @return float */
-    public function getprob_estinzione(): float{
+     * @return float
+     */
+    public function getprob_estinzione(): float {
         return $this->prob_estinzione;
     }
 
     /**
-     * @param float $prob_estinzione */
-    public function setprob_estinzione(float $prob_estinzione): void{
+     * @param float $prob_estinzione
+     */
+    public function setprob_estinzione(float $prob_estinzione): void {
         $this->prob_estinzione = $prob_estinzione;
     }
 
     /**
-     * @return string|null */
-    public function getDescrizione(): ?string{
+     * @return string|null
+     */
+    public function getDescrizione(): ?string {
         return $this->descrizione;
     }
 
     /**
-     * @param string|null $descrizione */
-    public function setDescrizione(?string $descrizione): void{
+     * @param string|null $descrizione
+     */
+    public function setDescrizione(?string $descrizione): void {
         $this->descrizione = $descrizione;
     }
 
 
-    public function __get($name){
+    public function __get($name) {
 
         return $this->$name ?? null;
 
     }
-    public function varDumps(bool $id = false) : array {
+
+    public function varDumps(bool $id = false): array {
 
         $array = get_object_vars($this);
-        if($id) unset($array['id']);
+        if ($id) unset($array['id']);
 
         return array_values($array);
 
     }
 
 
-    public function smartDump(bool $id = false) : array{
+    public function smartDump(bool $id = false): array {
 
         $data = get_object_vars($this);
 
-        if($id) unset($data['id']);
+        if ($id) unset($data['id']);
 
         return array_values($data);
 

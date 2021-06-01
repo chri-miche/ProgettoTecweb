@@ -2,7 +2,7 @@
 require_once __DIR__ . "/standardLayoutIncludes.php";
 require_once __DIR__ . "/Application/SessionUser.php";
 
-require_once __DIR__. "/Application/genericBrowser/GenericBrowser.php";
+require_once __DIR__ . "/Application/genericBrowser/GenericBrowser.php";
 
 $sessionUser = new SessionUser();
 
@@ -35,4 +35,6 @@ try {
 
     echo $page;
 
-} catch (Throwable $exception){ header('Location: html/error500.xhtml');}
+} catch (Throwable $exception) {
+    header('Location: html/error500.xhtml');
+}

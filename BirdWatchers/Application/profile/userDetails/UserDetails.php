@@ -5,8 +5,7 @@ require_once __DIR__ . "/../../databaseObjects/user/UserDAO.php";
 require_once __DIR__ . "/../followButton/FollowButton.php";
 
 /** User details has button to follow.*/
-class UserDetails extends Component
-{
+class UserDetails extends Component {
 
     private $user;
 
@@ -21,8 +20,7 @@ class UserDetails extends Component
      * @param bool $action Se l azione del componente è attiva o meno.
      * @param string|null $HTML the base layout of the component.
      */
-    public function __construct(UserVO $user, string $redirect, bool $action = true, string $HTML = null)
-    {
+    public function __construct(UserVO $user, string $redirect, bool $action = true, string $HTML = null) {
 
         $HTML = file_get_contents(__DIR__ . "/UserDetails.xhtml");
         $sessionUser = new SessionUser();
@@ -45,12 +43,11 @@ class UserDetails extends Component
 
     }
 
-    public function setDisplayLimit($limit){
+    public function setDisplayLimit($limit) {
         $this->displayLimit = $limit;
     }
 
-    public function resolveData()
-    {
+    public function resolveData() {
 
         $resolvedData = [];
 
@@ -60,8 +57,7 @@ class UserDetails extends Component
         return $resolvedData;
     }
 
-    public function build()
-    {
+    public function build() {
 
         $html = parent::build();
         $loggedActions = '';
@@ -84,7 +80,7 @@ class UserDetails extends Component
         $html = '<h3 id="friends-title"> Amici </h3>';
 
         /** Empty friend list display. */
-        if($friendsListLength === 0)
+        if ($friendsListLength === 0)
             return $html . '<h4> L\' utente non ha ancora amici. </h4>';
 
         $html .= '<ol class="friends">';

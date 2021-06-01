@@ -1,26 +1,18 @@
 <?php
 
-class VoTable extends Component
-{
-    /*file_get_contents()*/
-    /**
-     * @var string
-     */
+class VoTable extends Component {
+    /*** @var string */
     private $rowHtml;
-    /**
-     * @var DAO
-     */
+    /*** @var DAO */
     private $dao;
 
-    public function __construct(array $htmls, DAO $dao)
-    {
+    public function __construct(array $htmls, DAO $dao) {
         parent::__construct($htmls['table']);
         $this->rowHtml = $htmls['row'];
         $this->dao = $dao;
     }
 
-    public function build()
-    {
+    public function build() {
         $vos = $this->dao->getAll();
 
         $content = '';

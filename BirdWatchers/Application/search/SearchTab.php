@@ -8,13 +8,13 @@ require_once __DIR__ . "/../databaseObjects/specie/SpecieDAO.php";
 require_once __DIR__ . "/../BasePage.php";
 require_once __DIR__ . "/../genericBrowser/GenericBrowser.php";
 
-
 class SearchTab extends BasePage {
 
-    private $keyword; private $entity;
+    private $keyword;
+    private $entity;
 
     public function __construct($keyword, $entity, $currentPage = 0) {
-        parent::__construct(file_get_contents(__DIR__ ."/SearchTab.xhtml"));
+        parent::__construct(file_get_contents(__DIR__ . "/SearchTab.xhtml"));
 
         $this->keyword = addslashes($keyword);
         $this->entity = $entity;
@@ -23,24 +23,24 @@ class SearchTab extends BasePage {
             case "commento":
 
                 $giveVOArray = (new CommentoDAO())->search("%$this->keyword%");
-                /** @var CommentoVO $comment*/
-
-                $layout = file_get_contents(__DIR__ ."/CommentCard.xhtml"); break;
+                $layout = file_get_contents(__DIR__ . "/CommentCard.xhtml");
+                break;
 
             case "specie":
 
                 $giveVOArray = (new SpecieDAO())->search("%$this->keyword%");
-                $layout = file_get_contents(__DIR__ ."/SpecieCard.xhtml"); break;
+                $layout = file_get_contents(__DIR__ . "/SpecieCard.xhtml");
+                break;
 
             case "post":
             default:
 
                 $giveVOArray = (new PostDAO())->search("%$this->keyword%");
-                $layout = file_get_contents(__DIR__ ."/PostCard.xhtml");
+                $layout = file_get_contents(__DIR__ . "/PostCard.xhtml");
 
         }
 
-        $this->addComponent(new GenericBrowser($giveVOArray, $layout, "search.php?",$currentPage));
+        $this->addComponent(new GenericBrowser($giveVOArray, $layout, "search.php?", $currentPage));
     }
 
     public function resolveData() {
@@ -49,7 +49,7 @@ class SearchTab extends BasePage {
             "{post}" => $this->entity === 'post' ? '" class="disabled" aria-selected="true" aria-controls="panel-post" type="button' : '" aria-selected="false" type="submit',
             "{specie}" => $this->entity === 'specie' ? '" class="disabled" aria-selected="true" aria-controls="panel-post" type="button' : '" aria-selected="false" type="submit',
             "{commento}" => $this->entity === 'commento' ? '" class="disabled" aria-selected="true" aria-controls="panel-post" type="button' : '" aria-selected="false" type="submit',
-            'action="search.php?entity=' . $this->entity  . '"' => '',
+            'action="search.php?entity=' . $this->entity . '"' => '',
             "{entity}" => $this->entity,
         );
     }

@@ -15,8 +15,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "datab
 require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "databaseObjects/genere/GenereDAO.php";
 require_once __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "databaseObjects/specie/SpecieDAO.php";
 
-class AdminPanel extends Component
-{
+class AdminPanel extends Component {
     private static $entities = array(
         "utente" => "Utenti",
         "ordine" => "Ordine",
@@ -39,8 +38,7 @@ class AdminPanel extends Component
      */
     private $voices;
 
-    public function __construct(string $manage = "", string $operation = "list", array $keys = [], array $data = [])
-    {
+    public function __construct(string $manage = "", string $operation = "list", array $keys = [], array $data = []) {
         parent::__construct(file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . "AdminPanel.xhtml"));
 
         $this->manage = $manage;
@@ -52,8 +50,7 @@ class AdminPanel extends Component
         $this->initialize($manage, $operation, $data, $keys);
     }
 
-    private function initialize(string $manage, string $operation, array $data, array $keys)
-    {
+    private function initialize(string $manage, string $operation, array $data, array $keys) {
         $this->component = null;
         if (!isset($manage) || $this->manage == '') {
             $this->component = new AdminWelcomePage();
@@ -177,8 +174,7 @@ class AdminPanel extends Component
         }
     }
 
-    private function doUserInit(string $operation, array $data, array $keys)
-    {
+    private function doUserInit(string $operation, array $data, array $keys) {
         if ($operation === 'list') {
             $this->component = new UtenteTable();
         } elseif ($operation === 'update') {
@@ -202,8 +198,7 @@ class AdminPanel extends Component
         }
     }
 
-    private function htmlsFor(string $table)
-    {
+    private function htmlsFor(string $table) {
         $htmls = [];
         $ways = ['table', 'form', 'row', 'confirmdelete'];
         foreach ($ways as $way) {
@@ -214,8 +209,7 @@ class AdminPanel extends Component
         return $htmls;
     }
 
-    public function build()
-    {
+    public function build() {
         $menu = '';
         foreach ($this->voices as $voice) {
             if (empty($this->manage) || !strpos($voice[1], $this->manage)) {
@@ -233,8 +227,7 @@ class AdminPanel extends Component
         return $HTML;
     }
 
-    private function checkConservazione(&$data)
-    {
+    private function checkConservazione(&$data) {
         $errors = [];
         if (strlen($data['id']) !== 2) {
             $errors['id'] = "La lunghezza dell'id deve essere uguale a 2.";
@@ -256,8 +249,7 @@ class AdminPanel extends Component
         return $errors;
     }
 
-    private function checkFamiglia(array &$data)
-    {
+    private function checkFamiglia(array &$data) {
         $errors = [];
 
         $ordinevo = (new OrdineDAO())->get($data['ord_id']);
@@ -271,8 +263,7 @@ class AdminPanel extends Component
         return $errors;
     }
 
-    private function checkGenere(array &$data)
-    {
+    private function checkGenere(array &$data) {
         $errors = [];
 
         $famigliavo = (new FamigliaDAO())->get($data['f_id']);
@@ -287,8 +278,7 @@ class AdminPanel extends Component
         return $errors;
     }
 
-    private function checkSpecie(array &$data)
-    {
+    private function checkSpecie(array &$data) {
         $errors = [];
 
         $generevo = (new GenereDAO())->get($data['g_id']);
@@ -349,11 +339,12 @@ class AdminPanel extends Component
 
             if (move_uploaded_file($tmp_name, __IMGROOT__ . $proposedPath)) {
                 unset($data['file_immagine']);
-                $data['immagine'] = str_replace('\\', '/',"res" . $proposedPath);
+                $data['immagine'] = str_replace('\\', '/', "res" . $proposedPath);
             } else {
                 throw new Exception("Non sono riuscito a creare il file $proposedPath.");
             }
         }
     }
 }
+
 ?>

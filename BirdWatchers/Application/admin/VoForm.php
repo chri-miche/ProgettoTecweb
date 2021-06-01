@@ -1,31 +1,22 @@
 <?php
 
 
-class VoForm extends Component
-{
-    /**
-     * @var VO
-     */
+class VoForm extends Component {
+    /*** @var VO */
     private $vo;
-    /**
-     * @var array
-     */
+    /*** @var array */
     private $errors;
-    /**
-     * @var string
-     */
+    /*** @var string */
     private $operation;
 
-    public function __construct(string $html, VO $vo, array $errors, string $operation)
-    {
+    public function __construct(string $html, VO $vo, array $errors, string $operation) {
         parent::__construct($html);
         $this->vo = $vo;
         $this->errors = $errors;
         $this->operation = $operation;
     }
 
-    public function resolveData()
-    {
+    public function resolveData() {
         $values = [];
         $values['{operation}'] = $this->operation;
         $values['{key_readonly}'] = $this->operation === 'update' ? 'readonly="readonly"' : '';
@@ -43,4 +34,3 @@ class VoForm extends Component
     }
 }
 
-?>

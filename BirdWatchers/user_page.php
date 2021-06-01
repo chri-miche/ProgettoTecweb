@@ -24,7 +24,7 @@ try {
             if (isset($_POST['submit-profile-pic']) && isset($_GET['id']) && $_GET['id'] == $userVO->getId()) {
 
                 $name = basename($_FILES["input-file"]["name"]);
-                if (!preg_match("/\.(gif|png|jpg)$/", $name))
+                if (!preg_match("/\.(gif|png|jpg|jpeg)$/", $name))
                     throw new Exception('Il file dato non è un\'immagine');
 
                 $tmp_name = $_FILES["input-file"]["tmp_name"];

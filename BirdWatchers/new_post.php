@@ -44,7 +44,7 @@ try {
                             $tmp_name = $_FILES["immagini-post"]["tmp_name"][$key];
                             $name = basename($_FILES["immagini-post"]["name"][$key]);
 
-                            if (!preg_match("/\.(gif|png|jpg)$/", $name))
+                            if (!preg_match("/\.(gif|png|jpg|jpeg)$/", $name))
                                 throw new Exception('Il file dato non è un\'immagine.');
 
                             $proposedPath = "$uploads_dir/$name";

@@ -435,6 +435,11 @@ img {
     align-items: stretch;
 }
 
+#form-container fieldset {
+    border-style: none;
+    border-top: 1px solid rgba(0,0,0,.12);
+}
+
 #login-page form {
     border-style: none;
 }

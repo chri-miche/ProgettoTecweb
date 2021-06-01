@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    color: #000;
+    background-color: #fff;
+}
+
+
+a {
+    display: inline-block;
+}
+
+a:not([href^="#"]):after {
+    content: "[" attr(href) "]";
+}
+
+a[href^="#"] {
+    text-decoration: none;
+    color: black;
+}
+
+a[href^="#"]:visited {
+    text-decoration: none;
+    color: black;
+}
+a[href^="#"]::first-letter {
+    text-transform: lowercase;
+}
+
+.sketch{
+    display: none;
+}

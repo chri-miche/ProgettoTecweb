@@ -1,11 +1,8 @@
 <?php
 
-
 require_once __DIR__ . "/standardLayoutIncludes.php";
-require_once __DIR__ . "/Application/login/Login.php";
 
 require_once __DIR__ . "/Application/birdSummary/BirdSummary.php";
-
 require_once __DIR__."/Application/databaseObjects/specie/SpecieDAO.php";
 
 try {
@@ -24,9 +21,8 @@ try {
     } catch (Throwable $exception){
         $page->addComponent(new BirdError(null, 'Qualcosa con il reperimento della specie selezionata
         è andato storto, prego ritentare o contattare un amministratore del sistema.',
-            'Oops qualcosa non è andato come doveva', 'catalogo.php', '500'));
+            'Oops qualcosa non è andato come doveva', 'catalogo.php', '500', 'Torna al catalogo'));
     }
 
     echo $page;
 } catch (Throwable $exception){header('Location: html/error500.xhtml');}
-?>

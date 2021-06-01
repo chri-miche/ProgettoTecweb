@@ -6,4 +6,3 @@ require_once __DIR__ . "/Application/breadCrumb/BreadCrumb.php";
 
 require_once __DIR__. "/Application/error/BirdError.php";
 
-?>

@@ -40,8 +40,6 @@ try {
                                 $rootParent = __DIR__;
 
                                 $tmp_name = $_FILES["immagini-post"]["tmp_name"][$key];
-                                // basename() may prevent filesystem traversal attacks;
-                                // further validation/sanitation of the filename may be appropriate
                                 $name = basename($_FILES["immagini-post"]["name"][$key]);
 
                                 if(!preg_match("/\.(gif|png|jpg)$/", $name))
@@ -52,15 +50,12 @@ try {
                                 echo is_dir($rootParent . $uploads_dir);
                                 echo $rootParent . $uploads_dir;
 
-                                foreach ($folders as $folder) {
-                                    if (!is_dir($rootParent . $folder) && !mkdir($rootParent . $folder)) {
-                                        echo 'Error creating folder';
-                                        throw new Exception("Error creating folder $uploads_dir");
-                                    }
-                                }
-                                if (!is_dir($rootParent . "/$uploads_dir") && !mkdir($rootParent . "/$uploads_dir")) {
-                                    throw new Exception("Error creating folder $uploads_dir");
-                                };
+                                foreach ($folders as $folder)
+                                    if (!is_dir($rootParent . $folder) && !mkdir($rootParent . $folder))
+                                        throw new Exception("Errore nella creazione del percorso: $uploads_dir");
+
+                                if (!is_dir($rootParent . "/$uploads_dir") && !mkdir($rootParent . "/$uploads_dir"))
+                                    throw new Exception("Errore nella creazione del percorso $uploads_dir");
 
 
                                 $tentativi = 0;
@@ -69,11 +64,11 @@ try {
                                     $proposedPath = "$uploads_dir/" . ($tentativi === 0 ? '' : $tentativi) . "$name";
                                 }
 
-                                if (move_uploaded_file($tmp_name, $rootParent . "/$proposedPath")) {
+                                if (move_uploaded_file($tmp_name, $rootParent . "/$proposedPath"))
                                     $immagini[] = str_replace('\\', '/', $proposedPath);
-                                } else {
+                                else
                                     throw new Exception("Non è stato possibile salvare le foto");
-                                }
+
                             }
                         }
                     }
@@ -87,12 +82,10 @@ try {
                         (new UserDAO())->get($_POST['user-id']),
                         $immagini
                     );
-                    if ((new PostDAO())->save($postVO)) {
+                    if ((new PostDAO())->save($postVO))
                         $redirectID = $postVO->getId();
-                    } else {
+                    else
                         throw new Exception('Il salvataggio del post ha riscontrato un errore.');
-                    }
-
                 return true;
             });
 
@@ -111,7 +104,5 @@ try {
             Ritentare o contattare un amministratore per eventuali chiarimenti. In particolare il sistema notifica che: '.$errorMessage,
             'Attenzione, c\' è stato un errore!', 'new_post.php', '500', 'Torna alla creazione di un Post'));
     }
-
     echo $page;
 } catch (Throwable $error) {header('Location: html/error500.xhtml');}
-?>

@@ -8,10 +8,16 @@ try {
 
     $username = $_POST['email'] ?? null;
     $password = $_POST['password'] ?? null;
+    try {
 
-    $page->addComponent(new Login($username, $password));
+        $page->addComponent(new Login($username, $password));
+        echo $page;
 
-    echo $page;
-}catch (Throwable $error) { header('Location: html/error500.xhtml');}
+    } catch (Throwable $error){
+        if($error->getMessage() == 'User already authenticated') header('Location: index.php');
+        else throw new Exception('Internal serve error');
+    }
+
+}catch (Throwable $error) {header('Location: html/error500.xhtml'); }
 
 ?>

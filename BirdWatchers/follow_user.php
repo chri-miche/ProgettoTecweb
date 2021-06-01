@@ -6,10 +6,9 @@ $userDAO = new UserDAO();
 
 $currentUserVO = (new SessionUser())->getUser();
 
-/** L utente da aggiungere.*/
+/** User to add to friend list.*/
 $friendId = $_POST['usid'] ?? null;
 
-// echo $friendId;
 if(is_null($friendId))
     header("Location: index.php");
 
@@ -20,4 +19,3 @@ $userDAO->follow($currentUserVO, $friendVO);
 
 $previous = $_POST['previousPath'];
 header("Location: $previous$friendId");
-?>

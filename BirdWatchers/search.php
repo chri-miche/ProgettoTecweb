@@ -26,6 +26,6 @@ try {
 
     echo $page->build();
 } catch (Throwable $error) {
-    header('Location: html/error500.xhtml');
+    header('Location: internal_server_error.php?erroStatusCode=500');
 }
 

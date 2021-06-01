@@ -10,7 +10,6 @@ try {
     $username = $_POST['email'] ?? null;
     $password = $_POST['password'] ?? null;
     try {
-
         $page->addComponent(new Login($username, $password));
         echo $page;
 
@@ -20,7 +19,5 @@ try {
     }
 
 } catch (Throwable $error) {
-    header('Location: html/error500.xhtml');
+    header('Location: internal_server_error.php?erroStatusCode=500');
 }
-
-?>

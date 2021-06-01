@@ -26,5 +26,5 @@ try {
 
     echo $page;
 } catch (Throwable $exception) {
-    header('Location: html/error500.xhtml');
+    header('Location: internal_server_error.php?erroStatusCode=500');
 }

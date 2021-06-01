@@ -3,6 +3,9 @@
 require_once __DIR__ . "/../Component.php";
 require_once __DIR__ . "/../SessionUser.php";
 
+require_once __DIR__. "/../databaseObjects/user/UserDAO.php";
+require_once __DIR__. "/../databaseObjects/user/UserVO.php";
+
 class Login extends Component {
 
     private $user;
@@ -15,35 +18,29 @@ class Login extends Component {
         $this->user = new SessionUser();
         $this->loggedNow = false;
 
+        if($this->user->userIdentified())
+            throw new Exception('User already authenticated');
+
         /** Creazione di nuovo utente di sessione se non è attualmente logato.*/
-        if (!$this->user->userIdentified()) {
-            /** Controllo sui campi di input.*/
-            if (!is_null($email) && !is_null($password)) {
-
-                $loginUser = (new UserDAO())->getFromLogin($email, $password);
-                /** Se loginUser è valido e ben formato.*/
-
-                if (!is_null($loginUser->getId()))
-                    $this->user->setUserVO($loginUser);
-
-                /** Anche se fallisce è per sapere che ci ha tentato ora.*/
-                $this->loggedNow = true;
-            }
+        /** Controllo sui campi di input.*/
+        if (!is_null($email) && !is_null($password)) {
+            $loginUser = (new UserDAO())->getFromLogin($email, $password);
+            /** Se loginUser è valido e ben formato.*/
+            if (!is_null($loginUser->getId()))
+                $this->user->setUserVO($loginUser);
+            /** Anche se fallisce è per sapere che ci ha tentato ora.*/
+            $this->loggedNow = true;
         }
+
+        if($this->user->userIdentified())
+            throw new Exception('User just authenticated');
+
 
     }
 
     public function build() {
-
-        if ($this->user->userIdentified())
-            throw new Exception('User already authenticated');
-
-        if (!$this->user->userIdentified() && !$this->loggedNow)
-            return $this->baseLayout();
-
-        if (!$this->user->userIdentified() && $this->loggedNow)
-            return file_get_contents(__DIR__ . "/loginFailure.xhtml");
-
+        return (!$this->user->userIdentified() && !$this->loggedNow) ? $this->baseLayout():
+            file_get_contents(__DIR__ . "/loginFailure.xhtml");
     }
 
 }

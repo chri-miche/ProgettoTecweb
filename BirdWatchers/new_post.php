@@ -20,6 +20,8 @@ require_once __DIR__ .
 
 try {
     $sessionUser = new SessionUser();
+    if(!$sessionUser->userIdentified()) header('Location: index.php');
+
     $page = new BasePage(file_get_contents(__DIR__ . "/Application/BaseLayout.xhtml"));
 
     $page->addComponent(new SiteBar("new_post"));
